@@ -32,18 +32,22 @@ export default function Page() {
                 text={DATA.description}
               />
               <div className="flex gap-2">
-                <Link href={`mailto:${DATA.contact.email}`}>
-                  <Mail
-                    className="text-gray-500 dark:text-white border p-2 rounded-full hover:rotate-[10deg] hover:scale-110 transition-transform"
-                    size={36}
-                  />
-                </Link>
-                <Link href={`tel:${DATA.contact.tel}`}>
-                  <Phone
-                    className="text-gray-500 dark:text-white border p-2 rounded-full hover:rotate-[10deg] hover:scale-110 transition-transform"
-                    size={36}
-                  />
-                </Link>
+                <BlurFade delay={BLUR_FADE_DELAY * 2}>
+                  <Link href={`mailto:${DATA.contact.email}`}>
+                    <Mail
+                      className="text-gray-500 dark:text-white border p-2 rounded-full hover:rotate-[10deg] hover:scale-110 transition-transform"
+                      size={36}
+                    />
+                  </Link>
+                </BlurFade>
+                <BlurFade delay={BLUR_FADE_DELAY * 2}>
+                  <Link href={`tel:${DATA.contact.tel}`}>
+                    <Phone
+                      className="text-gray-500 dark:text-white border p-2 rounded-full hover:rotate-[10deg] hover:scale-110 transition-transform"
+                      size={36}
+                    />
+                  </Link>
+                </BlurFade>
               </div>
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
