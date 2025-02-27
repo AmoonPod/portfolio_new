@@ -56,6 +56,8 @@ export const metadata: Metadata = {
         alt: "Manuel De Ceglie - Sviluppatore Web",
       },
     ],
+    countryName: "Italy",
+
     locale: "it_IT",
     type: "website",
   },
@@ -93,6 +95,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="canonical" href={DATA.url} />
+
+        <meta property="og:logo" content="logo_black.png" />
       </head>
       <body
         className={cn(
