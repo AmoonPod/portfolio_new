@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Bricolage_Grotesque as Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
-
+import { Analytics } from "@vercel/analytics/react";
 const fontSans = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -102,6 +102,7 @@ export default function RootLayout({
             <Navbar />
           </TooltipProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
