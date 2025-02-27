@@ -72,8 +72,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: "Manuel De Ceglie - Sviluppatore Web e Software",
+    description:
+      "Soluzioni digitali personalizzate per far crescere la tua attività a Modena e oltre.",
+    site: `${DATA.url}`,
     card: "summary_large_image",
-    images: [`${DATA.url}/og-image.jpg`],
+    images: [`${DATA.url}/og-image.jpeg`],
   },
   verification: {
     google: "",
