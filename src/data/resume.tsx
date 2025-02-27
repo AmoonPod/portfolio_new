@@ -11,7 +11,7 @@ export const DATA = {
     "Sviluppatore software e web. Mi piace aiutare le attività a crescere con soluzioni digitali su misura. Appassionato di AI e delle sue potenzialità.",
   summary:
     "Appassionato di informatica da sempre, ho trasformato questo interesse in un lavoro che mi permette di aiutare le persone a realizzare le proprie idee. [Dopo aver lavorato su diversi tipi di progetti](#projects), ho scelto di dedicare parte del mio tempo e delle mie competenze alle attività locali, offrendo soluzioni digitali personalizzate: siti web, gestionali, applicazioni e molto altro. Il mio obiettivo è fornire strumenti efficaci e un supporto professionale per aiutarti a raggiungere i tuoi obiettivi di business, senza trascurare l'innovazione e le sfide che mi appassionano. Se hai un progetto in mente, [contattami per discuterne insieme](#contact).",
-  avatarUrl: "/me.webp", // Sostituisci con il tuo avatar reale
+  avatarUrl: "/manuel.jpeg", // Sostituisci con il tuo avatar reale
   skills: [
     "Sviluppo Software",
     "Sviluppo App Mobile",

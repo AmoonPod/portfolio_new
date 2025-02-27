@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     siteName: "Manuel De Ceglie",
     images: [
       {
-        url: `${DATA.url}/og-image.jpg`, // Aggiungi un'immagine ottimizzata (es. 1200x630px)
+        url: `${DATA.url}/og-image.jpeg`, // Aggiungi un'immagine ottimizzata (es. 1200x630px)
         width: 1200,
         height: 630,
         alt: "Manuel De Ceglie - Sviluppatore Web",
