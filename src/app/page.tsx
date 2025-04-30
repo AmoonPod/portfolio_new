@@ -114,15 +114,22 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
             <h2 className="text-xl font-bold">Cosa Faccio: I Miei Servizi Principali</h2>
           </BlurFade>
-          <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert space-y-6 mt-2">
+
+          <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert space-y-4 mt-2">
             {DATA.services.items.map((service, id) => (
-              <BlurFade key={service.title} delay={BLUR_FADE_DELAY * 10 + (id + 1) * 0.05}>
+              <BlurFade key={service.slug} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
                 <h3 className="inline text-sm font-bold">{service.title}</h3>
                 {' '}
                 <p className="inline m-0" dangerouslySetInnerHTML={{ __html: service.description }} />
+
+                {' '}
+                <Link href={service.slug} className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline whitespace-nowrap">
+                  [Approfondisci]
+                </Link>
               </BlurFade>
             ))}
           </div>
+
         </div>
       </section>
       <section id="projects">
