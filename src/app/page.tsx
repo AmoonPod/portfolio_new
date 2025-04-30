@@ -10,6 +10,7 @@ import { DATA } from "@/data/resume";
 import { Mail, Phone } from "lucide-react";
 import Link from "next/link";
 import Markdown from "react-markdown";
+import { ServiceContactForm } from '@/components/service-contact-form';
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -187,27 +188,15 @@ export default function Page() {
           </BlurFade>
         </div>
       </section>
-      <section id="contact">
-        <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
-          <BlurFade delay={BLUR_FADE_DELAY * 15}>
-            <div className="space-y-3">
-              <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                Contattami
-              </div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Contattami e parliamo!
-              </h2>
-              <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Se hai un progetto in mente o vuoi sapere di più sui servizi che
-                posso offrirti, non esitare a mandarmi un' email e ti risponderò
-                al più presto.
-              </p>
-            </div>
-            <Link href={`mailto:${DATA.contact.email}`} className="mt-4">
-              <Button className="text-lg mt-8">Contattami</Button>
-            </Link>
-          </BlurFade>
-        </div>
+      <section id="contact" className="mt-12">
+        <BlurFade delay={BLUR_FADE_DELAY * 15}>
+          <ServiceContactForm
+            serviceName="Homepage Generale"
+            formTitle="Contattami e Parliamo!"
+            formDescription="Se hai un progetto in mente o vuoi sapere di più sui servizi che posso offrirti, compila il modulo qui sotto e ti risponderò al più presto."
+            submitButtonText="Invia Messaggio"
+          />
+        </BlurFade>
       </section>
     </main>
   );

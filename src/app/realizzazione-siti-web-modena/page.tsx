@@ -1,7 +1,7 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import { DATA } from "@/data/resume"; // Potrebbe servire per dati comuni (es. contatto)
 import Link from "next/link";
-import { Button } from "@/components/ui/button"; // Per eventuali CTA
+import { ServiceContactForm } from '@/components/service-contact-form'; // Import the new form component
 
 // TODO: Definire metadati specifici per SEO
 // export const metadata = {
@@ -14,6 +14,7 @@ const BLUR_FADE_DELAY = 0.04;
 export default function RealizzazioneSitiWebPage() {
     // Trova il servizio specifico dai dati (opzionale, se serve info aggiuntiva qui)
     const servizio = DATA.services.items.find(s => s.title.includes("Siti Web"));
+    const serviceName = "Realizzazione Siti Web"; // Pass service name to the form
 
     return (
         <main className="flex flex-col min-h-[100dvh] space-y-10 mt-10 mb-10"> {/* Aggiunto padding verticale */}
@@ -37,16 +38,16 @@ export default function RealizzazioneSitiWebPage() {
                 </BlurFade>
                 <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-4 space-y-4">
                     <BlurFade delay={BLUR_FADE_DELAY * 4}>
-                        {/* Contenuto migrato e leggermente adattato */}
-                        <p>Sviluppo <strong>siti internet</strong> moderni, veloci e ottimizzati (SEO) per aziende, professionisti e negozi a <strong>Modena</strong>, <strong>Vignola</strong>, <strong>Castelfranco Emilia</strong>, <strong>Sassuolo</strong> e dintorni. Un sito web efficace è cruciale per <strong>attirare più clienti locali</strong> e presentare al meglio la tua attività.</p>
-                        <p>Mi occupo della creazione di diverse tipologie di siti web:</p>
+                        {/* Modified text for flow, integrating specific examples and removing tech jargon */}
+                        <p>Sviluppo <strong>siti internet</strong> moderni, veloci e ottimizzati (SEO) per aziende, professionisti e negozi a <strong>Modena e in tutta la provincia</strong>. Un sito web efficace è cruciale per <strong>attirare più clienti locali</strong> e presentare al meglio la tua attività. Che tu sia un <strong>professionista a Modena centro</strong>, un <strong>negozio a Carpi</strong>, o un'<strong>azienda manifatturiera a Sassuolo</strong>, posso creare il sito giusto per te.</p>
+                        <p>Mi occupo della creazione di diverse tipologie di siti web, personalizzati per le esigenze specifiche del <strong>territorio modenese</strong>:</p>
                         <ul>
-                            <li><strong>Siti Vetrina:</strong> Ideali per presentare la tua azienda, i tuoi servizi e i tuoi contatti in modo professionale.</li>
-                            <li><strong>Blog Aziendali:</strong> Perfetti per condividere contenuti, stabilire autorità nel tuo settore e migliorare la SEO.</li>
-                            <li><strong>Siti E-commerce:</strong> Soluzioni complete per vendere i tuoi prodotti online in modo sicuro ed efficace.</li>
-                            <li><strong>Landing Page:</strong> Pagine mirate per campagne di marketing specifiche, ottimizzate per la conversione.</li>
+                            <li><strong>Siti Vetrina Professionali:</strong> Per presentare la tua azienda, i tuoi servizi e rafforzare la tua immagine locale.</li>
+                            <li><strong>Blog Aziendali:</strong> Per condividere la tua expertise, interagire con la comunità e migliorare il posizionamento sui motori di ricerca.</li>
+                            <li><strong>Siti E-commerce Performanti:</strong> Per vendere i tuoi prodotti online raggiungendo clienti a Modena, provincia e oltre.</li>
+                            <li><strong>Landing Page Ottimizzate:</strong> Per massimizzare il ritorno di campagne marketing mirate sul territorio.</li>
                         </ul>
-                        <p>Il mio approccio garantisce soluzioni su misura, design <strong>responsive</strong> (perfettamente visibili su tutti i dispositivi) e un'interfaccia <strong>facile da usare</strong> per te e per i tuoi visitatori. Utilizzo tecnologie moderne come React e Next.js per assicurare prestazioni elevate.</p>
+                        <p>Il mio approccio garantisce soluzioni su misura, design <strong>responsive</strong> (perfettamente visibili su smartphone, tablet e desktop) e un'interfaccia <strong>facile da usare</strong> sia per te che per i tuoi visitatori. Il mio obiettivo è diventare il punto di riferimento per la <strong>creazione di siti web professionali nel modenese</strong>, fornendo strumenti efficaci che portano risultati concreti.</p>
                         <p><Link href="/#projects" className="font-semibold">Guarda alcuni progetti web realizzati</Link> o <Link href="/#contact" className="font-semibold">contattami per discutere del tuo progetto</Link>.</p>
                     </BlurFade>
                 </div>
@@ -63,16 +64,6 @@ export default function RealizzazioneSitiWebPage() {
                 </BlurFade>
             </section>
 
-            <section id="tecnologie-web">
-                <BlurFade delay={BLUR_FADE_DELAY * 6}>
-                    <h2 className="text-2xl font-bold">Tecnologie Utilizzate</h2>
-                    <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2">
-                        {/* TODO: Elencare tecnologie specifiche per siti web (React, Next.js, TypeScript, CMS headless?, TailwindCSS, etc.) */}
-                        Utilizzo principalmente React, Next.js, TypeScript, Tailwind CSS per siti performanti e moderni. Valuto anche l'uso di CMS o altre piattaforme in base alle esigenze.
-                    </p>
-                </BlurFade>
-            </section>
-
             <section id="faq-web">
                 <BlurFade delay={BLUR_FADE_DELAY * 7}>
                     <h2 className="text-2xl font-bold">Domande Frequenti (FAQ)</h2>
@@ -84,15 +75,39 @@ export default function RealizzazioneSitiWebPage() {
                 </BlurFade>
             </section>
 
-            <section id="cta-web" className="text-center">
-                <BlurFade delay={BLUR_FADE_DELAY * 8}>
-                    <h2 className="text-2xl font-bold mb-4">Pronto a Dare Vita al Tuo Nuovo Sito Web?</h2>
-                    <p className="text-muted-foreground md:text-xl max-w-xl mx-auto mb-6">
-                        Contattami oggi stesso per discutere delle tue esigenze e ricevere un preventivo gratuito e senza impegno per la realizzazione del tuo sito web a Modena.
+            {/* START INSERTION: Aree Servite Section */}
+            <section id="aree-servite">
+                <BlurFade delay={BLUR_FADE_DELAY * 7.5}> {/* Adjusted delay */}
+                    <h2 className="text-2xl font-bold">Aree Geografiche Servite</h2>
+                    <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2">
+                        Offro i miei servizi di realizzazione siti web principalmente nelle seguenti aree della provincia di Modena:
                     </p>
-                    <Link href="/#contact">
-                        <Button size="lg">Richiedi un Preventivo Gratuito</Button>
-                    </Link>
+                    <ul className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2 grid grid-cols-2 sm:grid-cols-3 gap-1 list-disc pl-5">
+                        <li>Modena</li>
+                        <li>Sassuolo</li>
+                        <li>Carpi</li>
+                        <li>Vignola</li>
+                        <li>Castelfranco Emilia</li>
+                        <li>Maranello</li>
+                        <li>Spilamberto</li>
+                        <li>Formigine</li>
+                        <li>Nonantola</li>
+                        <li>Pavullo nel Frignano</li>
+                        <li>Fiorano Modenese</li>
+                        <li>Altre località su richiesta</li>
+                    </ul>
+                </BlurFade>
+            </section>
+            {/* END INSERTION: Aree Servite Section */}
+
+            <section id="cta-web" className="mt-12"> {/* Adjusted margin */}
+                <BlurFade delay={BLUR_FADE_DELAY * 8}>
+                    <ServiceContactForm
+                        serviceName={serviceName}
+                        formTitle="Richiedi un Preventivo per il Tuo Sito Web"
+                        formDescription="Compila il modulo per ricevere un preventivo gratuito e senza impegno per la realizzazione del tuo sito web a Modena."
+                        submitButtonText="Richiedi Preventivo Gratuito"
+                    />
                 </BlurFade>
             </section>
 
