@@ -20,12 +20,14 @@ export default function Page() {
         <div className="mx-auto w-full max-w-2xl space-y-8">
           <div className="gap-2 flex justify-between">
             <div className="flex-col flex flex-1 space-y-1.5">
-              <BlurFadeText
-                delay={BLUR_FADE_DELAY}
-                className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
-                yOffset={8}
-                text={`${DATA.name}`}
-              />
+              <h1>
+                <BlurFadeText
+                  delay={BLUR_FADE_DELAY}
+                  className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
+                  yOffset={8}
+                  text={`${DATA.name}`}
+                />
+              </h1>
               <BlurFadeText
                 className="max-w-[600px] md:text-xl"
                 delay={BLUR_FADE_DELAY}
@@ -69,6 +71,21 @@ export default function Page() {
           </Markdown>
         </BlurFade>
       </section>
+      <section id="chi-aiuto">
+        <BlurFade delay={BLUR_FADE_DELAY * 5}>
+          <h2 className="text-xl font-bold">{DATA.targetAudience.title}</h2>
+        </BlurFade>
+        <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
+          <BlurFade delay={BLUR_FADE_DELAY * 6}>
+            <p dangerouslySetInnerHTML={{ __html: DATA.targetAudience.intro }} className="m-0" />
+            <ul className="list-disc pl-6 space-y-1">
+              {DATA.targetAudience.points.map((point, index) => (
+                <li key={index} dangerouslySetInnerHTML={{ __html: point }} />
+              ))}
+            </ul>
+          </BlurFade>
+        </div>
+      </section>
       <section id="education">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 7}>
@@ -93,14 +110,16 @@ export default function Page() {
         </div>
       </section>
       <section id="skills">
-        <div className="flex min-h-0 flex-col gap-y-3">
+        <div className="flex min-h-0 flex-col">
           <BlurFade delay={BLUR_FADE_DELAY * 9}>
-            <h2 className="text-xl font-bold">Skills</h2>
+            <h2 className="text-xl font-bold">Cosa Faccio: I Miei Servizi Principali</h2>
           </BlurFade>
-          <div className="flex flex-wrap gap-1">
-            {DATA.skills.map((skill, id) => (
-              <BlurFade key={skill} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                <Badge key={skill}>{skill}</Badge>
+          <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert space-y-6 mt-2">
+            {DATA.services.items.map((service, id) => (
+              <BlurFade key={service.title} delay={BLUR_FADE_DELAY * 10 + (id + 1) * 0.05}>
+                <h3 className="inline text-sm font-bold">{service.title}</h3>
+                {' '}
+                <p className="inline m-0" dangerouslySetInnerHTML={{ __html: service.description }} />
               </BlurFade>
             ))}
           </div>
@@ -146,10 +165,24 @@ export default function Page() {
           </div>
         </div>
       </section>
-
+      <section id="perche-scegliermi">
+        <BlurFade delay={BLUR_FADE_DELAY * 13}>
+          <h2 className="text-xl font-bold">{DATA.whyMe.title}</h2>
+        </BlurFade>
+        <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2 space-y-2">
+          <BlurFade delay={BLUR_FADE_DELAY * 14}>
+            <p dangerouslySetInnerHTML={{ __html: DATA.whyMe.intro }} />
+            <ul className="list-disc pl-6 space-y-1">
+              {DATA.whyMe.points.map((point, index) => (
+                <li key={index} dangerouslySetInnerHTML={{ __html: point }} />
+              ))}
+            </ul>
+          </BlurFade>
+        </div>
+      </section>
       <section id="contact">
         <div className="grid items-center justify-center gap-4 px-4 text-center md:px-6 w-full py-12">
-          <BlurFade delay={BLUR_FADE_DELAY * 16}>
+          <BlurFade delay={BLUR_FADE_DELAY * 15}>
             <div className="space-y-3">
               <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
                 Contattami

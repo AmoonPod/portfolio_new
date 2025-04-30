@@ -95,7 +95,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="canonical" href={DATA.url} />
-
+        <meta name="google-site-verification" content="BzkUaVu8rd1Ixv5g73FCGyldZPKgc2NklXHMqbOcm9Q" />
         <meta property="og:logo" content="logo_black.png" />
       </head>
       <body
