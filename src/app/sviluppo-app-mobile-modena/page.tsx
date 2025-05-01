@@ -2,10 +2,70 @@ import BlurFade from "@/components/magicui/blur-fade";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ServiceContactForm } from '@/components/service-contact-form';
+import { ArrowRight } from "lucide-react";
+import { Metadata } from "next";
+import { DATA } from "@/data/resume";
 
 // TODO: Definire metadati
 
 const BLUR_FADE_DELAY = 0.04;
+
+export const metadata: Metadata = {
+    metadataBase: new URL(DATA.url + "/sviluppo-app-mobile-modena"),
+    title: {
+        default: "Sviluppo App Mobile (iOS/Android) a Modena | Applicazioni Flutter su misura - Manuel De Ceglie",
+        template: "%s | Manuel De Ceglie",
+    },
+    alternates: {
+        canonical: DATA.url + "/sviluppo-app-mobile-modena",
+        languages: {
+            "it-IT": DATA.url + "/sviluppo-app-mobile-modena",
+        },
+    },
+    description:
+        "Realizzo applicazioni mobile native o cross-platform per iOS e Android. Sviluppo app a Modena e provincia. Preventivo gratuito!",
+    openGraph: {
+        title: "Sviluppo App Mobile (iOS/Android) a Modena | Applicazioni Flutter su misura - Manuel De Ceglie",
+        description:
+            "Realizzo applicazioni mobile native o cross-platform per iOS e Android. Sviluppo app a Modena e provincia. Preventivo gratuito!",
+        url: DATA.url + "/sviluppo-app-mobile-modena",
+        siteName: "Manuel De Ceglie",
+        images: [
+            {
+                url: `${DATA.url}/og-image.jpeg`,
+                width: 1200,
+                height: 630,
+                alt: "Sviluppo App Mobile (iOS/Android) a Modena | Applicazioni mobile su misura - Manuel De Ceglie",
+            },
+        ],
+        countryName: "Italy",
+        locale: "it_IT",
+        type: "website",
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+        },
+    },
+    twitter: {
+        title: "Sviluppo App Mobile (iOS/Android) a Modena | Applicazioni Flutter su misura - Manuel De Ceglie",
+        description:
+            "Realizzo applicazioni mobile native o cross-platform per iOS e Android. Sviluppo app a Modena e provincia. Preventivo gratuito!",
+        card: "summary_large_image",
+        images: [`${DATA.url}/og-image.jpeg`],
+    },
+
+    verification: {
+        google: "",
+        yandex: "",
+    },
+};
 
 export default function AppMobilePage() {
     const serviceName = "Sviluppo App Mobile";
@@ -43,6 +103,24 @@ export default function AppMobilePage() {
                         </ul>
                         <p>Utilizzo tecnologie moderne come Flutter per garantire <strong>prestazioni elevate</strong> e la possibilità di raggiungere sia utenti iOS che Android con un unico sviluppo efficiente. Seguo l'intero ciclo di vita dell'app, dall'idea alla <strong>pubblicazione sugli store</strong> (App Store e Google Play).</p>
                         <p>Il mio obiettivo è trasformare la tua visione in un'app di successo che porti <strong>risultati concreti</strong> al tuo business.</p>
+                        {/* Add styled Link CTAs */}
+                        <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
+                            {/* REMOVE link to projects */}
+                            {/* <Link
+                                href="/#projects"
+                                className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:text-blue-600 dark:hover:text-blue-400 group whitespace-nowrap"
+                            >
+                                Guarda i Progetti Correlati
+                                <ArrowRight className="size-3 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+                            </Link> */}
+                            <Link
+                                href="#cta-app"
+                                className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline group whitespace-nowrap"
+                            >
+                                Pianifica Chiamata per la Tua App
+                                <ArrowRight className="size-3 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+                            </Link>
+                        </div>
                     </BlurFade>
                 </div>
             </section>
@@ -52,10 +130,14 @@ export default function AppMobilePage() {
             <section id="mio-approccio-app">
                 <BlurFade delay={BLUR_FADE_DELAY * 5}>
                     <h2 className="text-2xl font-bold">Dall'Idea all'App Store: Il Percorso</h2>
-                    <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2">
-                        {/* TODO: Expand on app dev process */}
-                        Definizione requisiti, prototipazione UX/UI, sviluppo agile, test su dispositivi, supporto pubblicazione.
-                    </p>
+                    <ul className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2 list-disc pl-6 space-y-1">
+                        <li><strong>Analisi dell'Idea e Requisiti:</strong> Definiamo insieme le funzionalità chiave, il target di utenti e gli obiettivi strategici della tua applicazione mobile.</li>
+                        <li><strong>Design UX/UI e Prototipazione:</strong> Collaboro con te o il tuo designer per definire l'esperienza utente (UX) e trasformare le specifiche grafiche (UI) in prototipi interattivi.</li>
+                        <li><strong>Sviluppo Cross-Platform (Flutter):</strong> Sviluppo l'applicazione utilizzando Flutter, permettendo di raggiungere sia iOS che Android con un codice efficiente e performante.</li>
+                        <li><strong>Test Funzionali e Multi-device:</strong> Eseguo test approfonditi su diversi dispositivi e sistemi operativi per garantire stabilità, performance e compatibilità.</li>
+                        <li><strong>Pubblicazione sugli Store:</strong> Ti assisto nel processo di preparazione e pubblicazione dell'app su Apple App Store e Google Play Store, rispettando le linee guida.</li>
+                        <li><strong>Manutenzione ed Evoluzione:</strong> Offro supporto post-lancio per aggiornamenti, correzione di bug e future evoluzioni dell'applicazione.</li>
+                    </ul>
                 </BlurFade>
             </section>
 
@@ -66,8 +148,10 @@ export default function AppMobilePage() {
                     <h2 className="text-2xl font-bold">Domande Frequenti (FAQ)</h2>
                     <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2 space-y-2">
                         {/* TODO: Add FAQ specific for mobile apps */}
-                        <p><strong>Sviluppate sia per iOS che per Android?</strong> Sì, principalmente con tecnologie cross-platform come Flutter.</p>
-                        <p><strong>Vi occupate anche della grafica?</strong> Collaboro con designer o lavoro su specifiche fornite.</p>
+                        <p><strong>Sviluppate sia per iOS che per Android?</strong> Sì, utilizzo principalmente tecnologie cross-platform come Flutter per creare un'unica app che funziona nativamente su entrambi i sistemi, ottimizzando tempi e costi.</p>
+                        <p><strong>Vi occupate anche della grafica (UI/UX Design)?</strong> Mi concentro sullo sviluppo tecnico dell'applicazione. Collaboro strettamente con designer di tua fiducia o lavoro sulla base di specifiche e design che mi vengono forniti per garantire che l'app sia funzionale e rispetti la visione estetica desiderata.</p>
+                        {/* Add Cost/Time FAQ */}
+                        <p><strong>Quanto costa e quanto tempo richiede sviluppare un'app?</strong> I costi e le tempistiche variano significativamente in base alla complessità delle funzionalità, al design e alle integrazioni richieste. <Link href="#cta-app" className="font-semibold">Pianifichiamo una chiamata</Link> per discutere la tua idea e fornirti una stima più precisa.</p>
                     </div>
                 </BlurFade>
             </section>

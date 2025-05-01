@@ -19,49 +19,71 @@ export function ServiceContactForm({
     formDescription = "Compila il modulo sottostante per discutere delle tue esigenze specifiche. Ti risponderò al più presto.",
     submitButtonText = "Invia Richiesta"
 }: ServiceContactFormProps) {
-    const [status, setStatus] = useState('');
+    // Form state
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState(''); // Optional phone state
+    const [message, setMessage] = useState('');
 
-    // !! IMPORTANT: Replace with your actual form endpoint URL (e.g., Formspree, API route)
-    const formActionUrl = "YOUR_FORM_ENDPOINT_HERE";
+    // Submission state
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [submissionStatus, setSubmissionStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+    // Formcarry endpoint
+    const formCarryEndpoint = "https://formcarry.com/s/fC-nAghgngU";
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        setStatus('Invio in corso...');
-        const formData = new FormData(event.currentTarget);
+        event.stopPropagation();
 
-        // Basic validation example (can be enhanced)
-        if (!formData.get('email') || !formData.get('message')) {
-            setStatus('Errore: Email e Messaggio sono obbligatori.');
-            return;
-        }
+        setIsSubmitting(true);
+        setErrorMessage('');
+        setSubmissionStatus('idle');
 
-        if (formActionUrl === "YOUR_FORM_ENDPOINT_HERE") {
-            console.error("Please replace YOUR_FORM_ENDPOINT_HERE with your actual form submission URL in src/components/service-contact-form.tsx");
-            setStatus('Errore: Endpoint del form non configurato.');
-            // Simulate submission for local testing without endpoint
-            // setTimeout(() => setStatus('Messaggio inviato (simulato)!'), 1000);
+        // Basic validation (can be enhanced)
+        if (!name || !email || !message) {
+            setErrorMessage('Nome, Email e Messaggio sono obbligatori.');
+            setSubmissionStatus('error');
+            setIsSubmitting(false);
             return;
         }
 
         try {
-            const response = await fetch(formActionUrl, {
+            const response = await fetch(formCarryEndpoint, {
                 method: 'POST',
-                body: formData,
                 headers: {
-                    'Accept': 'application/json'
-                }
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                // Include serviceName and optional phone
+                body: JSON.stringify({ name, email, message, phone, serviceName })
             });
+            const data = await response.json();
 
-            if (response.ok) {
-                setStatus('Messaggio inviato con successo!');
-                (event.target as HTMLFormElement).reset(); // Clear form
+            if (data.code === 200) {
+                // Success
+                setSubmissionStatus('success');
+                // Clear form
+                setName('');
+                setEmail('');
+                setPhone('');
+                setMessage('');
+            } else if (data.code === 422) {
+                // Validation error from Formcarry
+                setErrorMessage(data.message || 'Errore di validazione.');
+                setSubmissionStatus('error');
             } else {
-                // Handle server errors (e.g., response.json() might contain details)
-                setStatus('Errore durante l\'invio. Riprova più tardi.');
+                // Other error from Formcarry
+                setErrorMessage(data.message || 'Si è verificato un errore.');
+                setSubmissionStatus('error');
             }
-        } catch (error) {
-            console.error('Form submission error:', error);
-            setStatus('Errore di rete durante l\'invio.');
+        } catch (error: any) {
+            // Network or other fetch error
+            setErrorMessage(error.message || 'Errore di rete o richiesta fallita.');
+            setSubmissionStatus('error');
+        } finally {
+            setIsSubmitting(false);
         }
     }
 
@@ -71,30 +93,54 @@ export function ServiceContactForm({
             <p className="text-muted-foreground md:text-lg mb-6 text-center">
                 {formDescription}
             </p>
-            <form onSubmit={handleSubmit} action={formActionUrl} method="POST" className="space-y-4">
-                {/* Hidden field for service context */}
-                <input type="hidden" name="service_page" value={serviceName} />
+            <form onSubmit={handleSubmit} className="space-y-4">
+                {/* No action/method needed when using fetch */}
+                {/* <input type="hidden" name="service_page" value={serviceName} /> REMOVED - sent via JS */}
 
                 <div>
                     <Label htmlFor="name">Nome</Label>
-                    <Input id="name" name="name" type="text" placeholder="Il tuo nome" required className="mt-1" />
+                    <Input
+                        id="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        type="text"
+                        placeholder="Il tuo nome"
+                        required
+                        className="mt-1"
+                    />
                 </div>
 
                 <div>
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" name="email" type="email" placeholder="latua@email.com" required className="mt-1" />
+                    <Input
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        type="email"
+                        placeholder="latua@email.com"
+                        required
+                        className="mt-1"
+                    />
                 </div>
 
                 <div>
                     <Label htmlFor="phone">Telefono (Opzionale)</Label>
-                    <Input id="phone" name="phone" type="tel" placeholder="Il tuo numero di telefono" className="mt-1" />
+                    <Input
+                        id="phone"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        type="tel"
+                        placeholder="Il tuo numero di telefono"
+                        className="mt-1"
+                    />
                 </div>
 
                 <div>
                     <Label htmlFor="message">Messaggio</Label>
                     <Textarea
                         id="message"
-                        name="message"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
                         placeholder={`Descrivi brevemente le tue esigenze per ${serviceName}...`}
                         required
                         className="mt-1"
@@ -103,18 +149,26 @@ export function ServiceContactForm({
                 </div>
 
                 <div className="text-center">
-                    <Button type="submit" size="lg" disabled={status.startsWith('Invio') || status.includes('successo')}>
-                        {status.startsWith('Invio') ? 'Invio...' : submitButtonText}
+                    <Button type="submit" size="lg" disabled={isSubmitting}>
+                        {isSubmitting ? 'Invio...' : submitButtonText}
                     </Button>
                 </div>
-                {status && (
-                    <p className={`mt-4 text-center text-sm ${status.includes('Errore') ? 'text-red-600' : 'text-green-600'}`}>
-                        {status}
+
+                {/* Submission Status Messages */}
+                {submissionStatus === 'success' && (
+                    <p className="mt-4 text-center text-sm text-green-600">
+                        Messaggio inviato con successo! Grazie.
                     </p>
                 )}
-                <p className="text-xs text-center text-muted-foreground mt-4">
+                {submissionStatus === 'error' && (
+                    <p className="mt-4 text-center text-sm text-red-600">
+                        Errore: {errorMessage}
+                    </p>
+                )}
+                {/* Remove old status/config message */}
+                {/* <p className="text-xs text-center text-muted-foreground mt-4">
                     Configura l'endpoint del form in <code>src/components/service-contact-form.tsx</code> per abilitare l'invio.
-                </p>
+                </p> */}
             </form>
         </div>
     );
