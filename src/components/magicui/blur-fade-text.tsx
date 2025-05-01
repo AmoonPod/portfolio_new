@@ -63,7 +63,7 @@ const BlurFadeText = ({
   return (
     <div className="flex">
       <AnimatePresence>
-        <motion.span
+        <motion.h2
           initial="hidden"
           animate="visible"
           exit="hidden"
@@ -76,7 +76,7 @@ const BlurFadeText = ({
           className={cn("inline-block", className)}
         >
           {text}
-        </motion.span>
+        </motion.h2>
       </AnimatePresence>
     </div>
   );
