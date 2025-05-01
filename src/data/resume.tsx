@@ -8,7 +8,7 @@ export const DATA = {
   location: "Castelfranco Emilia, MO",
   locationLink: "https://www.google.com/maps/place/castelfranco-emilia",
   description:
-    "Sviluppatore software e web. Mi piace aiutare le attività a crescere con soluzioni digitali su misura. Appassionato di AI e delle sue potenzialità.",
+    " Aiuto aziende e attività di Modena a ottenere risultati online con siti web efficaci, software gestionali personalizzati e integrazioni AI.",
   summary:
     "Appassionato di informatica da sempre, ho trasformato questo interesse in un lavoro che mi permette di aiutare le persone a realizzare le proprie idee. Dopo aver lavorato su diversi tipi di progetti, ho scelto di dedicare parte del mio tempo e delle mie competenze alle attività locali, principalmente nel territorio di Modena e provincia (incluse aree come Vignola, Castelfranco Emilia, Sassuolo). Offro soluzioni digitali personalizzate: siti web moderni ed efficaci, gestionali su misura, applicazioni mobili intuitive e software specifici per rispondere alle tue esigenze. Il mio obiettivo è fornire strumenti efficaci e un supporto professionale per aiutarti a raggiungere i tuoi obiettivi di business, operando con base a Castelfranco Emilia. Se hai un progetto in mente, contattami per discuterne insieme.",
   avatarUrl: "/manuel.jpeg", // Sostituisci con il tuo avatar reale
