@@ -16,6 +16,7 @@ interface Props {
   title: string;
   href?: string;
   description: string;
+  altText: string;
   dates: string;
   tags: readonly string[];
   link?: string;
@@ -33,6 +34,7 @@ export function ProjectCard({
   title,
   href,
   description,
+  altText,
   dates,
   tags,
   link,
@@ -65,7 +67,7 @@ export function ProjectCard({
           <Lens>
             <Image
               src={image}
-              alt={title}
+              alt={altText}
               width={500}
               height={300}
               className="h-40 w-full overflow-hidden object-cover object-top"

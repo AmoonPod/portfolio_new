@@ -51,7 +51,7 @@ export default function Page() {
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
               <Avatar className="size-28 border">
-                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
+                <AvatarImage alt="Manuel De Ceglie - Sviluppatore Web e Software a Modena" src={DATA.avatarUrl} />
                 <AvatarFallback>{DATA.initials}</AvatarFallback>
               </Avatar>
             </BlurFade>
@@ -158,6 +158,7 @@ export default function Page() {
                   key={project.title}
                   title={project.title}
                   description={project.description}
+                  altText={project.altText}
                   dates={project.dates}
                   tags={project.technologies}
                   image={project.image}

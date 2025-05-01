@@ -11,7 +11,7 @@ export const DATA = {
     " Aiuto aziende e attività di Modena a ottenere risultati online con siti web efficaci, software gestionali personalizzati e integrazioni AI.",
   summary:
     "Appassionato di informatica da sempre, ho trasformato questo interesse in un lavoro che mi permette di aiutare le persone a realizzare le proprie idee. Dopo aver lavorato su diversi tipi di progetti, ho scelto di dedicare parte del mio tempo e delle mie competenze alle attività locali, principalmente nel territorio di Modena e provincia (incluse aree come Vignola, Castelfranco Emilia, Sassuolo). Offro soluzioni digitali personalizzate: siti web moderni ed efficaci, gestionali su misura, applicazioni mobili intuitive e software specifici per rispondere alle tue esigenze. Il mio obiettivo è fornire strumenti efficaci e un supporto professionale per aiutarti a raggiungere i tuoi obiettivi di business, operando con base a Castelfranco Emilia. Se hai un progetto in mente, contattami per discuterne insieme.",
-  avatarUrl: "/manuel.jpeg", // Sostituisci con il tuo avatar reale
+  avatarUrl: "/manuel-de-ceglie-sviluppatore-web-modena.jpeg", // Sostituisci con il tuo avatar reale
   skills: [
     "Sviluppo Software",
     "Sviluppo App Mobile",
@@ -81,6 +81,7 @@ export const DATA = {
       active: true,
       description:
         "Ho collaborato nella realizzazione di un CRM aziendale per la gestione dei clienti e delle vendite.",
+      altText: "Screenshot del CRM Aziendale sviluppato con Flutter",
       technologies: [
         "Flutter",
         "Dart",
@@ -96,7 +97,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/ewo.jpg",
+      image: "/crm-aziendale-sviluppo-flutter.jpg",
       video: "",
     },
     {
@@ -106,6 +107,7 @@ export const DATA = {
       active: true,
       description:
         "Ho collaborato nella realizzazione del sito web vetrina internazionale per un'azienda con sede nel Regno Unito, specializzata nella gestione di asset e beni strutturali.",
+      altText: "Homepage del sito web realizzato per Asset Plan (Framer)",
       technologies: ["Framer", "React"],
       links: [
         {
@@ -114,7 +116,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/ap.jpg",
+      image: "/sito-web-asset-plan-framer.jpg",
       video: "",
     },
     {
@@ -123,7 +125,8 @@ export const DATA = {
       dates: "2024",
       active: true,
       description:
-        "Ho sviluppato il sito web vetrina per Pure Heat, azienda di Spilamberto (MO) attiva nella vendita di biomasse, pellet e servizi di pulizia canne fumarie, curando design e usabilità.",
+        "Ho sviluppato il sito web vetrina per Pure Heat, azienda attiva nella vendita di biomasse, pellet e servizi di pulizia canne fumarie, curando design e usabilità.",
+      altText: "Sito web vetrina Pure Heat ",
       technologies: ["Framer"],
       links: [
         {
@@ -132,7 +135,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/pureheat.jpg",
+      image: "/sito-web-vetrina-pure-heat.jpg",
       video: "",
     },
     {
@@ -142,6 +145,7 @@ export const DATA = {
       active: true,
       description:
         "Ho collaborato nel creare un'app che, sfruttando la potenza e l'intelligenza dell'AI, assiste gli ispettori delle infrastrutture nel loro lavoro.",
+      altText: "Interfaccia app Lumen per ispezioni con AI",
       technologies: ["Framer"],
       links: [
         {
@@ -150,7 +154,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/lumen.jpg",
+      image: "/app-lumen-ispezioni-ai.jpg",
       video: "",
     },
   ],
