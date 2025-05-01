@@ -101,7 +101,7 @@ export default function RealizzazioneSitiWebPage() {
                     <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-4 space-y-4">
                         <BlurFade delay={BLUR_FADE_DELAY * 4}>
                             {/* Modified text for flow, integrating specific examples and removing tech jargon */}
-                            <p>Sviluppo <strong>siti internet</strong> moderni, veloci e ottimizzati (SEO) per aziende, professionisti e negozi a <strong>Modena e in tutta la provincia</strong>. Un sito web efficace è cruciale per <strong>attirare più clienti locali</strong> e presentare al meglio la tua attività. Che tu sia un <strong>professionista a Modena centro</strong>, un <strong>negozio a Carpi</strong>, o un'<strong>azienda manifatturiera a Sassuolo</strong>, posso creare il sito giusto per te.</p>
+                            <p>Sviluppo <strong>siti internet</strong> moderni, veloci e ottimizzati (SEO) per aziende, professionisti e negozi a <strong>Modena e in tutta la provincia</strong>. Un sito web efficace è cruciale per <strong>attirare più clienti locali</strong> e presentare al meglio la tua attività. Che tu sia un <strong>professionista a Modena centro</strong>, un <strong>negozio a Carpi</strong>, o un&apos;<strong>azienda manifatturiera a Sassuolo</strong>, posso creare il sito giusto per te.</p>
                             <p>Mi occupo della creazione di diverse tipologie di siti web, personalizzati per le esigenze specifiche del <strong>territorio modenese</strong>:</p>
                             <ul>
                                 <li><strong>Siti Vetrina Professionali:</strong> Per presentare la tua azienda, i tuoi servizi e rafforzare la tua immagine locale.</li>
@@ -109,7 +109,7 @@ export default function RealizzazioneSitiWebPage() {
                                 <li><strong>Siti E-commerce Performanti:</strong> Per vendere i tuoi prodotti online raggiungendo clienti a Modena, provincia e oltre.</li>
                                 <li><strong>Landing Page Ottimizzate:</strong> Per massimizzare il ritorno di campagne marketing mirate sul territorio.</li>
                             </ul>
-                            <p>Il mio approccio garantisce soluzioni su misura, design <strong>responsive</strong> (perfettamente visibili su smartphone, tablet e desktop) e un'interfaccia <strong>facile da usare</strong> sia per te che per i tuoi visitatori. Il mio obiettivo è diventare il punto di riferimento per la <strong>creazione di siti web professionali nel modenese</strong>, fornendo strumenti efficaci che portano risultati concreti.</p>
+                            <p>Il mio approccio garantisce soluzioni su misura, design <strong>responsive</strong> (perfettamente visibili su smartphone, tablet e desktop) e un&apos;interfaccia <strong>facile da usare</strong> sia per te che per i tuoi visitatori. Il mio obiettivo è diventare il punto di riferimento per la <strong>creazione di siti web professionali nel modenese</strong>, fornendo strumenti efficaci che portano risultati concreti.</p>
                             <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
                                 <Link
                                     href="/#projects"
@@ -136,10 +136,10 @@ export default function RealizzazioneSitiWebPage() {
                         <h2 className="text-2xl font-bold">Il Mio Approccio alla Realizzazione del Tuo Sito</h2>
                         <ul className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2 list-disc pl-6 space-y-1">
                             <li><strong>Analisi e Strategia:</strong> Ascolto attentamente le tue esigenze e definiamo insieme gli obiettivi specifici che il sito web dovrà raggiungere.</li>
-                            <li><strong>Design su Misura:</strong> Creo un layout grafico unico e professionale, perfettamente allineato con l'identità del tuo brand e ottimizzato per l'esperienza utente.</li>
-                            <li><strong>Sviluppo Moderno:</strong> Utilizzo tecnologie all'avanguardia come Next.js e React per garantire un sito web veloce, sicuro, affidabile e facilmente aggiornabile.</li>
+                            <li><strong>Design su Misura:</strong> Creo un layout grafico unico e professionale, perfettamente allineato con l&apos;identità del tuo brand e ottimizzato per l&apos;esperienza utente.</li>
+                            <li><strong>Sviluppo Moderno:</strong> Utilizzo tecnologie all&apos;avanguardia come Next.js e React per garantire un sito web veloce, sicuro, affidabile e facilmente aggiornabile.</li>
                             <li><strong>Ottimizzazione SEO Base:</strong> Imposto le fondamenta tecniche e strutturali affinché il tuo sito sia ben indicizzato e possa essere trovato più facilmente sui motori di ricerca come Google.</li>
-                            <li><strong>Consegna e Formazione:</strong> Ti consegno il sito web completo e pronto all'uso, fornendoti anche una breve formazione per permetterti di gestire i contenuti in autonomia, se necessario.</li>
+                            <li><strong>Consegna e Formazione:</strong> Ti consegno il sito web completo e pronto all&apos;uso, fornendoti anche una breve formazione per permetterti di gestire i contenuti in autonomia, se necessario.</li>
                             <li><strong>Supporto Continuativo:</strong> Rimango a tua disposizione anche dopo il lancio per offrire assistenza tecnica, manutenzione e futuri aggiornamenti.</li>
                         </ul>
                     </BlurFade>

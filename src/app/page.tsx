@@ -200,23 +200,25 @@ export default function Page() {
               } else if (service.title.includes("Applicazioni Mobile")) {
                 contactCtaText = "Pianifica Chiamata per la Tua App";
               } else if (service.title.includes("AI")) {
-                contactCtaText = "Valuta le Potenzialità AI";
+                contactCtaText = "Esplora le Potenzialità AI";
               }
 
               return (
                 <BlurFade key={service.slug} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
                   <h3 className="inline text-sm font-bold">{service.title}</h3>
                   {' '}
-                  <span className="inline m-0" dangerouslySetInnerHTML={{ __html: service.description }} />
+                  <div className="text-sm text-muted-foreground" dangerouslySetInnerHTML={{ __html: service.description }} />
 
                   <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2">
-                    <Link
-                      href={service.slug}
-                      className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline group whitespace-nowrap"
-                    >
-                      Approfondisci il Servizio
-                      <ArrowRight className="size-3 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
-                    </Link>
+                    {service.slug !== "/consulenza-integrazione-ai-modena" && (
+                      <Link
+                        href={service.slug}
+                        className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline group whitespace-nowrap"
+                      >
+                        Approfondisci il Servizio
+                        <ArrowRight className="size-3 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+                      </Link>
+                    )}
                     <Link
                       href="/#contact"
                       className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:text-blue-600 dark:hover:text-blue-400 group whitespace-nowrap"
@@ -273,21 +275,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section id="perche-scegliermi">
-        <BlurFade delay={BLUR_FADE_DELAY * 13}>
-          <h2 className="text-xl font-bold">{DATA.whyMe.title}</h2>
-        </BlurFade>
-        <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2 space-y-2">
-          <BlurFade delay={BLUR_FADE_DELAY * 14}>
-            <p dangerouslySetInnerHTML={{ __html: DATA.whyMe.intro }} />
-            <ul className="list-disc pl-6 space-y-1">
-              {DATA.whyMe.points.map((point, index) => (
-                <li key={index} dangerouslySetInnerHTML={{ __html: point }} />
-              ))}
-            </ul>
-          </BlurFade>
-        </div>
-      </section>
+
       <section id="contact" className="mt-12">
         <BlurFade delay={BLUR_FADE_DELAY * 15}>
           <ServiceContactForm

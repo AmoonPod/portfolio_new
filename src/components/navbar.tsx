@@ -62,15 +62,17 @@ export default function Navbar() {
                 </PopoverTrigger>
                 <PopoverContent className="w-56 p-2 z-50">
                   <div className="grid gap-1">
-                    {DATA.services.items.map((service) => (
-                      <Link
-                        key={service.slug}
-                        href={service.slug}
-                        className="block rounded-md p-2 text-sm hover:bg-accent"
-                      >
-                        {service.title.replace(":", "")}
-                      </Link>
-                    ))}
+                    {DATA.services.items
+                      .filter(service => !service.title.includes("AI"))
+                      .map((service) => (
+                        <Link
+                          key={service.slug}
+                          href={service.slug}
+                          className="block rounded-md p-2 text-sm hover:bg-accent"
+                        >
+                          {service.title.replace(":", "")}
+                        </Link>
+                      ))}
                   </div>
                 </PopoverContent>
               </Popover>

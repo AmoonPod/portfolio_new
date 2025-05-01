@@ -8,6 +8,7 @@ import { Bricolage_Grotesque as Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Link from "next/link";
 const fontSans = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -36,6 +37,11 @@ export default function RootLayout({
           <TooltipProvider delayDuration={0}>
             {children}
             <Navbar />
+            <footer className="text-center text-xs text-muted-foreground pt-6 pb-12 sm:pb-6 flex flex-col sm:flex-row justify-center items-center gap-x-2 gap-y-1">
+              <span>P. IVA: 04032610364</span>
+              <span className="hidden sm:inline">|</span>
+              <Link href="/privacy-policy" className="hover:underline">Privacy Policy</Link>
+            </footer>
           </TooltipProvider>
         </ThemeProvider>
         <Analytics />

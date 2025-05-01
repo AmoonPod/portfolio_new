@@ -92,7 +92,7 @@ export default function GestionaliPage() {
                 <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-4 space-y-4">
                     <BlurFade delay={BLUR_FADE_DELAY * 4}>
                         {/* Content focused on benefits and client needs */}
-                        <p>Realizzo <strong>applicativi web aziendali</strong> e <strong>software gestionali su misura</strong> per PMI e realtà produttive di <strong>Modena</strong>, <strong>Sassuolo</strong>, <strong>Maranello</strong> e dell'intera provincia. Il mio obiettivo è aiutarti a <strong>ottimizzare i tuoi processi lavorativi</strong> e rendere la tua azienda più efficiente.</p>
+                        <p>Realizzo <strong>applicativi web aziendali</strong> e <strong>software gestionali su misura</strong> per PMI e realtà produttive di <strong>Modena</strong>, <strong>Sassuolo</strong>, <strong>Maranello</strong> e dell&apos;intera provincia. Il mio obiettivo è aiutarti a <strong>ottimizzare i tuoi processi lavorativi</strong> e rendere la tua azienda più efficiente.</p>
                         <p>Sei stanco di procedure manuali lente e soggette a errori? Un gestionale personalizzato può fare la differenza, ad esempio per:</p>
                         <ul>
                             <li>Migliorare la gestione delle <strong>commesse</strong> e dei clienti (CRM)</li>
@@ -117,15 +117,15 @@ export default function GestionaliPage() {
             {/* RE-INSERT Placeholder Sections (Adjusted Titles) BELOW */}
             <section id="mio-approccio-gestionali">
                 <BlurFade delay={BLUR_FADE_DELAY * 5}> {/* Adjusted delay if needed */}
-                    <h2 className="text-2xl font-bold">Dall'Analisi alla Soluzione: Il Mio Metodo</h2>
+                    <h2 className="text-2xl font-bold">Dall&apos;Analisi alla Soluzione: Il Mio Metodo</h2>
                     {/* Add detailed list for software development process */}
                     <ul className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2 list-disc pl-6 space-y-1">
                         <li><strong>Analisi dei Requisiti:</strong> Comprendiamo a fondo le tue esigenze operative, i flussi di lavoro attuali e gli obiettivi specifici che il software deve raggiungere.</li>
-                        <li><strong>Progettazione della Soluzione:</strong> Definiamo l'architettura del software, le tecnologie da utilizzare e progettiamo interfacce utente intuitive e funzionali.</li>
+                        <li><strong>Progettazione della Soluzione:</strong> Definiamo l&apos;architettura del software, le tecnologie da utilizzare e progettiamo interfacce utente intuitive e funzionali.</li>
                         <li><strong>Sviluppo Agile e Modulare:</strong> Costruiamo il software per moduli, con un approccio agile che permette rilasci incrementali e feedback continui, garantendo flessibilità.</li>
                         <li><strong>Test Funzionali e Qualità:</strong> Eseguiamo test rigorosi per assicurarci che il software sia privo di errori, performante e risponda perfettamente ai requisiti definiti.</li>
-                        <li><strong>Rilascio e Integrazione:</strong> Implementiamo la soluzione nel tuo ambiente lavorativo, curando l'integrazione con eventuali sistemi preesistenti e la migrazione dei dati.</li>
-                        <li><strong>Formazione e Supporto:</strong> Forniamo formazione al tuo team per l'utilizzo ottimale del nuovo gestionale e offriamo supporto tecnico post-rilascio.</li>
+                        <li><strong>Rilascio e Integrazione:</strong> Implementiamo la soluzione nel tuo ambiente lavorativo, curando l&apos;integrazione con eventuali sistemi preesistenti e la migrazione dei dati.</li>
+                        <li><strong>Formazione e Supporto:</strong> Forniamo formazione al tuo team per l&apos;utilizzo ottimale del nuovo gestionale e offriamo supporto tecnico post-rilascio.</li>
                     </ul>
                 </BlurFade>
             </section>
@@ -138,10 +138,10 @@ export default function GestionaliPage() {
                     <h2 className="text-2xl font-bold">Domande Frequenti (FAQ)</h2>
                     <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2 space-y-2">
                         {/* TODO: Add FAQ specific for custom software */}
-                        <p><strong>È possibile integrare il gestionale con altri software?</strong> Sì, l'integrazione con i tuoi sistemi esistenti (es. contabilità, e-commerce) è un aspetto fondamentale che analizziamo insieme.</p>
+                        <p><strong>È possibile integrare il gestionale con altri software?</strong> Sì, l&apos;integrazione con i tuoi sistemi esistenti (es. contabilità, e-commerce) è un aspetto fondamentale che analizziamo insieme.</p>
                         <p><strong>Offrite assistenza post-rilascio?</strong> Certo, fornisco supporto continuativo e piani di manutenzione per garantire che il software rimanga performante e aggiornato.</p>
                         {/* Add Cost/Time FAQ */}
-                        <p><strong>Quanto costa e quanto tempo richiede un gestionale su misura?</strong> I costi e le tempistiche dipendono molto dalla complessità delle funzionalità richieste. Un'analisi preliminare gratuita ci permette di definire meglio l'investimento. <Link href="#cta-gestionali" className="font-semibold">Contattami per un'analisi gratuita</Link>.</p>
+                        <p><strong>Quanto costa e quanto tempo richiede un gestionale su misura?</strong> I costi e le tempistiche dipendono molto dalla complessità delle funzionalità richieste. Un&apos;analisi preliminare gratuita ci permette di definire meglio l&apos;investimento. <Link href="#cta-gestionali" className="font-semibold">Contattami per un&apos;analisi gratuita</Link>.</p>
                     </div>
                 </BlurFade>
             </section>
@@ -174,7 +174,7 @@ export default function GestionaliPage() {
                 <BlurFade delay={BLUR_FADE_DELAY * 8}> {/* Delay Placeholder */}
                     <ServiceContactForm
                         serviceName={serviceName}
-                        formTitle="Migliora ORA l'Efficienza della Tua Azienda"
+                        formTitle="Migliora l'Efficienza della Tua Azienda?"
                         formDescription="Richiedi un preventivo gratuito per sviluppare il software gestionale perfetto per le tue esigenze a Modena e provincia."
                         submitButtonText="Richiedi Preventivo Gratuito"
                     />

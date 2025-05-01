@@ -80,7 +80,7 @@ export default function AppMobilePage() {
                 </BlurFade>
                 <BlurFade delay={BLUR_FADE_DELAY * 2}>
                     <h2 className="mt-4 text-center text-muted-foreground md:text-xl max-w-2xl mx-auto">
-                        Trasforma la tua idea in un'applicazione mobile nativa o cross-platform per raggiungere i tuoi clienti su iOS e Android. Sviluppo app a Modena e provincia.
+                        Trasforma la tua idea in un&apos;applicazione mobile nativa o cross-platform per raggiungere i tuoi clienti su iOS e Android. Sviluppo app a Modena e provincia.
                     </h2>
                 </BlurFade>
             </section>
@@ -93,16 +93,16 @@ export default function AppMobilePage() {
                 <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-4 space-y-4">
                     <BlurFade delay={BLUR_FADE_DELAY * 4}>
                         {/* Content focused on benefits and client needs */}
-                        <p>Porto le tue idee su smartphone e tablet creando <strong>applicazioni mobile</strong> native o cross-platform per dispositivi iOS e Android. Collaboro con <strong>startup e aziende di Modena, Castelfranco Emilia</strong> e dell'intera provincia per sviluppare soluzioni digitali coinvolgenti.</p>
-                        <p>Che tu voglia lanciare un nuovo servizio, migliorare l'interazione con i tuoi clienti o digitalizzare un processo, un'app mobile può essere la chiave per:</p>
+                        <p>Porto le tue idee su smartphone e tablet creando <strong>applicazioni mobile</strong> native o cross-platform per dispositivi iOS e Android. Collaboro con <strong>startup e aziende di Modena, Castelfranco Emilia</strong> e dell&apos;intera provincia per sviluppare soluzioni digitali coinvolgenti.</p>
+                        <p>Che tu voglia lanciare un nuovo servizio, migliorare l&apos;interazione con i tuoi clienti o digitalizzare un processo, un&apos;app mobile può essere la chiave per:</p>
                         <ul>
                             <li><strong>Raggiungere i tuoi clienti</strong> ovunque si trovino, direttamente sul loro dispositivo preferito.</li>
-                            <li>Offrire un'<strong>esperienza utente fluida</strong> e ottimizzata per il mobile.</li>
+                            <li>Offrire un&apos;<strong>esperienza utente fluida</strong> e ottimizzata per il mobile.</li>
                             <li>Creare un <strong>canale di comunicazione diretto</strong> e personalizzato.</li>
                             <li><strong>Differenziarti dalla concorrenza</strong> con uno strumento innovativo.</li>
                         </ul>
-                        <p>Utilizzo tecnologie moderne come Flutter per garantire <strong>prestazioni elevate</strong> e la possibilità di raggiungere sia utenti iOS che Android con un unico sviluppo efficiente. Seguo l'intero ciclo di vita dell'app, dall'idea alla <strong>pubblicazione sugli store</strong> (App Store e Google Play).</p>
-                        <p>Il mio obiettivo è trasformare la tua visione in un'app di successo che porti <strong>risultati concreti</strong> al tuo business.</p>
+                        <p>Utilizzo tecnologie moderne come Flutter per garantire <strong>prestazioni elevate</strong> e la possibilità di raggiungere sia utenti iOS che Android con un unico sviluppo efficiente. Seguo l&apos;intero ciclo di vita dell&apos;app, dall&apos;idea alla <strong>pubblicazione sugli store</strong> (App Store e Google Play).</p>
+                        <p>Il mio obiettivo è trasformare la tua visione in un&apos;app di successo che porti <strong>risultati concreti</strong> al tuo business.</p>
                         {/* Add styled Link CTAs */}
                         <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
                             {/* REMOVE link to projects */}
@@ -129,14 +129,14 @@ export default function AppMobilePage() {
             {/* Placeholder Sections (Adjusted Titles) */}
             <section id="mio-approccio-app">
                 <BlurFade delay={BLUR_FADE_DELAY * 5}>
-                    <h2 className="text-2xl font-bold">Dall'Idea all'App Store: Il Percorso</h2>
+                    <h2 className="text-2xl font-bold">Dall&apos;Idea all&apos;App Store: Il Percorso</h2>
                     <ul className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2 list-disc pl-6 space-y-1">
-                        <li><strong>Analisi dell'Idea e Requisiti:</strong> Definiamo insieme le funzionalità chiave, il target di utenti e gli obiettivi strategici della tua applicazione mobile.</li>
-                        <li><strong>Design UX/UI e Prototipazione:</strong> Collaboro con te o il tuo designer per definire l'esperienza utente (UX) e trasformare le specifiche grafiche (UI) in prototipi interattivi.</li>
-                        <li><strong>Sviluppo Cross-Platform (Flutter):</strong> Sviluppo l'applicazione utilizzando Flutter, permettendo di raggiungere sia iOS che Android con un codice efficiente e performante.</li>
+                        <li><strong>Analisi dell&apos;Idea e Requisiti:</strong> Definiamo insieme le funzionalità chiave, il target di utenti e gli obiettivi strategici della tua applicazione mobile.</li>
+                        <li><strong>Design UX/UI e Prototipazione:</strong> Collaboro con te o il tuo designer per definire l&apos;esperienza utente (UX) e trasformare le specifiche grafiche (UI) in prototipi interattivi.</li>
+                        <li><strong>Sviluppo Cross-Platform (Flutter):</strong> Sviluppo l&apos;applicazione utilizzando Flutter, permettendo di raggiungere sia iOS che Android con un codice efficiente e performante.</li>
                         <li><strong>Test Funzionali e Multi-device:</strong> Eseguo test approfonditi su diversi dispositivi e sistemi operativi per garantire stabilità, performance e compatibilità.</li>
-                        <li><strong>Pubblicazione sugli Store:</strong> Ti assisto nel processo di preparazione e pubblicazione dell'app su Apple App Store e Google Play Store, rispettando le linee guida.</li>
-                        <li><strong>Manutenzione ed Evoluzione:</strong> Offro supporto post-lancio per aggiornamenti, correzione di bug e future evoluzioni dell'applicazione.</li>
+                        <li><strong>Pubblicazione sugli Store:</strong> Ti assisto nel processo di preparazione e pubblicazione dell&apos;app su Apple App Store e Google Play Store, rispettando le linee guida.</li>
+                        <li><strong>Manutenzione ed Evoluzione:</strong> Offro supporto post-lancio per aggiornamenti, correzione di bug e future evoluzioni dell&apos;applicazione.</li>
                     </ul>
                 </BlurFade>
             </section>
@@ -148,10 +148,10 @@ export default function AppMobilePage() {
                     <h2 className="text-2xl font-bold">Domande Frequenti (FAQ)</h2>
                     <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2 space-y-2">
                         {/* TODO: Add FAQ specific for mobile apps */}
-                        <p><strong>Sviluppate sia per iOS che per Android?</strong> Sì, utilizzo principalmente tecnologie cross-platform come Flutter per creare un'unica app che funziona nativamente su entrambi i sistemi, ottimizzando tempi e costi.</p>
-                        <p><strong>Vi occupate anche della grafica (UI/UX Design)?</strong> Mi concentro sullo sviluppo tecnico dell'applicazione. Collaboro strettamente con designer di tua fiducia o lavoro sulla base di specifiche e design che mi vengono forniti per garantire che l'app sia funzionale e rispetti la visione estetica desiderata.</p>
+                        <p><strong>Sviluppate sia per iOS che per Android?</strong> Sì, utilizzo principalmente tecnologie cross-platform come Flutter per creare un&apos;unica app che funziona nativamente su entrambi i sistemi, ottimizzando tempi e costi.</p>
+                        <p><strong>Vi occupate anche della grafica (UI/UX Design)?</strong> Mi concentro sullo sviluppo tecnico dell&apos;applicazione. Collaboro strettamente con designer di tua fiducia o lavoro sulla base di specifiche e design che mi vengono forniti per garantire che l&apos;app sia funzionale e rispetti la visione estetica desiderata.</p>
                         {/* Add Cost/Time FAQ */}
-                        <p><strong>Quanto costa e quanto tempo richiede sviluppare un'app?</strong> I costi e le tempistiche variano significativamente in base alla complessità delle funzionalità, al design e alle integrazioni richieste. <Link href="#cta-app" className="font-semibold">Pianifichiamo una chiamata</Link> per discutere la tua idea e fornirti una stima più precisa.</p>
+                        <p><strong>Quanto costa e quanto tempo richiede sviluppare un&apos;app?</strong> I costi e le tempistiche variano significativamente in base alla complessità delle funzionalità, al design e alle integrazioni richieste. <Link href="#cta-app" className="font-semibold">Pianifichiamo una chiamata</Link> per discutere la tua idea e fornirti una stima più precisa.</p>
                     </div>
                 </BlurFade>
             </section>
@@ -182,7 +182,7 @@ export default function AppMobilePage() {
                 <BlurFade delay={BLUR_FADE_DELAY * 8}> {/* Delay Placeholder */}
                     <ServiceContactForm
                         serviceName={serviceName}
-                        formTitle="Hai un'Idea per un'App Mobile?"
+                        formTitle="Hai un&apos;Idea per un&apos;App Mobile?"
                         formDescription="Pianifica una chiamata conoscitiva gratuita per discutere del tuo progetto di app mobile e scoprire come posso aiutarti a realizzarlo."
                         submitButtonText="Pianifica una Chiamata"
                     />

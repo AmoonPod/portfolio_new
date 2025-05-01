@@ -29,6 +29,14 @@ interface LensProps {
   lensColor?: string;
   /** The aria label of the lens */
   ariaLabel?: string;
+  /** The magnification of the lens */
+  magnification?: number;
+  /** The gradient percentage of the lens */
+  gradientPercentage?: number;
+  /** The size of the lens */
+  size?: number;
+  /** The className of the lens */
+  className?: string;
 }
 
 export function Lens({
@@ -41,6 +49,10 @@ export function Lens({
   duration = 0.1,
   lensColor = "black",
   ariaLabel = "Zoom Area",
+  magnification = 1.3,
+  gradientPercentage = 100,
+  size = 170,
+  className,
 }: LensProps) {
   if (zoomFactor < 1) {
     throw new Error("zoomFactor must be greater than 1");
@@ -57,7 +69,7 @@ export function Lens({
     if (isStatic) return position;
     if (defaultPosition && !isHovering) return defaultPosition;
     return mousePosition;
-  }, [isStatic, position, defaultPosition, isHovering, mousePosition]);
+  }, [isStatic, position, defaultPosition, isHovering, mousePosition,]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -71,11 +83,9 @@ export function Lens({
     if (e.key === "Escape") setIsHovering(false);
   }, []);
 
-  const maskImage = useMotionTemplate`radial-gradient(circle ${
-    lensSize / 2
-  }px at ${currentPosition.x}px ${
-    currentPosition.y
-  }px, ${lensColor} 100%, transparent 100%)`;
+  const maskImage = useMotionTemplate`radial-gradient(circle ${lensSize / 2
+    }px at ${currentPosition.x}px ${currentPosition.y
+    }px, ${lensColor} 100%, transparent 100%)`;
 
   const LensContent = useMemo(() => {
     const { x, y } = currentPosition;

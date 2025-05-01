@@ -177,8 +177,8 @@ export const DATA = {
         slug: "/sviluppo-app-mobile-modena"
       },
       {
-        title: "Consulenza e Integrazione AI per Aziende Locali:",
-        description: "Aiuto le aziende della provincia di <strong>Modena</strong> a sfruttare l\'<strong>Intelligenza Artificiale</strong> per innovare e ottenere un vantaggio competitivo.Posso aiutarti a:<ul><li>Integrare funzionalità AI nei tuoi sistemi esistenti</li><li>Creare <strong>strumenti intelligenti</strong> per automatizzare compiti ripetitivi</li><li>Analizzare dati in modo avanzato per ottenere insight preziosi</li><li>Migliorare l\'esperienza dei tuoi clienti con soluzioni personalizzate</li></ul>L\'AI può <strong>ottimizzare processi e aprire nuove opportunità</strong> di business.",
+        title: "Esplorazione e Integrazione AI per Aziende Locali:",
+        description: "Esploro come le aziende della provincia di <strong>Modena</strong> possono sfruttare l\'<strong>Intelligenza Artificiale</strong> per innovare. Possiamo valutare insieme come:<ul><li>Integrare funzionalità AI nei tuoi sistemi esistenti</li><li>Creare <strong>prototipi di strumenti intelligenti</strong> per automatizzare compiti ripetitivi</li><li>Analizzare dati in modo avanzato per ottenere possibili insight</li><li>Migliorare l\'esperienza dei tuoi clienti con soluzioni personalizzate</li></ul>L\'AI può <strong>ottimizzare processi e aprire nuove opportunità</strong>: scopriamo insieme se fa al caso tuo.",
         slug: "/consulenza-integrazione-ai-modena"
       }
     ]
