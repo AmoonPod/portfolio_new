@@ -1,6 +1,4 @@
 import BlurFade from "@/components/magicui/blur-fade";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { ServiceContactForm } from '@/components/service-contact-form';
 
 // TODO: Definire metadati
