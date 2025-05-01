@@ -1,3 +1,5 @@
+"use client";
+
 import { Dock, DockIcon } from "@/components/magicui/dock";
 import { ModeToggle } from "@/components/mode-toggle";
 import { buttonVariants } from "@/components/ui/button";
@@ -10,6 +12,13 @@ import {
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import React from "react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { LayoutGrid } from 'lucide-react';
 
 export default function Navbar() {
   return (
@@ -36,6 +45,41 @@ export default function Navbar() {
             </Tooltip>
           </DockIcon>
         ))}
+        <Separator orientation="vertical" className="h-full" />
+        <DockIcon>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <div
+                    className={cn(
+                      buttonVariants({ variant: "ghost", size: "icon" }),
+                      "size-12"
+                    )}
+                  >
+                    <LayoutGrid className="size-4" />
+                  </div>
+                </PopoverTrigger>
+                <PopoverContent className="w-56 p-2 z-50">
+                  <div className="grid gap-1">
+                    {DATA.services.items.map((service) => (
+                      <Link
+                        key={service.slug}
+                        href={service.slug}
+                        className="block rounded-md p-2 text-sm hover:bg-accent"
+                      >
+                        {service.title.replace(":", "")}
+                      </Link>
+                    ))}
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Servizi</p>
+            </TooltipContent>
+          </Tooltip>
+        </DockIcon>
         <Separator orientation="vertical" className="h-full" />
         {Object.entries(DATA.contact.social)
           .filter(([_, social]) => social.navbar)

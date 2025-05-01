@@ -1,11 +1,70 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { ServiceContactForm } from '@/components/service-contact-form';
+import { ArrowRight } from "lucide-react";
+import { Metadata } from "next";
+import { DATA } from "@/data/resume";
 
 // TODO: Definire metadati
 
 const BLUR_FADE_DELAY = 0.04;
+
+export const metadata: Metadata = {
+    metadataBase: new URL(DATA.url + "/sviluppo-gestionali-personalizzati-modena"),
+    title: {
+        default: "Sviluppo Gestionali Personalizzati a Modena | Software su misura - Manuel De Ceglie",
+        template: "%s | Manuel De Ceglie",
+    },
+    alternates: {
+        canonical: DATA.url + "/sviluppo-gestionali-personalizzati-modena",
+        languages: {
+            "it-IT": DATA.url + "/sviluppo-gestionali-personalizzati-modena",
+        },
+    },
+    description:
+        "Realizzo software su misura a Modena per aziende e attività. Ottimizza processi di produzione, magazzino, CRM e fatturazione. Preventivo gratuito!",
+    openGraph: {
+        title: "Sviluppo Gestionali Personalizzati a Modena | Software su misura - Manuel De Ceglie",
+        description:
+            "Realizzo software su misura a Modena per aziende e attività. Ottimizza processi di produzione, magazzino, CRM e fatturazione. Preventivo gratuito!",
+        url: DATA.url + "/sviluppo-gestionali-personalizzati-modena",
+        siteName: "Manuel De Ceglie",
+        images: [
+            {
+                url: `${DATA.url}/og-image.jpeg`,
+                width: 1200,
+                height: 630,
+                alt: "Sviluppo Gestionali Personalizzati a Modena | Software su misura - Manuel De Ceglie",
+            },
+        ],
+        countryName: "Italy",
+        locale: "it_IT",
+        type: "website",
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+        },
+    },
+    twitter: {
+        title: "Sviluppo Gestionali Personalizzati a Modena | Software su misura - Manuel De Ceglie",
+        description:
+            "Realizzo software su misura a Modena per aziende e attività. Ottimizza processi di produzione, magazzino, CRM e fatturazione. Preventivo gratuito!",
+        card: "summary_large_image",
+        images: [`${DATA.url}/og-image.jpeg`],
+    },
+
+    verification: {
+        google: "",
+        yandex: "",
+    },
+};
 
 export default function GestionaliPage() {
     const serviceName = "Sviluppo Gestionali Personalizzati";
@@ -19,9 +78,9 @@ export default function GestionaliPage() {
                     </h1>
                 </BlurFade>
                 <BlurFade delay={BLUR_FADE_DELAY * 2}>
-                    <p className="mt-4 text-center text-muted-foreground md:text-xl max-w-2xl mx-auto">
+                    <h2 className="mt-4 text-center text-muted-foreground md:text-xl max-w-2xl mx-auto">
                         Ottimizza i processi della tua azienda a Modena con un software gestionale su misura. Semplifica la fatturazione, il magazzino, la gestione clienti e molto altro.
-                    </p>
+                    </h2>
                 </BlurFade>
             </section>
 
@@ -41,22 +100,36 @@ export default function GestionaliPage() {
                             <li>Tenere sotto controllo il <strong>magazzino</strong> in tempo reale</li>
                         </ul>
                         <p>Un software su misura <strong>riduce gli errori, libera tempo prezioso</strong> per te e i tuoi collaboratori e ti fornisce dati chiari per prendere decisioni migliori. Sviluppo soluzioni intuitive, potenti e perfettamente integrate con i tuoi sistemi esistenti.</p>
-                        <p>Il mio obiettivo è diventare il partner tecnologico di fiducia per le <strong>aziende del distretto ceramico e metalmeccanico</strong>, e non solo, fornendo strumenti che portano un reale vantaggio competitivo.</p>
+                        <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
+                            <Link
+                                href="#cta-gestionali"
+                                className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline group whitespace-nowrap"
+                            >
+                                Discutiamo delle tue esigenze specifiche
+                                <ArrowRight className="size-3 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+                            </Link>
+                        </div>
                     </BlurFade>
                 </div>
             </section>
             {/* END: Add Service Details Section */}
 
-            {/* Placeholder Sections (Adjusted Titles) */}
+            {/* RE-INSERT Placeholder Sections (Adjusted Titles) BELOW */}
             <section id="mio-approccio-gestionali">
-                <BlurFade delay={BLUR_FADE_DELAY * 5}>
+                <BlurFade delay={BLUR_FADE_DELAY * 5}> {/* Adjusted delay if needed */}
                     <h2 className="text-2xl font-bold">Dall'Analisi alla Soluzione: Il Mio Metodo</h2>
-                    <p className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2">
-                        {/* TODO: Expand on process for custom software */}
-                        Ascolto attivo, analisi approfondita dei processi, sviluppo agile, test rigorosi e formazione all'uso.
-                    </p>
+                    {/* Add detailed list for software development process */}
+                    <ul className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2 list-disc pl-6 space-y-1">
+                        <li><strong>Analisi dei Requisiti:</strong> Comprendiamo a fondo le tue esigenze operative, i flussi di lavoro attuali e gli obiettivi specifici che il software deve raggiungere.</li>
+                        <li><strong>Progettazione della Soluzione:</strong> Definiamo l'architettura del software, le tecnologie da utilizzare e progettiamo interfacce utente intuitive e funzionali.</li>
+                        <li><strong>Sviluppo Agile e Modulare:</strong> Costruiamo il software per moduli, con un approccio agile che permette rilasci incrementali e feedback continui, garantendo flessibilità.</li>
+                        <li><strong>Test Funzionali e Qualità:</strong> Eseguiamo test rigorosi per assicurarci che il software sia privo di errori, performante e risponda perfettamente ai requisiti definiti.</li>
+                        <li><strong>Rilascio e Integrazione:</strong> Implementiamo la soluzione nel tuo ambiente lavorativo, curando l'integrazione con eventuali sistemi preesistenti e la migrazione dei dati.</li>
+                        <li><strong>Formazione e Supporto:</strong> Forniamo formazione al tuo team per l'utilizzo ottimale del nuovo gestionale e offriamo supporto tecnico post-rilascio.</li>
+                    </ul>
                 </BlurFade>
             </section>
+            {/* END RE-INSERTION */}
 
             {/* Removed detailed tech section placeholder */}
 
@@ -65,8 +138,10 @@ export default function GestionaliPage() {
                     <h2 className="text-2xl font-bold">Domande Frequenti (FAQ)</h2>
                     <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2 space-y-2">
                         {/* TODO: Add FAQ specific for custom software */}
-                        <p><strong>È possibile integrare il gestionale con altri software?</strong> Sì, l'integrazione è un aspetto fondamentale.</p>
-                        <p><strong>Offrite assistenza post-rilascio?</strong> Certo, fornisco supporto e manutenzione continua.</p>
+                        <p><strong>È possibile integrare il gestionale con altri software?</strong> Sì, l'integrazione con i tuoi sistemi esistenti (es. contabilità, e-commerce) è un aspetto fondamentale che analizziamo insieme.</p>
+                        <p><strong>Offrite assistenza post-rilascio?</strong> Certo, fornisco supporto continuativo e piani di manutenzione per garantire che il software rimanga performante e aggiornato.</p>
+                        {/* Add Cost/Time FAQ */}
+                        <p><strong>Quanto costa e quanto tempo richiede un gestionale su misura?</strong> I costi e le tempistiche dipendono molto dalla complessità delle funzionalità richieste. Un'analisi preliminare gratuita ci permette di definire meglio l'investimento. <Link href="#cta-gestionali" className="font-semibold">Contattami per un'analisi gratuita</Link>.</p>
                     </div>
                 </BlurFade>
             </section>
@@ -99,7 +174,7 @@ export default function GestionaliPage() {
                 <BlurFade delay={BLUR_FADE_DELAY * 8}> {/* Delay Placeholder */}
                     <ServiceContactForm
                         serviceName={serviceName}
-                        formTitle="Migliora l'Efficienza della Tua Azienda?"
+                        formTitle="Migliora ORA l'Efficienza della Tua Azienda"
                         formDescription="Richiedi un preventivo gratuito per sviluppare il software gestionale perfetto per le tue esigenze a Modena e provincia."
                         submitButtonText="Richiedi Preventivo Gratuito"
                     />

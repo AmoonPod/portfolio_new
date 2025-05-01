@@ -5,11 +5,12 @@ import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DATA } from "@/data/resume";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import { ServiceContactForm } from '@/components/service-contact-form';
 import { Metadata } from "next";
+import { Button } from "@/components/ui/button";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -189,18 +190,44 @@ export default function Page() {
           </BlurFade>
 
           <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert space-y-4 mt-2">
-            {DATA.services.items.map((service, id) => (
-              <BlurFade key={service.slug} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                <h3 className="inline text-sm font-bold">{service.title}</h3>
-                {' '}
-                <p className="inline m-0" dangerouslySetInnerHTML={{ __html: service.description }} />
+            {DATA.services.items.map((service, id) => {
+              // Determine specific CTA text based on title
+              let contactCtaText = "Richiedi Informazioni"; // Default
+              if (service.title.includes("Siti Web")) {
+                contactCtaText = "Parliamo del tuo Sito Web";
+              } else if (service.title.includes("Gestionali")) {
+                contactCtaText = "Richiedi Preventivo Gestionale";
+              } else if (service.title.includes("Applicazioni Mobile")) {
+                contactCtaText = "Pianifica Chiamata per la Tua App";
+              } else if (service.title.includes("AI")) {
+                contactCtaText = "Valuta le Potenzialità AI";
+              }
 
-                {' '}
-                <Link href={service.slug} className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline whitespace-nowrap">
-                  [Approfondisci]
-                </Link>
-              </BlurFade>
-            ))}
+              return (
+                <BlurFade key={service.slug} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
+                  <h3 className="inline text-sm font-bold">{service.title}</h3>
+                  {' '}
+                  <span className="inline m-0" dangerouslySetInnerHTML={{ __html: service.description }} />
+
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2">
+                    <Link
+                      href={service.slug}
+                      className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline group whitespace-nowrap"
+                    >
+                      Approfondisci il Servizio
+                      <ArrowRight className="size-3 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+                    </Link>
+                    <Link
+                      href="/#contact"
+                      className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:text-blue-600 dark:hover:text-blue-400 group whitespace-nowrap"
+                    >
+                      {contactCtaText}
+                      <ArrowRight className="size-3 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+                    </Link>
+                  </div>
+                </BlurFade>
+              );
+            })}
           </div>
 
         </div>

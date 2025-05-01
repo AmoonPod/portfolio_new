@@ -4,6 +4,7 @@ import { ServiceContactForm } from '@/components/service-contact-form'; // Impor
 import { Metadata } from "next";
 import { DATA } from "@/data/resume";
 import Head from "next/head";
+import { ArrowRight } from "lucide-react"; // Ensure ArrowRight is imported
 
 // TODO: Definire metadati specifici per SEO
 // export const metadata = {
@@ -87,9 +88,9 @@ export default function RealizzazioneSitiWebPage() {
                     </BlurFade>
                     <BlurFade delay={BLUR_FADE_DELAY * 2}>
                         {/* Breve intro specifica per la pagina */}
-                        <p className="mt-4 text-center text-muted-foreground md:text-xl max-w-2xl mx-auto">
+                        <h2 className="mt-4 text-center text-muted-foreground md:text-xl max-w-2xl mx-auto">
                             Hai bisogno di un sito web moderno, performante e ottimizzato per i motori di ricerca per far crescere la tua attività a Modena e dintorni? Scopri come posso aiutarti.
-                        </p>
+                        </h2>
                     </BlurFade>
                 </section>
 
@@ -109,7 +110,22 @@ export default function RealizzazioneSitiWebPage() {
                                 <li><strong>Landing Page Ottimizzate:</strong> Per massimizzare il ritorno di campagne marketing mirate sul territorio.</li>
                             </ul>
                             <p>Il mio approccio garantisce soluzioni su misura, design <strong>responsive</strong> (perfettamente visibili su smartphone, tablet e desktop) e un'interfaccia <strong>facile da usare</strong> sia per te che per i tuoi visitatori. Il mio obiettivo è diventare il punto di riferimento per la <strong>creazione di siti web professionali nel modenese</strong>, fornendo strumenti efficaci che portano risultati concreti.</p>
-                            <p><Link href="/#projects" className="font-semibold">Guarda alcuni progetti web realizzati</Link> o <Link href="#cta-web" className="font-semibold">contattami per discutere del tuo progetto</Link>.</p>
+                            <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3">
+                                <Link
+                                    href="/#projects"
+                                    className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:text-blue-600 dark:hover:text-blue-400 group whitespace-nowrap"
+                                >
+                                    Guarda i Progetti Correlati
+                                    <ArrowRight className="size-3 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+                                </Link>
+                                <Link
+                                    href="#cta-web"
+                                    className="inline-flex items-center gap-1 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline group whitespace-nowrap"
+                                >
+                                    Richiedi Preventivo Sito Web
+                                    <ArrowRight className="size-3 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
+                                </Link>
+                            </div>
                         </BlurFade>
                     </div>
                 </section>
@@ -134,7 +150,7 @@ export default function RealizzazioneSitiWebPage() {
                         <h2 className="text-2xl font-bold">Domande Frequenti (FAQ)</h2>
                         <div className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert mt-2 space-y-2">
                             {/* TODO: Aggiungere FAQ specifiche per siti web */}
-                            <p><strong>Quanto costa realizzare un sito web?</strong> I costi variano in base alla complessità del progetto (numero di pagine, funzionalità specifiche, e-commerce, ecc.). <Link href="#cta-web" className="font-semibold">Contattami</Link> per un preventivo personalizzato e trasparente.</p>
+                            <p><strong>Quanto costa realizzare un sito web?</strong> I costi variano in base alla complessità del progetto (numero di pagine, funzionalità specifiche, e-commerce, ecc.). Contattami per un preventivo personalizzato e trasparente.</p>
                             <p><strong>Quanto tempo ci vuole per creare un sito?</strong> Dipende dalla complessità e dalla rapidità nel fornire contenuti e feedback. Un sito vetrina semplice può richiedere 3-4 settimane, progetti più complessi richiedono più tempo.</p>
                             <p><strong>Posso aggiornare il sito da solo dopo la consegna?</strong> Assolutamente sì. Se richiesto, posso integrare un CMS (Content Management System) facile da usare che ti permetterà di modificare testi, immagini e aggiungere news/articoli in autonomia. Offro anche una breve formazione.</p>
                         </div>

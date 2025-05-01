@@ -19,9 +19,9 @@ export default function AppMobilePage() {
                     </h1>
                 </BlurFade>
                 <BlurFade delay={BLUR_FADE_DELAY * 2}>
-                    <p className="mt-4 text-center text-muted-foreground md:text-xl max-w-2xl mx-auto">
+                    <h2 className="mt-4 text-center text-muted-foreground md:text-xl max-w-2xl mx-auto">
                         Trasforma la tua idea in un'applicazione mobile nativa o cross-platform per raggiungere i tuoi clienti su iOS e Android. Sviluppo app a Modena e provincia.
-                    </p>
+                    </h2>
                 </BlurFade>
             </section>
 
