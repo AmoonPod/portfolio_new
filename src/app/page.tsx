@@ -9,8 +9,84 @@ import { Mail, Phone } from "lucide-react";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import { ServiceContactForm } from '@/components/service-contact-form';
+import { Metadata } from "next";
 
 const BLUR_FADE_DELAY = 0.04;
+
+export const metadata: Metadata = {
+  metadataBase: new URL(DATA.url),
+  title: {
+    default: "Realizzazione Siti Web e Software a Modena | Manuel De Ceglie",
+    template: "%s | Manuel De Ceglie",
+  },
+  alternates: {
+    canonical: DATA.url,
+    languages: {
+      "it-IT": DATA.url,
+    },
+  },
+  description:
+    "Realizzo siti web professionali e software su misura a Modena. Soluzioni digitali per PMI e professionisti. Contattami per un preventivo!",
+  keywords: [
+    "realizzazione siti web modena",
+    "creazione siti web modena",
+    "sviluppo software modena",
+    "sviluppatore web modena",
+    "software su misura modena",
+    "siti web castelfranco emilia",
+    "siti web vignola",
+    "gestionali modena",
+    "app mobile modena",
+    "manuel de ceglie",
+    "programmatore modena",
+    "web agency modena",
+    "consulenza AI modena",
+    "programmatore sassuolo",
+    "next.js modena",
+    "react modena",
+    "flutter modena",
+  ],
+  openGraph: {
+    title: "Realizzazione Siti Web e Software a Modena | Manuel De Ceglie",
+    description:
+      "Realizzo siti web professionali e software su misura a Modena per PMI e professionisti. Contattami!",
+    url: DATA.url,
+    siteName: "Manuel De Ceglie",
+    images: [
+      {
+        url: `${DATA.url}/og-image.jpeg`,
+        width: 1200,
+        height: 630,
+        alt: "Realizzazione Siti Web e Sviluppo Software a Modena - Manuel De Ceglie",
+      },
+    ],
+    countryName: "Italy",
+    locale: "it_IT",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  twitter: {
+    title: "Realizzazione Siti Web e Software a Modena | Manuel De Ceglie",
+    description:
+      "Realizzo siti web professionali e software su misura a Modena per PMI e professionisti. Contattami!",
+    card: "summary_large_image",
+    images: [`${DATA.url}/og-image.jpeg`],
+  },
+  verification: {
+    google: "",
+    yandex: "",
+  },
+};
 
 export default function Page() {
   return (
