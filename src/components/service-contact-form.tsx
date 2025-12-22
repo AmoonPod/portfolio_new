@@ -23,6 +23,7 @@ export function ServiceContactForm({
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState(''); // Optional phone state
+    const [need, setNeed] = useState(''); // What the user needs
     const [message, setMessage] = useState('');
 
     // Submission state
@@ -56,8 +57,8 @@ export function ServiceContactForm({
                     "Accept": "application/json",
                     "Content-Type": "application/json"
                 },
-                // Include serviceName and optional phone
-                body: JSON.stringify({ name, email, message, phone, serviceName })
+                // Include serviceName, need, and optional phone
+                body: JSON.stringify({ name, email, message, phone, need, serviceName })
             });
             const data = await response.json();
 
@@ -68,6 +69,7 @@ export function ServiceContactForm({
                 setName('');
                 setEmail('');
                 setPhone('');
+                setNeed('');
                 setMessage('');
             } else if (data.code === 422) {
                 // Validation error from Formcarry
@@ -133,6 +135,35 @@ export function ServiceContactForm({
                         placeholder="Il tuo numero di telefono"
                         className="mt-1"
                     />
+                </div>
+
+                <div>
+                    <Label className="mb-3 block">Di cosa hai bisogno?</Label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                        {[
+                            { value: 'nuovo-sito', label: 'Nuovo Sito' },
+                            { value: 'gestionale-software', label: 'Gestionale/Software' },
+                            { value: 'app-mobile', label: 'App Mobile' },
+                            { value: 'non-lo-so', label: 'Non lo so ancora' },
+                        ].map((option) => (
+                            <button
+                                key={option.value}
+                                type="button"
+                                onClick={() => setNeed(option.value)}
+                                className={`
+                                    px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg border-2 text-xs sm:text-sm font-medium transition-all
+                                    whitespace-normal break-words text-center
+                                    ${
+                                        need === option.value
+                                            ? 'border-primary bg-primary/10 text-primary'
+                                            : 'border-border bg-background hover:border-primary/50 hover:bg-muted/50'
+                                    }
+                                `}
+                            >
+                                {option.label}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
                 <div>

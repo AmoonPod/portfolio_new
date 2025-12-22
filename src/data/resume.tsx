@@ -1,24 +1,23 @@
-import { Icons } from "@/components/icons";
-import { HomeIcon, NotebookIcon } from "lucide-react";
+import { Icons } from "@/components/icons"
+import { HomeIcon, Globe, User, Database, Smartphone } from "lucide-react"
 
 export const DATA = {
   name: "Manuel De Ceglie",
   initials: "MDC",
-  url: "https://manueldeceglie.it", // Sostituisci con il tuo URL reale
+  url: "https://manueldeceglie.it",
   location: "Castelfranco Emilia, MO",
   locationLink: "https://www.google.com/maps/place/castelfranco-emilia",
   description:
-    " Aiuto aziende e attività di Modena a ottenere risultati online con siti web efficaci, software gestionali personalizzati e integrazioni AI.",
+    "Aiuto aziende e attività in Emilia-Romagna a ottenere risultati online con siti web efficaci, software gestionali personalizzati e app mobile.",
   summary:
-    "Appassionato di informatica da sempre, ho trasformato questo interesse in un lavoro che mi permette di aiutare le persone a realizzare le proprie idee. Dopo aver lavorato su diversi tipi di progetti, ho scelto di dedicare parte del mio tempo e delle mie competenze alle attività locali, principalmente nel territorio di Modena e provincia (incluse aree come Vignola, Castelfranco Emilia, Sassuolo). Offro soluzioni digitali personalizzate: siti web moderni ed efficaci, gestionali su misura, applicazioni mobili intuitive e software specifici per rispondere alle tue esigenze. Il mio obiettivo è fornire strumenti efficaci e un supporto professionale per aiutarti a raggiungere i tuoi obiettivi di business, operando con base a Castelfranco Emilia. Se hai un progetto in mente, contattami per discuterne insieme.",
-  avatarUrl: "/manuel-de-ceglie-sviluppatore-web-modena.jpeg", // Sostituisci con il tuo avatar reale
+    "Appassionato di informatica da sempre, ho trasformato questo interesse in un lavoro che mi permette di aiutare le persone a realizzare le proprie idee. Dopo aver lavorato su diversi tipi di progetti, ho scelto di dedicare parte del mio tempo e delle mie competenze alle attività locali, principalmente nel territorio di Modena, Reggio Emilia e provincia. Offro soluzioni digitali personalizzate: siti web moderni ed efficaci, gestionali su misura, applicazioni mobili intuitive e software specifici per rispondere alle tue esigenze. Il mio obiettivo è fornire strumenti efficaci e un supporto professionale per aiutarti a raggiungere i tuoi obiettivi di business, operando con base a Castelfranco Emilia. Se hai un progetto in mente, contattami per discuterne insieme.",
+  avatarUrl: "/manuel-de-ceglie-sviluppatore-web-modena.png",
   skills: [
     "Sviluppo Software",
     "Sviluppo App Mobile",
     "Sviluppo Siti Web",
     "Sviluppo Gestionali",
     "Sviluppo Applicazioni Desktop e Web",
-    "AI",
     "Framer",
     "SEO",
     "React",
@@ -28,25 +27,27 @@ export const DATA = {
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
-    { href: "/blog", icon: NotebookIcon, label: "Blog" }, // Se hai un blog
+    { href: "/siti-web", icon: Globe, label: "Siti Web" },
+    { href: "/gestionali", icon: Database, label: "Gestionali" },
+    { href: "/app-mobile", icon: Smartphone, label: "App Mobile" },
+    { href: "/chi-sono", icon: User, label: "Chi Sono" },
   ],
   contact: {
-    email: "amoonpod@gmail.com", // Sostituisci con la tua email
-    tel: "+39 3462136256", // Sostituisci con il tuo numero di telefono
+    email: "info@manueldeceglie.it",
+    tel: "+39 3462136256",
     social: {
       GitHub: {
         name: "GitHub",
-        url: "https://github.com/AmoonPod", // Sostituisci con il tuo URL GitHub
+        url: "https://github.com/AmoonPod",
         icon: Icons.github,
-        navbar: true,
+        navbar: false,
       },
       LinkedIn: {
         name: "LinkedIn",
-        url: "https://www.linkedin.com/in/manuel-de-ceglie/", // Sostituisci con il tuo URL LinkedIn
+        url: "https://www.linkedin.com/in/manuel-de-ceglie/",
         icon: Icons.linkedin,
-        navbar: true,
+        navbar: false,
       },
-      // Aggiungi o rimuovi altri social media a seconda delle tue esigenze
     },
   },
   work: [
@@ -163,45 +164,45 @@ export const DATA = {
     items: [
       {
         title: "Creazione Siti Web Professionali a Modena e Provincia:",
-        description: "Sviluppo <strong>siti internet</strong> moderni, veloci e ottimizzati (SEO) per aziende, professionisti e negozi a <strong>Modena</strong>, <strong>Vignola</strong>, <strong>Castelfranco Emilia</strong>, <strong>Sassuolo</strong> e dintorni. Un sito web efficace è cruciale per <strong>attirare più clienti locali</strong>.Realizzo diverse tipologie di siti, tra cui:<ul><li>Siti vetrina per presentare al meglio la tua attività</li><li>Blog aziendali per condividere contenuti e interagire con il tuo pubblico</li><li>Soluzioni <strong>e-commerce</strong> per avviare o potenziare la vendita online</li></ul>Creo soluzioni su misura, responsive e facili da usare, che riflettono la tua identità e ti aiutano a crescere.",
-        slug: "/realizzazione-siti-web-modena"
+        description:
+          "Sviluppo <strong>siti internet</strong> moderni, veloci e ottimizzati (SEO) per aziende, professionisti e negozi a <strong>Modena</strong>, <strong>Vignola</strong>, <strong>Castelfranco Emilia</strong>, <strong>Sassuolo</strong> e dintorni. Un sito web efficace è cruciale per <strong>attirare più clienti locali</strong>.Realizzo diverse tipologie di siti, tra cui:<ul><li>Siti vetrina per presentare al meglio la tua attività</li><li>Blog aziendali per condividere contenuti e interagire con il tuo pubblico</li><li>Soluzioni <strong>e-commerce</strong> per avviare o potenziare la vendita online</li></ul>Creo soluzioni su misura, responsive e facili da usare, che riflettono la tua identità e ti aiutano a crescere.",
+        slug: "/siti-web",
       },
       {
         title: "Software Gestionali su Misura nel Modenese:",
-        description: "Realizzo <strong>applicativi web aziendali</strong> e <strong>software su misura</strong> per PMI e realtà produttive di <strong>Modena</strong>, <strong>Sassuolo</strong>, <strong>Maranello</strong> e provincia, pensati per ottimizzare i tuoi processi lavorativi.Hai bisogno di migliorare aspetti come:<ul><li>Gestione delle <strong>commesse</strong> e dei clienti (CRM)</li><li>Tracciabilità della <strong>produzione</strong></li><li>Integrazione con la <strong>fatturazione elettronica (PA e B2B)</strong></li><li>Controllo del <strong>magazzino</strong></li></ul>Un gestionale personalizzato <strong>riduce gli errori manuali e libera tempo prezioso</strong> per la tua attività, rendendola più efficiente. Sviluppo soluzioni intuitive, potenti e integrabili.",
-        slug: "/sviluppo-gestionali-personalizzati-modena"
+        description:
+          "Realizzo <strong>applicativi web aziendali</strong> e <strong>software su misura</strong> per PMI e realtà produttive di <strong>Modena</strong>, <strong>Sassuolo</strong>, <strong>Maranello</strong> e provincia, pensati per ottimizzare i tuoi processi lavorativi.Hai bisogno di migliorare aspetti come:<ul><li>Gestione delle <strong>commesse</strong> e dei clienti (CRM)</li><li>Tracciabilità della <strong>produzione</strong></li><li>Integrazione con la <strong>fatturazione elettronica (PA e B2B)</strong></li><li>Controllo del <strong>magazzino</strong></li></ul>Un gestionale personalizzato <strong>riduce gli errori manuali e libera tempo prezioso</strong> per la tua attività, rendendola più efficiente. Sviluppo soluzioni intuitive, potenti e integrabili.",
+        slug: "/gestionali",
       },
       {
         title: "Sviluppo Applicazioni Mobile (iOS/Android):",
-        description: "Porto le tue idee su smartphone e tablet creando <strong>applicazioni mobile</strong> native o cross-platform (utilizzando Flutter/Dart) per dispositivi iOS e Android. Collaboro con startup e aziende di <strong>Modena</strong> e provincia.Sviluppo app:<ul><li><strong>Performanti</strong> e reattive</li><li><strong>Intuitive</strong> e facili da usare</li><li>Utili per <strong>raggiungere i tuoi clienti ovunque</strong> si trovino</li></ul>Seguo l\'intero ciclo di sviluppo, dalla progettazione alla pubblicazione sugli store.",
-        slug: "/sviluppo-app-mobile-modena"
+        description:
+          "Porto le tue idee su smartphone e tablet creando <strong>applicazioni mobile</strong> native o cross-platform (utilizzando Flutter/Dart) per dispositivi iOS e Android. Collaboro con startup e aziende di <strong>Modena</strong> e provincia.Sviluppo app:<ul><li><strong>Performanti</strong> e reattive</li><li><strong>Intuitive</strong> e facili da usare</li><li>Utili per <strong>raggiungere i tuoi clienti ovunque</strong> si trovino</li></ul>Seguo l'intero ciclo di sviluppo, dalla progettazione alla pubblicazione sugli store.",
+        slug: "/app-mobile",
       },
-      {
-        title: "Esplorazione e Integrazione AI per Aziende Locali:",
-        description: "Esploro come le aziende della provincia di <strong>Modena</strong> possono sfruttare l\'<strong>Intelligenza Artificiale</strong> per innovare. Possiamo valutare insieme come:<ul><li>Integrare funzionalità AI nei tuoi sistemi esistenti</li><li>Creare <strong>prototipi di strumenti intelligenti</strong> per automatizzare compiti ripetitivi</li><li>Analizzare dati in modo avanzato per ottenere possibili insight</li><li>Migliorare l\'esperienza dei tuoi clienti con soluzioni personalizzate</li></ul>L\'AI può <strong>ottimizzare processi e aprire nuove opportunità</strong>: scopriamo insieme se fa al caso tuo.",
-        slug: "/consulenza-integrazione-ai-modena"
-      }
-    ]
+    ],
   },
   targetAudience: {
     title: "A Chi Mi Rivolgo",
-    intro: "Collaboro principalmente con <strong>piccole e medie imprese (PMI)</strong>, <strong>liberi professionisti</strong>, <strong>negozi</strong>, <strong>artigiani</strong> e <strong>startup</strong> con sede nella provincia di <strong>Modena</strong>, incluse aree chiave come <strong>Vignola</strong>, <strong>Castelfranco Emilia</strong>, <strong>Sassuolo</strong> e <strong>Maranello</strong>. Il mio obiettivo è aiutarvi a sfruttare il digitale per:",
+    intro:
+      "Collaboro principalmente con <strong>piccole e medie imprese (PMI)</strong>, <strong>liberi professionisti</strong>, <strong>negozi</strong>, <strong>artigiani</strong> e <strong>startup</strong> con sede nella provincia di <strong>Modena</strong>, incluse aree chiave come <strong>Vignola</strong>, <strong>Castelfranco Emilia</strong>, <strong>Sassuolo</strong> e <strong>Maranello</strong>. Il mio obiettivo è aiutarvi a sfruttare il digitale per:",
     points: [
       "Aumentare la vostra <strong>visibilità online</strong> e raggiungere nuovi clienti con siti web efficaci e ottimizzati (SEO).",
       "Migliorare l'<strong>efficienza operativa</strong> interna attraverso software gestionali personalizzati che digitalizzano e semplificano i processi.",
       "Creare <strong>esperienze digitali coinvolgenti</strong> per i vostri utenti tramite applicazioni web e mobile intuitive.",
-      "Lanciare <strong>nuove idee e servizi</strong> sul mercato con soluzioni tecnologiche su misura."
-    ]
+      "Lanciare <strong>nuove idee e servizi</strong> sul mercato con soluzioni tecnologiche su misura.",
+    ],
   },
   whyMe: {
     title: "Perché Scegliermi",
-    intro: "Mi impegno a fornire non solo codice, ma soluzioni concrete che portano valore al tuo business. Ecco cosa mi distingue:",
+    intro:
+      "Mi impegno a fornire non solo codice, ma soluzioni concrete che portano valore al tuo business. Ecco cosa mi distingue:",
     points: [
       "<strong>Approccio Personalizzato:</strong> Ascolto attentamente le tue esigenze per proporti la soluzione tecnologica più adatta, senza pacchetti preconfezionati. Il tuo progetto è unico.",
       "<strong>Focus sui Risultati:</strong> Il mio obiettivo è aiutarti a raggiungere i tuoi traguardi, che sia aumentare le vendite, migliorare l'efficienza o rafforzare la tua presenza online.",
-      "<strong>Competenza Tecnica Aggiornata:</strong> Utilizzo tecnologie moderne e performanti come Next.js, React, Flutter e sono costantemente aggiornato sulle ultime tendenze, inclusa l'Intelligenza Artificiale, per offrirti soluzioni all'avanguardia.",
+      "<strong>Competenza Tecnica Aggiornata:</strong> Utilizzo tecnologie moderne e performanti come Next.js, React, Flutter e sono costantemente aggiornato sulle ultime tendenze per offrirti soluzioni all'avanguardia.",
       "<strong>Trasparenza e Comunicazione:</strong> Ti tengo aggiornato durante tutto il processo di sviluppo, con un dialogo aperto e chiaro.",
-      "<strong>Supporto Diretto:</strong> Sono il tuo referente unico per lo sviluppo e l'assistenza, garantendo un supporto rapido e competente per le realtà di <strong>Modena</strong> e provincia."
-    ]
-  }
-};
+      "<strong>Supporto Diretto:</strong> Sono il tuo referente unico per lo sviluppo e l'assistenza, garantendo un supporto rapido e competente per le realtà di <strong>Modena</strong> e provincia.",
+    ],
+  },
+}
