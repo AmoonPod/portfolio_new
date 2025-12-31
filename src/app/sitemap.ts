@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { DATA } from '@/data/resume'
+import { getAllSlugs } from '@/data/local-pages/siti-web-dataset'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = DATA.url
@@ -30,27 +31,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  // Local pages - Siti Web
-  const sitiWebLocalPages = [
-    {
-      url: `${baseUrl}/siti-web-modena`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/siti-web-reggio-emilia`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/siti-web-castelnovo-ne-monti`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    },
-  ]
+  // Local pages - Siti Web (generated dynamically from dataset)
+  const localSlugs = getAllSlugs()
+  const sitiWebLocalPages = localSlugs.map(slug => ({
+    url: `${baseUrl}/siti-web-${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: slug.includes('reggio-emilia') || slug.includes('sassuolo') ? 0.8 : 0.7,
+  }))
 
   return [
     ...staticPages,

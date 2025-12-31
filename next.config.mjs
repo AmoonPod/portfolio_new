@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'api.dicebear.com',
+        pathname: '/**',
+      },
+    ],
+  },
   async redirects() {
     return [
       // Redirect old service pages to new clean URLs
@@ -41,8 +50,16 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
-    ]
+    ];
   },
-}
+  async rewrites() {
+    return [
+      {
+        source: '/siti-web-:city', // URL users will see
+        destination: '/siti-web/:city', // The internal dynamic route
+      },
+    ];
+  },
+};
 
-export default nextConfig
+export default nextConfig;

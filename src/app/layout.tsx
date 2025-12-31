@@ -52,12 +52,10 @@ export default function RootLayout({
           <footer className="border-t bg-muted/30">
             <div className="max-w-[1400px] mx-auto px-6 py-12">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-                  <Link href="/" className="hover:text-foreground transition-colors">
-                    Home
-                  </Link>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white font-black text-xl shadow-xl shadow-primary/20">M</div>
+                  <p className="font-black text-xl tracking-tighter">© {new Date().getFullYear()} Manuel De Ceglie</p>
                 </div>
-
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
                   <span>P. IVA: 04032610364</span>
                   <span className="hidden sm:inline">|</span>
