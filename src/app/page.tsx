@@ -12,6 +12,7 @@ import {
   MonitorSmartphone,
   TrendingUp,
   ExternalLink,
+  MessageCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BlurFade from "@/components/magicui/blur-fade";
@@ -84,306 +85,279 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen flex flex-col font-sans bg-background">
+    <main className="min-h-screen flex flex-col font-sans bg-background overflow-x-hidden w-full">
       {/* HERO SECTION */}
       <section
         id="hero"
-        className="relative min-h-[85vh] flex items-center py-16 md:py-0 bg-gradient-to-b from-background to-muted/20"
+        className="relative min-h-[90vh] flex items-center py-20 md:py-20 bg-background overflow-hidden"
       >
-        <div className="container max-w-[1400px] mx-auto px-6 md:px-12">
-          <div className="grid xl:grid-cols-2 gap-12 xl:gap-16 items-center">
-            <BlurFade
-              delay={0.1}
-              className="flex flex-col justify-center text-left space-y-6"
-            >
-              {/* Mini intro - chi sono */}
-              <div className="flex items-center gap-3">
-                <div className="w-16 h-16 rounded-full bg-muted overflow-hidden border-2 border-primary/20">
+        {/* BACKGROUND TECH GRID */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+          <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]"></div>
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent"></div>
+        </div>
+
+        <div className="container max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 relative z-10">
+          <div className="grid xl:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+            {/* LEFT COLUMN: Content */}
+            <BlurFade delay={0.1} className="flex flex-col justify-center text-left space-y-8">
+
+              {/* Trust Badge */}
+              <div className="inline-flex items-center gap-3 bg-muted/50 border border-primary/10 rounded-full pl-1 pr-4 py-1 w-fit backdrop-blur-md hover:bg-muted/80 transition-colors cursor-default">
+                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-background shadow-sm">
                   <Image
                     src={DATA.avatarUrl}
                     alt="Manuel De Ceglie"
-                    width={48}
-                    height={48}
-                    className="object-cover w-full h-full"
+                    fill
+                    className="object-cover"
                   />
                 </div>
-                <div>
-                  <p className="font-medium text-sm">Manuel De Ceglie</p>
-                  <p className="text-xs text-muted-foreground">
-                    Consulente & Sviluppatore
-                  </p>
+                <div className="flex flex-col">
+                  <span className="text-xs font-bold text-foreground tracking-wide uppercase">Manuel De Ceglie</span>
+                  <span className="text-[10px] text-muted-foreground flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                    Disponibile per nuovi progetti
+                  </span>
                 </div>
               </div>
 
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1]">
-                Soluzioni digitali per far
-                <br />
-                <span className="relative inline-block">
-                  <span className="relative z-10 text-primary animate-[fadeInUp_0.8s_ease-out_0.3s_both]">
-                    crescere la tua azienda.
-                  </span>
-                  <span className="absolute bottom-0 left-0 h-1 bg-primary/30 w-0 animate-[drawUnderline_0.6s_ease-out_0.8s_forwards]"></span>
-                </span>
-              </h1>
-
-              <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
-                Per aziende che sono stanche di strumenti lenti, inefficaci o
-                che sono invisibili su Google. Vuoi dei risultati concreti?
-                Contattami.
-              </p>
-
-              {/* Micro-list servizi - Hidden on mobile to keep CTA visible */}
-              <div className="hidden md:flex flex-wrap gap-2 pt-2">
-                {[
-                  { label: "Siti Web" },
-                  { label: "Software su Misura" },
-                  { label: "Integrazioni & AI" },
-                  { label: "App Mobile" },
-                ].map((service) => (
-                  <span
-                    key={service.label}
-                    className="px-3 py-1.5 bg-muted/60 border rounded-full text-sm font-medium"
-                  >
-                    {service.label}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-center gap-4 w-full pt-2">
-                <Button
-                  size="lg"
-                  className="text-base sm:text-lg px-6 py-5 sm:px-8 sm:py-7 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/10 transition-all w-full sm:w-auto group"
-                  asChild
-                >
-                  <Link href="#contact">
-                    Prenota analisi gratuita (15 min)
-                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </Button>
-
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="text-base sm:text-lg px-6 py-5 sm:px-8 sm:py-7 border-green-200 hover:bg-green-50 hover:border-green-300 text-green-700 transition-all w-full sm:w-auto group"
-                  asChild
-                >
-                  <a
-                    href="https://wa.me/393462136256?text=Ciao%20Manuel,%20ho%20visto%20il%20tuo%20sito."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="w-5 h-5 mr-2 fill-current"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+              <div className="space-y-4">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[0.9] text-foreground">
+                  Soluzioni digitali <br className="hidden lg:block" />
+                  per far <span className="relative inline-block text-transparent bg-clip-text bg-[#FFBC11] animate-gradient bg-300%">
+                    crescere
+                    <svg className="absolute w-full h-3 -bottom-1 left-0 text-[#FFBC11] opacity-40" viewBox="0 0 100 10" preserveAspectRatio="none">
+                      <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="2" fill="none" />
                     </svg>
-                    Chat su WhatsApp
-                  </a>
-                </Button>
+                  </span>
+                  <br />
+                  la tua azienda.
+                </h1>
+
+                <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl text-balance">
+                  Basta strumenti lenti o siti invisibili. Sviluppo ecosistemi digitali
+                  su misura per imprenditori che vogliono <span className="font-semibold text-foreground">risultati misurabili</span>,
+                  senza il gergo tecnico inutile.
+                </p>
               </div>
 
-              <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground pt-4 items-center">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                  Risposta entro 24h
-                </span>
-                <span className="text-muted-foreground/40">•</span>
-                <span>Consulenza gratuita</span>
-                <span className="text-muted-foreground/40">•</span>
-                <span>Zero pressione</span>
+              {/* CTA AREA */}
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                  {/* Main Button */}
+                  <div className="relative group">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-[#FFBC11] to-orange-500 rounded-2xl blur opacity-30 group-hover:opacity-75 transition duration-200"></div>
+                    <Button
+                      size="lg"
+                      className="relative w-full sm:w-auto h-14 sm:h-16 px-8 rounded-2xl font-bold text-lg shadow-xl hover:bg-primary/90"
+                      asChild
+                    >
+                      <Link href="#contact">
+                        Analisi Gratuita
+                        <span className="bg-white/20 text-white text-xs py-0.5 px-2 rounded-md ml-3 font-normal backdrop-blur-sm">15 min</span>
+                        <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                    </Button>
+                  </div>
+
+                  {/* WhatsApp Button */}
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="h-14 sm:h-16 px-8 rounded-2xl border-2 border-[#25D366] hover:bg-[#25D366]/10 font-semibold text-base w-full sm:w-auto text-[#25D366] hover:text-[#25D366] transition-all"
+                    asChild
+                  >
+                    <a
+                      href="https://wa.me/393462136256"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <svg className="w-5 h-5 mr-2" fill="#25D366" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                      </svg>
+                      Scrivimi su WhatsApp
+                    </a>
+                  </Button>
+                </div>
+
+                {/* Trust indicators */}
+                <div className="flex items-center gap-x-6 gap-y-2 text-xs font-medium text-muted-foreground flex-wrap pt-2">
+                  <span className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-[#FFBC11]" />
+                    Risposta in 24h
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-[#FFBC11]" />
+                    Preventivi chiari
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-[#FFBC11]" />
+                    Assistenza diretta
+                  </span>
+                </div>
               </div>
             </BlurFade>
 
-            {/* DESKTOP: Full visual card (XL screens) */}
-            <BlurFade
-              delay={0.3}
-              className="relative hidden xl:flex items-center justify-center"
-            >
-              {/* Colorful gradient blobs */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
-              <div
-                className="absolute bottom-0 left-0 w-56 h-56 bg-blue-500/15 rounded-full blur-3xl animate-pulse"
-                style={{ animationDelay: "1s" }}
-              ></div>
+            {/* RIGHT COLUMN (DESKTOP): The "Hollywood Tech" Card */}
+            <BlurFade delay={0.3} className="hidden xl:flex relative items-center justify-center perspective-1000">
+              {/* The Main "HUD" Card */}
+              <div className="relative w-full max-w-[480px] bg-background/60 backdrop-blur-xl border border-white/20 shadow-2xl rounded-[2rem] overflow-hidden transform transition-all duration-500 hover:scale-[1.02] hover:shadow-[#33333]/40">
 
-              {/* Services visual card */}
-              <div className="relative w-full max-w-md bg-background rounded-2xl shadow-2xl border border-border/50 transform transition-all hover:-translate-y-1 duration-300">
-                <div className="bg-gradient-to-r from-primary/5 to-blue-500/5 border-b px-5 py-4 flex items-center justify-between rounded-t-2xl">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Code className="w-4 h-4 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-sm">
-                        Il tuo progetto
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        dalla strategia al risultato
-                      </div>
-                    </div>
+                {/* Card Header */}
+                <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between bg-white/5">
+                  <div className="flex gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                  </div>
+                  <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
+                    System_Status: Active
                   </div>
                 </div>
 
-                <div className="p-4 space-y-2.5">
-                  {/* Service steps - animated */}
+                {/* Scanner Line */}
+                <div className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent z-20 animate-scan shadow-[0_0_20px_2px_rgba(var(--primary),0.5)] pointer-events-none"></div>                {/* Content */}
+                <div className="p-6 space-y-4 relative z-10">
                   {[
                     {
                       icon: Search,
-                      label: "Analizzo il problema",
-                      desc: "Capisco cosa ti serve davvero",
-                      color: "bg-primary",
-                      delay: "0.5s",
+                      title: "Analisi Strategica",
+                      subtitle: "Identificazione colli di bottiglia",
+                      bg: "bg-orange-500/10",
+                      text: "text-orange-500",
+                      progress: "100%"
                     },
                     {
                       icon: Code,
-                      label: "Progetto la soluzione",
-                      desc: "Sito, software, app o integrazione",
-                      color: "bg-blue-500",
-                      delay: "0.7s",
+                      title: "Sviluppo su misura",
+                      subtitle: "Codice pulito, veloce, scalabile",
+                      bg: "bg-[#FFBC11]/10",
+                      text: "text-[#FFBC11]",
+                      progress: "85%"
                     },
                     {
                       icon: Rocket,
-                      label: "Costruisco e lancio",
-                      desc: "Sviluppo e metto online",
-                      color: "bg-emerald-500",
-                      delay: "0.9s",
-                    },
-                    {
-                      icon: TrendingUp,
-                      label: "Misuro i risultati",
-                      desc: "Ottimizziamo insieme",
-                      color: "bg-orange-500",
-                      delay: "1.1s",
-                    },
-                  ].map((item, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-3 p-2.5 bg-muted/40 rounded-lg border border-transparent hover:border-primary/10 hover:bg-muted/60 transition-all cursor-pointer group animate-[slideIn_0.4s_ease-out_forwards] opacity-0"
-                      style={{ animationDelay: item.delay }}
-                    >
-                      <div
-                        className={`w-8 h-8 rounded-full ${item.color} flex items-center justify-center text-white shadow-md`}
-                      >
-                        <item.icon className="w-3.5 h-3.5" />
+                      title: "Lancio e Crescita",
+                      subtitle: "Pubblicazione e monitoraggio KPI",
+                      bg: "bg-emerald-500/10",
+                      text: "text-emerald-500",
+                      progress: "0%"
+                    }
+                  ].map((item, idx) => (
+                    <div key={idx} className="group flex items-center gap-4 p-4 rounded-xl bg-white/40 dark:bg-black/20 border border-white/10 hover:bg-white/60 transition-all duration-300">
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${item.bg} ${item.text} shadow-inner`}>
+                        <item.icon className="w-6 h-6" />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="font-medium text-sm group-hover:text-primary transition-colors">
-                          {item.label}
+                      <div className="flex-1">
+                        <div className="flex justify-between items-center mb-1">
+                          <h3 className="font-bold text-sm text-foreground">{item.title}</h3>
+                          {idx === 0 && <span className="text-[10px] font-mono text-green-600 bg-green-500/10 px-2 py-0.5 rounded-full">FATTO</span>}
+                          {idx === 1 && <span className="text-[10px] font-mono text-[#FFBC11] bg-[#FFBC11]/10 px-2 py-0.5 rounded-full animate-pulse">IN CORSO</span>}
                         </div>
-                        <div className="text-xs text-muted-foreground">
-                          {item.desc}
-                        </div>
-                      </div>
-                      <div className="text-xs text-muted-foreground font-medium">
-                        {i + 1}
+                        <p className="text-xs text-muted-foreground">{item.subtitle}</p>
                       </div>
                     </div>
                   ))}
+
+                  <div className="mt-4 pt-4 border-t border-dashed border-muted-foreground/20">
+                    <div className="flex items-center justify-between">
+                      <div className="text-xs text-muted-foreground">Efficienza stimata</div>
+                      <div className="text-xl font-black ">+120%</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </BlurFade>
           </div>
 
-          {/* MOBILE/TABLET: Compact process timeline (below hero, visible on < XL) */}
-          <BlurFade delay={0.4} className="xl:hidden mt-12">
-            <div className="relative">
-              {/* Subtle gradient background */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-blue-500/5 to-emerald-500/5 rounded-2xl"></div>
+          {/* MOBILE/TABLET: The "Mini-HUD" (< XL screens) - RIFATTO COMPLETAMENTE */}
+          <BlurFade delay={0.4} className="xl:hidden mt-16 pb-8">
+            <div className="relative overflow-hidden bg-background/60 border border-white/20 backdrop-blur-xl rounded-[1.5rem] shadow-xl">
+              {/* Mobile Header */}
+              <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 bg-muted/20">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-[#FFBC11] animate-pulse"></div>
+                  <span className="text-[10px] font-mono uppercase text-muted-foreground tracking-widest">Processo Attivo</span>
+                </div>
+                <div className="text-[10px] font-mono text-muted-foreground">v2.0</div>
+              </div>
 
-              <div className="relative bg-background/80 backdrop-blur-sm rounded-2xl border shadow-lg p-4 sm:p-6">
-                {/* Header */}
-                <div className="flex items-center gap-2 mb-4 pb-3 border-b">
-                  <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Code className="w-3.5 h-3.5 text-primary" />
+              {/* Mobile Process Timeline */}
+              <div className="p-5">
+                <div className="relative space-y-6 pl-2">
+                  {/* Vertical Line Connector */}
+                  <div className="absolute left-[19px] top-2 bottom-4 w-[2px] bg-gradient-to-b from-green-500 via-[#FFBC11] to-muted"></div>
+
+                  {/* Step 1 */}
+                  <div className="relative flex items-center gap-4">
+                    <div className="relative z-10 w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center text-xs shadow-[0_0_10px_rgba(34,197,94,0.4)]">
+                      <Search className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-foreground">Analisi</div>
+                      <div className="text-[10px] text-muted-foreground">Strategia definita</div>
+                    </div>
                   </div>
-                  <div className="text-sm font-medium">Come lavoro</div>
+
+                  {/* Step 2 (Active) */}
+                  <div className="relative flex items-center gap-4">
+                    <div className="relative z-10 w-8 h-8 rounded-full bg-[#FFBC11] text-white flex items-center justify-center text-xs shadow-[0_0_15px_rgba(255,188,17,0.6)] animate-pulse">
+                      <Code className="w-4 h-4" />
+                    </div>
+                    <div className="flex-1 bg-muted/30 p-2 rounded-lg border border-[#FFBC11]/20">
+                      <div className="flex justify-between items-center mb-1">
+                        <div className="text-xs font-bold text-[#FFBC11]">Sviluppo</div>
+                        <span className="text-[9px] bg-[#FFBC11]/20 text-[#FFBC11] px-1.5 py-0.5 rounded animate-pulse">In corso...</span>
+                      </div>
+                      <div className="w-full bg-muted rounded-full h-1.5 overflow-hidden">
+                        <div className="bg-[#FFBC11] h-1.5 rounded-full w-[70%]"></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className="relative flex items-center gap-4">
+                    <div className="relative z-10 w-8 h-8 rounded-full bg-muted border border-muted-foreground/30 flex items-center justify-center text-muted-foreground">
+                      <Rocket className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-muted-foreground">Lancio</div>
+                      <div className="text-[10px] text-muted-foreground">In attesa</div>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Process steps - horizontal on tablet, 2x2 grid on mobile */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {[
-                    {
-                      icon: Search,
-                      label: "Analizzo",
-                      desc: "il problema",
-                      color: "bg-primary",
-                      delay: "0.5s",
-                    },
-                    {
-                      icon: Code,
-                      label: "Progetto",
-                      desc: "la soluzione",
-                      color: "bg-blue-500",
-                      delay: "0.6s",
-                    },
-                    {
-                      icon: Rocket,
-                      label: "Costruisco",
-                      desc: "e lancio",
-                      color: "bg-emerald-500",
-                      delay: "0.7s",
-                    },
-                    {
-                      icon: TrendingUp,
-                      label: "Misuro",
-                      desc: "i risultati",
-                      color: "bg-orange-500",
-                      delay: "0.8s",
-                    },
-                  ].map((item, i) => (
-                    <div
-                      key={i}
-                      className="relative flex flex-col items-center text-center p-3 rounded-xl bg-muted/30 hover:bg-muted/50 transition-colors animate-[slideIn_0.4s_ease-out_forwards] opacity-0"
-                      style={{ animationDelay: item.delay }}
-                    >
-                      {/* Step number badge */}
-                      <div className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-background border text-[10px] font-bold flex items-center justify-center text-muted-foreground">
-                        {i + 1}
-                      </div>
-
-                      {/* Icon */}
-                      <div
-                        className={`w-10 h-10 rounded-full ${item.color} flex items-center justify-center text-white shadow-md mb-2`}
-                      >
-                        <item.icon className="w-4 h-4" />
-                      </div>
-
-                      {/* Label */}
-                      <div className="font-semibold text-sm leading-tight">
-                        {item.label}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        {item.desc}
-                      </div>
-
-                      {/* Connector line (hidden on last item and on mobile 2nd/4th) */}
-                      {i < 3 && (
-                        <div className="hidden md:block absolute top-1/2 -right-1.5 w-3 h-0.5 bg-border"></div>
-                      )}
-                    </div>
-                  ))}
+                {/* Mobile KPI Footer */}
+                <div className="mt-6 pt-4 border-t border-dashed border-border/50 flex justify-between items-end">
+                  <div className="text-[10px] text-muted-foreground max-w-[60%]">
+                    Proiezione crescita post-lancio:
+                  </div>
+                  <div className="text-lg font-black">
+                    +120%
+                  </div>
                 </div>
               </div>
             </div>
           </BlurFade>
+
         </div>
       </section>
 
       {/* IL CASO STUDIO (IL PICHELLO) */}
       <section
         id="case-study"
-        className="py-32 bg-[#F9FAFB] text-foreground overflow-hidden relative"
+        className="py-32 bg-[#F9FAFB] text-foreground overflow-hidden relative w-full"
       >
-        <div className="container max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
+        <div className="container max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 relative z-10 w-full">
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-16">
             <BlurFade delay={0.1}>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-                Non credermi sulla parola. Guarda i numeri.
+              <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter">
+                Non credermi sulla parola. <br /> Guarda i numeri.
               </h2>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-medium">
                 Il Pichello era invisibile online. Ora riceve ordini ogni
                 settimana. Ecco come.
               </p>
@@ -394,17 +368,17 @@ export default function HomePage() {
             {/* Video del sito Il Pichello */}
             <BlurFade
               delay={0.2}
-              className="relative order-2 lg:order-1 flex flex-col items-center gap-8"
+              className="relative order-2 lg:order-1 flex flex-col items-center gap-8 w-full overflow-hidden px-4 sm:px-0"
             >
               {/* Phone frame with video */}
-              <div className="relative mx-auto border-gray-900 bg-gray-900 border-[14px] rounded-[2.5rem] shadow-2xl shadow-black/20 hover:scale-[1.02] transition-transform duration-500 ease-out overflow-hidden">
-                {/* iPhone side buttons */}
-                <div className="h-[32px] w-[3px] bg-gray-900 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
-                <div className="h-[46px] w-[3px] bg-gray-900 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
-                <div className="h-[46px] w-[3px] bg-gray-900 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
-                <div className="h-[64px] w-[3px] bg-gray-900 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
+              <div className="relative mx-auto border-gray-900 bg-gray-900 border-[14px] rounded-[2.5rem] shadow-2xl shadow-black/20 hover:scale-[1.02] transition-transform duration-500 ease-out overflow-visible max-w-full">
+                {/* iPhone side buttons - hidden on mobile to prevent overflow */}
+                <div className="hidden sm:block h-[32px] w-[3px] bg-gray-900 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
+                <div className="hidden sm:block h-[46px] w-[3px] bg-gray-900 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
+                <div className="hidden sm:block h-[46px] w-[3px] bg-gray-900 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
+                <div className="hidden sm:block h-[64px] w-[3px] bg-gray-900 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
 
-                <div className="rounded-[2rem] overflow-hidden w-[280px] bg-[#f2f2f7] flex flex-col">
+                <div className="rounded-[2rem] overflow-hidden w-[280px] max-w-full bg-[#f2f2f7] flex flex-col">
                   {/* Safari iOS-style top bar - sopra il video */}
                   <div className="bg-[#f2f2f7] pt-12 pb-2 px-3 relative shrink-0">
                     {/* Dynamic Island / Notch area */}
@@ -461,7 +435,7 @@ export default function HomePage() {
               </div>
 
               {/* Mini growth chart - Area style */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg border w-full max-w-xs">
+              <div className="bg-white rounded-[2rem] p-6 shadow-xl border-2 w-full max-w-xs">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-sm font-medium text-muted-foreground">
                     Crescita click al sito
@@ -521,68 +495,67 @@ export default function HomePage() {
                 Caso studio reale
               </div>
 
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight text-gray-900">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[0.95]">
                 Da zero contatti a{" "}
                 <span className="text-[#2E4F2F]">ordini ogni settimana</span>
               </h2>
 
               <div className="space-y-4 text-muted-foreground">
                 <p className="text-lg leading-relaxed">
-                  <strong className="text-foreground">Il problema:</strong> un
-                  vivaio con ottimi prodotti ma invisibile online. Sito vecchio,
+                  <strong className="text-foreground">Il problema:</strong> un'azienda agricola con ottimi prodotti ma invisibile online. Sito vecchio,
                   informazioni sbagliate, nessuno li trovava su Google.
                 </p>
                 <p className="text-lg leading-relaxed">
                   <strong className="text-foreground">La soluzione:</strong>{" "}
                   nuovo sito veloce, catalogo digitale, scheda Google
                   ottimizzata. Ora i clienti li trovano, vedono i prodotti e
-                  ordinano direttamente.
+                  fanno ordini ogni settimana.
                 </p>
               </div>
 
               {/* KPI Grid */}
-              <div className="grid grid-cols-2 gap-4 pt-6">
-                <div className="bg-white rounded-xl p-5 border shadow-sm">
+              <div className="grid grid-cols-2 gap-6 pt-6">
+                <div className="bg-white rounded-[2rem] p-6 border-2 shadow-xl">
                   <AnimatedKpi
                     value={1000}
                     prefix=">"
                     label="Click al mese"
-                    valueClassName="text-3xl md:text-4xl font-bold text-[#2E4F2F]"
-                    labelClassName="text-xs font-medium uppercase tracking-wider text-muted-foreground mt-1"
+                    valueClassName="text-3xl md:text-4xl font-black text-[#2E4F2F]"
+                    labelClassName="text-xs font-black uppercase tracking-wider text-muted-foreground mt-1"
                   />
                   <div className="text-xs text-muted-foreground/60 mt-2">
                     prima: ~100
                   </div>
                 </div>
-                <div className="bg-white rounded-xl p-5 border shadow-sm">
+                <div className="bg-white rounded-[2rem] p-6 border-2 shadow-xl">
                   <AnimatedKpi
                     value={300}
                     suffix="+"
                     label="Visite Google Maps"
-                    valueClassName="text-3xl md:text-4xl font-bold text-[#2E4F2F]"
-                    labelClassName="text-xs font-medium uppercase tracking-wider text-muted-foreground mt-1"
+                    valueClassName="text-3xl md:text-4xl font-black text-[#2E4F2F]"
+                    labelClassName="text-xs font-black uppercase tracking-wider text-muted-foreground mt-1"
                   />
                   <div className="text-xs text-muted-foreground/60 mt-2">
                     prima: ~20
                   </div>
                 </div>
-                <div className="bg-white rounded-xl p-5 border shadow-sm">
+                <div className="bg-white rounded-[2rem] p-6 border-2 shadow-xl">
                   <AnimatedKpi
                     value={10}
-                    suffix="/mese"
+                    suffix=""
                     label="Contatti reali"
-                    valueClassName="text-3xl md:text-4xl font-bold text-[#2E4F2F]"
-                    labelClassName="text-xs font-medium uppercase tracking-wider text-muted-foreground mt-1"
+                    valueClassName="text-3xl md:text-4xl font-black text-[#2E4F2F]"
+                    labelClassName="text-xs font-black uppercase tracking-wider text-muted-foreground mt-1"
                   />
                   <div className="text-xs text-muted-foreground/60 mt-2">
                     prima: 0
                   </div>
                 </div>
-                <div className="bg-white rounded-xl p-5 border shadow-sm flex flex-col justify-center">
-                  <div className="text-lg font-bold text-[#2E4F2F]">
+                <div className="bg-white rounded-[2rem] p-6 border-2 shadow-xl flex flex-col justify-center">
+                  <div className="text-lg font-black text-[#2E4F2F]">
                     Ordini ogni settimana
                   </div>
-                  <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground mt-1">
+                  <div className="text-xs font-black uppercase tracking-wider text-muted-foreground mt-1">
                     dal sito
                   </div>
                 </div>
@@ -605,56 +578,56 @@ export default function HomePage() {
       </section>
 
       {/* COSA INCLUDE L'ANALISI */}
-      <section className="py-24 bg-background">
-        <div className="container max-w-[1400px] mx-auto px-6 md:px-12">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="py-12 sm:py-16 md:py-24 bg-background">
+        <div className="container max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start lg:items-center">
             {/* Left: Explanation */}
             <BlurFade delay={0.2}>
-              <div className="inline-flex items-center gap-2 text-sm font-medium text-green-600 mb-4">
-                <CheckCircle2 className="w-4 h-4" />
+              <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-green-600 mb-3 sm:mb-4">
+                <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 Gratuita, senza impegno
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-4 sm:mb-6 tracking-tighter">
                 Come funziona la consulenza
               </h2>
-              <p className="text-xl text-muted-foreground mb-8">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-6 sm:mb-8 leading-relaxed font-medium">
                 Non è una chiamata commerciale. Ti ascolto, capisco il problema,
                 e ti propongo una direzione concreta — che tu decida di lavorare
                 con me o no.
               </p>
 
-              <div className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-primary font-bold">
+              <div className="space-y-4 sm:space-y-6">
+                <div className="flex gap-3 sm:gap-5 p-4 sm:p-6 rounded-xl sm:rounded-[2rem] bg-white border-2 border-transparent hover:border-primary/20 shadow-sm transition-all">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center shrink-0 text-primary font-black text-lg sm:text-xl">
                     1
                   </div>
-                  <div>
-                    <h3 className="font-bold mb-1">Ti ascolto</h3>
-                    <p className="text-muted-foreground text-sm">
+                  <div className="min-w-0">
+                    <h3 className="font-black text-base sm:text-lg md:text-xl mb-1 tracking-tight">Ti ascolto</h3>
+                    <p className="text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed">
                       Mi racconti cosa ti serve: visibilità, efficienza,
                       automazioni, un&apos;app. Capisco il contesto.
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-primary font-bold">
+                <div className="flex gap-3 sm:gap-5 p-4 sm:p-6 rounded-xl sm:rounded-[2rem] bg-white border-2 border-transparent hover:border-primary/20 shadow-sm transition-all">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center shrink-0 text-primary font-black text-lg sm:text-xl">
                     2
                   </div>
-                  <div>
-                    <h3 className="font-bold mb-1">Analizzo la situazione</h3>
-                    <p className="text-muted-foreground text-sm">
+                  <div className="min-w-0">
+                    <h3 className="font-black text-base sm:text-lg md:text-xl mb-1 tracking-tight">Analizzo la situazione</h3>
+                    <p className="text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed">
                       Guardo cosa hai già, cosa manca, cosa si può migliorare.
                       Ti dico cosa ha senso fare e cosa no.
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-primary font-bold">
+                <div className="flex gap-3 sm:gap-5 p-4 sm:p-6 rounded-xl sm:rounded-[2rem] bg-white border-2 border-transparent hover:border-primary/20 shadow-sm transition-all">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center shrink-0 text-primary font-black text-lg sm:text-xl">
                     3
                   </div>
-                  <div>
-                    <h3 className="font-bold mb-1">Ti propongo un piano</h3>
-                    <p className="text-muted-foreground text-sm">
+                  <div className="min-w-0">
+                    <h3 className="font-black text-base sm:text-lg md:text-xl mb-1 tracking-tight">Ti propongo un piano</h3>
+                    <p className="text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed">
                       Strategia, tempi, costi. Tutto chiaro. Poi decidi tu se
                       andare avanti.
                     </p>
@@ -665,52 +638,52 @@ export default function HomePage() {
 
             {/* Right: Visual card */}
             <BlurFade delay={0.4}>
-              <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-3xl p-8 md:p-10 border border-primary/20 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
-                <div className="relative">
-                  <h3 className="text-2xl font-bold mb-6">
+              <div className="bg-white rounded-2xl sm:rounded-[3rem] p-6 sm:p-8 md:p-10 lg:p-16 border-4 border-primary/10 shadow-2xl relative overflow-hidden group mt-8 lg:mt-0">
+                <div className="absolute top-0 right-0 w-48 h-48 sm:w-64 sm:h-64 bg-primary/5 rounded-full blur-[80px]"></div>
+                <div className="relative z-10">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black mb-6 sm:mb-8 md:mb-10 tracking-tighter">
                     Dopo la chiamata avrai:
                   </h3>
-                  <ul className="space-y-4">
-                    <li className="flex items-start gap-3">
-                      <CheckCircle2 className="w-6 h-6 text-green-500 shrink-0 mt-0.5" />
-                      <span>
+                  <ul className="space-y-3 sm:space-y-4">
+                    <li className="flex items-start gap-2 sm:gap-3">
+                      <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 shrink-0 mt-0.5" />
+                      <span className="text-sm sm:text-base">
                         <strong>Direzione chiara</strong> — quale soluzione fa
                         al caso tuo e perché
                       </span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <CheckCircle2 className="w-6 h-6 text-green-500 shrink-0 mt-0.5" />
-                      <span>
+                    <li className="flex items-start gap-2 sm:gap-3">
+                      <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 shrink-0 mt-0.5" />
+                      <span className="text-sm sm:text-base">
                         <strong>Priorità definite</strong> — cosa fare subito,
                         cosa può aspettare
                       </span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <CheckCircle2 className="w-6 h-6 text-green-500 shrink-0 mt-0.5" />
-                      <span>
+                    <li className="flex items-start gap-2 sm:gap-3">
+                      <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 shrink-0 mt-0.5" />
+                      <span className="text-sm sm:text-base">
                         <strong>Stima tempi e costi</strong> — range realistico,
                         senza sorprese
                       </span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <CheckCircle2 className="w-6 h-6 text-green-500 shrink-0 mt-0.5" />
-                      <span>
+                    <li className="flex items-start gap-2 sm:gap-3">
+                      <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-green-500 shrink-0 mt-0.5" />
+                      <span className="text-sm sm:text-base">
                         <strong>Zero pressione</strong> — decidi tu se andare
                         avanti o no
                       </span>
                     </li>
                   </ul>
 
-                  <div className="mt-8">
+                  <div className="mt-6 sm:mt-8 md:mt-10">
                     <Button
                       size="lg"
-                      className="w-full text-lg py-6 group"
+                      className="w-full h-14 sm:h-16 text-base sm:text-lg rounded-xl sm:rounded-2xl shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-1 transition-all font-black group"
                       asChild
                     >
                       <Link href="#contact">
-                        Prenota l&apos;Analisi Gratuita
-                        <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                        <span className="whitespace-nowrap">Prenota l&apos;Analisi Gratuita</span>
+                        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform flex-shrink-0" />
                       </Link>
                     </Button>
                   </div>
@@ -722,13 +695,13 @@ export default function HomePage() {
       </section>
 
       {/* SERVIZI */}
-      <section id="services" className="py-24 bg-background">
-        <div className="container max-w-[1400px] mx-auto px-6 md:px-12">
+      <section id="services" className="py-24 bg-background w-full overflow-x-hidden">
+        <div className="container max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 w-full">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter">
               Scegliamo insieme la strada
             </h2>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-medium">
               Partiamo dal bisogno: visibilità, processi, integrazioni o
               prodotto. Poi costruiamo la soluzione giusta.
             </p>
@@ -737,12 +710,12 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <BlurFade
               delay={0.3}
-              className="bg-background border-2 border-primary/20 p-6 rounded-2xl shadow-md hover:shadow-lg transition-all group relative"
+              className="bg-white border-2 border-primary/20 p-8 rounded-[2rem] shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group relative"
             >
-              <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-5 text-primary group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 text-primary group-hover:scale-110 transition-transform shadow-lg shadow-primary/10">
                 <MonitorSmartphone className="w-7 h-7" />
               </div>
-              <h3 className="text-lg font-bold mb-2">
+              <h3 className="text-xl font-black mb-3 tracking-tight">
                 Siti Vetrina per farti trovare
               </h3>
               <p className="text-muted-foreground text-sm mb-3">
@@ -762,12 +735,12 @@ export default function HomePage() {
 
             <BlurFade
               delay={0.4}
-              className="bg-background border p-6 rounded-2xl shadow-sm hover:shadow-lg transition-all group"
+              className="bg-white border-2 p-8 rounded-[2rem] shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group"
             >
-              <div className="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-5 text-blue-600 group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 text-blue-600 group-hover:scale-110 transition-transform shadow-lg shadow-blue-500/10">
                 <Database className="w-7 h-7" />
               </div>
-              <h3 className="text-lg font-bold mb-2">
+              <h3 className="text-xl font-black mb-3 tracking-tight">
                 Gestionali per eliminare Excel
               </h3>
               <p className="text-muted-foreground text-sm mb-3">
@@ -787,12 +760,12 @@ export default function HomePage() {
 
             <BlurFade
               delay={0.5}
-              className="bg-background border p-6 rounded-2xl shadow-sm hover:shadow-lg transition-all group"
+              className="bg-white border-2 p-8 rounded-[2rem] shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group"
             >
-              <div className="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-5 text-purple-600 group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 text-purple-600 group-hover:scale-110 transition-transform shadow-lg shadow-purple-500/10">
                 <Zap className="w-7 h-7" />
               </div>
-              <h3 className="text-lg font-bold mb-2">
+              <h3 className="text-xl font-black mb-3 tracking-tight">
                 App per fidelizzare i clienti
               </h3>
               <p className="text-muted-foreground text-sm mb-3">
@@ -812,12 +785,12 @@ export default function HomePage() {
 
             <BlurFade
               delay={0.6}
-              className="bg-background border p-6 rounded-2xl shadow-sm hover:shadow-lg transition-all group"
+              className="bg-white border-2 p-8 rounded-[2rem] shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all group"
             >
-              <div className="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-5 text-orange-600 group-hover:scale-110 transition-transform">
+              <div className="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center mb-6 text-orange-600 group-hover:scale-110 transition-transform shadow-lg shadow-orange-500/10">
                 <Rocket className="w-7 h-7" />
               </div>
-              <h3 className="text-lg font-bold mb-2">App Mobile</h3>
+              <h3 className="text-xl font-black mb-3 tracking-tight">App Mobile</h3>
               <p className="text-muted-foreground text-sm mb-3">
                 Hai bisogno di un&apos;app per i tuoi clienti o per il tuo team?
                 La progetto e costruisco per te.
@@ -843,12 +816,12 @@ export default function HomePage() {
           <BlurFade delay={0.2}>
             <div className="max-w-4xl mx-auto">
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-blue-500/20 rounded-3xl blur-xl opacity-40"></div>
-                <div className="relative bg-background rounded-3xl p-8 md:p-12 border shadow-xl">
-                  <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-blue-500/20 rounded-[3rem] blur-xl opacity-40"></div>
+                <div className="relative bg-white rounded-[3rem] p-10 md:p-16 border-4 shadow-2xl">
+                  <div className="flex flex-col md:flex-row gap-10 items-center md:items-start">
                     {/* Large avatar */}
                     <div className="shrink-0">
-                      <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl bg-muted overflow-hidden border-4 border-primary/20 shadow-lg">
+                      <div className="w-32 h-32 md:w-40 md:h-40 rounded-[2rem] bg-muted overflow-hidden border-4 border-primary/20 shadow-xl">
                         <Image
                           src={DATA.avatarUrl}
                           alt="Manuel De Ceglie"
@@ -861,14 +834,14 @@ export default function HomePage() {
 
                     {/* Content */}
                     <div className="flex-1 text-center md:text-left">
-                      <h3 className="text-2xl md:text-3xl font-bold mb-2">
+                      <h3 className="text-3xl md:text-4xl font-black mb-2 tracking-tighter">
                         Manuel De Ceglie
                       </h3>
-                      <p className="text-primary font-medium mb-4">
+                      <p className="text-primary font-black mb-6 text-lg">
                         Sviluppatore Web & Software
                       </p>
 
-                      <p className="text-muted-foreground leading-relaxed mb-6 text-lg">
+                      <p className="text-muted-foreground leading-relaxed mb-8 text-xl font-medium">
                         Non sono un&apos;agenzia con 15 persone che non si
                         parlano. Sono uno sviluppatore che lavora direttamente
                         con te. Mi scrivi? Rispondo io. Hai un problema? Lo
@@ -911,12 +884,12 @@ export default function HomePage() {
       {/* CTA FINALE */}
       <section
         id="contact"
-        className="py-32 relative overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background"
+        className="py-32 relative overflow-hidden bg-gradient-to-b from-background via-primary/5 to-background w-full"
       >
-        <div className="container max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
+        <div className="container max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 relative z-10 w-full">
           {/* Background decorative elements */}
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] -mr-96 -mt-96 opacity-50"></div>
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] -ml-64 -mb-64 opacity-50"></div>
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] -mr-96 -mt-96 opacity-50 pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] -ml-64 -mb-64 opacity-50 pointer-events-none"></div>
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start relative z-10">
             {/* Left Column: Content */}
@@ -926,11 +899,11 @@ export default function HomePage() {
                 Analisi Gratuita • Senza Impegno
               </div>
 
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] tracking-tighter">
                 Pronto a far decollare il tuo progetto?
               </h2>
 
-              <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
+              <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-lg font-medium">
                 Non vendo pacchetti pronti. Analizzo la tua situazione e ti
                 propongo la strategia migliore per i tuoi obiettivi concreti.
               </p>
@@ -954,15 +927,15 @@ export default function HomePage() {
                     desc: "Niente agenzie, parli direttamente con me",
                   },
                 ].map((item, i) => (
-                  <div key={i} className="flex gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-                      <CheckCircle2 className="w-5 h-5 text-primary" />
+                  <div key={i} className="flex gap-5 p-6 rounded-[2rem] bg-white border-2 border-transparent hover:border-primary/20 shadow-sm transition-all">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center shrink-0">
+                      <CheckCircle2 className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <div className="font-bold text-base mb-1">
+                      <div className="font-black text-xl mb-1 tracking-tight">
                         {item.title}
                       </div>
-                      <div className="text-sm text-muted-foreground">
+                      <div className="text-base text-muted-foreground leading-relaxed">
                         {item.desc}
                       </div>
                     </div>
@@ -971,9 +944,9 @@ export default function HomePage() {
               </div>
 
               {/* Personal touch card */}
-              <div className="mt-12 p-6 bg-background border-2 border-primary/20 rounded-2xl shadow-lg">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-xl overflow-hidden border-2 border-primary/20 shadow-md">
+              <div className="mt-12 p-8 bg-white border-4 border-primary/20 rounded-[2rem] shadow-xl">
+                <div className="flex items-center gap-6">
+                  <div className="w-20 h-20 rounded-[2rem] overflow-hidden border-4 border-primary/20 shadow-xl">
                     <Image
                       src={DATA.avatarUrl}
                       alt="Manuel De Ceglie"
@@ -983,10 +956,10 @@ export default function HomePage() {
                     />
                   </div>
                   <div>
-                    <div className="font-bold text-base">
+                    <div className="font-black text-xl tracking-tight">
                       Parla direttamente con me
                     </div>
-                    <div className="text-sm text-muted-foreground mt-0.5">
+                    <div className="text-base text-muted-foreground mt-1">
                       Risposta garantita entro 24 ore
                     </div>
                   </div>
@@ -998,12 +971,12 @@ export default function HomePage() {
             <div className="relative">
               {/* Form container with shadow */}
               <div className="sticky top-8">
-                <div className="bg-background border-2 border-border rounded-3xl p-8 md:p-10 shadow-2xl">
-                  <div className="mb-8">
-                    <h3 className="text-2xl md:text-3xl font-bold mb-3">
+                <div className="bg-white border-4 border-border rounded-[3rem] p-10 md:p-16 shadow-2xl">
+                  <div className="mb-10">
+                    <h3 className="text-3xl md:text-4xl font-black mb-4 tracking-tighter">
                       Raccontami la tua idea
                     </h3>
-                    <p className="text-muted-foreground">
+                    <p className="text-muted-foreground text-lg leading-relaxed font-medium">
                       Bastano 30 secondi per iniziare. Riceverai un&apos;analisi
                       dettagliata senza alcun impegno.
                     </p>

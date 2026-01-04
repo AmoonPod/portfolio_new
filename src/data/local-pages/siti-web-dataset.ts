@@ -50,7 +50,6 @@ export const sitiWebDataset: LocalPageData[] = [
     },
     solution: {
       title: 'Un sito che lavora per te, mentre sei in laboratorio o in campo',
-      body: 'Conosco bene la nostra zona e so che qui le persone cercano concretezza. Non ti vendo fumo: ti costruisco un sito che carica in un secondo anche con poco segnale, che spiega bene cosa fai e che rende facilissimo contattarti. Che tu sia un elettricista, un ristoratore o un produttore locale, il tuo sito sarà il tuo miglior biglietto da visita.',
       highlights: [
         "Veloce davvero, anche con la connessione dell'Appennino",
         'Ottimizzato per farti trovare da chi cerca in zona',
@@ -177,12 +176,13 @@ export const sitiWebDataset: LocalPageData[] = [
       ],
     },
     solution: {
-      title: 'Un metodo basato sui dati, non sulle opinioni',
-      body: "Non sono qui per farti un sito 'carino'. Sono qui per costruire uno strumento che ti aiuti a fatturare di più. Analizzo i tuoi competitor a Reggio, capisco cosa cercano i tuoi clienti e creo un'esperienza di navigazione che li porti dritti a scriverti o chiamarti. Niente fronzoli, solo quello che serve per convertire.",
+      title: 'Ti offro un sito che lavora per te e che ti fa fatturare di più',
       highlights: [
-        'Design moderno che riflette la tua professionalità',
-        'SEO tecnica per scalare le posizioni a Reggio Emilia',
-        'Ottimizzazione per conversioni (più lead, meno perdite)',
+        'Veloce davvero, anche con poca connessione internet',
+        'Ottimizzato per farti trovare da chi cerca in zona',
+        'Facile da usare per te e per i tuoi clienti',
+        'Integrazione con WhatsApp per ricevere ordini o prenotazioni',
+        'Scheda Google Maps sistemata e professionale',
       ],
     },
     uniqueBlocks: [
@@ -296,11 +296,10 @@ export const sitiWebDataset: LocalPageData[] = [
       ],
     },
     solution: {
-      title: 'Siti concreti, per persone concrete',
-      body: "Abito in zona e so cosa significa gestire un'attività qui. Non ti serve un sito con animazioni spaziali che non carica mai. Ti serve un sito leggero, che funzioni bene sul telefono di chi sta guidando verso Carpineti, che mostri chiaramente cosa fai e dove sei. Il mio obiettivo è farti squillare il telefono o ricevere mail di richiesta.",
+      title: 'Ci penso io a tutto',
       highlights: [
         'Prezzo fisso senza sorprese',
-        'Ottimizzato per i turisti che visitano il Castello e la zona',
+        'Ottimizzato per i turisti che visitano Carpineti',
         'Facilissimo da usare anche da smartphone',
         'Posizionamento locale su Google Maps incluso',
         'Supporto diretto: se hai un problema, mi chiami',
@@ -389,7 +388,6 @@ export const sitiWebDataset: LocalPageData[] = [
     },
     solution: {
       title: 'Efficienza e velocità: il linguaggio delle aziende',
-      body: "A Sassuolo sappiamo che il tempo è denaro. Non ti propongo un sito generico, ma una piattaforma pensata per il B2B. Che tu venda ceramica, servizi industriali o logistica, il tuo sito deve semplificare la vita a te e ai tuoi clienti. Integrazioni con i tuoi dati attuali, filtri avanzati per i prodotti e una velocità che stupirà i tuoi partner all'estero.",
       highlights: [
         'Cataloghi dinamici facili da navigare',
         'Aree riservate per distributori e agenti',
@@ -505,7 +503,6 @@ export const sitiWebDataset: LocalPageData[] = [
     },
     solution: {
       title: 'Più visibilità, meno chiacchiere',
-      body: "A Fiorano c'è bisogno di praticità. Il mio lavoro è semplice: prendo la tua attività e la rendo visibile a chi ne ha bisogno. Studio come cercano i tuoi servizi, sistemo la tua presenza su Google Maps e costruisco un sito che carichi all'istante. Non ti serve un sito per vincere premi di design, ti serve un sito per vincere nuovi clienti.",
       highlights: [
         'Posizionamento locale garantito su Fiorano',
         'Siti pronti per il mobile (smartphone)',

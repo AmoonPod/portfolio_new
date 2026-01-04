@@ -36,8 +36,8 @@ export default function RootLayout({
       >
         <TooltipProvider delayDuration={0}>
           {/* Sticky Navbar */}
-          <header className="sticky top-0 z-50 w-full border-b bg-background md:bg-background/95 md:backdrop-blur supports-[backdrop-filter]:md:bg-background/60">
-            <div className="max-w-[1400px] mx-auto px-6">
+          <header className="sticky top-0 z-50 w-full border-b bg-background md:bg-background/95 md:backdrop-blur supports-[backdrop-filter]:md:bg-background/60 overflow-x-hidden">
+            <div className="max-w-[1400px] mx-auto px-4 sm:px-6 w-full">
               <div className="flex h-16 items-center justify-between">
                 <Link href="/" className="hover:opacity-80 transition-opacity">
                   <span className="font-semibold text-sm sm:text-base">{DATA.name}</span>
@@ -49,8 +49,8 @@ export default function RootLayout({
             </div>
           </header>
           {children}
-          <footer className="border-t bg-muted/30">
-            <div className="max-w-[1400px] mx-auto px-6 py-12">
+          <footer className="border-t bg-muted/30 w-full overflow-x-hidden">
+            <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-12 w-full">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white font-black text-xl shadow-xl shadow-primary/20">M</div>
