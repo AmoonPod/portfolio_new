@@ -11,13 +11,15 @@ interface ServiceContactFormProps {
     formTitle?: string;
     formDescription?: string;
     submitButtonText?: string;
+    hideServiceTypes?: boolean; // If true, hides the service type selection
 }
 
 export function ServiceContactForm({
     serviceName,
     formTitle = "Richiedi Maggiori Informazioni",
     formDescription = "Compila il modulo sottostante per discutere delle tue esigenze specifiche. Ti risponderò al più presto.",
-    submitButtonText = "Invia Richiesta"
+    submitButtonText = "Invia Richiesta",
+    hideServiceTypes = false
 }: ServiceContactFormProps) {
     // Form state
     const [name, setName] = useState('');
@@ -137,34 +139,35 @@ export function ServiceContactForm({
                     />
                 </div>
 
-                <div>
-                    <Label className="mb-3 block">Di cosa hai bisogno?</Label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
-                        {[
-                            { value: 'nuovo-sito', label: 'Nuovo Sito' },
-                            { value: 'gestionale-software', label: 'Gestionale/Software' },
-                            { value: 'app-mobile', label: 'App Mobile' },
-                            { value: 'non-lo-so', label: 'Non lo so ancora' },
-                        ].map((option) => (
-                            <button
-                                key={option.value}
-                                type="button"
-                                onClick={() => setNeed(option.value)}
-                                className={`
-                                    px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg border-2 text-xs sm:text-sm font-medium transition-all
-                                    whitespace-normal break-words text-center
-                                    ${
-                                        need === option.value
+                {!hideServiceTypes && (
+                    <div>
+                        <Label className="mb-3 block">Di cosa hai bisogno?</Label>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
+                            {[
+                                { value: 'nuovo-sito', label: 'Nuovo Sito' },
+                                { value: 'gestionale-software', label: 'Gestionale/Software' },
+                                { value: 'app-mobile', label: 'App Mobile' },
+                                { value: 'non-lo-so', label: 'Non lo so ancora' },
+                            ].map((option) => (
+                                <button
+                                    key={option.value}
+                                    type="button"
+                                    onClick={() => setNeed(option.value)}
+                                    className={`
+                                        px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg border-2 text-xs sm:text-sm font-medium transition-all
+                                        whitespace-normal break-words text-center
+                                        ${need === option.value
                                             ? 'border-primary bg-primary/10 text-primary'
                                             : 'border-border bg-background hover:border-primary/50 hover:bg-muted/50'
-                                    }
-                                `}
-                            >
-                                {option.label}
-                            </button>
-                        ))}
+                                        }
+                                    `}
+                                >
+                                    {option.label}
+                                </button>
+                            ))}
+                        </div>
                     </div>
-                </div>
+                )}
 
                 <div>
                     <Label htmlFor="message">Messaggio</Label>
@@ -172,7 +175,7 @@ export function ServiceContactForm({
                         id="message"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        placeholder={`Descrivi brevemente le tue esigenze per ${serviceName}...`}
+                        placeholder={`Descrivi brevemente le tue esigenze...`}
                         required
                         className="mt-1"
                         rows={5}

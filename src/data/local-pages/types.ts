@@ -20,9 +20,15 @@ export type Block =
       highlightIndex?: number;
     }
   | {
-      kind: 'comparison';
+      kind: 'comparison'; // AGGIORNATO: Ora supporta items con "has: boolean"
       title: string;
-      items: Array<{ label: string; has: boolean; description?: string }>;
+      items: Array<{ 
+        label: string; 
+        has: boolean; 
+        description?: string;
+        standardPercent?: number; // Percentuale per la barra "Standard" (0-100)
+        standardLabel?: string; // Testo personalizzato al posto di "Limitato"
+      }>;
     }
   | {
       kind: 'process';
