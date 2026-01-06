@@ -3,6 +3,8 @@ import { Metadata } from "next";
 import { DATA } from "@/data/resume";
 
 export function generateLocalPageMetadata(data: LocalPageData): Metadata {
+  const isActive = data.active !== false; // Default to true if not specified
+
   return {
     title: data.seo.title,
     description: data.seo.description,
@@ -32,11 +34,11 @@ export function generateLocalPageMetadata(data: LocalPageData): Metadata {
       images: [`${DATA.url}/og-image.png`],
     },
     robots: {
-      index: true,
-      follow: true,
+      index: isActive,
+      follow: isActive,
       googleBot: {
-        index: true,
-        follow: true,
+        index: isActive,
+        follow: isActive,
         "max-video-preview": -1,
         "max-image-preview": "large",
         "max-snippet": -1,

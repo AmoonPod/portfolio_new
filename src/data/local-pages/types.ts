@@ -1,59 +1,10 @@
-export type Block =
-  | {
-      kind: 'callout';
-      title: string;
-      body: string;
-      variant?: 'info' | 'warning' | 'success';
-    }
-  | { kind: 'checklist'; title: string; items: string[]; icon?: boolean }
-  | {
-      kind: 'case';
-      title: string;
-      before: string;
-      after: string;
-      metrics?: Array<{ label: string; value: string; trend?: 'up' | 'down' }>;
-    }
-  | {
-      kind: 'table';
-      title: string;
-      rows: Array<{ a: string; b: string }>;
-      highlightIndex?: number;
-    }
-  | {
-      kind: 'comparison'; // AGGIORNATO: Ora supporta items con "has: boolean"
-      title: string;
-      items: Array<{ 
-        label: string; 
-        has: boolean; 
-        description?: string;
-        standardPercent?: number; // Percentuale per la barra "Standard" (0-100)
-        standardLabel?: string; // Testo personalizzato al posto di "Limitato"
-      }>;
-    }
-  | {
-      kind: 'process';
-      title: string;
-      steps: Array<{ step: number; title: string; description: string }>;
-    }
-  | {
-      kind: 'testimonial';
-      text: string;
-      author: string;
-      role: string;
-      location: string;
-    }
-  | {
-      kind: 'stats';
-      title: string;
-      items: Array<{ label: string; value: string; description: string }>;
-    };
-
 export interface LocalPageData {
   slug: string;
   cityName: string;
   province: string;
   region: string;
   population?: number;
+  active: boolean; // If false, page won't be indexed by robots and won't be accessible
 
   seo: {
     title: string;
@@ -71,30 +22,40 @@ export interface LocalPageData {
     trustSignal?: string;
   };
 
-  pain: {
-    title: string;
-    bullets: string[];
+  diagnostica?: {
+    badge: string;
+    title: string | React.ReactNode;
+    problems: string[];
+    solutions: string[];
   };
 
-  solution: {
+  goodInvestment?: {
     title: string;
-    highlights?: string[];
+    titleHighlight: string;
+    subtitle: string;
+    cards: Array<{
+      icon: 'star' | 'shield' | 'zap';
+      title: string;
+      description: string;
+      description2: string;
+      footerType: 'premium' | 'ownership' | 'roi';
+    }>;
   };
-
-  uniqueBlocks: Block[];
 
   faq: Array<{ q: string; a: string }>;
 
-  links: Array<{ label: string; href: string }>;
-
   serviceSlug: string;
   serviceName: string;
-  offer?: {
+  offers?: Array<{
+    id: string; // Unique identifier for the offer
     title: string;
     description: string;
-    price: string;
+    price: string; // e.g., "490", "1.490"
     badge?: string;
-  };
+    active: boolean; // Whether this offer is currently active
+    type: 'landing' | 'website'; // Type of offer
+    features: string[]; // List of features (first 3 shown in popup)
+  }>;
 }
 
 export interface LocalCityLink {

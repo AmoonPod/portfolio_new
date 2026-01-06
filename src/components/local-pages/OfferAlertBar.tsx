@@ -5,18 +5,34 @@ import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight, Sparkles, Tag, Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
 
+interface Offer {
+    id: string
+    title: string
+    price: string
+    badge?: string
+    active: boolean
+    type: 'landing' | 'website'
+}
+
 interface OfferAlertBarProps {
-    offer: {
-        title: string
-        price: string
-        badge?: string
-    }
+    offers?: Offer[]
     cityName: string
     onClick: () => void
 }
 
-export function OfferAlertBar({ offer, cityName, onClick }: OfferAlertBarProps) {
+export function OfferAlertBar({ offers = [], cityName, onClick }: OfferAlertBarProps) {
     const [index, setIndex] = useState(0)
+
+    // Filtra solo le offerte attive
+    const activeOffers = offers.filter(o => o.active)
+    
+    // Se non ci sono offerte attive, non mostrare la barra
+    if (activeOffers.length === 0) {
+        return null
+    }
+
+    // Prendi la prima offerta attiva per i messaggi
+    const firstOffer = activeOffers[0]
 
     // Messaggi che ruotano
     const messages = [
@@ -26,9 +42,9 @@ export function OfferAlertBar({ offer, cityName, onClick }: OfferAlertBarProps) 
             highlight: cityName
         },
         {
-            text: `Sito Web completo a soli ${offer.price}`,
+            text: `${firstOffer.title} a soli €${firstOffer.price}`,
             icon: Tag,
-            highlight: offer.price
+            highlight: `€${firstOffer.price}`
         },
         {
             text: "Offerta a tempo limitato - Clicca qui",

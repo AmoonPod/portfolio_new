@@ -12,53 +12,68 @@ import {
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
+interface Offer {
+    id: string
+    title: string
+    description: string
+    price: string
+    badge?: string
+    active: boolean
+    type: 'landing' | 'website'
+    features: string[]
+}
+
 interface OfferPopupProps {
-    offer?: any // Lo rendiamo opzionale perché usiamo dati interni per i tab
+    offers?: Offer[] // Array di offerte attive
     cityName: string
     isOpen?: boolean
     onOpenChange?: (open: boolean) => void
 }
 
-// Definiamo i due pacchetti fissi come richiesto
-const PACKAGES = {
-    landing: {
-        id: 'landing',
-        label: 'Landing Page',
-        icon: LayoutTemplate,
-        price: '499',
-        subtitle: 'Pagina Unica',
-        description: 'Ideale per campagne e promozioni specifiche.',
-        features: [
-            "Design One-Page a conversione",
-            "Copywriting persuasivo base",
-            "Consegna rapida in 7gg"
-        ]
-    },
-    website: {
-        id: 'website',
-        label: 'Sito Web',
-        icon: Layers,
-        price: '799',
-        subtitle: 'Multi-Pagina',
-        description: 'La vetrina completa per la tua attività.',
-        features: [
-            "Design Completo Multi-Page",
-            "Ottimizzazione SEO Base",
-            "Ottimizzazione Mobile",
-        ]
-    }
-}
-
-export function OfferPopup({ cityName, isOpen, onOpenChange }: OfferPopupProps) {
+export function OfferPopup({ offers = [], cityName, isOpen, onOpenChange }: OfferPopupProps) {
     const [internalOpen, setInternalOpen] = useState(false)
-    const [activeTab, setActiveTab] = useState<'landing' | 'website'>('website') // Default sul sito completo
+
+    // Filtra solo le offerte attive e ordina per tipo (landing prima, website dopo)
+    const activeOffers = offers.filter(o => o.active).sort((a, b) => {
+        if (a.type === 'landing' && b.type === 'website') return -1
+        if (a.type === 'website' && b.type === 'landing') return 1
+        return 0
+    })
+
+    const [activeTab, setActiveTab] = useState<string>(activeOffers[0]?.id || '')
 
     const isControlled = typeof isOpen !== 'undefined'
     const open = isControlled ? isOpen : internalOpen
     const setOpen = isControlled ? onOpenChange! : setInternalOpen
 
     // Dati del pacchetto attivo
-    const currentPkg = PACKAGES[activeTab]
+    const currentOffer = activeOffers.find(o => o.id === activeTab) || activeOffers[0]
+
+    // Se non ci sono offerte attive, non mostrare il popup
+    if (!currentOffer || activeOffers.length === 0) {
+        return null
+    }
+
+    // Icone per tipo
+    const typeIcons = {
+        landing: LayoutTemplate,
+        website: Layers
+    }
+
+    // Label per tipo
+    const typeLabels = {
+        landing: 'Landing Page',
+        website: 'Sito Web'
+    }
+
+    // Subtitle per tipo
+    const typeSubtitles = {
+        landing: 'Pagina Unica',
+        website: 'Multi-Pagina'
+    }
+
+    // Mostra solo le prime 3 features
+    const displayFeatures = currentOffer.features.slice(0, 3)
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -91,39 +106,38 @@ export function OfferPopup({ cityName, isOpen, onOpenChange }: OfferPopupProps) 
                         </div>
 
                         {/* Custom Animated Tabs */}
-                        <div className="relative z-10 grid grid-cols-2 p-1 bg-gray-200/50 rounded-2xl border border-white/50 shadow-inner">
-                            {(['landing', 'website'] as const).map((tab) => (
-                                <button
-                                    key={tab}
-                                    onClick={() => setActiveTab(tab)}
-                                    className={cn(
-                                        "relative py-2.5 text-xs font-bold uppercase tracking-wide transition-all duration-300 z-10 flex items-center justify-center gap-2",
-                                        activeTab === tab ? "text-foreground" : "text-muted-foreground hover:text-foreground/70"
-                                    )}
-                                >
-                                    {activeTab === tab && (
-                                        <motion.div
-                                            layoutId="activeTab"
-                                            className="absolute inset-0 bg-white rounded-xl shadow-sm border border-black/5"
-                                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                        />
-                                    )}
-                                    <span className="relative z-10">{PACKAGES[tab].label}</span>
-                                </button>
-                            ))}
-                        </div>
+                        {activeOffers.length > 1 && (
+                            <div className="relative z-10 grid p-1 bg-gray-200/50 rounded-2xl border border-white/50 shadow-inner" style={{ gridTemplateColumns: `repeat(${activeOffers.length}, 1fr)` }}>
+                                {activeOffers.map((offer) => {
+                                    const Icon = typeIcons[offer.type]
+                                    return (
+                                        <button
+                                            key={offer.id}
+                                            onClick={() => setActiveTab(offer.id)}
+                                            className={cn(
+                                                "relative py-2.5 text-xs font-bold uppercase tracking-wide transition-all duration-300 z-10 flex items-center justify-center gap-2",
+                                                activeTab === offer.id ? "text-foreground" : "text-muted-foreground hover:text-foreground/70"
+                                            )}
+                                        >
+                                            {activeTab === offer.id && (
+                                                <motion.div
+                                                    layoutId="activeTab"
+                                                    className="absolute inset-0 bg-white rounded-xl shadow-sm border border-black/5"
+                                                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                                                />
+                                            )}
+                                            <span className="relative z-10">{typeLabels[offer.type]}</span>
+                                        </button>
+                                    )
+                                })}
+                            </div>
+                        )}
                     </div>
 
                     {/* Body: The Content */}
                     <div className="px-8 pb-8 -mt-6 relative z-20 bg-white rounded-t-[2.5rem] shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)]">
 
-                        {/* Close Button */}
-                        <button
-                            onClick={() => setOpen(false)}
-                            className="absolute top-4 right-4 p-2 text-muted-foreground hover:text-foreground hover:bg-gray-100 rounded-full transition-all"
-                        >
-                            <X className="w-4 h-4" />
-                        </button>
+
 
                         <div className="text-center space-y-6 pt-8">
 
@@ -137,22 +151,25 @@ export function OfferPopup({ cityName, isOpen, onOpenChange }: OfferPopupProps) 
                                     transition={{ duration: 0.2 }}
                                     className="relative py-2"
                                 >
+                                    {currentOffer.badge && (
+                                        <span className="inline-block text-[10px] font-bold text-[#FFBC11] uppercase tracking-widest mb-2 px-2 py-1 bg-[#FFBC11]/10 rounded-full">
+                                            {currentOffer.badge}
+                                        </span>
+                                    )}
                                     <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1 block">
-                                        {currentPkg.subtitle}
+                                        {typeSubtitles[currentOffer.type]}
                                     </span>
                                     <div className="flex items-start justify-center text-foreground scale-110 origin-center">
                                         <span className="text-2xl font-bold mt-2 mr-1 text-primary">€</span>
                                         <span className="text-7xl font-black tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-b from-primary to-primary/80">
-                                            {currentPkg.price}
+                                            {currentOffer.price}
                                         </span>
                                     </div>
-                                    <p className="text-xs text-muted-foreground mt-2 max-w-[200px] mx-auto leading-relaxed">
-                                        {currentPkg.description}
-                                    </p>
+
                                 </motion.div>
                             </AnimatePresence>
 
-                            {/* Features Stack */}
+                            {/* Features Stack - Solo prime 3 */}
                             <div className="bg-muted/30 rounded-2xl p-5 border border-border/50 space-y-3">
                                 <AnimatePresence mode="wait">
                                     <motion.div
@@ -161,7 +178,7 @@ export function OfferPopup({ cityName, isOpen, onOpenChange }: OfferPopupProps) 
                                         animate={{ opacity: 1 }}
                                         transition={{ duration: 0.3 }}
                                     >
-                                        {currentPkg.features.map((item, i) => (
+                                        {displayFeatures.map((item, i) => (
                                             <div key={i} className="flex items-center gap-3 mb-3 last:mb-0">
                                                 <div className="w-5 h-5 rounded-full bg-[#FFBC11] flex items-center justify-center shrink-0 shadow-sm">
                                                     <Check className="w-3 h-3 text-black stroke-[3]" />
@@ -173,20 +190,29 @@ export function OfferPopup({ cityName, isOpen, onOpenChange }: OfferPopupProps) 
                                 </AnimatePresence>
                             </div>
 
-                            {/* Main CTA */}
-                            <Button
-                                size="lg"
-                                className="w-full h-14 rounded-xl text-base font-bold shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-1 transition-all bg-primary text-white"
-                                asChild
-                            >
-                                <Link href="#contatti" onClick={() => setOpen(false)}>
-                                    Blocca il prezzo a {currentPkg.price}€
-                                    <ArrowRight className="w-5 h-5 ml-2" />
-                                </Link>
-                            </Button>
+                            {/* CTAs */}
+                            <div className="space-y-3">
+                                <Button
+                                    size="lg"
+                                    className="w-full h-14 rounded-xl text-base font-bold shadow-xl shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-1 transition-all bg-primary text-white"
+                                    asChild
+                                >
+                                    <Link href="#contatti" onClick={() => setOpen(false)}>
+                                        Blocca il prezzo a €{currentOffer.price}
+                                        <ArrowRight className="w-5 h-5 ml-2" />
+                                    </Link>
+                                </Button>
 
-                            <div className="text-[10px] text-muted-foreground text-center">
-                                Offerta limitata per {cityName}
+                                <Button
+                                    size="lg"
+                                    variant="outline"
+                                    className="w-full h-12 rounded-xl text-base font-medium"
+                                    asChild
+                                >
+                                    <Link href={`#offerta-${currentOffer.id}`} onClick={() => setOpen(false)}>
+                                        Scopri di più
+                                    </Link>
+                                </Button>
                             </div>
                         </div>
                     </div>

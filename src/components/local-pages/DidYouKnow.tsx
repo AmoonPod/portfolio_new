@@ -99,6 +99,14 @@ export function DidYouKnowSection({ cityName, onCtaClick }: DidYouKnowProps) {
         <section className="py-24 bg-background relative overflow-hidden">
             <div className=" max-w-[1200px] mx-auto px-6 relative z-10">
 
+                {/* Section Title */}
+                <div className="text-center mb-16 md:mb-24">
+                    <div className="flex items-center justify-center gap-3 text-muted-foreground font-medium leading-relaxed">
+                        <Lightbulb className="w-5 h-5 md:w-6 md:h-6 text-[#FFBC11]" />
+                        <span className="text-xl md:text-2xl">Lo sapevi che...</span>
+                    </div>
+                </div>
+
                 <div ref={ref} className="relative group">
                     {/* Glow Effect Behind */}
                     <div className={cn(
@@ -142,11 +150,6 @@ export function DidYouKnowSection({ cityName, onCtaClick }: DidYouKnowProps) {
 
                             {/* RIGHT: THE INSIGHT */}
                             <div className="text-center md:text-left space-y-6">
-                                <div className="flex items-center justify-center md:justify-start gap-3 text-muted-foreground/80 mb-2">
-                                    <Lightbulb className="w-5 h-5 text-[#FFBC11]" />
-                                    <span className="text-sm font-bold uppercase tracking-widest">Lo sapevi che...</span>
-                                </div>
-
                                 <h3 className="text-3xl md:text-5xl font-black text-white leading-tight">
                                     {stat.title}
                                 </h3>

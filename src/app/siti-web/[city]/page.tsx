@@ -17,9 +17,13 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   const { city } = await params;
   const data = getLocalPageBySlug(city);
 
-  if (!data) {
+  if (!data || data.active === false) {
     return {
       title: "Pagina Non Trovata",
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
@@ -30,7 +34,7 @@ export default async function LocalPage({ params }: { params: Promise<{ city: st
   const { city } = await params;
   const data = getLocalPageBySlug(city);
 
-  if (!data) {
+  if (!data || data.active === false) {
     notFound();
   }
 
