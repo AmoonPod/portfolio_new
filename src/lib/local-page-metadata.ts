@@ -1,6 +1,6 @@
-import { LocalPageData } from "@/data/local-pages/types";
-import { Metadata } from "next";
-import { DATA } from "@/data/resume";
+import { LocalPageData } from '@/data/local-pages/types';
+import { Metadata } from 'next';
+import { DATA } from '@/data/resume';
 
 export function generateLocalPageMetadata(data: LocalPageData): Metadata {
   const isActive = data.active !== false; // Default to true if not specified
@@ -8,6 +8,7 @@ export function generateLocalPageMetadata(data: LocalPageData): Metadata {
   return {
     title: data.seo.title,
     description: data.seo.description,
+    keywords: data.seo.keywords,
     alternates: {
       canonical: data.seo.canonical,
     },
@@ -18,20 +19,20 @@ export function generateLocalPageMetadata(data: LocalPageData): Metadata {
       siteName: DATA.name,
       images: [
         {
-          url: `${DATA.url}/og-image.png`,
+          url: `${DATA.url}/api/og?title=${encodeURIComponent(data.cityName)}`,
           width: 1200,
           height: 630,
-          alt: `${data.serviceName} a ${data.cityName}`,
+          alt: `Realizzazione siti web a ${data.cityName}`,
         },
       ],
-      locale: "it_IT",
-      type: "website",
+      locale: 'it_IT',
+      type: 'website',
     },
     twitter: {
       title: data.seo.title,
       description: data.seo.description,
-      card: "summary_large_image",
-      images: [`${DATA.url}/og-image.png`],
+      card: 'summary_large_image',
+      images: [`${DATA.url}/api/og?title=${encodeURIComponent(data.cityName)}`],
     },
     robots: {
       index: isActive,
@@ -39,14 +40,10 @@ export function generateLocalPageMetadata(data: LocalPageData): Metadata {
       googleBot: {
         index: isActive,
         follow: isActive,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
       },
     },
   };
 }
-
-
-
-

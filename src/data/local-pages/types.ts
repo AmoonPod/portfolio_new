@@ -5,6 +5,10 @@ export interface LocalPageData {
   region: string;
   population?: number;
   active: boolean; // If false, page won't be indexed by robots and won't be accessible
+  geo?: {
+    lat: number;
+    lng: number;
+  };
 
   seo: {
     title: string;

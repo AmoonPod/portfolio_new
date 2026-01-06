@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { generateServiceJsonLd, generateFAQJsonLd, generateBreadcrumbJsonLd } from "@/lib/seo";
-import { getLocalPageBySlug, getAllSlugs } from "@/data/local-pages/siti-web-dataset";
+import { getLocalPageBySlug, getAllSlugs, getPagesByProvince } from "@/data/local-pages/siti-web-dataset";
 import LocalPageTemplate from "@/components/local-pages/LocalPageTemplate";
 import { generateLocalPageMetadata } from "@/lib/local-page-metadata";
 
@@ -44,6 +44,10 @@ export default async function LocalPage({ params }: { params: Promise<{ city: st
     serviceType: "Web Development",
     areaServed: [data.cityName, data.province, data.region],
     url: data.seo.canonical,
+    offers: data.offers || [],
+    image: `${data.seo.canonical}/og-image.png`,
+    geo: data.geo,
+    cityName: data.cityName
   });
 
   const faqJsonLd = generateFAQJsonLd(data.faq.map(faq => ({
@@ -57,6 +61,13 @@ export default async function LocalPage({ params }: { params: Promise<{ city: st
     { name: data.serviceName, url: "https://manueldeceglie.it/#services" },
     { name: data.cityName, url: data.seo.canonical },
   ]);
+
+  // Recupera città della stessa provincia per interlinking
+  const allProvincePages = getPagesByProvince(data.province)
+  const activeProvincePages = allProvincePages.filter(page => page.active !== false)
+  const nearbyCities = activeProvincePages
+    .filter(page => page.slug !== data.slug)
+    .slice(0, 6)
 
   return (
     <>
@@ -72,7 +83,7 @@ export default async function LocalPage({ params }: { params: Promise<{ city: st
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <LocalPageTemplate data={data} />
+      <LocalPageTemplate data={data} nearbyCities={nearbyCities} />
     </>
   );
 }

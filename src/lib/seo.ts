@@ -1,12 +1,27 @@
 import { DATA } from '@/data/resume'
 
 // Types for JSON-LD structured data
+interface Offer {
+  id: string
+  title: string
+  description: string
+  price: string
+  active: boolean
+}
+
 interface ServiceJsonLdProps {
   serviceName: string
   serviceDescription: string
   serviceType: string
   areaServed?: string | string[]
   url: string
+  offers?: Offer[]
+  image?: string
+  geo?: {
+    lat: number
+    lng: number
+  }
+  cityName?: string
 }
 
 interface FAQItem {
@@ -25,20 +40,59 @@ export function generateServiceJsonLd({
   serviceDescription,
   serviceType,
   areaServed = 'Italy',
-  url
+  url,
+  offers = [],
+  image,
+  geo,
+  cityName
 }: ServiceJsonLdProps) {
-  return {
+  // Filter only active offers and prepare them for schema
+  const activeOffers = offers.filter(offer => offer.active)
+
+  // Build areaServed with optional geo coordinates
+  let areaServedSchema: any
+  if (Array.isArray(areaServed)) {
+    // If we have geo coordinates and city name, use the first area (city) with coordinates
+    if (geo && cityName && areaServed.length > 0 && areaServed[0] === cityName) {
+      areaServedSchema = [
+        {
+          '@type': 'Place',
+          name: cityName,
+          geo: {
+            '@type': 'GeoCoordinates',
+            latitude: geo.lat,
+            longitude: geo.lng
+          }
+        },
+        ...areaServed.slice(1).map(area => ({
+          '@type': 'City',
+          name: area
+        }))
+      ]
+    } else {
+      areaServedSchema = areaServed.map(area => ({
+        '@type': 'City',
+        name: area
+      }))
+    }
+  } else {
+    areaServedSchema = {
+      '@type': 'Country',
+      name: areaServed
+    }
+  }
+
+  const schema: any = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: serviceName,
     description: serviceDescription,
     serviceType: serviceType,
     provider: {
-      '@type': 'ProfessionalService',
+      '@type': 'Person',
       name: DATA.name,
       url: DATA.url,
-      logo: `${DATA.url}/logo_black.png`,
-      image: `${DATA.url}${DATA.avatarUrl}`,
+      image: image || `${DATA.url}${DATA.avatarUrl}`,
       telephone: DATA.contact.tel,
       email: DATA.contact.email,
       address: {
@@ -46,28 +100,31 @@ export function generateServiceJsonLd({
         addressLocality: 'Castelfranco Emilia',
         addressRegion: 'MO',
         addressCountry: 'IT'
-      },
-      areaServed: Array.isArray(areaServed)
-        ? areaServed.map(area => ({
-            '@type': 'Place',
-            name: area
-          }))
-        : {
-            '@type': 'Country',
-            name: areaServed
-          }
+      }
     },
     url: url,
-    areaServed: Array.isArray(areaServed)
-      ? areaServed.map(area => ({
-          '@type': 'Place',
-          name: area
-        }))
-      : {
-          '@type': 'Country',
-          name: areaServed
-        }
+    areaServed: areaServedSchema
   }
+
+  // Add offer catalog if offers are available
+  if (activeOffers.length > 0) {
+    schema.hasOfferCatalog = {
+      '@type': 'OfferCatalog',
+      name: 'Servizi di Sviluppo Web',
+      itemListElement: activeOffers.map((offer) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: offer.title,
+          description: offer.description
+        },
+        price: offer.price.replace(/[^\d]/g, ''), // Remove all non-digit characters (€, dots, etc.)
+        priceCurrency: 'EUR'
+      }))
+    }
+  }
+
+  return schema
 }
 
 // Generate FAQPage schema

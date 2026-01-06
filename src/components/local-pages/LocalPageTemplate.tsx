@@ -11,13 +11,15 @@ import { Hero } from "./Hero";
 import { FAQ } from "./FAQ";
 import { ContactSection } from "./ContactSection";
 import { ActiveOffersSection } from "./OffersSection";
+import { NearbyCitiesFooter } from "./NearbyCitiesFooter";
 
 interface LocalPageTemplateProps {
   data: LocalPageData;
+  nearbyCities?: LocalPageData[];
 }
 
 
-export default function LocalPageTemplate({ data }: LocalPageTemplateProps) {
+export default function LocalPageTemplate({ data, nearbyCities = [] }: LocalPageTemplateProps) {
   const [isOfferOpen, setIsOfferOpen] = useState(false);
 
   // Filtra solo le offerte attive
@@ -74,6 +76,13 @@ export default function LocalPageTemplate({ data }: LocalPageTemplateProps) {
       <FAQ faq={data.faq} />
 
       <ContactSection cityName={data.cityName} serviceSlug={data.serviceSlug} />
+
+      {nearbyCities.length > 0 && (
+        <NearbyCitiesFooter
+          nearbyCities={nearbyCities}
+          serviceName={data.serviceName}
+        />
+      )}
     </main>
   );
 }
