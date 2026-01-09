@@ -513,7 +513,7 @@ export const sitiWebDataset: LocalPageData[] = [
       "h1": "Siti Web a Vignola: fatti per farti trovare e contattare"
     },
     "hero": {
-      "h1": "A Vignola la concorrenza è forte: il tuo sito web deve urlare \"sceglie me!\"",
+      "h1": "A Vignola la concorrenza è forte: il tuo sito web deve urlare \"scegli me!\"",
       "sub": "Che tu sia abbia un ristorante, sia un professionista o un’attività locale, oggi il primo confronto con i tuoi competitor avviene su Google. Io ti realizzo un sito veloce, chiaro e convincente: così chi cerca ti trova, capisce subito il valore e ti contatta.",
       "ctaText": "Parliamo del tuo sito",
       "ctaHref": "#contatti",
@@ -654,7 +654,7 @@ export const sitiWebDataset: LocalPageData[] = [
       "h1": "Siti Web a Fiorano Modenese: veloci, chiari, orientati ai contatti"
     },
     "hero": {
-      "h1": "A Fiorano la concorrenza è forte: il tuo sito web deve urlare \"sceglie me!\"",
+      "h1": "A Fiorano la concorrenza è forte: il tuo sito web deve urlare \"scegli me!\"",
       "sub": "Tra tutte le attività locali, i liberi professionisti e le aziende è fondamentale distinguersi. Chi entra nel tuo sito web deve capire in pochi secondi cosa fai e come chiederti un preventivo. Ti creo un sito snello, professionale e ottimizzato per Google.",
       "ctaText": "Parliamo del progetto",
       "ctaHref": "#contatti",
