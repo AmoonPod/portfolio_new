@@ -22,7 +22,7 @@ export function NavbarWrapper({ children }: { children: React.ReactNode }) {
               <span className="font-semibold text-sm sm:text-base">{DATA.name}</span>
             </Link>
             <Button asChild size="sm" className="text-sm">
-              <Link href="#contact">Contattami</Link>
+              <Link href="#contact">Analisi Gratuita</Link>
             </Button>
           </div>
         </div>
