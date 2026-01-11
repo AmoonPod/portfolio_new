@@ -5,7 +5,8 @@ import {
     AlertTriangle,
     Terminal,
     Zap,
-    Check
+    Check,
+    X
 } from 'lucide-react'
 import BlurFade from '@/components/magicui/blur-fade'
 
@@ -53,44 +54,36 @@ export function DiagnosticaAttuale({
 
                 <div className="relative grid lg:grid-cols-12 gap-8 items-center">
 
-                    {/* LEFT: THE GLITCH / PROBLEM (Terminal Style) */}
+                    {/* LEFT: THE PROBLEM (Clear & Approachable) */}
                     <div className="lg:col-span-5 relative z-10">
                         <BlurFade delay={0.2}>
-                            <div className="relative bg-[#1a1a1a] rounded-2xl border border-white/10 shadow-2xl overflow-hidden transform rotate-[-2deg] hover:rotate-0 transition-transform duration-500 group">
-
-                                {/* Fake Browser/Terminal Header */}
-                                <div className="bg-[#2a2a2a] px-4 py-3 flex items-center gap-2 border-b border-white/5">
-                                    <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                                    <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                                    <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-                                    <div className="ml-auto text-[10px] font-mono text-white/30 flex items-center gap-1">
-                                        <Terminal className="w-3 h-3" />
-                                        error_log.txt
+                            <div className="relative bg-white rounded-3xl border border-red-100 shadow-xl overflow-hidden group">
+                                {/* Problem Header */}
+                                <div className="bg-red-50 px-6 py-4 border-b border-red-100 flex items-center justify-between">
+                                    <div className="flex items-center gap-2 text-red-600">
+                                        <X className="w-5 h-5 stroke-[3]" />
+                                        <span className="text-sm font-black uppercase tracking-wider">Cosa non funziona</span>
                                     </div>
+                                    <div className="h-2 w-12 bg-red-200 rounded-full"></div>
                                 </div>
 
                                 {/* Content */}
-                                <div className="p-6 md:p-8 space-y-6">
-                                    <div className="space-y-4 font-mono text-sm">
-                                        {problems.map((problem: string, i: number) => (
-                                            <div key={i} className="flex gap-3 opacity-80 group-hover:opacity-100 transition-opacity">
-                                                <span className="text-red-500 shrink-0 select-none">{`>`}</span>
-                                                <p className="text-red-200/90 leading-relaxed">
-                                                    <span className="bg-red-500/20 text-red-400 px-1 rounded mr-2 text-xs">ERROR {400 + i}</span>
-                                                    {problem}
-                                                </p>
+                                <div className="p-8 md:p-10 space-y-6">
+                                    {problems.map((problem: string, i: number) => (
+                                        <div key={i} className="flex gap-4 items-start">
+                                            <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center shrink-0 mt-0.5">
+                                                <X className="w-3.5 h-3.5 text-red-500 stroke-[3]" />
                                             </div>
-                                        ))}
-                                    </div>
-
-                                    {/* Glitch Overlay Effect */}
-                                    <div className="absolute inset-0 bg-red-500/5 mix-blend-overlay pointer-events-none opacity-0 group-hover:opacity-100 animate-pulse"></div>
+                                            <p className="text-gray-600 font-medium leading-relaxed">
+                                                {problem}
+                                            </p>
+                                        </div>
+                                    ))}
                                 </div>
 
-                                {/* Status Bar */}
-                                <div className="bg-red-950/30 p-3 border-t border-red-500/20 flex items-center justify-between">
-                                    <span className="text-xs text-red-400 font-mono animate-pulse">● CONNECTION UNSTABLE</span>
-                                    <span className="text-xs text-red-500/50 font-mono">packet_loss: 98%</span>
+                                {/* Bottom Indicator */}
+                                <div className="bg-red-50/50 p-4 border-t border-red-100 text-center">
+                                    <span className="text-xs text-red-500 font-bold uppercase tracking-widest">Contatti persi ogni giorno</span>
                                 </div>
                             </div>
                         </BlurFade>
@@ -112,7 +105,7 @@ export function DiagnosticaAttuale({
                         </BlurFade>
                     </div>
 
-                    {/* RIGHT: THE UPGRADE / SOLUTION (Modern Glass) */}
+                    {/* RIGHT: THE SOLUTION (Modern & Clear) */}
                     <div className="lg:col-span-5 relative z-20">
                         <BlurFade delay={0.4}>
                             <div className="relative">
@@ -128,13 +121,13 @@ export function DiagnosticaAttuale({
                                                 <Zap className="w-4 h-4 text-[#FFBC11] fill-[#FFBC11]" />
                                             </div>
                                             <div>
-                                                <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Upgrade Disponibile</div>
-                                                <div className="text-sm font-black text-foreground">Versione 2.0</div>
+                                                <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">La mia soluzione</div>
+                                                <div className="text-sm font-black text-foreground">Nuovo Metodo</div>
                                             </div>
                                         </div>
                                         <div className="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold flex items-center gap-1.5">
                                             <span className="w-1.5 h-1.5 rounded-full bg-green-600 animate-pulse"></span>
-                                            Online
+                                            Attivo
                                         </div>
                                     </div>
 
@@ -152,12 +145,12 @@ export function DiagnosticaAttuale({
 
                                     {/* Footer Stat */}
                                     <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
-                                        <div className="text-xs text-muted-foreground font-medium">Performance Score</div>
+                                        <div className="text-xs text-muted-foreground font-medium">Efficienza Garantita</div>
                                         <div className="flex items-center gap-2">
                                             <div className="h-1.5 w-24 bg-gray-200 rounded-full overflow-hidden">
                                                 <div className="h-full w-full bg-green-500 animate-[width_1.5s_ease-out]"></div>
                                             </div>
-                                            <span className="text-sm font-black text-green-600">99/100</span>
+                                            <span className="text-sm font-black text-green-600">100%</span>
                                         </div>
                                     </div>
 

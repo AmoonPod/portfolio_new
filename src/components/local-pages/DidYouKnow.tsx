@@ -117,10 +117,10 @@ export function DidYouKnowSection({ cityName, onCtaClick }: DidYouKnowProps) {
                                     "from-green-500 to-emerald-500"
                     )}></div>
 
-                    <div className="relative bg-[#0f0f0f] rounded-[2.5rem] border border-white/10 p-8 md:p-14 overflow-hidden shadow-2xl">
+                    <div className="relative bg-white rounded-[2.5rem] border border-gray-100 p-8 md:p-14 overflow-hidden shadow-2xl">
 
                         {/* Background Pattern */}
-                        <div className="absolute inset-0 opacity-10 bg-[linear-gradient(45deg,#ffffff05_1px,transparent_1px),linear-gradient(-45deg,#ffffff05_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-[size:20px_20px]"></div>
 
                         <div className="relative z-10 flex flex-col md:flex-row items-center gap-10 md:gap-16">
 
@@ -128,7 +128,7 @@ export function DidYouKnowSection({ cityName, onCtaClick }: DidYouKnowProps) {
                             <div className="relative shrink-0 flex flex-col items-center md:items-start">
                                 <div className="flex items-start leading-none">
                                     <span className={cn(
-                                        "text-[8rem] md:text-[10rem] font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-white/50 tabular-nums",
+                                        "text-[8rem] md:text-[10rem] font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-gray-900 to-gray-500 tabular-nums",
                                     )}>
                                         {currentValue}
                                     </span>
@@ -146,27 +146,27 @@ export function DidYouKnowSection({ cityName, onCtaClick }: DidYouKnowProps) {
                             </div>
 
                             {/* SEPARATOR (Desktop) */}
-                            <div className="hidden md:block w-px h-40 bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
+                            <div className="hidden md:block w-px h-40 bg-gradient-to-b from-transparent via-gray-200 to-transparent"></div>
 
                             {/* RIGHT: THE INSIGHT */}
                             <div className="text-center md:text-left space-y-6">
-                                <h3 className="text-3xl md:text-5xl font-black text-white leading-tight">
+                                <h3 className="text-3xl md:text-5xl font-black text-gray-900 leading-tight">
                                     {stat.title}
                                 </h3>
 
-                                <p className="text-xl text-gray-400 leading-relaxed font-medium max-w-2xl">
+                                <p className="text-xl text-gray-500 leading-relaxed font-medium max-w-2xl text-balance">
                                     {stat.description}
                                 </p>
 
-                                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-md relative overflow-hidden group/cta hover:bg-white/10 transition-colors">
-                                    <div className={cn("absolute top-0 left-0 w-1 h-full", stat.bg.replace('/10', ''))}></div>
+                                <div className="bg-gray-50 border border-gray-100 rounded-2xl p-6 md:p-8 backdrop-blur-md relative overflow-hidden group/cta hover:bg-gray-100/80 transition-colors shadow-sm">
+                                    <div className={cn("absolute top-0 left-0 w-1 h-full", stat.color.replace('text-', 'bg-'))}></div>
 
                                     <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                                         <div className="space-y-1 text-center md:text-left">
-                                            <div className="text-sm font-bold text-white/50 uppercase tracking-wider">
+                                            <div className="text-sm font-bold text-gray-400 uppercase tracking-wider">
                                                 Non rientrare in questa statistica
                                             </div>
-                                            <div className="text-xl font-bold text-white">
+                                            <div className="text-xl font-bold text-gray-900">
                                                 {stat.question}
                                             </div>
                                         </div>
@@ -176,7 +176,7 @@ export function DidYouKnowSection({ cityName, onCtaClick }: DidYouKnowProps) {
                                             onClick={onCtaClick ? onCtaClick : undefined}
                                             className={cn(
                                                 "h-14 px-8 rounded-xl font-bold text-base shadow-xl transition-all hover:scale-105",
-                                                "bg-white text-black hover:bg-white/90"
+                                                "bg-[#0a0a0a] text-white hover:bg-black"
                                             )}
                                             asChild={!onCtaClick}
                                         >
@@ -195,9 +195,9 @@ export function DidYouKnowSection({ cityName, onCtaClick }: DidYouKnowProps) {
                                     </div>
                                 </div>
 
-                                <div className="pt-4 flex items-center justify-center md:justify-start gap-2 text-xs font-mono text-gray-600">
+                                <div className="pt-4 flex items-center justify-center md:justify-start gap-2 text-xs font-bold text-gray-400">
                                     <span>FONTE DATI:</span>
-                                    <span className="text-gray-500 uppercase">{stat.source}</span>
+                                    <span className="uppercase">{stat.source}</span>
                                 </div>
                             </div>
 

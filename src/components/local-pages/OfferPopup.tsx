@@ -85,7 +85,7 @@ export function OfferPopup({ offers = [], cityName, isOpen, onOpenChange }: Offe
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogContent className="w-[90vw] max-w-[420px] p-0 border-none shadow-2xl bg-transparent overflow-visible">
-                <DialogTitle className="sr-only">Scegli la tua Offerta</DialogTitle>
+                <DialogTitle className="sr-only">Scegli la soluzione definitiva per la tua attività</DialogTitle>
 
                 {/* Glow Effect posteriore che cambia colore in base al tab? Teniamolo giallo per coerenza brand */}
                 <div className="absolute inset-0 bg-[#FFBC11] opacity-20 blur-[60px] rounded-full pointer-events-none z-[-1]"></div>

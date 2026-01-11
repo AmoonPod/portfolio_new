@@ -10,7 +10,7 @@ import { DATA } from "@/data/resume"
 
 export default function HeroSection() {
     return (
-        <section className="relative pt-24 pb-16 md:pt-32 md:pb-32 overflow-hidden bg-[#FAFAFA]">
+        <section className="relative py-16 overflow-hidden bg-[#FAFAFA]">
 
             {/* Background: Warm & Clean */}
             <div className="absolute top-0 right-0 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-[#FFBC11]/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none opacity-60"></div>

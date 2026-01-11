@@ -25,7 +25,7 @@ export function OfferAlertBar({ offers = [], cityName, onClick }: OfferAlertBarP
 
     // Filtra solo le offerte attive
     const activeOffers = offers.filter(o => o.active)
-    
+
     // Se non ci sono offerte attive, non mostrare la barra
     if (activeOffers.length === 0) {
         return null
@@ -37,7 +37,7 @@ export function OfferAlertBar({ offers = [], cityName, onClick }: OfferAlertBarP
     // Messaggi che ruotano
     const messages = [
         {
-            text: `Offerta esclusiva per ${cityName}`,
+            text: `La soluzione definitiva per le attività di ${cityName}`,
             icon: Sparkles,
             highlight: cityName
         },

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, MapPin, Search } from 'lucide-react'
+import { ArrowRight, MapPin, Search, TrendingUp } from 'lucide-react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import BlurFade from '@/components/magicui/blur-fade'
 import { Button } from '@/components/ui/button'
@@ -22,12 +22,12 @@ export function Hero({ cityName, hero }: HeroProps) {
   const y = useTransform(scrollYProgress, [0, 1], [0, -50])
 
   return (
-    <section className="relative py-24 md:py-20  overflow-hidden bg-background">
-      {/* Abstract Map Grid Background */}
+    <section className="relative py-24 md:py-20 overflow-hidden bg-[#FAFAFA]">
+      {/* Subtle Background Pattern */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
-          backgroundSize: '40px 40px'
+          backgroundImage: 'radial-gradient(#000 1px, transparent 1px)',
+          backgroundSize: '24px 24px'
         }}>
       </div>
 
@@ -104,58 +104,60 @@ export function Hero({ cityName, hero }: HeroProps) {
           </div>
 
           {/* Right: Visual Contextual Simulation */}
-          <div className="lg:col-span-5 hidden lg:block perspective-1000">
+          <div className="lg:col-span-5 hidden lg:block">
             <BlurFade delay={0.3}>
               <motion.div
                 style={{ y }}
-                className="relative w-full aspect-square max-w-[500px] mx-auto"
+                className="relative w-full aspect-square max-w-[500px] mx-auto flex items-center justify-center"
               >
-                {/* The Abstract "Local Search" Card */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50 rounded-[2.5rem] shadow-2xl border border-white/50 p-6 flex flex-col transform rotate-[-6deg] hover:rotate-0 transition-all duration-700 ease-out z-10">
-                  {/* Fake Browser Bar */}
-                  <div className="flex items-center gap-2 mb-6 bg-muted/30 p-3 rounded-full w-fit">
-                    <Search className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-xs font-medium text-muted-foreground">sito web {cityName}</span>
+                {/* Success Visualization Card */}
+                <div className="relative w-full bg-white rounded-[2.5rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] border border-gray-100 p-8 md:p-10 transform rotate-[-2deg] hover:rotate-0 transition-all duration-700 ease-out z-10">
+                  
+                  {/* Card Header: Client Result */}
+                  <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-50">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-green-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-green-500/20">
+                        <TrendingUp className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <div className="font-black text-gray-900 text-lg">Risultati Reali</div>
+                        <div className="text-xs font-bold text-green-600 uppercase tracking-wider">Nuovi contatti oggi</div>
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Simulated Result */}
-                  <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/40 flex-1 flex flex-col relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#FFBC11]/10 rounded-bl-[100px] z-0"></div>
+                  {/* Notification List: Simulation of Business Success */}
+                  <div className="space-y-4">
+                    {[
+                      { title: "Nuova richiesta preventivo", time: "2 min fa", type: "Email" },
+                      { title: "Chiamata da Google Maps", time: "1 ora fa", type: "Tel" },
+                      { title: "Messaggio WhatsApp", time: "3 ore fa", type: "WA" }
+                    ].map((item, i) => (
+                      <motion.div 
+                        key={i}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.5 + (i * 0.2) }}
+                        className="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-gray-100 group/item hover:bg-white hover:shadow-md transition-all"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                          <span className="text-sm font-bold text-gray-700">{item.title}</span>
+                        </div>
+                        <span className="text-[10px] font-bold text-gray-400 uppercase">{item.time}</span>
+                      </motion.div>
+                    ))}
+                  </div>
 
-                    <div className="flex items-start justify-between relative z-10">
-                      <div className="space-y-1">
-                        <div className="h-2 w-20 bg-muted rounded-full"></div>
-                        <div className="h-6 w-48 bg-primary/10 rounded-md"></div>
-                      </div>
-                      <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">
-                        <MapPin className="w-5 h-5 fill-current" />
-                      </div>
-                    </div>
-
-                    <div className="mt-8 grid grid-cols-2 gap-3">
-                      <div className="h-24 bg-muted/20 rounded-xl border border-dashed border-muted-foreground/20 animate-pulse"></div>
-                      <div className="h-24 bg-muted/20 rounded-xl border border-dashed border-muted-foreground/20 animate-pulse delay-100"></div>
-                    </div>
-
-                    <div className="mt-auto pt-6 flex items-center gap-3">
-                      <div className="px-3 py-1 bg-green-500 text-white text-[10px] font-bold rounded-full">APERTO ORA</div>
-                      <div className="px-3 py-1 bg-muted text-muted-foreground text-[10px] font-bold rounded-full">5.0 ★★★★★</div>
-                    </div>
-
-                    {/* Overlay Cursor Animation */}
-                    <motion.div
-                      className="absolute bottom-10 right-10"
-                      initial={{ x: 20, y: 20, opacity: 0 }}
-                      animate={{ x: 0, y: 0, opacity: 1 }}
-                      transition={{ delay: 1, duration: 1, repeat: Infinity, repeatType: "reverse", repeatDelay: 2 }}
-                    >
-                      <svg className="w-8 h-8 text-primary drop-shadow-xl" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2l12 11.2-5.8.5 3.3 7.3-2.2.9-3.2-7.4-4.4 4V2z" /></svg>
-                    </motion.div>
+                  {/* Growth Badge */}
+                  <div className="mt-8 pt-8 border-t border-gray-50 flex items-center justify-between">
+                    <div className="text-xs font-bold text-gray-400 uppercase tracking-widest">Crescita a {cityName}</div>
+                    <div className="text-2xl font-black text-gray-900">+340%</div>
                   </div>
                 </div>
 
-                {/* Backdrop Blob */}
-                <div className="absolute -inset-10 bg-gradient-to-tr from-primary/20 via-[#FFBC11]/20 to-primary/5 rounded-full blur-[60px] -z-10 animate-pulse"></div>
+                {/* Backdrop Decoration */}
+                <div className="absolute -inset-10 bg-gradient-to-tr from-primary/10 via-[#FFBC11]/10 to-primary/5 rounded-full blur-[80px] -z-10 animate-pulse"></div>
               </motion.div>
             </BlurFade>
           </div>
@@ -164,4 +166,5 @@ export function Hero({ cityName, hero }: HeroProps) {
     </section>
   )
 }
+
 
