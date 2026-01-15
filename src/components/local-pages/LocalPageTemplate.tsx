@@ -12,6 +12,7 @@ import { FAQ } from "./FAQ";
 import { ContactSection } from "./ContactSection";
 import { ActiveOffersSection } from "./OffersSection";
 import { NearbyCitiesFooter } from "./NearbyCitiesFooter";
+import { CaseStudyProof } from "./CaseStudyProof";
 
 interface LocalPageTemplateProps {
   data: LocalPageData;
@@ -72,6 +73,9 @@ export default function LocalPageTemplate({ data, nearbyCities = [] }: LocalPage
       )}
       {/* --- DID YOU KNOW SECTION --- */}
       <DidYouKnowSection cityName={data.cityName} />
+
+      {/* --- CASE STUDY PROOF --- */}
+      <CaseStudyProof cityName={data.cityName} />
 
       <FAQ faq={data.faq} />
 

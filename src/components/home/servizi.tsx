@@ -71,8 +71,8 @@ export default function ServicesSection() {
                             </div>
 
                             <div className="mt-auto">
-                                <Link href="/siti-web" className="inline-flex items-center text-sm font-black uppercase tracking-wider text-gray-900 group-hover:text-[#FFBC11] transition-colors">
-                                    Scopri i Siti Web <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                <Link href="#contact" className="inline-flex items-center text-sm font-black uppercase tracking-wider text-gray-900 group-hover:text-purple-600 transition-colors">
+                                    Analisi Gratuita <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </div>
                         </div>

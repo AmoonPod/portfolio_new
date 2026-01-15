@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { DATA } from '@/data/resume';
 import { getAllSlugs } from '@/data/local-pages/siti-web-dataset';
+import { getAllCaseStudySlugs } from '@/data/case-studies/case-studies-data';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = DATA.url;
@@ -19,7 +20,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
+    {
+      url: `${baseUrl}/il-tuo-business-sanguina`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/casi-studio`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    },
   ];
+
+  // Case studies pages
+  const caseStudySlugs = getAllCaseStudySlugs();
+  const caseStudyPages = caseStudySlugs.map((slug) => ({
+    url: `${baseUrl}/casi-studio/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }));
 
   // Local pages - Siti Web (generated dynamically from dataset)
   const localSlugs = getAllSlugs();
@@ -31,5 +53,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       slug.includes('reggio-emilia') || slug.includes('sassuolo') ? 0.8 : 0.9,
   }));
 
-  return [...staticPages, ...sitiWebLocalPages];
+  return [...staticPages, ...caseStudyPages, ...sitiWebLocalPages];
 }

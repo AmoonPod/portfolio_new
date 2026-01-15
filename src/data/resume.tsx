@@ -34,7 +34,7 @@ export const DATA = {
   ],
   contact: {
     email: "info@manueldeceglie.it",
-    tel: "+39 3462136256",
+    tel: "+39 350 576 4958",
     social: {
       GitHub: {
         name: "GitHub",

@@ -84,7 +84,7 @@ export default function HeroSection() {
                                     asChild
                                 >
                                     <a
-                                        href="https://wa.me/393462136256"
+                                        href="https://wa.me/message/NUINS3YRUTA4O1"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >

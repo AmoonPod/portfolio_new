@@ -50,10 +50,16 @@ export default function CaseStudySection() {
                                 </p>
                             </div>
 
-                            <div className="pt-6">
+                            <div className="pt-6 flex flex-col sm:flex-row gap-4">
                                 <Button size="lg" className="h-14 px-8 rounded-xl font-bold bg-[#0a0a0a] text-white hover:bg-black/80 shadow-xl group" asChild>
                                     <Link href="#contact">
                                         Analisi Gratuita 15 min
+                                        <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                                    </Link>
+                                </Button>
+                                <Button size="lg" variant="outline" className="h-14 px-8 rounded-xl font-bold border-2 border-green-600/30 text-green-800 hover:bg-green-50 hover:border-green-600/50 group" asChild>
+                                    <Link href="/casi-studio/il-pichello">
+                                        Leggi il Caso Studio
                                         <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                                     </Link>
                                 </Button>

@@ -78,7 +78,7 @@ export function Hero({ cityName, hero }: HeroProps) {
                   asChild
                 >
                   <a
-                    href={`https://wa.me/393462136256?text=Ciao%20Manuel,%20voglio%20info%20per%20un%20sito%20a%20${encodeURIComponent(cityName)}`}
+                    href="https://wa.me/message/NUINS3YRUTA4O1"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
