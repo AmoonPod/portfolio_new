@@ -61,7 +61,7 @@ export default function CasiStudioPage() {
                     <BlurFade delay={0.3}>
                         <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed font-medium">
                             Non promesse. <strong className="text-foreground">Risultati misurabili.</strong><br />
-                            Scopri come ho aiutato aziende reali a crescere online.
+                            Scopri come ho aiutato aziende reali a crescere online con <Link href="/siti-web" className="text-foreground font-bold hover:text-primary transition-colors underline decoration-primary/30 underline-offset-4">siti web</Link> ad alte prestazioni.
                         </p>
                     </BlurFade>
                 </div>

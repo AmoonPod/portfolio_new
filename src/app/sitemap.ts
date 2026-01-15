@@ -27,6 +27,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/siti-web`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 1.0,
+    },
+    {
       url: `${baseUrl}/casi-studio`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
@@ -46,11 +52,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Local pages - Siti Web (generated dynamically from dataset)
   const localSlugs = getAllSlugs();
   const sitiWebLocalPages = localSlugs.map((slug) => ({
-    url: `${baseUrl}/siti-web-${slug}`,
+    url: `${baseUrl}/siti-web/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority:
-      slug.includes('reggio-emilia') || slug.includes('sassuolo') ? 0.8 : 0.9,
+      slug.includes('reggio-emilia') || slug.includes('sassuolo') ? 0.9 : 0.8,
   }));
 
   return [...staticPages, ...caseStudyPages, ...sitiWebLocalPages];

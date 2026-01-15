@@ -308,7 +308,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
                         <BlurFade delay={0.3}>
                             <p className="text-xl text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed">
-                                Raccontami la tua situazione. Ti dirò onestamente se e come posso aiutarti a raggiungere i tuoi obiettivi.
+                                Raccontami la tua situazione. Ti dirò onestamente se e come posso aiutarti a raggiungere i tuoi obiettivi con un <Link href="/siti-web" className="text-foreground font-bold hover:text-primary transition-colors underline decoration-primary/30 underline-offset-2">sito web</Link> ad alte prestazioni.
                             </p>
                         </BlurFade>
 

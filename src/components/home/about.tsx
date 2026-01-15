@@ -78,7 +78,7 @@ export default function AboutSection() {
                                     <p className="text-base leading-relaxed">
                                         Perché non ho uffici costosi o stipendi a vuoto da coprire.
                                         Investo tutto il mio tempo nel tuo progetto.
-                                        Sono <span className="text-gray-900 font-bold bg-[#FFBC11]/20 px-1">ossessionato dalle performance</span>: se un sito è lento, non ci dormo la notte finché non vola.
+                                        Sono <span className="text-gray-900 font-bold bg-[#FFBC11]/20 px-1">ossessionato dalle performance</span>: se un <Link href="/siti-web" className="underline decoration-[#FFBC11] hover:text-[#FFBC11] transition-colors">sito</Link> è lento, non ci dormo la notte finché non vola.
                                     </p>
                                 </div>
 

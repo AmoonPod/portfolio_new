@@ -3,6 +3,7 @@
 import { X, Check, ArrowRight, AlertTriangle, Zap, Search, Smartphone } from "lucide-react"
 import BlurFade from "@/components/magicui/blur-fade"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 export default function EmpathySection() {
     return (
@@ -12,11 +13,11 @@ export default function EmpathySection() {
                 {/* HEADER: Stretto, leggibile, impattante */}
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <h2 className="text-3xl md:text-5xl font-black tracking-tighter text-gray-900 mb-6">
-                        La dura verità sui siti web.
+                        La dura verità sui <Link href="/siti-web" className="underline decoration-gray-300 underline-offset-4 hover:text-red-500 transition-colors">siti web</Link>.
                     </h2>
                     <div className="text-xl text-gray-500 font-medium leading-relaxed space-y-6 max-w-2xl mx-auto text-balance">
                         <p>
-                            Probabilmente ti è già capitato. Hai pagato per un sito, ti hanno promesso mari e monti, e ti sei ritrovato con una pagina che nessuno visita e impossibile da aggiornare.
+                            Probabilmente ti è già capitato. Hai pagato per un <Link href="/siti-web" className="text-gray-900 font-bold hover:underline">sito</Link>, ti hanno promesso mari e monti, e ti sei ritrovato con una pagina che nessuno visita e impossibile da aggiornare.
                         </p>
                         <p>
                             C'è un abisso tra un sito "carino" e uno che porta fatturato.

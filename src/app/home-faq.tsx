@@ -6,11 +6,16 @@ import { motion, AnimatePresence } from "framer-motion"
 import BlurFade from "@/components/magicui/blur-fade"
 import { cn } from "@/lib/utils"
 
+import Link from "next/link"
+
 const faqs = [
   {
     question: "Quanto costa un progetto?",
-    answer:
-      "Dipende da cosa ti serve: un sito vetrina, un gestionale, un'app. Non ho listini fissi perché ogni progetto è diverso. Parliamone: ti faccio una stima chiara dopo aver capito le tue esigenze."
+    answer: (
+      <>
+        Dipende da cosa ti serve: un <Link href="/siti-web" className="underline decoration-[#FFBC11] underline-offset-4 hover:text-primary transition-colors">sito vetrina</Link>, un gestionale, un'app. Non ho listini fissi perché ogni progetto è diverso. Parliamone: ti faccio una stima chiara dopo aver capito le tue esigenze.
+      </>
+    )
   },
   {
     question: "Quanto tempo ci vuole?",
@@ -19,8 +24,11 @@ const faqs = [
   },
   {
     question: "Lavori solo su siti web?",
-    answer:
-      "No. Faccio siti web, software gestionali, integrazioni tra sistemi, automazioni con AI e app mobile. Partiamo dal bisogno e scegliamo insieme la soluzione."
+    answer: (
+      <>
+        No. Faccio <Link href="/siti-web" className="underline decoration-[#FFBC11] underline-offset-4 hover:text-primary transition-colors">siti web</Link>, software gestionali, integrazioni tra sistemi, automazioni con AI e app mobile. Partiamo dal bisogno e scegliamo insieme la soluzione.
+      </>
+    )
   },
   {
     question: "Dove lavori?",

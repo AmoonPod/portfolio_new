@@ -104,7 +104,7 @@ export function CaseStudyProof({ cityName }: CaseStudyProofProps) {
                         <BlurFade delay={0.4}>
                             <p className="text-lg text-muted-foreground leading-relaxed">
                                 Ho aiutato <strong className="text-foreground">{caseStudy.client}</strong> a trasformare la loro presenza online.
-                                Il sito non è solo "bello" — genera clienti veri.
+                                Il <Link href="/siti-web" className="text-foreground font-bold hover:text-primary transition-colors underline decoration-primary/30 underline-offset-2">sito web</Link> non è solo "bello" — genera clienti veri.
                             </p>
                         </BlurFade>
 

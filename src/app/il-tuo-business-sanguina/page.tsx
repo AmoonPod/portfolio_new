@@ -58,7 +58,7 @@ function DarkTechForm() {
       const response = await fetch(formCarryEndpoint, {
         method: 'POST',
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify({ name, email, phone, need, message, serviceName: 'Landing Disruptive - Analisi' })
+        body: JSON.stringify({ name, email, phone, need, message, serviceName: 'Il Tuo Business Sanguina - Analisi' })
       })
       const data = await response.json()
 
@@ -175,7 +175,7 @@ export default function IlTuoBusinessSanguinaPage() {
             </h1>
 
             <p className="text-xl md:text-2xl text-zinc-400 font-medium max-w-3xl mx-auto leading-relaxed mb-10 text-balance">
-              Hai un sito che non converte? Processi manuali che ti rallentano?
+              Hai un <Link href="/siti-web" className="text-white font-bold hover:text-[#FFBC11] transition-colors underline decoration-[#FFBC11]/30 underline-offset-2">sito web</Link> che non converte? Processi manuali che ti rallentano?
               Non serve un restyling. Serve un'infrastruttura digitale da guerra.
             </p>
 
@@ -249,7 +249,7 @@ export default function IlTuoBusinessSanguinaPage() {
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">Sito "Da Museo"</h3>
                 <p className="text-zinc-400 leading-relaxed mb-8 text-sm">
-                  Il 70% dei tuoi clienti ti cerca da smartphone. Se il tuo sito non è una Web App fluida, stai regalando soldi.
+                  Il 70% dei tuoi clienti ti cerca da smartphone. Se il tuo <Link href="/siti-web" className="text-white font-bold hover:text-[#FFBC11] transition-colors underline decoration-[#FFBC11]/30 underline-offset-2">sito</Link> non è una Web App fluida, stai regalando soldi.
                 </p>
                 {/* Visual Representation of broken mobile site */}
                 <div className="mt-auto relative w-full h-40 bg-zinc-950 rounded-t-xl border-t border-x border-zinc-800 p-4 overflow-hidden opacity-60">
@@ -330,7 +330,7 @@ export default function IlTuoBusinessSanguinaPage() {
               <div className="w-14 h-14 rounded-2xl bg-[#FFBC11] flex items-center justify-center text-black mb-8 relative z-10 shadow-[0_0_20px_-5px_#FFBC11]">
                 <Smartphone className="w-7 h-7" />
               </div>
-              <h3 className="text-2xl font-black text-white mb-4">Siti Web Ultra-Fast</h3>
+              <h3 className="text-2xl font-black text-white mb-4"><Link href="/siti-web" className="hover:text-[#FFBC11] transition-colors">Siti Web</Link> Ultra-Fast</h3>
               <p className="text-zinc-400 leading-relaxed mb-8 text-sm font-medium flex-grow">
                 Non uso template WordPress. Scrivo codice custom (Next.js) che Google ama.
                 Velocità istantanea, SEO aggressiva, Design che converte.
@@ -402,19 +402,19 @@ export default function IlTuoBusinessSanguinaPage() {
                   <span className="text-[#FFBC11]">Parliamo di business.</span>
                 </h2>
                 <p className="text-xl text-zinc-400 font-medium leading-relaxed">
-                  Compila il form. Analizzo la tua situazione attuale (Sito, Software, Processi) e ti dico cosa non va e come sistemarlo.
+                  Compila il form. Analizzo la tua situazione attuale (<Link href="/siti-web" className="text-white font-bold hover:text-[#FFBC11] transition-colors underline decoration-[#FFBC11]/30 underline-offset-2">Sito Web</Link>, Software, Processi) e ti dico cosa non va e come sistemarlo.
                 </p>
               </div>
 
               <div className="bg-zinc-900/30 rounded-2xl p-8 border border-zinc-800 backdrop-blur-sm">
                 <div className="flex items-center gap-5 mb-5">
                   <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-[#FFBC11] shadow-lg shadow-[#FFBC11]/20">
-                    <Image 
-                      src={DATA.avatarUrl} 
-                      alt="Manuel De Ceglie - Sviluppatore Web e Consulente Business Digitale" 
-                      width={56} 
-                      height={56} 
-                      className="object-cover" 
+                    <Image
+                      src={DATA.avatarUrl}
+                      alt="Manuel De Ceglie - Sviluppatore Web e Consulente Business Digitale"
+                      width={56}
+                      height={56}
+                      className="object-cover"
                     />
                   </div>
                   <div>
@@ -427,13 +427,12 @@ export default function IlTuoBusinessSanguinaPage() {
                 </p>
               </div>
 
-              {/* WhatsApp Button */}
               <div className="pt-6 border-t border-zinc-800/50">
-                <p className="text-zinc-500 text-sm font-bold uppercase tracking-wider mb-4">Oppure scrivimi direttamente</p>
+                <p className="text-zinc-500 text-sm font-bold uppercase tracking-wider mb-4">Canale di emergenza (WhatsApp)</p>
                 <WhatsAppButton
                   size="lg"
-                  className="w-full h-14 rounded-xl"
-                  message="Ciao Manuel, voglio una diagnosi per il mio business."
+                  className="w-full h-14 rounded-xl shadow-[0_0_30px_-5px_rgba(37,211,102,0.2)] hover:shadow-[0_0_30px_-5px_rgba(37,211,102,0.4)] transition-all"
+                  message="Ciao Manuel, ho visto la pagina 'Il tuo business sanguina'. Ho bisogno di una diagnosi urgente."
                 />
               </div>
             </div>

@@ -49,7 +49,7 @@ export function Hero({ cityName, hero }: HeroProps) {
               >
                 <MapPin className="w-3.5 h-3.5 text-[#FFBC11] animate-pulse" />
                 <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
-                  Sviluppo Siti Web a <span className="text-foreground font-black">{cityName}</span>
+                  <Link href="/siti-web" className="hover:text-primary transition-colors">Sviluppo Siti Web</Link> a <span className="text-foreground font-black">{cityName}</span>
                 </span>
               </motion.div>
 
@@ -112,7 +112,7 @@ export function Hero({ cityName, hero }: HeroProps) {
               >
                 {/* Success Visualization Card */}
                 <div className="relative w-full bg-white rounded-[2.5rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] border border-gray-100 p-8 md:p-10 transform rotate-[-2deg] hover:rotate-0 transition-all duration-700 ease-out z-10">
-                  
+
                   {/* Card Header: Client Result */}
                   <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-50">
                     <div className="flex items-center gap-3">
@@ -133,7 +133,7 @@ export function Hero({ cityName, hero }: HeroProps) {
                       { title: "Chiamata da Google Maps", time: "1 ora fa", type: "Tel" },
                       { title: "Messaggio WhatsApp", time: "3 ore fa", type: "WA" }
                     ].map((item, i) => (
-                      <motion.div 
+                      <motion.div
                         key={i}
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}

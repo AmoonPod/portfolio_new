@@ -47,7 +47,7 @@ L'analisi tecnica del vecchio sito ha evidenziato criticità bloccanti per il bu
     
 ## La Strategia: Oltre il semplice restyling
     
-L'obiettivo non era fare un sito "più bello", ma costruire uno strumento commerciale. Abbiamo applicato il mio metodo di **Sviluppo Web Orientato al Fatturato**.
+L'obiettivo non era fare un sito "più bello", ma costruire uno strumento commerciale. Abbiamo applicato il mio metodo di **[Sviluppo Web Orientato al Fatturato](/siti-web)**.
     
 ### 1. Digitalizzazione del Catalogo (Information Architecture)
 Abbiamo censito e fotografato ogni singolo prodotto. Ho ristrutturato le categorie merceologiche per rispondere agli intenti di ricerca degli utenti (es. *"Pasta di grani antichi"* vs *"Miele millefiori artigianale"*). Ora ogni prodotto ha una sua [Landing Page](/siti-web-castelnovo-ne-monti) dedicata e indicizzata.
@@ -77,7 +77,7 @@ A sei mesi dal lancio del nuovo sito [agricolailpichello.it](https://www.agricol
     
 ## Conclusione
     
-Il caso dell'Agricola Il Pichello dimostra che anche una piccola realtà locale può competere con i giganti se supportata dalla giusta tecnologia. Non serve avere budget milionari, serve smettere di usare strumenti amatoriali.
+Il caso dell'Agricola Il Pichello dimostra che anche una piccola realtà locale può competere con i giganti se supportata dalla giusta tecnologia. Non serve avere budget milionari, serve smettere di usare strumenti amatoriali e investire in [siti web professionali](/siti-web).
     
 **Il tuo sito nasconde il valore dei tuoi prodotti invece di esaltarlo?**
 Se sei un'azienda di Reggio Emilia o provincia, non lasciare che la tua concorrenza ti rubi altri clienti.

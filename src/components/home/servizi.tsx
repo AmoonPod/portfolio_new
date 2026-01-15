@@ -58,7 +58,7 @@ export default function ServicesSection() {
 
                             <p className="text-gray-500 leading-relaxed mb-8 flex-1">
                                 Non uso costruttori visuali pesanti che impallano il browser. Scrivo codice su misura progettato per piacere a Google.
-                                Risultato? Un sito che carica in un lampo, scala le classifiche di ricerca e converte i visitatori in clienti paganti.</p>
+                                Risultato? Un <Link href="/siti-web" className="text-gray-900 font-bold hover:text-[#FFBC11] transition-colors underline decoration-[#FFBC11]/30 underline-offset-2">sito web</Link> che carica in un lampo, scala le classifiche di ricerca e converte i visitatori in clienti paganti.</p>
 
                             {/* Target Badge */}
                             <div className="bg-gray-50 rounded-xl p-4 mb-8 border border-gray-100">
@@ -71,8 +71,8 @@ export default function ServicesSection() {
                             </div>
 
                             <div className="mt-auto">
-                                <Link href="#contact" className="inline-flex items-center text-sm font-black uppercase tracking-wider text-gray-900 group-hover:text-purple-600 transition-colors">
-                                    Analisi Gratuita <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                <Link href="/siti-web" className="inline-flex items-center text-sm font-black uppercase tracking-wider text-gray-900 group-hover:text-purple-600 transition-colors">
+                                    Scopri di più <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </div>
                         </div>

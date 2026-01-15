@@ -76,7 +76,7 @@ export default function LocalCityLinks({ currentCity, currentProvince, allCities
               Non trovi la tua città?
             </h3>
             <p className="text-sm text-muted-foreground">
-              Offro servizi di sviluppo siti web in tutta l&apos;Emilia-Romagna e anche da remoto. Contattami per un preventivo personalizzato.
+              Offro servizi di sviluppo <Link href="/siti-web" className="text-primary hover:underline">siti web</Link> in tutta l&apos;Emilia-Romagna e anche da remoto. Contattami per un preventivo personalizzato.
             </p>
             <Button asChild size="lg" className="w-full sm:w-auto">
               <Link href="/#contact">

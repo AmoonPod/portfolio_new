@@ -165,7 +165,7 @@ export const DATA = {
       {
         title: "Creazione Siti Web Professionali a Modena e Provincia:",
         description:
-          "Sviluppo <strong>siti internet</strong> moderni, veloci e ottimizzati (SEO) per aziende, professionisti e negozi a <strong>Modena</strong>, <strong>Vignola</strong>, <strong>Castelfranco Emilia</strong>, <strong>Sassuolo</strong> e dintorni. Un sito web efficace è cruciale per <strong>attirare più clienti locali</strong>.Realizzo diverse tipologie di siti, tra cui:<ul><li>Siti vetrina per presentare al meglio la tua attività</li><li>Blog aziendali per condividere contenuti e interagire con il tuo pubblico</li><li>Soluzioni <strong>e-commerce</strong> per avviare o potenziare la vendita online</li></ul>Creo soluzioni su misura, responsive e facili da usare, che riflettono la tua identità e ti aiutano a crescere.",
+          "Sviluppo <a href='/siti-web' style='text-decoration:underline; font-weight:bold;'>siti internet</a> moderni, veloci e ottimizzati (SEO) per aziende, professionisti e negozi a <strong>Modena</strong>, <strong>Vignola</strong>, <strong>Castelfranco Emilia</strong>, <strong>Sassuolo</strong> e dintorni. Un <a href='/siti-web' style='text-decoration:underline;'>sito web</a> efficace è cruciale per <strong>attirare più clienti locali</strong>.Realizzo diverse tipologie di siti, tra cui:<ul><li>Siti vetrina per presentare al meglio la tua attività</li><li>Blog aziendali per condividere contenuti e interagire con il tuo pubblico</li><li>Soluzioni <strong>e-commerce</strong> per avviare o potenziare la vendita online</li></ul>Creo soluzioni su misura, responsive e facili da usare, che riflettono la tua identità e ti aiutano a crescere.",
         slug: "/siti-web",
       },
       {

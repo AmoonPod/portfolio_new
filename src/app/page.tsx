@@ -17,6 +17,7 @@ import {
   FileText,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import BlurFade from "@/components/magicui/blur-fade";
 import { ServiceContactForm } from "@/components/service-contact-form";
 import { AnimatedKpi } from "@/components/animated-kpi";
@@ -161,6 +162,15 @@ export default function HomePage() {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="pt-8">
+                <p className="text-muted-foreground text-sm font-bold uppercase tracking-widest mb-4">Oppure scrivimi subito</p>
+                <WhatsAppButton
+                  size="lg"
+                  className="h-16 px-10 rounded-2xl w-full sm:w-auto shadow-xl transition-all hover:scale-105"
+                  message="Ciao Manuel! Ho un'idea per un progetto e vorrei parlarne con te."
+                />
               </div>
             </div>
 

@@ -58,7 +58,7 @@ export default async function LocalPage({ params }: { params: Promise<{ city: st
   const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     { name: "Home", url: "https://manueldeceglie.it" },
     { name: "Servizi", url: "https://manueldeceglie.it/#services" },
-    { name: data.serviceName, url: "https://manueldeceglie.it/#services" },
+    { name: data.serviceName, url: "https://manueldeceglie.it/siti-web" },
     { name: data.cityName, url: data.seo.canonical },
   ]);
 
