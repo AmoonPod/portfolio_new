@@ -27,6 +27,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/offerta-landing`,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 1.0,
+    },
+    {
       url: `${baseUrl}/siti-web`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,

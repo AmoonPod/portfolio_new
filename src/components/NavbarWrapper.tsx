@@ -8,8 +8,9 @@ import { DATA } from "@/data/resume"
 export function NavbarWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const isEditCMS = pathname?.startsWith('/edit-cms')
+  const isOfferLanding = pathname?.startsWith('/offerta-landing')
 
-  if (isEditCMS) {
+  if (isEditCMS || isOfferLanding) {
     return <>{children}</>
   }
 
