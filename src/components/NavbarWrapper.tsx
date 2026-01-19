@@ -8,9 +8,12 @@ import { DATA } from "@/data/resume"
 export function NavbarWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const isEditCMS = pathname?.startsWith('/edit-cms')
-  const isOfferLanding = pathname?.startsWith('/offerta-landing')
+  const isOfferPage = pathname?.startsWith('/offerta-landing') ||
+    pathname?.startsWith('/offerta-preventivo') ||
+    pathname?.startsWith('/offerta-rate') ||
+    pathname?.startsWith('/offerta-garanzia')
 
-  if (isEditCMS || isOfferLanding) {
+  if (isEditCMS || isOfferPage) {
     return <>{children}</>
   }
 
