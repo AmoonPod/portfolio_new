@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { DATA } from '@/data/resume';
 import { getAllSlugs } from '@/data/local-pages/siti-web-dataset';
 import { getAllCaseStudySlugs } from '@/data/case-studies/case-studies-data';
+import { getAllLocationSlugs } from '@/data/locations';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = DATA.url;
@@ -51,12 +52,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'daily' as const,
       priority: 0.9,
     },
-
     {
       url: `${baseUrl}/siti-web`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/sviluppo-software`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/sviluppo-app-mobile`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/casi-studio`,
@@ -75,9 +87,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // Local pages - Siti Web (generated dynamically from dataset)
-  const localSlugs = getAllSlugs();
-  const sitiWebLocalPages = localSlugs.map((slug) => ({
+  // Local pages - Software Gestionali (all cities from locations)
+  const allLocationSlugs = getAllLocationSlugs();
+
+  const sitiWebLocalPages = allLocationSlugs.map((slug) => ({
     url: `${baseUrl}/siti-web/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
@@ -85,5 +98,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       slug.includes('reggio-emilia') || slug.includes('sassuolo') ? 0.9 : 0.8,
   }));
 
-  return [...staticPages, ...caseStudyPages, ...sitiWebLocalPages];
+  const softwareGestionaliLocalPages = allLocationSlugs.map((slug) => ({
+    url: `${baseUrl}/sviluppo-software/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority:
+      slug.includes('reggio-emilia') || slug.includes('modena') || slug.includes('bologna') ? 0.9 : 0.8,
+  }));
+
+  return [
+    ...staticPages,
+    ...caseStudyPages,
+    ...sitiWebLocalPages,
+    ...softwareGestionaliLocalPages,
+  ];
 }

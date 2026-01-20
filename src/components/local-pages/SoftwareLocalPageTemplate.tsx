@@ -33,6 +33,7 @@ import BlurFade from "@/components/magicui/blur-fade";
 import Link from "next/link";
 import Image from "next/image";
 import { getLocationBySlug } from "@/data/locations";
+import { Breadcrumb } from "./Breadcrumb";
 
 interface SoftwareLocalPageTemplateProps {
   data: LocalPageData;
@@ -111,7 +112,7 @@ const generateLocalSchema = (data: LocalPageData) => {
         "@type": "LocalBusiness",
         "name": `Sviluppo Software Gestionale ${data.cityName}`,
         "description": `Sviluppo software e CRM su misura per aziende a ${data.cityName}.`,
-        "url": `https://manueldeceglie.it/software-gestionali/${data.slug}`,
+        "url": `https://manueldeceglie.it/sviluppo-software/${data.slug}`,
         "priceRange": "€€€",
         "areaServed": {
             "@type": "City",
@@ -135,6 +136,16 @@ export default function SoftwareLocalPageTemplate({ data, nearbyCities = [] }: S
 
       {/* --- HERO SECTION (DARK) --- */}
       <section className="relative pt-32 pb-24 md:pt-48 md:pb-40 overflow-hidden bg-[#050505] text-white">
+        {/* Breadcrumb Navigation - Posizionato in modo assoluto */}
+        <div className="absolute top-0 left-0 right-0 z-20 bg-[#050505]/80 backdrop-blur-sm border-b border-white/5">
+          <Breadcrumb
+            serviceName={data.serviceName}
+            serviceSlug={data.serviceSlug}
+            cityName={data.cityName}
+            variant="dark"
+          />
+        </div>
+        {/* Il padding top esistente (pt-32) è già sufficiente per il breadcrumb */}
         {/* Background Effects */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[50vh] bg-blue-900/20 rounded-full blur-[120px] pointer-events-none opacity-40 animate-pulse"></div>
         <div className="absolute bottom-0 right-0 w-[60vw] h-[60vh] bg-[#FFBC11]/5 rounded-full blur-[100px] pointer-events-none opacity-30"></div>
@@ -521,7 +532,7 @@ export default function SoftwareLocalPageTemplate({ data, nearbyCities = [] }: S
                 {nearbyCities.map((city) => (
                     <Link
                     key={city.slug}
-                    href={`/software-gestionali/${city.slug}`}
+                    href={`/sviluppo-software/${city.slug}`}
                     className="px-4 py-2 bg-white/5 hover:bg-[#FFBC11] hover:text-black rounded-full text-gray-400 text-sm font-medium transition-all hover:scale-105"
                     >
                     {city.cityName}

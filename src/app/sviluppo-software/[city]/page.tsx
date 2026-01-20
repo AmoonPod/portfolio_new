@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const archetype = assignArchetype(location);
-  const metadata = buildSeoMetadata(location, 'software-gestionali', archetype);
+  const metadata = buildSeoMetadata(location, 'sviluppo-software', archetype);
 
   return {
     title: metadata.title,
@@ -56,8 +56,8 @@ function generateJsonLd(pageData: ReturnType<typeof buildSoftwarePageContent>) {
   const breadcrumbJsonLd = getBreadcrumbJsonLd([
     { name: 'Home', url: baseUrl },
     { name: 'Servizi', url: `${baseUrl}#services` },
-    { name: pageData.serviceName, url: `${baseUrl}/software-gestionali` },
-    { name: pageData.province, url: `${baseUrl}/software-gestionali/${pageData.province.toLowerCase().replace(/ /g, '-')}` },
+    { name: pageData.serviceName, url: `${baseUrl}/sviluppo-software` },
+    { name: pageData.province, url: `${baseUrl}/sviluppo-software/${pageData.province.toLowerCase().replace(/ /g, '-')}` },
     { name: pageData.cityName, url: pageData.seo.canonical },
   ]);
 

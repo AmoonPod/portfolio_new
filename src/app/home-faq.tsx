@@ -26,7 +26,7 @@ const faqs = [
     question: "Lavori solo su siti web?",
     answer: (
       <>
-        No. Faccio <Link href="/siti-web" className="underline decoration-[#FFBC11] underline-offset-4 hover:text-primary transition-colors">siti web</Link>, software gestionali, integrazioni tra sistemi, automazioni con AI e app mobile. Partiamo dal bisogno e scegliamo insieme la soluzione.
+        No. Faccio <Link href="/siti-web" className="underline decoration-[#FFBC11] underline-offset-4 hover:text-primary transition-colors">siti web</Link>, <Link href="/sviluppo-software" className="underline decoration-[#FFBC11] underline-offset-4 hover:text-primary transition-colors">software su misura</Link>, integrazioni tra sistemi, automazioni con AI e app mobile. Partiamo dal bisogno e scegliamo insieme la soluzione.
       </>
     )
   },

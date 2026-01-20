@@ -62,12 +62,12 @@ export const metadata: Metadata = {
         'gestionale emilia romagna', 'sviluppo software modena', 'crm bologna'
     ],
     alternates: {
-        canonical: `${BASE_URL}/software-gestionali`,
+        canonical: `${BASE_URL}/sviluppo-software`,
     },
     openGraph: {
         title: 'Sviluppo Software Gestionale su Misura e CRM',
         description: 'Smetti di combattere con Excel: gestionali su misura con automazioni, integrazioni API e report per PMI e professionisti.',
-        url: `${BASE_URL}/software-gestionali`,
+        url: `${BASE_URL}/sviluppo-software`,
         siteName: 'Manuel De Ceglie',
         images: [{ url: `${BASE_URL}/og-image.png`, width: 1200, height: 630 }],
         locale: 'it_IT',
@@ -129,7 +129,7 @@ export default function SoftwareGestionaliPage() {
         serviceDescription: 'Sviluppo software gestionali su misura per automatizzare processi aziendali: CRM, magazzino, ordini, report e integrazioni API.',
         serviceType: 'Software Development',
         areaServed: ['Emilia-Romagna', 'Veneto', 'Toscana', 'Italia'],
-        url: `${BASE_URL}/software-gestionali`,
+        url: `${BASE_URL}/sviluppo-software`,
         image: `${BASE_URL}/og-image.png`,
         offers: [
             { id: 'crm-base', title: 'CRM su Misura', description: 'Gestione clienti, preventivi e comunicazioni.', price: '1500', active: true },
@@ -139,7 +139,7 @@ export default function SoftwareGestionaliPage() {
     })
     serviceJsonLd.isSimilarTo = ['https://it.wikipedia.org/wiki/Enterprise_resource_planning', 'https://it.wikipedia.org/wiki/Customer_relationship_management']
     const faqJsonLd = generateFAQJsonLd(faqs.map(f => ({ question: f.q, answer: f.a })))
-    const breadcrumbJsonLd = generateBreadcrumbJsonLd([{ name: 'Home', url: BASE_URL }, { name: 'Software Gestionali', url: `${BASE_URL}/software-gestionali` }])
+    const breadcrumbJsonLd = generateBreadcrumbJsonLd([{ name: 'Home', url: BASE_URL }, { name: 'Software Gestionali', url: `${BASE_URL}/sviluppo-software` }])
 
     return (
         <>

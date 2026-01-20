@@ -87,7 +87,7 @@ const MOUNTAIN_OFFERS = {
 
 function generateFAQ(archetype: MarketArchetype, citySlug: string, location: Location): Array<{ q: string; a: string }> {
   const sector = getSectorFromArchetype(archetype);
-  
+
   const replacements = {
     cityName: location.name,
     province: location.province,
@@ -267,7 +267,7 @@ function getOffersForArchetype(archetype: MarketArchetype, citySlug: string) {
 
 function estimateAltitudeFromLocation(location: Location): number {
   const { lat, lng } = location.geo;
-  
+
   if (lat > 44.2 && lat < 44.4 && lng > 10.2 && lng < 10.7) {
     return 600;
   }
@@ -280,7 +280,7 @@ function estimateAltitudeFromLocation(location: Location): number {
   if (lat > 44.3 && lat < 44.35 && lng > 10.25 && lng < 10.35) {
     return 650;
   }
-  
+
   return 100;
 }
 
@@ -300,10 +300,10 @@ function getSectorFromArchetype(archetype: MarketArchetype): string {
 export function buildPageContent(location: Location, active: boolean = true): LocalPageData {
   const archetype = assignArchetype(location);
   const archetypeData = getArchetype(archetype);
-  
+
   const altitude = estimateAltitudeFromLocation(location);
   const sector = getSectorFromArchetype(archetype);
-  
+
   const replacements = createReplacements(
     location.name,
     location.province,
@@ -320,7 +320,7 @@ export function buildPageContent(location: Location, active: boolean = true): Lo
   const hero = generateHero(archetype, location.name, replacements);
   const diagnostica = generateDiagnostica(archetype, location.name, replacements);
   const goodInvestmentBase = generateGoodInvestment(archetype, replacements);
-  
+
   const investmentCards = [
     {
       icon: 'star' as const,
@@ -344,12 +344,12 @@ export function buildPageContent(location: Location, active: boolean = true): Lo
       footerType: 'roi' as const,
     },
   ];
-  
+
   const goodInvestment = {
     ...goodInvestmentBase,
     cards: investmentCards,
   };
-  
+
   const seo = generateSEO(
     archetype,
     location.name,
@@ -383,7 +383,7 @@ export function buildPageContent(location: Location, active: boolean = true): Lo
 
 export function rebuildPageData(location: Location, existingData?: Partial<LocalPageData>): LocalPageData {
   const newData = buildPageContent(location, existingData?.active ?? true);
-  
+
   return {
     ...newData,
     ...existingData,
@@ -395,17 +395,17 @@ export function rebuildPageData(location: Location, existingData?: Partial<Local
 export function buildSoftwarePageContent(location: Location, active: boolean = true): LocalPageData {
   const archetype = assignArchetype(location);
   const archetypeData = getArchetype(archetype);
-  
+
   const altitude = estimateAltitudeFromLocation(location);
   const sector = getSectorFromArchetype(archetype);
-  
+
   const replacements = createReplacements(
     location.name,
     location.province,
     location.region,
     location.population,
     'Software Gestionali',
-    'software-gestionali',
+    'sviluppo-software',
     altitude,
     sector,
     archetypeData.name,
@@ -415,7 +415,7 @@ export function buildSoftwarePageContent(location: Location, active: boolean = t
   const hero = generateSoftwareHero(archetype, location.name, replacements);
   const diagnostica = generateSoftwareDiagnostica(archetype, location.name, replacements);
   const goodInvestmentBase = generateSoftwareGoodInvestment(archetype, replacements);
-  
+
   const investmentCards = [
     {
       icon: 'zap' as const,
@@ -439,12 +439,12 @@ export function buildSoftwarePageContent(location: Location, active: boolean = t
       footerType: 'premium' as const,
     },
   ];
-  
+
   const goodInvestment = {
     ...goodInvestmentBase,
     cards: investmentCards,
   };
-  
+
   const seo = generateSoftwareSEO(
     archetype,
     location.name,
@@ -452,7 +452,7 @@ export function buildSoftwarePageContent(location: Location, active: boolean = t
     location.slug,
     replacements
   );
-  
+
   const faq = generateSoftwareFAQ(archetype, location.slug, replacements);
 
   return {
@@ -462,7 +462,7 @@ export function buildSoftwarePageContent(location: Location, active: boolean = t
     region: location.region,
     population: location.population,
     active,
-    serviceSlug: 'software-gestionali',
+    serviceSlug: 'sviluppo-software',
     serviceName: 'Software Gestionali',
     offers: [],
     seo,
@@ -476,7 +476,7 @@ export function buildSoftwarePageContent(location: Location, active: boolean = t
 
 export function rebuildSoftwarePageData(location: Location, existingData?: Partial<LocalPageData>): LocalPageData {
   const newData = buildSoftwarePageContent(location, existingData?.active ?? true);
-  
+
   return {
     ...newData,
     ...existingData,

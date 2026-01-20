@@ -36,7 +36,7 @@ const SERVICE_NAMES: Record<string, string> = {
   'social-media': 'Social Media',
   'ecommerce': 'E-commerce',
   'branding': 'Branding',
-  'software-gestionali': 'Software Gestionali',
+  'sviluppo-software': 'Software Gestionali',
 };
 
 const SERVICE_SLUGS: Record<string, string> = {
@@ -45,7 +45,7 @@ const SERVICE_SLUGS: Record<string, string> = {
   'social-media': 'social-media',
   'ecommerce': 'ecommerce',
   'branding': 'branding',
-  'software-gestionali': 'software-gestionali',
+  'sviluppo-software': 'sviluppo-software',
 };
 
 // Zone/area keywords per città italiane - zona industriale, quartieri, distretti
@@ -90,7 +90,7 @@ export function generateTitle(
   suffix: string = 'Manuel De Ceglie',
   archetype?: MarketArchetype
 ): string {
-  if (serviceSlug === 'software-gestionali') {
+  if (serviceSlug === 'sviluppo-software') {
     // Per piccoli comuni (montagna, pianura): title più "terra terra" e vicini all'artigiano
     const isSmallTown = archetype === 'MountainSmall' || archetype === 'PlainsSmall' || archetype === 'HillMedium';
     
@@ -133,7 +133,7 @@ export function generateDescription(
   serviceSlug: string = 'siti-web',
   archetype?: MarketArchetype
 ): string {
-  if (serviceSlug === 'software-gestionali') {
+  if (serviceSlug === 'sviluppo-software') {
     const archetypeHints: Record<MarketArchetype, string[]> = {
       MountainSmall: [
         `Sviluppatore software a ${cityName}. Realizzo gestionali web e automazioni per eliminare Excel. Soluzioni custom senza canoni per artigiani e attività di montagna.`,
@@ -253,8 +253,8 @@ export function generateKeywords(
   const normalizedProvince = province.toLowerCase();
   const normalizedService = serviceName.toLowerCase();
   
-  // For software-gestionali: NO keyword stuffing with nearby cities
-  if (serviceSlug === 'software-gestionali') {
+  // For sviluppo-software: NO keyword stuffing with nearby cities
+  if (serviceSlug === 'sviluppo-software') {
     // Per piccoli comuni: keyword solo sulla città, NO provincia/regione
     const isSmallTown = archetype === 'MountainSmall' || archetype === 'PlainsSmall' || archetype === 'HillMedium';
     
@@ -320,7 +320,7 @@ export function generateH1(
   serviceSlug: string = 'siti-web',
   archetype?: MarketArchetype
 ): string {
-  if (serviceSlug === 'software-gestionali') {
+  if (serviceSlug === 'sviluppo-software') {
     const templates = [
       `Software Gestionali a ${cityName} per Attività che Vogliono Crescere`,
       `Il Tuo Gestionale Personalizzato a ${cityName}`,
@@ -369,8 +369,8 @@ export function buildSeoMetadata(
       type: 'website',
       images: [
         {
-          url: serviceSlug === 'software-gestionali' 
-            ? `${baseUrl}/api/og/software-gestionali/${citySlug}`
+          url: serviceSlug === 'sviluppo-software' 
+            ? `${baseUrl}/api/og/sviluppo-software/${citySlug}`
             : `${baseUrl}/og-image.png`,
           width: 1200,
           height: 630,
@@ -382,8 +382,8 @@ export function buildSeoMetadata(
       card: 'summary_large_image',
       title,
       description,
-      images: [serviceSlug === 'software-gestionali' 
-        ? `${baseUrl}/api/og/software-gestionali/${citySlug}`
+      images: [serviceSlug === 'sviluppo-software' 
+        ? `${baseUrl}/api/og/sviluppo-software/${citySlug}`
         : `${baseUrl}/og-image.png`
       ],
     },

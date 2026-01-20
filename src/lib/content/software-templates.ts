@@ -1010,7 +1010,7 @@ export function generateSoftwareSEO(
   return {
     title: replaceTokens(title, replacements),
     description: replaceTokens(description, replacements),
-    canonical: buildCanonicalUrl(citySlug, 'software-gestionali'),
+    canonical: buildCanonicalUrl(citySlug, 'sviluppo-software'),
     keywords: finalKeywords, // Ora include le keyword specifiche del settore!
     h1: replaceTokens(h1, replacements),
   };

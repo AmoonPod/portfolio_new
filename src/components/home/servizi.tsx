@@ -112,8 +112,8 @@ export default function ServicesSection() {
                             </div>
 
                             <div className="mt-auto relative z-10">
-                                <Link href="#contact" className="inline-flex items-center text-sm font-black uppercase tracking-wider text-white group-hover:text-blue-400 transition-colors">
-                                    Analisi Gratuita <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                <Link href="/sviluppo-software" className="inline-flex items-center text-sm font-black uppercase tracking-wider text-white group-hover:text-blue-400 transition-colors">
+                                    Scopri di più <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </div>
                         </div>
