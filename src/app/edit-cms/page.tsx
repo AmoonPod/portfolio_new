@@ -544,7 +544,16 @@ export default function EditCMSPage() {
                                                         <Label className="text-green-600">Lista Soluzioni</Label>
                                                         {activeData.diagnostica?.solutions.map((sol, i) => (
                                                             <div key={i} className="flex gap-2">
-                                                                <Input value={sol} onChange={e => updateArrayItem('diagnostica.solutions', i, e.target.value)} />
+                                                                <Input
+                                                                    value={typeof sol === 'string' ? sol : sol.text}
+                                                                    onChange={e =>
+                                                                        updateArrayItem(
+                                                                            'diagnostica.solutions',
+                                                                            i,
+                                                                            typeof sol === 'string' ? e.target.value : { ...sol, text: e.target.value }
+                                                                        )
+                                                                    }
+                                                                />
                                                                 <Button variant="ghost" size="icon" onClick={() => removeFromArray('diagnostica.solutions', i)}><Trash2 className="w-4 h-4 text-destructive" /></Button>
                                                             </div>
                                                         ))}

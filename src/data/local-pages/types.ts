@@ -30,7 +30,7 @@ export interface LocalPageData {
     badge: string;
     title: string | React.ReactNode;
     problems: string[];
-    solutions: string[];
+    solutions: Array<string | { text: string; value?: string }>;
   };
 
   goodInvestment?: {

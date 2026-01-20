@@ -185,7 +185,9 @@ export default function LocalPageClient({
                   Le nostre soluzioni
                 </h3>
                 <ul className="space-y-3">
-                  {pageData.diagnostica.solutions.map((solution, idx) => (
+                  {pageData.diagnostica.solutions.map((solution, idx) => {
+                    const solutionText = typeof solution === 'string' ? solution : solution.text
+                    return (
                     <li key={idx} className="flex items-start">
                       <svg
                         className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5"
@@ -200,9 +202,9 @@ export default function LocalPageClient({
                           d="M5 13l4 4L19 7"
                         />
                       </svg>
-                      <span className="text-gray-700">{solution}</span>
+                      <span className="text-gray-700">{solutionText}</span>
                     </li>
-                  ))}
+                  )})}
                 </ul>
               </div>
             </div>

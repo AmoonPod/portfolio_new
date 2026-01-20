@@ -1,12 +1,18 @@
 import { DATA } from '@/data/resume'
 
 // Types for JSON-LD structured data
+interface PriceRangeSpecification {
+  minPrice: string
+  maxPrice: string
+}
+
 interface Offer {
   id: string
   title: string
   description: string
-  price: string
   active: boolean
+  price?: string
+  priceSpecification?: PriceRangeSpecification
 }
 
 interface ServiceJsonLdProps {
@@ -111,16 +117,36 @@ export function generateServiceJsonLd({
     schema.hasOfferCatalog = {
       '@type': 'OfferCatalog',
       name: 'Servizi di Sviluppo Web',
-      itemListElement: activeOffers.map((offer) => ({
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: offer.title,
-          description: offer.description
-        },
-        price: offer.price.replace(/[^\d]/g, ''), // Remove all non-digit characters (€, dots, etc.)
-        priceCurrency: 'EUR'
-      }))
+      itemListElement: activeOffers.map((offer) => {
+        const offerSchema: any = {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: offer.title,
+            description: offer.description
+          }
+        }
+
+        if (offer.priceSpecification) {
+          offerSchema.priceSpecification = {
+            '@type': 'PriceSpecification',
+            minPrice: offer.priceSpecification.minPrice.replace(/[^\d]/g, ''),
+            maxPrice: offer.priceSpecification.maxPrice.replace(/[^\d]/g, ''),
+            priceCurrency: 'EUR'
+          }
+        } else if (offer.price) {
+          const normalizedPrice = offer.price.replace(/[^\d]/g, '') // Remove all non-digit characters (€, dots, etc.)
+          const numericPrice = Number(normalizedPrice)
+
+          // If price is 0/empty, treat it as "call for price" and omit the price field.
+          if (Number.isFinite(numericPrice) && numericPrice > 0) {
+            offerSchema.price = normalizedPrice
+            offerSchema.priceCurrency = 'EUR'
+          }
+        }
+
+        return offerSchema
+      })
     }
   }
 

@@ -61,20 +61,32 @@ function generateJsonLd(pageData: ReturnType<typeof buildSoftwarePageContent>) {
     { name: pageData.cityName, url: pageData.seo.canonical },
   ]);
 
+  // LocalBusiness schema with geographic coordinates
+  const localBusinessSchema: any = {
+    '@type': 'ProfessionalService',
+    name: 'Manuel De Ceglie',
+    description: 'Sviluppatore software specializzato in software gestionali e automazioni per attività locali',
+    url: baseUrl,
+    areaServed: [
+      { '@type': 'Place', name: pageData.region },
+      { '@type': 'Place', name: pageData.province },
+      { '@type': 'Place', name: pageData.cityName },
+    ],
+  };
+
+  // Add geographic coordinates if available
+  if (pageData.geo && pageData.geo.lat && pageData.geo.lng) {
+    localBusinessSchema.geo = {
+      '@type': 'GeoCoordinates',
+      latitude: pageData.geo.lat,
+      longitude: pageData.geo.lng,
+    };
+  }
+
   return {
     '@context': 'https://schema.org',
     '@graph': [
-      {
-        '@type': 'ProfessionalService',
-        name: 'Manuel De Ceglie',
-        description: 'Web developer specializzato in software gestionali per attività locali',
-        url: baseUrl,
-        areaServed: [
-          { '@type': 'Place', name: pageData.region },
-          { '@type': 'Place', name: pageData.province },
-          { '@type': 'Place', name: pageData.cityName },
-        ],
-      },
+      localBusinessSchema,
       {
         '@type': 'Service',
         name: `${pageData.serviceName} a ${pageData.cityName}`,

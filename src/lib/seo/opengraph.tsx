@@ -1,4 +1,4 @@
-import { ImageResponse } from '@vercel/og';
+import { ImageResponse } from 'next/og';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 
@@ -22,7 +22,11 @@ const COLORS = {
 async function getFontData(): Promise<ArrayBuffer> {
   try {
     const fontPath = join(process.cwd(), 'public', 'fonts', 'Inter-Bold.ttf');
-    return await readFile(fontPath);
+    const fontBuffer = await readFile(fontPath);
+    return fontBuffer.buffer.slice(
+      fontBuffer.byteOffset,
+      fontBuffer.byteOffset + fontBuffer.byteLength
+    ) as ArrayBuffer;
   } catch {
     return new ArrayBuffer(0);
   }

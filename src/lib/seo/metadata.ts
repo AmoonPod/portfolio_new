@@ -87,17 +87,33 @@ export function generateTitle(
   cityName: string,
   serviceName: string,
   serviceSlug: string = 'siti-web',
-  suffix: string = 'Manuel De Ceglie'
+  suffix: string = 'Manuel De Ceglie',
+  archetype?: MarketArchetype
 ): string {
   if (serviceSlug === 'software-gestionali') {
-    const templates = [
-      `Software Gestionali su Misura a ${cityName} | ${suffix}`,
-      `Gestionale Personalizzato per la Tua Attività a ${cityName} | ${suffix}`,
-      `CRM e Software Aziendale a ${cityName} | ${suffix}`,
-      `Digitalizza la Tua Impresa con un Software a ${cityName} | ${suffix}`,
+    // Per piccoli comuni (montagna, pianura): title più "terra terra" e vicini all'artigiano
+    const isSmallTown = archetype === 'MountainSmall' || archetype === 'PlainsSmall' || archetype === 'HillMedium';
+    
+    if (isSmallTown) {
+      const smallTownTemplates = [
+        `Software per Artigiani e Attività a ${cityName} | Gestionali Semplici`,
+        `Gestionali e Software su Misura a ${cityName} | Per Piccole Attività`,
+        `Digitalizzazione per Artigiani a ${cityName} | Software Personalizzati`,
+        `Software Gestionali Semplici a ${cityName} | ${suffix}`,
+      ];
+      const index = cityName.length % smallTownTemplates.length;
+      return smallTownTemplates[index];
+    }
+    
+    // Per città grandi (capoluoghi, industriali): title più corporate e B2B
+    const corporateTemplates = [
+      `Sviluppo Software su Misura a ${cityName} | ${suffix}`,
+      `Programmatore a ${cityName}: Software Personalizzati e Automazioni | ${suffix}`,
+      `Realizzazione Software e Gestionali a ${cityName} | ${suffix}`,
+      `Sviluppo Tool e Automazioni a ${cityName} | ${suffix}`,
     ];
-    const index = cityName.length % templates.length;
-    return templates[index];
+    const index = cityName.length % corporateTemplates.length;
+    return corporateTemplates[index];
   }
   
   const templates = [
@@ -120,57 +136,55 @@ export function generateDescription(
   if (serviceSlug === 'software-gestionali') {
     const archetypeHints: Record<MarketArchetype, string[]> = {
       MountainSmall: [
-        `Software gestionali per artigiani e attività di montagna a ${cityName}.`,
-        `Gestionali su misura che funzionano anche offline nelle zone appenniniche.`,
-        `Digitalizza la tua attività a ${cityName} con un software pensato per te.`,
+        `Sviluppatore software a ${cityName}. Realizzo gestionali web e automazioni per eliminare Excel. Soluzioni custom senza canoni per artigiani e attività di montagna.`,
+        `Basta carta e file persi. Sviluppo software su misura per attività di ${cityName}. Gestionali facili, offline-first e senza costi mensili.`,
+        `Digitalizza la tua attività a ${cityName} con un software pensato per te. Automazione processi e zero errori.`,
       ],
       HillMedium: [
-        `Software gestionali per agriturismi e artigiani del territorio collinare a ${cityName}.`,
-        `CRM su misura che valorizza la tradizione della tua attività a ${cityName}.`,
-        `Gestionali personalizzati per attività della zona collinare.`,
+        `Sviluppatore software a ${cityName}. Realizzo gestionali web, CRM e automazioni per agriturismi e artigiani. Soluzioni custom senza canoni.`,
+        `Software su misura per agriturismi e artigiani del territorio collinare a ${cityName}. Elimina Excel e velocizza il lavoro.`,
+        `Gestionali personalizzati per attività della zona collinare. Automazione processi e controllo totale.`,
       ],
       IndustrialHub: [
-        `Software gestionali B2B per aziende del settore a ${cityName}.`,
-        `Gestionali enterprise per il settore industriale della zona.`,
-        `CRM aziendale per PMI e grandi imprese a ${cityName}.`,
+        `Sviluppatore software a ${cityName}. Realizzo gestionali web, CRM e automazioni per eliminare Excel. Soluzioni custom senza canoni per PMI e aziende.`,
+        `Software gestionali B2B per aziende del settore a ${cityName}. Automazione processi e digitalizzazione completa.`,
+        `CRM aziendale su misura per PMI e grandi imprese a ${cityName}. Elimina la carta e velocizza il lavoro.`,
       ],
       FoodValley: [
-        `Software gestionali per aziende food e artigiani del gusto a ${cityName}.`,
-        `Gestionali con tracciabilità HACCP per il settore alimentare.`,
-        `Digitalizzazione per aziende enogastronomiche a ${cityName}.`,
+        `Sviluppatore software a ${cityName}. Realizzo gestionali web con tracciabilità HACCP e automazioni per aziende food. Soluzioni custom senza canoni.`,
+        `Software gestionali per aziende food e artigiani del gusto a ${cityName}. Elimina Excel e digitalizza i processi.`,
+        `Digitalizzazione per aziende enogastronomiche a ${cityName}. Automazione e controllo totale.`,
       ],
       ProvinceCapital: [
-        `Software gestionali per professionisti e attività di ${cityName}.`,
-        `CRM su misura per PMI e studi professionali nel territorio.`,
-        `Gestionali che ti fanno risparmiare tempo e aumentare il fatturato.`,
+        `Sviluppatore software a ${cityName}. Realizzo gestionali web, CRM e automazioni per eliminare Excel. Soluzioni custom senza canoni per PMI e aziende.`,
+        `Software su misura per professionisti e attività di ${cityName}. Automazione processi e zero errori.`,
+        `Gestionali che ti fanno risparmiare tempo e aumentare il fatturato. Elimina la carta e velocizza il lavoro.`,
       ],
       SuburbanGrowth: [
-        `Software gestionali per attività in crescita nell'hinterland di ${cityName}.`,
-        `CRM scalabile per aziende che vogliono espandersi.`,
-        `Gestionali personalizzati per attività dinamiche della zona.`,
+        `Sviluppatore software a ${cityName}. Realizzo gestionali web, CRM e automazioni per eliminare Excel. Soluzioni custom senza canoni per attività in crescita.`,
+        `Software gestionali per attività in crescita nell'hinterland di ${cityName}. Automazione e scalabilità.`,
+        `Gestionali personalizzati per attività dinamiche della zona. Elimina Excel e velocizza il lavoro.`,
       ],
       PlainsSmall: [
-        `Software gestionali per artigiani e commercianti della pianura.`,
-        `Gestionali locali ottimizzati per il territorio di ${cityName}.`,
-        `Digitalizza la tua attività con un software su misura.`,
+        `Sviluppatore software a ${cityName}. Realizzo gestionali web e automazioni per eliminare Excel. Soluzioni custom senza canoni per artigiani e commercianti.`,
+        `Basta carta e file persi. Sviluppo software su misura per artigiani e attività di ${cityName}. Gestionali facili e senza costi mensili.`,
+        `Digitalizza la tua attività con un software su misura. Automazione processi e controllo totale.`,
       ],
       MetroBologna: [
-        `Software gestionali nell'area metropolitana bolognese.`,
-        `CRM enterprise per aziende dell'hinterland bolognese.`,
-        `Gestionali professionali per competitività nel territorio.`,
+        `Sviluppatore software nell'area metropolitana bolognese. Realizzo gestionali web, CRM e automazioni per eliminare Excel. Soluzioni custom senza canoni.`,
+        `Software gestionali per aziende dell'hinterland bolognese. Automazione processi e digitalizzazione completa.`,
+        `Gestionali professionali per competitività nel territorio. Elimina la carta e velocizza il lavoro.`,
       ],
     };
     
     const hints = archetype ? archetypeHints[archetype] : [
-      `Software gestionali personalizzati a ${cityName}.`,
-      `CRM e gestionali su misura per la tua attività.`,
-      `Digitalizza la tua impresa con un software professionale.`,
+      `Sviluppatore software a ${cityName}. Realizzo gestionali web, CRM e automazioni per eliminare Excel. Soluzioni custom senza canoni per PMI, artigiani e professionisti.`,
+      `Software su misura per la tua attività. Automazione processi e zero errori.`,
+      `Digitalizza la tua impresa con un software professionale. Elimina Excel e velocizza il lavoro.`,
     ];
     
     const index = cityName.length % hints.length;
-    const base = hints[index];
-    
-    return `${base} Soluzioni su misura per PMI, artigiani e professionisti.`;
+    return hints[index];
   }
   
   const archetypeHints: Record<MarketArchetype, string[]> = {
@@ -232,13 +246,51 @@ export function generateKeywords(
   cityName: string,
   province: string,
   serviceName: string,
-  serviceSlug: string = 'siti-web'
+  serviceSlug: string = 'siti-web',
+  archetype?: MarketArchetype
 ): string[] {
   const normalizedCity = cityName.toLowerCase();
   const normalizedProvince = province.toLowerCase();
   const normalizedService = serviceName.toLowerCase();
   
-  // Base keywords
+  // For software-gestionali: NO keyword stuffing with nearby cities
+  if (serviceSlug === 'software-gestionali') {
+    // Per piccoli comuni: keyword solo sulla città, NO provincia/regione
+    const isSmallTown = archetype === 'MountainSmall' || archetype === 'PlainsSmall' || archetype === 'HillMedium';
+    
+    const keywords = [
+      `sviluppo software ${normalizedCity}`,
+      `programmatore ${normalizedCity}`,
+      `software su misura ${normalizedCity}`,
+      `automazione processi ${normalizedCity}`,
+      `realizzazione gestionali ${normalizedCity}`,
+      `creazione database ${normalizedCity}`,
+      `digitalizzazione azienda ${normalizedCity}`,
+      `sviluppo web app ${normalizedCity}`,
+      `consulenza informatica ${normalizedCity}`,
+      `software house ${normalizedCity}`,
+      `crm personalizzato ${normalizedCity}`,
+    ];
+    
+    // Per piccoli comuni: aggiungi keyword più specifiche per artigiani
+    if (isSmallTown) {
+      keywords.push(`digitalizzazione ${normalizedCity}`);
+      keywords.push(`informatica ${normalizedCity}`);
+      keywords.push(`gestionale artigiani ${normalizedCity}`);
+      keywords.push(`software artigiani ${normalizedCity}`);
+    }
+    
+    // Add province-level keywords SOLO per città grandi (capoluoghi, industriali)
+    // Per piccoli comuni, lascia che sia la pagina provinciale a posizionarsi
+    if (!isSmallTown) {
+      keywords.push(`sviluppo software ${normalizedProvince}`);
+      keywords.push(`software su misura ${normalizedProvince}`);
+    }
+    
+    return keywords;
+  }
+  
+  // Base keywords for other services
   const keywords = [
     `${normalizedService} ${normalizedCity}`,
     `${normalizedService} ${normalizedProvince}`,
@@ -247,7 +299,7 @@ export function generateKeywords(
     `creazione ${normalizedService} ${normalizedCity}`,
   ];
   
-  // Add zone/district keywords if available
+  // Add zone/district keywords if available (only for siti-web)
   if (CITY_ZONES[normalizedCity]) {
     const zones = CITY_ZONES[normalizedCity];
     zones.forEach(zone => {
@@ -258,22 +310,6 @@ export function generateKeywords(
   // Add region and broader area keywords
   keywords.push(`${normalizedService} emilia romagna`);
   keywords.push(`${normalizedService} provincia ${normalizedProvince}`);
-  
-  // Add specific service keywords for software
-  if (serviceSlug === 'software-gestionali') {
-    keywords.push('software gestionale emilia romagna');
-    keywords.push('crm su misura');
-    keywords.push('gestionale aziendale personalizzato');
-    keywords.push('digitalizzazione impresa');
-    keywords.push('automatizzazione processi');
-    keywords.push('software per artigiani');
-    keywords.push('gestionale per negozi');
-    keywords.push('software per ristoranti');
-    
-    if (CITY_ZONES[normalizedCity]) {
-      keywords.push(`software gestionale${CITY_ZONES[normalizedCity].join(` ${normalizedProvince}`)}`);
-    }
-  }
   
   return keywords;
 }
@@ -316,9 +352,9 @@ export function buildSeoMetadata(
   const canonical = generateCanonicalUrl(citySlug, serviceSlug);
   const baseUrl = 'https://manueldeceglie.it';
   
-  const title = generateTitle(location.name, serviceName, serviceSlug);
+  const title = generateTitle(location.name, serviceName, serviceSlug, 'Manuel De Ceglie', archetype);
   const description = generateDescription(location.name, serviceName, serviceSlug, archetype);
-  const keywords = generateKeywords(location.name, location.province, serviceName, serviceSlug);
+  const keywords = generateKeywords(location.name, location.province, serviceName, serviceSlug, archetype);
   const h1 = generateH1(location.name, serviceName, serviceSlug, archetype);
   
   return {
