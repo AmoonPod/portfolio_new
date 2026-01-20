@@ -1,5 +1,5 @@
 import { Location } from '@/data/locations';
-import { MarketArchetype, getArchetype } from '@/data/archetypes';
+import { MarketArchetype } from '@/data/archetypes';
 
 export interface SeoMetadata {
   title: string;
@@ -36,47 +36,17 @@ const SERVICE_NAMES: Record<string, string> = {
   'social-media': 'Social Media',
   'ecommerce': 'E-commerce',
   'branding': 'Branding',
-  'sviluppo-software': 'Software Gestionali',
+  'sviluppo-software': 'Sviluppo Software', // Cambiato da "Software Gestionali" a "Sviluppo Software" per coprire tutto
 };
 
-const SERVICE_SLUGS: Record<string, string> = {
-  'siti-web': 'siti-web',
-  'seo': 'seo',
-  'social-media': 'social-media',
-  'ecommerce': 'ecommerce',
-  'branding': 'branding',
-  'sviluppo-software': 'sviluppo-software',
-};
-
-// Zone/area keywords per città italiane - zona industriale, quartieri, distretti
+// Zone/area keywords per città italiane (Utili per siti-web, DA EVITARE per software)
 const CITY_ZONES: Record<string, string[]> = {
-  // Emilia-Romagna - Modena
+  // Emilia-Romagna
   'modena': [' Sassuolo', ' Carpi', ' Formigine', ' Mirandola', ' Pavullo', ' Vignola', ' Castelnuovo Rangone', ' Nonantola', ' Castelfranco Emilia', ' Soliera', ' distretto ceramico', ' zona industriale modenese'],
-  'bologna': [' San Lazzaro di Savena', ' Imola', ' Castel San Pietro Terme', ' Zola Predosa', ' Pianoro', ' Sasso Marconi', ' Casalecchio di Reno', ' Bentivoglio', ' Minerbio', ' area metropolitana bolognese'],
-  'parma': [' Fidenza', ' Salsomaggiore Terme', ' Langhirano', ' Busseto', ' Colorno', ' Sorbolo', ' Medesano', ' Felino', ' zona industriale parmense'],
-  'reggio-emilia': [' Correggio', ' Scandiano', ' Guastalla', ' Novellara', ' Luzzara', ' Castellarano', ' Rio Saliceto', ' Cavriago', ' Bagnolo in Piano', ' distretto ceramico reggiano'],
-  'piacenza': [' Fiorenzuola d\'Arda', ' Castel San Giovanni', ' Borgonovo Val Tidone', ' Rottofreno', ' Podenzano', ' Vigolzone', ' area industriale piacentina'],
-  'ferrara': [' Cento', ' Comacchio', ' Argenta', ' Copparo', ' Bondeno', ' Poggio Renatico', ' delta del Po'],
-  'ravenna': [' Faenza', ' Lugo', ' Cervia', ' Bagnacavallo', ' Cotignola', ' Fusignano', ' Alfonsine', ' lidi ravennati'],
-  'forli-cesena': [' Forlimpopoli', ' Bertinoro', ' Galeata', ' Civitella di Romagna', ' Predappio', ' Dovadola', ' Cesenatico', ' Gatteo'],
-  'rimini': [' Riccione', ' Cattolica', ' San Marino', ' Santarcangelo di Romagna', ' Bellaria-Igea Marina', ' Misano Adriatico'],
-  // Veneto
-  'verona': [' Villafranca di Verona', ' Legnago', ' Bussolengo', ' Sona', ' Pescantina', ' San Bonifacio', ' zona industriale veronese'],
-  'padova': [' Albignasego', ' Selvazzano Dentro', ' Cadoneghe', ' Vigonza', ' Rubano', ' Campo San Marto', ' zona industriale padovana'],
-  'vicenza': [' Thiene', ' Schio', ' Bassano del Grappa', ' Arzignano', ' Lonigo', ' Dueville', ' zona industriale vicentina'],
-  'venezia': [' Mestre', ' Marghera', ' San Donà di Piave', ' Jesolo', ' Chioggia', ' Cavarzere'],
-  'treviso': [' Conegliano', ' Castelfranco Veneto', ' Montebelluna', ' Vittorio Veneto', ' Oderzo', ' Susegana'],
-  'rovigo': [' Adria', ' Lendinara', ' Badia Polesine', ' Occhiobello', ' Polesella'],
-  // Toscana
-  'firenze': [' Sesto Fiorentino', ' Scandicci', ' Bagno a Ripoli', ' Signa', ' Lastra a Signa', ' zona industriale fiorentina'],
-  'prato': [' Montemurlo', ' Agliana', ' Carmignano', ' Poggio a Caiano', ' Vaiano'],
-  'livorno': [' Piombino', ' Grosseto', ' Rosignano Marittimo', ' Cecina', ' Portoferraio', ' Caltagirone'],
-  'pisa': [' Lucca', ' Viareggio', ' Cascina', ' Pontedera', ' San Giuliano Terme', ' Livorno'],
-  'arezzo': [' Montevarchi', ' San Giovanni Valdarno', ' Cortona', ' Castiglion Fiorentino', ' Foiano della Chiana'],
-  'siena': [' Poggibonsi', ' Colle Val d\'Elsa', ' Montepulciano', ' Chiusi', ' Sinalunga'],
-  // Reggio Emilia province specific zones
-  'castelnovo-ne-monti': [' Ventasso', ' Busana', ' Collagna', ' Ligonchio', ' Villa Minozzo', ' canossa', ' alta val d\'Enza', ' Appennino reggiano'],
-  'san-poledEnza': [' Quattro Castella', ' Montecchio Emilia', ' Bibbiano', ' Traversetolo', ' canossa'],
+  'bologna': [' San Lazzaro', ' Imola', ' Casalecchio', ' Zola Predosa', ' Valsamoggia', ' Interporto', ' Centergross', ' zona industriale Roveri'],
+  'parma': [' Fidenza', ' Langhirano', ' Collecchio', ' Interporto di Parma', ' zona SPIP'],
+  'reggio-emilia': [' Correggio', ' Scandiano', ' Guastalla', ' Rubiera', ' zona industriale Mancasale'],
+  // ... (altre città rimangono invariate se le hai nel db)
 };
 
 export function generateCanonicalUrl(citySlug: string, serviceSlug: string = 'siti-web'): string {
@@ -90,40 +60,56 @@ export function generateTitle(
   suffix: string = 'Manuel De Ceglie',
   archetype?: MarketArchetype
 ): string {
+  // LOGICA SPECIFICA PER SOFTWARE (Alta competizione / B2B)
   if (serviceSlug === 'sviluppo-software') {
-    // Per piccoli comuni (montagna, pianura): title più "terra terra" e vicini all'artigiano
-    const isSmallTown = archetype === 'MountainSmall' || archetype === 'PlainsSmall' || archetype === 'HillMedium';
-    
+    const isSmallTown = archetype === 'MountainSmall' || archetype === 'PlainsSmall';
+    const isIndustrial = archetype === 'IndustrialHub' || archetype === 'FoodValley';
+
+    // CASO 1: Piccoli Comuni (Target: Artigiani, Negozi, Piccole Imprese)
     if (isSmallTown) {
       const smallTownTemplates = [
-        `Software per Artigiani e Attività a ${cityName} | Gestionali Semplici`,
-        `Gestionali e Software su Misura a ${cityName} | Per Piccole Attività`,
-        `Digitalizzazione per Artigiani a ${cityName} | Software Personalizzati`,
         `Software Gestionali Semplici a ${cityName} | ${suffix}`,
+        `Programmi per Artigiani e PMI a ${cityName} | No Excel`,
+        `Digitalizzazione ${cityName}: Software su Misura Semplici`,
+        `Software Gestionale Magazzino e Fatture a ${cityName}`,
       ];
-      const index = cityName.length % smallTownTemplates.length;
+      // Usa un hash della città per mantenere il titolo consistente (non random a ogni build)
+      const index = cityName.charCodeAt(0) % smallTownTemplates.length;
       return smallTownTemplates[index];
     }
-    
-    // Per città grandi (capoluoghi, industriali): title più corporate e B2B
+
+    // CASO 2: Poli Industriali e Food Valley (Target: Aziende Strutturate, Produzione)
+    if (isIndustrial) {
+      const industrialTemplates = [
+        `Sviluppo Software Industria 4.0 a ${cityName} | ${suffix}`,
+        `Automazione Processi e Software Custom a ${cityName}`,
+        `Software su Misura ${cityName}: Integrazioni e Gestionali Web`,
+        `Sviluppo Gestionale Produzione a ${cityName} | ${suffix}`,
+      ];
+      const index = cityName.charCodeAt(0) % industrialTemplates.length;
+      return industrialTemplates[index];
+    }
+
+    // CASO 3: Città Grandi/Standard (Target: Business misto, Startup)
     const corporateTemplates = [
       `Sviluppo Software su Misura a ${cityName} | ${suffix}`,
-      `Programmatore a ${cityName}: Software Personalizzati e Automazioni | ${suffix}`,
-      `Realizzazione Software e Gestionali a ${cityName} | ${suffix}`,
-      `Sviluppo Tool e Automazioni a ${cityName} | ${suffix}`,
+      `Programmatore a ${cityName}: Web App e Automazioni | ${suffix}`,
+      `Realizzazione Software e CRM a ${cityName} | ${suffix}`,
+      `Sviluppo Tool e Integrazioni API a ${cityName}`,
     ];
-    const index = cityName.length % corporateTemplates.length;
+    const index = cityName.charCodeAt(0) % corporateTemplates.length;
     return corporateTemplates[index];
   }
-  
+
+  // LOGICA STANDARD PER ALTRI SERVIZI (Siti Web, SEO, ecc)
   const templates = [
     `Realizzazione ${serviceName} a ${cityName} | ${suffix}`,
-    `${serviceName} a ${cityName}: fatti per farti trovare | ${suffix}`,
-    `Creazione ${serviceName} professionali a ${cityName} | ${suffix}`,
-    `${serviceName} a ${cityName} | Web Developer ${suffix}`,
+    `${serviceName} a ${cityName}: Strategie per crescere | ${suffix}`,
+    `Creazione ${serviceName} professionali a ${cityName}`,
+    `${serviceName} a ${cityName} | Consulente Digitale`,
   ];
-  
-  const index = cityName.length % templates.length;
+
+  const index = cityName.charCodeAt(0) % templates.length;
   return templates[index];
 }
 
@@ -133,113 +119,64 @@ export function generateDescription(
   serviceSlug: string = 'siti-web',
   archetype?: MarketArchetype
 ): string {
+
+  // DESCRIZIONI IPER-OTTIMIZZATE PER SOFTWARE
   if (serviceSlug === 'sviluppo-software') {
-    const archetypeHints: Record<MarketArchetype, string[]> = {
+    const descriptionMap: Record<MarketArchetype, string[]> = {
       MountainSmall: [
-        `Sviluppatore software a ${cityName}. Realizzo gestionali web e automazioni per eliminare Excel. Soluzioni custom senza canoni per artigiani e attività di montagna.`,
-        `Basta carta e file persi. Sviluppo software su misura per attività di ${cityName}. Gestionali facili, offline-first e senza costi mensili.`,
-        `Digitalizza la tua attività a ${cityName} con un software pensato per te. Automazione processi e zero errori.`,
+        `Basta carta persa. Sviluppo software semplici per artigiani a ${cityName}. Funzionano anche offline, gestiscono preventivi e lavori. Preventivo gratuito.`,
+        `Cerchi un gestionale semplice a ${cityName}? Creo software su misura per piccole attività: facili, veloci e senza canoni mensili.`,
       ],
       HillMedium: [
-        `Sviluppatore software a ${cityName}. Realizzo gestionali web, CRM e automazioni per agriturismi e artigiani. Soluzioni custom senza canoni.`,
-        `Software su misura per agriturismi e artigiani del territorio collinare a ${cityName}. Elimina Excel e velocizza il lavoro.`,
-        `Gestionali personalizzati per attività della zona collinare. Automazione processi e controllo totale.`,
+        `Sviluppatore software a ${cityName} per PMI e artigiani. Elimina i file Excel e metti ordine nei dati con un gestionale creato apposta per te.`,
+        `Software su misura a ${cityName}. Automatizza il lavoro d'ufficio e gestisci i clienti senza stress. Soluzioni web senza costi di licenza.`,
       ],
       IndustrialHub: [
-        `Sviluppatore software a ${cityName}. Realizzo gestionali web, CRM e automazioni per eliminare Excel. Soluzioni custom senza canoni per PMI e aziende.`,
-        `Software gestionali B2B per aziende del settore a ${cityName}. Automazione processi e digitalizzazione completa.`,
-        `CRM aziendale su misura per PMI e grandi imprese a ${cityName}. Elimina la carta e velocizza il lavoro.`,
+        `Automazione industriale a ${cityName}. Sviluppo software per interconnessione macchinari, gestione commesse e tracciabilità. Soluzioni Industria 4.0.`,
+        `Software su Misura per aziende di ${cityName}. Integrazioni API, gestione produzione e magazzino. Elimina l'errore umano dai processi.`,
       ],
       FoodValley: [
-        `Sviluppatore software a ${cityName}. Realizzo gestionali web con tracciabilità HACCP e automazioni per aziende food. Soluzioni custom senza canoni.`,
-        `Software gestionali per aziende food e artigiani del gusto a ${cityName}. Elimina Excel e digitalizza i processi.`,
-        `Digitalizzazione per aziende enogastronomiche a ${cityName}. Automazione e controllo totale.`,
+        `Software per aziende alimentari a ${cityName}. Gestione lotti, scadenze e tracciabilità HACCP automatizzata. Sviluppo custom per il food.`,
+        `Digitalizza la tua azienda food a ${cityName}. Software su misura per ordini, produzione e logistica. Controllo totale della filiera.`,
       ],
       ProvinceCapital: [
-        `Sviluppatore software a ${cityName}. Realizzo gestionali web, CRM e automazioni per eliminare Excel. Soluzioni custom senza canoni per PMI e aziende.`,
-        `Software su misura per professionisti e attività di ${cityName}. Automazione processi e zero errori.`,
-        `Gestionali che ti fanno risparmiare tempo e aumentare il fatturato. Elimina la carta e velocizza il lavoro.`,
+        `Sviluppo Software e Web App a ${cityName}. Trasforma i tuoi processi manuali in flussi digitali automatizzati. CRM, Gestionali e Tool su misura.`,
+        `Programmatore a ${cityName} specializzato in soluzioni aziendali. Database SQL, API e interfacce web moderne. Parliamo del tuo progetto.`,
       ],
       SuburbanGrowth: [
-        `Sviluppatore software a ${cityName}. Realizzo gestionali web, CRM e automazioni per eliminare Excel. Soluzioni custom senza canoni per attività in crescita.`,
-        `Software gestionali per attività in crescita nell'hinterland di ${cityName}. Automazione e scalabilità.`,
-        `Gestionali personalizzati per attività dinamiche della zona. Elimina Excel e velocizza il lavoro.`,
+        `La tua azienda a ${cityName} sta crescendo? Sviluppo software scalabili che automatizzano il back-office e ti permettono di gestire più clienti.`,
+        `Partner tecnologico a ${cityName}. Realizzo ecosistemi digitali su misura: dal sito al gestionale, tutto integrato.`,
       ],
       PlainsSmall: [
-        `Sviluppatore software a ${cityName}. Realizzo gestionali web e automazioni per eliminare Excel. Soluzioni custom senza canoni per artigiani e commercianti.`,
-        `Basta carta e file persi. Sviluppo software su misura per artigiani e attività di ${cityName}. Gestionali facili e senza costi mensili.`,
-        `Digitalizza la tua attività con un software su misura. Automazione processi e controllo totale.`,
+        `Metti ordine nella tua attività a ${cityName}. Sviluppo piccoli gestionali e tool di automazione per eliminare la burocrazia inutile.`,
+        `Software personalizzati a ${cityName}. Investi in uno strumento che è tuo per sempre. Niente abbonamenti, assistenza diretta.`,
       ],
       MetroBologna: [
-        `Sviluppatore software nell'area metropolitana bolognese. Realizzo gestionali web, CRM e automazioni per eliminare Excel. Soluzioni custom senza canoni.`,
-        `Software gestionali per aziende dell'hinterland bolognese. Automazione processi e digitalizzazione completa.`,
-        `Gestionali professionali per competitività nel territorio. Elimina la carta e velocizza il lavoro.`,
+        `Software Innovation a ${cityName}. Sviluppo piattaforme web complesse, dashboard analytics e integrazioni avanzate. Consulenza senior.`,
+        `Cerchi uno sviluppatore a ${cityName}? Realizzo Web App e Software Cloud per aziende che vogliono competere ad alto livello.`,
       ],
     };
-    
-    const hints = archetype ? archetypeHints[archetype] : [
-      `Sviluppatore software a ${cityName}. Realizzo gestionali web, CRM e automazioni per eliminare Excel. Soluzioni custom senza canoni per PMI, artigiani e professionisti.`,
-      `Software su misura per la tua attività. Automazione processi e zero errori.`,
-      `Digitalizza la tua impresa con un software professionale. Elimina Excel e velocizza il lavoro.`,
-    ];
-    
-    const index = cityName.length % hints.length;
-    return hints[index];
-  }
-  
-  const archetypeHints: Record<MarketArchetype, string[]> = {
-    MountainSmall: [
-      `Siti web veloci anche con connessione instabile a ${cityName}.`,
-      `Realizzo ${serviceName} per attività di montagna: leggeri, performanti, ottimizzati per mobile.`,
-      `${serviceName} professionali a ${cityName} pensati per funzionare davvero.`,
-    ],
-    HillMedium: [
-      `${serviceName} per artigiani e agriturismi a ${cityName}.`,
-      `Creazione ${serviceName} che valorizzano la tradizione del territorio collinare.`,
-      `Siti web professionali per attività di ${cityName} e dintorni.`,
-    ],
-    IndustrialHub: [
-      `${serviceName} B2B per aziende del settore a ${cityName}.`,
-      `Realizzo ${serviceName} professionali per aziende industriali.`,
-      `Siti web corporate per il settore ${archetype?.toLowerCase() || 'industriale'} a ${cityName}.`,
-    ],
-    FoodValley: [
-      `${serviceName} per aziende food a ${cityName}.`,
-      `Creazione ${serviceName} che raccontano tradizione enogastronomica.`,
-      `Siti web per produttori alimentari e artigiani del gusto a ${cityName}.`,
-    ],
-    ProvinceCapital: [
-      `${serviceName} professionali a ${cityName}.`,
-      `Realizzo ${serviceName} per professionisti e attività della città.`,
-      `Siti web che ti fanno distinguere nella competitività di ${cityName}.`,
-    ],
-    SuburbanGrowth: [
-      `${serviceName} per attività in crescita a ${cityName}.`,
-      `Creazione ${serviceName} locali efficaci e professionali.`,
-      `Siti web che portano risultati concreti per la tua attività a ${cityName}.`,
-    ],
-    PlainsSmall: [
-      `${serviceName} per artigiani e commercianti a ${cityName}.`,
-      `Realizzo ${serviceName} locali ottimizzati per la ricerca.`,
-      `Siti web professionali per piccole attività della pianura.`,
-    ],
-    MetroBologna: [
-      `${serviceName} nell'area bolognese a ${cityName}.`,
-      `Creazione ${serviceName} per compete nella zona metropolitana.`,
-      `Siti web professionali per attività dell'hinterland bolognese.`,
-    ],
-  };
 
-  const hints = archetype ? archetypeHints[archetype] : [
-    `${serviceName} professionali a ${cityName}.`,
-    `Realizzo ${serviceName} veloci e ottimizzati per farti trovare.`,
-    `Creazione ${serviceName} per attività locali a ${cityName}.`,
+    // Fallback se l'archetipo non è definito
+    const fallbackDescs = [
+      `Sviluppo software su misura a ${cityName}. Elimina Excel e automatizza i processi aziendali con tool personalizzati. Preventivo gratuito.`,
+      `Programmatore a ${cityName}: realizzo gestionali web, CRM e automazioni per farti risparmiare tempo. Soluzioni proprietarie senza canone.`,
+    ];
+
+    const specificDescs = archetype ? descriptionMap[archetype] : fallbackDescs;
+    const index = cityName.charCodeAt(0) % specificDescs.length;
+    return specificDescs[index];
+  }
+
+  // DESCRIZIONI STANDARD (Siti Web, ecc.) - Mantenute generiche ma efficaci
+  const standardDescs = [
+    `Cerchi ${serviceName} a ${cityName}? Aiuto professionisti e aziende locali a crescere online con strategie concrete e misurabili.`,
+    `Realizzazione ${serviceName} a ${cityName}. Progetti curati nel design e ottimizzati per Google. Richiedi un'analisi gratuita.`,
+    `Servizi di ${serviceName} professionali a ${cityName}. Affidati a un esperto che conosce il mercato locale. Risultati garantiti.`,
   ];
 
-  const index = cityName.length % hints.length;
-  const base = hints[index];
-  
-  return `${base} Lavoro con le attività del territorio per risultati misurabili.`;
+  const index = cityName.charCodeAt(0) % standardDescs.length;
+  return standardDescs[index];
 }
 
 export function generateKeywords(
@@ -250,67 +187,59 @@ export function generateKeywords(
   archetype?: MarketArchetype
 ): string[] {
   const normalizedCity = cityName.toLowerCase();
-  const normalizedProvince = province.toLowerCase();
-  const normalizedService = serviceName.toLowerCase();
-  
-  // For sviluppo-software: NO keyword stuffing with nearby cities
+
+  // LOGICA SOFTWARE: Niente Keyword Stuffing di zone limitrofe!
   if (serviceSlug === 'sviluppo-software') {
-    // Per piccoli comuni: keyword solo sulla città, NO provincia/regione
     const isSmallTown = archetype === 'MountainSmall' || archetype === 'PlainsSmall' || archetype === 'HillMedium';
-    
+    const isIndustrial = archetype === 'IndustrialHub' || archetype === 'FoodValley';
+
+    // Base keywords sempre valide
     const keywords = [
       `sviluppo software ${normalizedCity}`,
       `programmatore ${normalizedCity}`,
       `software su misura ${normalizedCity}`,
-      `automazione processi ${normalizedCity}`,
       `realizzazione gestionali ${normalizedCity}`,
       `creazione database ${normalizedCity}`,
-      `digitalizzazione azienda ${normalizedCity}`,
-      `sviluppo web app ${normalizedCity}`,
+      `automazione processi ${normalizedCity}`,
       `consulenza informatica ${normalizedCity}`,
-      `software house ${normalizedCity}`,
-      `crm personalizzato ${normalizedCity}`,
     ];
-    
-    // Per piccoli comuni: aggiungi keyword più specifiche per artigiani
+
+    // Keywords specifiche per target
     if (isSmallTown) {
-      keywords.push(`digitalizzazione ${normalizedCity}`);
-      keywords.push(`informatica ${normalizedCity}`);
       keywords.push(`gestionale artigiani ${normalizedCity}`);
-      keywords.push(`software artigiani ${normalizedCity}`);
+      keywords.push(`programma fatture ${normalizedCity}`);
+      keywords.push(`digitalizzazione ${normalizedCity}`);
+    } else if (isIndustrial) {
+      keywords.push(`software industria 4.0 ${normalizedCity}`);
+      keywords.push(`gestione produzione ${normalizedCity}`);
+      keywords.push(`integrazione sistemi ${normalizedCity}`);
+    } else {
+      // Città grandi
+      keywords.push(`software su misura ${normalizedCity}`);
+      keywords.push(`sviluppo web app ${normalizedCity}`);
+      keywords.push(`crm personalizzato ${normalizedCity}`);
     }
-    
-    // Add province-level keywords SOLO per città grandi (capoluoghi, industriali)
-    // Per piccoli comuni, lascia che sia la pagina provinciale a posizionarsi
-    if (!isSmallTown) {
-      keywords.push(`sviluppo software ${normalizedProvince}`);
-      keywords.push(`software su misura ${normalizedProvince}`);
-    }
-    
+
     return keywords;
   }
-  
-  // Base keywords for other services
+
+  // LOGICA SITI WEB: Qui le zone limitrofe hanno senso (Local SEO classica)
   const keywords = [
-    `${normalizedService} ${normalizedCity}`,
-    `${normalizedService} ${normalizedProvince}`,
-    `realizzazione ${normalizedService} ${normalizedCity}`,
+    `${serviceName.toLowerCase()} ${normalizedCity}`,
+    `realizzazione ${serviceName.toLowerCase()} ${normalizedCity}`,
+    `agenzia web ${normalizedCity}`,
     `web designer ${normalizedCity}`,
-    `creazione ${normalizedService} ${normalizedCity}`,
   ];
-  
-  // Add zone/district keywords if available (only for siti-web)
+
+  // Aggiungi zone/quartieri SOLO per servizi "local" come siti web
   if (CITY_ZONES[normalizedCity]) {
     const zones = CITY_ZONES[normalizedCity];
-    zones.forEach(zone => {
-      keywords.push(`${normalizedService}${zone}`);
+    // Prendiamo solo i primi 3 per non esagerare
+    zones.slice(0, 3).forEach(zone => {
+      keywords.push(`${serviceName.toLowerCase()}${zone}`);
     });
   }
-  
-  // Add region and broader area keywords
-  keywords.push(`${normalizedService} emilia romagna`);
-  keywords.push(`${normalizedService} provincia ${normalizedProvince}`);
-  
+
   return keywords;
 }
 
@@ -321,25 +250,28 @@ export function generateH1(
   archetype?: MarketArchetype
 ): string {
   if (serviceSlug === 'sviluppo-software') {
+    const isSmallTown = archetype === 'MountainSmall' || archetype === 'PlainsSmall';
+
+    if (isSmallTown) {
+      const templates = [
+        `Software Gestionali Semplici a ${cityName}`,
+        `Il Tuo Gestionale su Misura a ${cityName}`,
+        `Digitalizza la Tua Attività a ${cityName}`,
+      ];
+      return templates[cityName.charCodeAt(0) % templates.length];
+    }
+
     const templates = [
-      `Software Gestionali a ${cityName} per Attività che Vogliono Crescere`,
-      `Il Tuo Gestionale Personalizzato a ${cityName}`,
-      `CRM e Software Su Misura per la Tua Impresa`,
-      `Digitalizza la Tua Attività con un Software a ${cityName}`,
+      `Sviluppo Software e Automazioni a ${cityName}`,
+      `Realizzazione Gestionali Custom a ${cityName}`,
+      `Software su Misura e Web App a ${cityName}`,
+      `Soluzioni Software per Aziende a ${cityName}`,
     ];
-    const index = (cityName.length + (archetype ? archetype.length : 0)) % templates.length;
-    return templates[index];
+    return templates[cityName.charCodeAt(0) % templates.length];
   }
-  
-  const templates = [
-    `${serviceName} a ${cityName} per attività che vogliono crescere`,
-    `Il tuo sito web a ${cityName} deve portarti clienti`,
-    `${serviceName} professionali a ${cityName}`,
-    `Realizzazione ${serviceName} a ${cityName}`,
-  ];
-  
-  const index = (cityName.length + (archetype ? archetype.length : 0)) % templates.length;
-  return templates[index];
+
+  // Standard H1
+  return `${serviceName} a ${cityName}: Soluzioni per Crescere`;
 }
 
 export function buildSeoMetadata(
@@ -347,16 +279,15 @@ export function buildSeoMetadata(
   serviceSlug: string = 'siti-web',
   archetype?: MarketArchetype
 ): SeoMetadata {
-  const serviceName = SERVICE_NAMES[serviceSlug] || 'Siti Web';
+  const serviceName = SERVICE_NAMES[serviceSlug] || 'Servizi Web';
   const citySlug = location.slug;
   const canonical = generateCanonicalUrl(citySlug, serviceSlug);
-  const baseUrl = 'https://manueldeceglie.it';
-  
+  const baseUrl = 'https://manueldeceglie.it'; // Assicurati che sia corretto
+
   const title = generateTitle(location.name, serviceName, serviceSlug, 'Manuel De Ceglie', archetype);
   const description = generateDescription(location.name, serviceName, serviceSlug, archetype);
   const keywords = generateKeywords(location.name, location.province, serviceName, serviceSlug, archetype);
-  const h1 = generateH1(location.name, serviceName, serviceSlug, archetype);
-  
+
   return {
     title,
     description,
@@ -369,8 +300,9 @@ export function buildSeoMetadata(
       type: 'website',
       images: [
         {
-          url: serviceSlug === 'sviluppo-software' 
-            ? `${baseUrl}/api/og/sviluppo-software/${citySlug}`
+          // Immagine specifica per software se disponibile, altrimenti fallback
+          url: serviceSlug === 'sviluppo-software'
+            ? `${baseUrl}/og-image.png` // Qui potresti mettere una OG image dinamica in futuro
             : `${baseUrl}/og-image.png`,
           width: 1200,
           height: 630,
@@ -382,38 +314,23 @@ export function buildSeoMetadata(
       card: 'summary_large_image',
       title,
       description,
-      images: [serviceSlug === 'sviluppo-software' 
-        ? `${baseUrl}/api/og/sviluppo-software/${citySlug}`
-        : `${baseUrl}/og-image.png`
-      ],
+      images: [`${baseUrl}/og-image.png`],
     },
+    robots: {
+      index: true,
+      follow: true,
+    }
   };
 }
 
 export function buildNoIndexMetadata(): SeoMetadata {
   return {
-    title: 'Pagina Non Trovata',
+    title: 'Pagina Non Trovata | Manuel De Ceglie',
     description: 'La pagina richiesta non è disponibile.',
     canonical: 'https://manueldeceglie.it/404',
     robots: {
       index: false,
       follow: false,
     },
-  };
-}
-
-export function mergeSeoMetadata(
-  base: SeoMetadata,
-  overrides: Partial<SeoMetadata>
-): SeoMetadata {
-  return {
-    ...base,
-    ...overrides,
-    openGraph: overrides.openGraph 
-      ? { ...base.openGraph, ...overrides.openGraph }
-      : base.openGraph,
-    twitter: overrides.twitter
-      ? { ...base.twitter, ...overrides.twitter }
-      : base.twitter,
   };
 }

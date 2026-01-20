@@ -1,5 +1,5 @@
 import { MarketArchetype } from '@/data/archetypes';
-import { TokenReplacements, replaceTokens, createReplacements, buildCanonicalUrl, buildKeywords } from '@/lib/content/tokens';
+import { TokenReplacements, replaceTokens, createReplacements, buildCanonicalUrl, buildKeywords } from '@/lib/link-graph/tokens';
 import { pickVariant, spintaxParse, getPopulationTier, getZoneContext } from '@/lib/content/spintax';
 
 interface ProblemSolution {
@@ -302,13 +302,13 @@ export function generateSEO(
     `{{ServiceName}} a {{CityName}}: fatti per farti trovare`,
     `Creazione {{ServiceName}} professionali a {{CityName}}`,
   ];
-  
+
   const descriptionVariants = [
     `{{ServiceName}} professionali a {{CityName}}: veloci, ottimizzati per Google e costruiti per portarti clienti reali.`,
     `Creo {{ServiceName}} a {{CityName}} per attività locali: sito veloce, chiaro e orientato ai risultati.`,
     `{{ServiceName}} a {{CityName}} per professionisti e attività che vogliono farsi trovare online.`,
   ];
-  
+
   const h1Variants = [
     `{{ServiceName}} a {{CityName}} per attività che vogliono crescere`,
     `Il tuo sito web a {{CityName}} deve portarti clienti`,

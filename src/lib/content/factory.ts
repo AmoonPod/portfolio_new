@@ -1,6 +1,6 @@
 import { Location } from '@/data/locations';
 import { MarketArchetype, assignArchetype, getArchetype } from '@/data/archetypes';
-import { createReplacements, TokenReplacements, replaceTokens } from '@/lib/content/tokens';
+import { createReplacements, TokenReplacements, replaceTokens } from '@/lib/link-graph/tokens';
 import { pickVariant, getPopulationTier, getZoneContext, spintaxParse } from '@/lib/content/spintax';
 import { generateHero, generateDiagnostica, generateGoodInvestment, generateSEO } from '@/lib/content/templates';
 import { generateSoftwareHero, generateSoftwareDiagnostica, generateSoftwareGoodInvestment, generateSoftwareSEO, generateSoftwareFAQ } from '@/lib/content/software-templates';

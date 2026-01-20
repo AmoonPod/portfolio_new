@@ -1,5 +1,5 @@
 import { ProvinceInfo, getProvinceInfo, getTopCitiesForProvince } from './graph';
-import { TokenReplacements, replaceTokens, createReplacements } from '@/lib/content/tokens';
+import { TokenReplacements, replaceTokens, createReplacements } from '@/lib/link-graph/tokens';
 import { pickVariant, deterministicPick } from '@/lib/content/spintax';
 
 export interface ProvincePageData {

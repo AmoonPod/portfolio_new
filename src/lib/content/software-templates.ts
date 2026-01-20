@@ -1,5 +1,5 @@
 import { MarketArchetype } from '@/data/archetypes';
-import { TokenReplacements, replaceTokens, createReplacements, buildCanonicalUrl, buildKeywords } from '@/lib/content/tokens';
+import { TokenReplacements, replaceTokens, createReplacements, buildCanonicalUrl, buildKeywords } from '@/lib/link-graph/tokens';
 import { pickVariant, spintaxParse, getPopulationTier, getZoneContext } from '@/lib/content/spintax';
 
 interface SoftwareSolution {
@@ -70,10 +70,10 @@ const ARCHETYPE_KEYWORDS: Record<MarketArchetype, string[]> = {
   HillMedium: ['software pmi', 'automazione ufficio', 'sviluppo gestionale cloud', 'software su misura artigiani'],
   IndustrialHub: ['software produzione', 'interconnessione 4.0', 'gestione commesse', 'software automazione industriale'],
   FoodValley: ['software tracciabilità', 'gestione lotti scadenza', 'software agroalimentare', 'automazione ordini'],
-  ProvinceCapital: ['sviluppo web app', 'crm personalizzato', 'software house locale', 'integrazione api'],
+  ProvinceCapital: ['sviluppo web app', 'crm personalizzato', 'software su misura locale', 'integrazione api'],
   SuburbanGrowth: ['software scalabile', 'gestione clienti crm', 'automazione processi aziendali', 'sviluppo saas'],
   PlainsSmall: ['gestionale magazzino semplice', 'software fatturazione', 'programmatore locale', 'assistenza software'],
-  MetroBologna: ['sviluppo piattaforme web', 'system integrator', 'software enterprise', 'big data analytics'],
+  MetroBologna: ['sviluppo piattaforme web', 'system integrator', 'software su misura enterprise', 'big data analytics'],
 };
 
 // --- HERO SECTION (Problema Universale -> Soluzione Locale) ---
@@ -156,7 +156,7 @@ const SOFTWARE_HERO_TEMPLATES_BY_INITIAL: Partial<Record<MarketArchetype, Record
       trustSignal: 'Sviluppo software professionali a {{CityName}}',
     },
     M_Z: {
-      h1: 'Software House e Automazioni a {{CityName}}',
+      h1: 'Software su Misura e Automazioni a {{CityName}}',
       sub: 'Non ti serve un gestionale gigante, ti serve il *tuo* gestionale. Costruisco tool e piattaforme web specifiche per risolvere i tuoi colli di bottiglia operativi.',
       ctaText: 'Richiedi Preventivo',
       trustSignal: 'Soluzioni digitali custom (Codice di proprietà)',
@@ -201,7 +201,7 @@ const SOFTWARE_HERO_TEMPLATES_BY_INITIAL: Partial<Record<MarketArchetype, Record
       h1: 'Software Innovation e Tool Custom a {{CityName}}',
       sub: 'Non adattarti agli standard. Costruiamo insieme la tecnologia che serve alla tua visione. Web App veloci, sicure e integrate con i tuoi sistemi.',
       ctaText: 'Consulenza Tech',
-      trustSignal: 'Software House agile per Bologna e provincia',
+      trustSignal: 'Software su misura agile per Bologna e provincia',
     },
   },
 };
