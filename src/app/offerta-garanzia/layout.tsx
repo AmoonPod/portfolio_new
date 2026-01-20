@@ -103,8 +103,8 @@ export default function OfferGaranziaLayout({
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
             <div className="offer-landing-page variant-garanzia">
-                {children}
-            </div>
+            {children}
+        </div>
         </>
     )
 }

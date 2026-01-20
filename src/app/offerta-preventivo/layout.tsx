@@ -114,8 +114,8 @@ export default function OfferPreventivoLayout({
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
             <div className="offer-landing-page variant-preventivo">
-                {children}
-            </div>
+            {children}
+        </div>
         </>
     )
 }

@@ -104,8 +104,8 @@ export default function OfferRateLayout({
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
             />
             <div className="offer-landing-page variant-rate">
-                {children}
-            </div>
+            {children}
+        </div>
         </>
     )
 }

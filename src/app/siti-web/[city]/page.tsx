@@ -1,91 +1,124 @@
-import { notFound } from "next/navigation";
-import { generateServiceJsonLd, generateFAQJsonLd, generateBreadcrumbJsonLd } from "@/lib/seo";
-import { getLocalPageBySlug, getAllSlugs, getPagesByProvince } from "@/data/local-pages/siti-web-dataset";
-import LocalPageTemplate from "@/components/local-pages/LocalPageTemplate";
-import { generateLocalPageMetadata } from "@/lib/local-page-metadata";
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { getLocationBySlug, getAllLocationSlugs } from '@/data/locations';
+import { assignArchetype } from '@/data/archetypes';
+import { buildPageContent } from '@/lib/content/factory';
+import { buildSeoMetadata } from '@/lib/seo/metadata';
+import { getFAQJsonLd, getBreadcrumbJsonLd } from '@/lib/seo/local-page';
+import { getNearestNeighbors, getProvinceByCitySlug, buildProvinceBreadcrumb } from '@/lib/link-graph/graph';
+import LocalPageTemplate from '@/components/local-pages/LocalPageTemplate';
 
-export const dynamicParams = false;
-
-export async function generateStaticParams() {
-  const slugs = getAllSlugs();
-  return slugs.map(slug => ({
-    city: slug,
-  }));
+interface PageProps {
+  params: Promise<{ city: string }>;
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ city: string }> }): Promise<ReturnType<typeof generateLocalPageMetadata>> {
-  const { city } = await params;
-  const data = getLocalPageBySlug(city);
+export const dynamicParams = true;
 
-  if (!data || data.active === false) {
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const slugs = getAllLocationSlugs();
+  return slugs.map(slug => ({ city: slug }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { city } = await params;
+  const location = getLocationBySlug(city);
+
+  if (!location) {
     return {
-      title: "Pagina Non Trovata",
-      robots: {
-        index: false,
-        follow: false,
-      },
+      title: 'Pagina Non Trovata',
+      description: 'La pagina richiesta non esiste.',
     };
   }
 
-  return generateLocalPageMetadata(data);
+  const archetype = assignArchetype(location);
+  const metadata = buildSeoMetadata(location, 'siti-web', archetype);
+
+  return {
+    title: metadata.title,
+    description: metadata.description,
+    keywords: metadata.keywords,
+    alternates: {
+      canonical: metadata.canonical,
+    },
+    openGraph: metadata.openGraph,
+    twitter: metadata.twitter,
+  };
 }
 
-export default async function LocalPage({ params }: { params: Promise<{ city: string }> }) {
-  const { city } = await params;
-  const data = getLocalPageBySlug(city);
+function generateJsonLd(pageData: ReturnType<typeof buildPageContent>) {
+  const baseUrl = 'https://manueldeceglie.it';
 
-  if (!data || data.active === false) {
+  const faqJsonLd = getFAQJsonLd(pageData.faq);
+
+  const breadcrumbItems = buildProvinceBreadcrumb(pageData.slug);
+  const breadcrumbJsonLd = getBreadcrumbJsonLd([
+    { name: 'Home', url: baseUrl },
+    { name: 'Servizi', url: `${baseUrl}#services` },
+    { name: pageData.serviceName, url: `${baseUrl}/siti-web` },
+    { name: pageData.province, url: `${baseUrl}/siti-web/${pageData.province.toLowerCase().replace(/ /g, '-')}` },
+    { name: pageData.cityName, url: pageData.seo.canonical },
+  ]);
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'ProfessionalService',
+        name: 'Manuel De Ceglie',
+        description: 'Web developer specializzato in siti web per attività locali',
+        url: baseUrl,
+        areaServed: [
+          { '@type': 'Place', name: pageData.region },
+          { '@type': 'Place', name: pageData.province },
+          { '@type': 'Place', name: pageData.cityName },
+        ],
+      },
+      {
+        '@type': 'Service',
+        name: `${pageData.serviceName} a ${pageData.cityName}`,
+        description: pageData.seo.description,
+        provider: { '@type': 'ProfessionalService', name: 'Manuel De Ceglie' },
+        areaServed: [
+          { '@type': 'Place', name: pageData.cityName },
+          { '@type': 'Place', name: pageData.province },
+        ],
+      },
+      breadcrumbJsonLd,
+      faqJsonLd,
+    ],
+  };
+}
+
+export default async function LocalPage({ params }: PageProps) {
+  const { city } = await params;
+
+  const location = getLocationBySlug(city);
+  if (!location) {
     notFound();
   }
 
-  const serviceJsonLd = generateServiceJsonLd({
-    serviceName: `${data.serviceName} a ${data.cityName}`,
-    serviceDescription: data.seo.description,
-    serviceType: "Web Development",
-    areaServed: [data.cityName, data.province, data.region],
-    url: data.seo.canonical,
-    offers: data.offers || [],
-    image: `${data.seo.canonical}/og-image.png`,
-    geo: data.geo,
-    cityName: data.cityName
+  const pageData = buildPageContent(location);
+
+  const neighbors = getNearestNeighbors(city, 6);
+  const nearbyCities = neighbors.map(n => {
+    const neighborPage = buildPageContent(n.location);
+    return neighborPage;
   });
 
-  const faqJsonLd = generateFAQJsonLd(data.faq.map(faq => ({
-    question: faq.q,
-    answer: faq.a,
-  })));
-
-  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
-    { name: "Home", url: "https://manueldeceglie.it" },
-    { name: "Servizi", url: "https://manueldeceglie.it/#services" },
-    { name: data.serviceName, url: "https://manueldeceglie.it/siti-web" },
-    { name: data.cityName, url: data.seo.canonical },
-  ]);
-
-  // Recupera città della stessa provincia per interlinking
-  const allProvincePages = getPagesByProvince(data.province)
-  const activeProvincePages = allProvincePages.filter(page => page.active !== false)
-  const nearbyCities = activeProvincePages
-    .filter(page => page.slug !== data.slug)
-    .slice(0, 6)
+  const jsonLd = generateJsonLd(pageData);
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      <LocalPageTemplate
+        data={pageData}
+        nearbyCities={nearbyCities}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
-      <LocalPageTemplate data={data} nearbyCities={nearbyCities} />
     </>
   );
 }
-
-
