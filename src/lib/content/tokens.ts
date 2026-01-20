@@ -20,6 +20,32 @@ const COMMON_TOKENS: Record<string, string> = {
   [TOKENS.SERVICE_SLUG]: 'siti-web',
 };
 
+// Zone/area keywords per città italiane - zona industriale, quartieri, distretti
+const CITY_ZONES: Record<string, string[]> = {
+  'modena': ['sassuolo', 'carpi', 'formigine', 'mirandola', 'pavullo', 'vignola', 'castelnuovo rangone', 'nonantola', 'castelfranco emilia', 'soliera', 'distretto ceramico', 'zona industriale modenese'],
+  'bologna': ['san lazaro di savena', 'imola', 'castel san pietro terme', 'zola predosa', 'pianoro', 'sasso marconi', 'casalecchio di reno', 'bentivoglio', 'minerbio', 'area metropolitana bolognese'],
+  'parma': ['fidenza', 'salsomaggiore terme', 'langhirano', 'busseto', 'colorno', 'sorbolo', 'medesano', 'felino', 'zona industriale parmense'],
+  'reggio-emilia': ['correggio', 'scandiano', 'guastalla', 'novellara', 'luzzara', 'castellarano', 'rio saliceto', 'cavriago', 'bagnolo in piano', 'distretto ceramico reggiano'],
+  'piacenza': ['fiorenzuola d\'arda', 'castel san giovanni', 'borgonovo val tidone', 'rottofreno', 'podenzano', 'vigolzone', 'area industriale piacentina'],
+  'ferrara': ['cento', 'comacchio', 'argenta', 'copparo', 'bondeno', 'poggio renatico', 'delta del po'],
+  'ravenna': ['faenza', 'lugo', 'cervia', 'bagnacavallo', 'cotignola', 'fusignano', 'alfonsine', 'lidi ravennati'],
+  'forlì': ['forlimpopoli', 'bertinoro', 'galeata', 'civitella di romagna', 'predappio', 'dovadola', 'cesenatico', 'gatteo'],
+  'rimini': ['riccione', 'cattolica', 'san marino', 'santarcangelo di romagna', 'bellaria-igea marina', 'misano adriatico'],
+  'verona': ['villafranca di verona', 'legnago', 'bussolengo', 'sona', 'pescantina', 'san bonifacio', 'zona industriale veronese'],
+  'padova': ['albignasego', 'selvazzano dentro', 'cadoneghe', 'vigonza', 'rubano', 'campo san marto', 'zona industriale padovana'],
+  'vicenza': ['thiene', 'schio', 'bassano del grappa', 'arzignano', 'lonigo', 'dueville', 'zona industriale vicentina'],
+  'venezia': ['mestre', 'marghera', 'san donà di piave', 'jesolo', 'chioggia', 'cararzere'],
+  'treviso': ['conegliano', 'castelfranco veneto', 'montebelluna', 'vittorio veneto', 'oderzo', 'susegana'],
+  'firenze': ['sesto fiorentino', 'scandicci', 'bagno a ripoli', 'signa', 'lastra a signa', 'zona industriale fiorentina'],
+  'prato': ['montemurlo', 'agliana', 'carmignano', 'poggio a caiano', 'vaiano'],
+  'livorno': ['piombino', 'grosseto', 'rosignano marittimo', 'cegna', 'portoferraio', 'caltagirone'],
+  'pisa': ['lucca', 'viareggio', 'cascina', 'pontedera', 'san giuliano terme'],
+  'arezzo': ['montevarchi', 'san giovanni valdarno', 'cortona', 'castiglion fiorentino', 'foiano della chiana'],
+  'siena': ['poggibonsi', 'colle val d\'elsa', 'montepulciano', 'chiusi', 'sinalunga'],
+  'castelnovo ne\'monti': ['ventasso', 'busana', 'collagna', 'ligonchio', 'villa minozzo', 'canossa', 'alta val d\'enza', 'appennino reggiano'],
+  'san polo d\'enza': ['quattro castella', 'montecchio emilia', 'bibbiano', 'traversetolo', 'canossa'],
+};
+
 // Converte camelCase in UPPER_CASE (es: cityName -> CITY_NAME)
 function camelToUpperSnake(str: string): string {
   return str
@@ -83,7 +109,8 @@ export function buildKeywords(cityName: string, province: string, serviceName: s
   const normalizedProvince = province.toLowerCase();
   const normalizedService = serviceName.toLowerCase();
   
-  return [
+  // Base keywords
+  const keywords: string[] = [
     `${normalizedService} ${normalizedCity}`,
     `${normalizedService} ${normalizedProvince}`,
     `realizzazione ${normalizedService} ${normalizedCity}`,
@@ -91,7 +118,18 @@ export function buildKeywords(cityName: string, province: string, serviceName: s
     `creazione ${normalizedService} ${normalizedCity}`,
     `${normalizedService} ${normalizedProvince} appennino`,
     `${normalizedService} emilia romagna`,
+    `${normalizedService} provincia ${normalizedProvince}`,
   ];
+  
+  // Add zone/district keywords if available
+  if (CITY_ZONES[normalizedCity]) {
+    const zones = CITY_ZONES[normalizedCity];
+    zones.forEach(zone => {
+      keywords.push(`${normalizedService} ${zone}`);
+    });
+  }
+  
+  return keywords;
 }
 
 export function capitalizeFirst(str: string): string {

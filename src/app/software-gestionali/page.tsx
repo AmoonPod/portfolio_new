@@ -68,36 +68,52 @@ const BASE_URL = 'https://manueldeceglie.it'
 
 export const metadata: Metadata = {
     metadataBase: new URL(DATA.url),
-    title: 'Software Gestionali e CRM su Misura | Automatizza la tua Attività',
-    description: 'Smetti di perdere tempo con fogli Excel e processi manuali. Creo software gestionali e CRM su misura per la tua azienda. Automazione, efficienza e controllo totale.',
+    title: 'Software Gestionali e CRM su Misura | Digitalizza la Tua Impresa',
+    description: 'Sviluppo software gestionali personalizzati e CRM su misura per PMI, artigiani e professionisti. Automatizza i processi, risparmia tempo e aumenta il fatturato.',
     keywords: [
+        // Nazionali
         'software gestionale',
-        'crm su misura',
         'gestionale aziendale',
+        'crm su misura',
         'software personalizzato',
-        'automazione processi',
-        'gestionale emilia romagna',
+        'sviluppo software italia',
+        'software su misura',
+        'automatizzazione processi aziendali',
+        'digitalizzazione impresa',
+        'gestionale clienti',
+        'software gestione magazzino',
         'crm per artigiani',
+        'crm per professionisti',
         'gestionale per negozi',
         'software per ristoranti',
-        'crm per professionisti',
-        'sviluppo software',
-        'software su misura',
-        'automatizzazione impresa',
-        'digitalizzazione aziendale',
-        'software gestione clienti',
-        'crm accessibile',
-        'software per dentisti',
-        'software per avvocati',
-        'gestionale per dentisti',
-        'gestionale per commercialisti'
+        'gestionale per studi professionali',
+        // Locali - Emilia-Romagna
+        'software gestionale emilia romagna',
+        'sviluppo software reggio emilia',
+        'crm su misura modena',
+        'gestionale parma',
+        'software personalizzato bologna',
+        'digitalizzazione impresa piacenza',
+        'gestionale artigiani appennino',
+        'software per aziende ferrara',
+        // Locali - Castelnovo ne' Monti e zone
+        'software gestionale castelnovo ne monti',
+        'sviluppo software alta val d\'enza',
+        'crm per artigiani canossa',
+        'gestionale per negozi carpineti',
+        'software su misura villamino',
+        'digitalizzazione casina',
+        'software per aziende di rubiera',
+        'gestionale per artigiani di san polo d\'enza',
+        'sviluppo software provincia reggio emilia',
+        'crm per piccole imprese emilia'
     ],
     alternates: {
         canonical: `${BASE_URL}/software-gestionali`,
     },
     openGraph: {
-        title: 'Il Tuo Gestionale che Funziona Davvero',
-        description: 'Niente Excel caotici o software complicati. Ti costruisco un gestionale su misura che fa esattamente quello che ti serve.',
+        title: 'Software Gestionali e CRM Su Misura per la Tua Impresa',
+        description: 'Smetterai di combattere con Excel e processi manuali. Ti costruisco un gestionale che si adatta perfettamente alle esigenze della tua attività.',
         url: `${BASE_URL}/software-gestionali`,
         siteName: 'Manuel De Ceglie',
         images: [{ url: `${BASE_URL}/og-image.png`, width: 1200, height: 630 }],
@@ -108,28 +124,28 @@ export const metadata: Metadata = {
 
 const faqs = [
     {
-        q: 'Perché dovrei investire in un software su misura invece di usare Excel o software generici?',
-        a: 'Excel è ottimo per i calcoli, ma quando i dati crescono diventa ingestibile, error-prone e impossibile da condividre in team. I software generici (come gestionali standard) sono progettati per "tutti", quindi hanno funzionalità che non usi e mancano di quelle che ti servono davvero. Un software su misura fa esattamente quello che ti serve, si adatta al TUO processo e cresce con te. È la differenza tra un abito confezionato e uno fatto dal sarto.'
+        q: 'Perché dovrei investire in un software su misura invece di usare Excel o un gestionale generico?',
+        a: 'Excel è ottimo per fare due conti, ma quando i dati iniziano ad accumularsi diventa ingestibile, pieno di errori e impossibile da condividere con il team. I gestionali standard, invece, sono pensati per tutte le aziende: contengono funzionalità che non userai mai e ti mancano quelle che servono a te. Un software su misura fa esattamente quello che ti serve, si adatta al tuo modo di lavorare e cresce вместе con la tua azienda. È la differenza tra comprare un vestito al mercato e fartelo confezionare da un sarto: il secondo ti dura una vita e ti sta perfetto.'
     },
     {
         q: 'Quanto costa un software gestionale su misura?',
-        a: 'Dipende dalla complessità. Per un CRM base con gestione clienti e preventivi si parte da €1.500. Per un gestionale completo con magazzino, ordini, fatturazione e integrazioni si va dai €3.000 ai €8.000. Progetti complessi con automazioni avanzate hanno prezzi superiori. Il vantaggio? Una volta pagato, è TUO. Nessun canone mensile, nessuna licenza, nessun aumento unilaterale dei prezzi.'
+        a: 'Dipende da quello che ti serve. Per un CRM base con gestione clienti e preventivi si parte da 1.500 euro. Per un gestionale completo con magazzino, ordini, fatturazione semplice e integrazioni si va dai 3.000 agli 8.000 euro. I progetti più complessi, con automazioni avanzate e integrazioni personalizzate, hanno un costo superiore. Il vantaggio? Una volta pagato, il software è tuo. Nessun canone mensile, nessuna licenza, nessun aumento dei prezzi deciso da altri.'
     },
     {
-        q: 'Il mio team saprà usarlo?',
-        a: 'Progetto interfacce intuitive, pensate per chi non ha tempo di leggere manuali. Se sai usare WhatsApp o un sito web, saprai usare il tuo gestionale. Inoltre, fornisco video tutorial personalizzati e documentazione specifica per il tuo team.'
+        q: 'Il mio team saprà usarlo senza problemi?',
+        a: 'Progetto interfacce intuitive, pensate per chi non ha tempo di leggere manuali infiniti. Se sai usare WhatsApp o un sito web, saprai usare il tuo gestionale. In più, ti fornisco video tutorial personalizzati e una documentazione scritta appositamente per il tuo team.'
     },
     {
-        q: 'Posso integrare il gestionale con i software che già uso?',
-        a: 'Sì. Posso creare integrazioni con: email e calendari (Google, Outlook), WhatsApp Business, e-commerce (Shopify, WooCommerce), contabilità, gateway di pagamento, e qualsiasi API disponibile. L\'obiettivo è creare un ecosistema digitale, non silos isolati.'
+        q: 'Posso integrare il gestionale con i software che uso già?',
+        a: 'Certo. Posso creare integrazioni con la tua email e il tuo calendario (Google, Outlook), con WhatsApp Business, con il tuo e-commerce (Shopify, WooCommerce), con il commercialista, con i gateway di pagamento e con qualsiasi altra API sia disponibile. L\'obiettivo è creare un ecosistema digitale dove i dati fluiscono, non isole separate che non comunicano tra loro.'
     },
     {
-        q: 'E se ho bisogno di modifiche dopo il lancio?',
-        a: 'Il software è tuo, quindi posso modificarlo quando vuoi. Offro pacchetti di assistenza oraria per piccole modifiche o aggiornamenti più strutturati per nuove funzionalità. Niente lock-in, sei libero.'
+        q: 'E se tra qualche anno ho bisogno di aggiungere qualcosa?',
+        a: 'Il software è tuo, quindi posso modificarlo quando vuoi. Offro pacchetti di assistenza oraria per le piccole modifiche del giorno dopo e progetti più strutturati quando serve aggiungere funzionalità nuove. Non c\'è lock-in, sei libero di fare quello che vuoi con il tuo investimento.'
     },
     {
         q: 'I miei dati sono al sicuro?',
-        a: 'Implemento backup automatici, crittografia dei dati sensibili e controlli di accesso granulari. Decidiamo insieme dove ospitare i dati (server dedicato, cloud, infrastruttura on-premise). La sicurezza è una priorità, non un\'opzione.'
+        a: 'Implemento backup automatici, crittografia dei dati sensibili e controlli di accesso granulari. Decidiamo insieme dove ospitare i tuoi dati: su un server dedicato, nel cloud o on-premise nella tua sede. La sicurezza non è un\'opzione, è una priorità.'
     }
 ]
 
@@ -137,11 +153,11 @@ const industries = [
     { name: 'Artigiani e Fabbri', icon: Wrench, desc: 'Gestione commesse, preventivi, materiali, clienti' },
     { name: 'Ristoranti e Bar', icon: UtensilsCrossed, desc: 'Ordini, fornitori, magazzino, prenotazioni' },
     { name: 'Negozi e Retail', icon: Store, desc: 'Inventario, vendite, clienti fidelizzati' },
-    { name: 'Studi Professionali', icon: Briefcase, desc: 'Gestione pratiche, scadenze, clienti' },
-    { name: 'Dentali e Medici', icon: Stethoscope, desc: 'Prenotazioni, cartelle pazienti, promemoria' },
-    { name: 'Corrieri e Trasporti', icon: Truck, desc: 'Tracciamento, pianificazione, clienti' },
-    { name: 'Palestre e Scuole', icon: GraduationCap, desc: 'Abbonamenti, prenotazioni, iscrizioni' },
-    { name: 'Agentie e Agenzie', icon: Home, desc: 'Portfolio, clienti, preventivi, contratti' },
+    { name: 'Studi Professionali', icon: Briefcase, desc: 'Gestione pratiche, scadenze e clienti' },
+    { name: 'Dentisti e Studi Medici', icon: Stethoscope, desc: 'Prenotazioni, cartelle pazienti e promemoria' },
+    { name: 'Corrieri e Trasporti', icon: Truck, desc: 'Tracciamento, pianificazione e gestione clienti' },
+    { name: 'Palestre e Scuole', icon: GraduationCap, desc: 'Abbonamenti, prenotazioni e iscrizioni' },
+    { name: 'Agenzie e Immobiliari', icon: Home, desc: 'Portfolio, clienti, preventivi e contratti' },
     { name: 'Autofficine', icon: Car, desc: 'Interventi, ricambi, clienti, garanzie' },
     { name: 'Veterinarie', icon: PawPrint, desc: 'Pazienti, appuntamenti, farmaci, storico' },
 ]
@@ -173,35 +189,35 @@ const features = [
         color: 'text-orange-500',
         bg: 'bg-orange-50',
         title: 'Magazzino',
-        desc: 'Inventario实时, alert scorte minime, tracciabilità lotti e scadenze.'
+        desc: 'Inventario sempre aggiornato, alert per le scorte minime, tracciabilità lotti e scadenze.'
     },
     {
         icon: Calendar,
         color: 'text-cyan-500',
         bg: 'bg-cyan-50',
-        title: 'Calendario & Promemoria',
+        title: 'Calendario e Promemoria',
         desc: 'Appuntamenti, scadenze, task assegnati e notifiche automatiche.'
     },
     {
         icon: BarChart3,
         color: 'text-pink-500',
         bg: 'bg-pink-50',
-        title: 'Dashboard & Report',
-        desc: 'Metriche chiave in tempo reale, grafici e export dati per decisioni informate.'
+        title: 'Dashboard e Report',
+        desc: 'Metriche chiave in tempo reale, grafici chiari e export dei dati per decisioni informate.'
     },
     {
         icon: Puzzle,
         color: 'text-indigo-500',
         bg: 'bg-indigo-50',
         title: 'Integrazioni',
-        desc: 'Connetti WhatsApp Business, email, calendario e altri servizi che usi.'
+        desc: 'Connetti WhatsApp Business, email, calendario e tutti gli altri servizi che usi già.'
     },
     {
         icon: Bell,
         color: 'text-rose-500',
         bg: 'bg-rose-50',
         title: 'Automazioni',
-        desc: 'Notifiche automatiche, email di conferma, promemoria智能 e workflow ripetitivi eliminati.'
+        desc: 'Notifiche automatiche, email di conferma e workflow ripetitivi eliminati una volta per tutte.'
     },
 ]
 
@@ -279,9 +295,9 @@ export default function SoftwareGestionaliPage() {
                             </h1>
 
                             <p className="text-xl md:text-2xl text-gray-400 font-medium leading-relaxed mb-12 max-w-3xl mx-auto text-balance">
-                                Se gestisci la tua attività con fogli disordinati, promemoria sparsi e processi ripetitivi,
+                                Se gestisci la tua attività con fogli sparsi, promemoria in giro e operazioni che ripeti ogni giorno,
                                 <span className="text-white font-bold"> stai bruciando tempo prezioso</span>.
-                                Io costruisco software che fanno il lavoro al posto tuo.
+                                Io creo software che fanno il lavoro al posto tuo, così puoi concentrarti su quello che conta davvero.
                             </p>
 
                             <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
@@ -333,35 +349,35 @@ export default function SoftwareGestionaliPage() {
                                     color: 'text-orange-500',
                                     bg: 'bg-orange-50',
                                     title: 'Dati Sparsi Ovunque',
-                                    desc: 'I clienti sono su un foglio, gli ordini su un altro, le scadenze nel calendario di Outlook.'
+                                    desc: 'I clienti sono su un foglio, gli ordini su un altro, le scadenze sul calendario di Outlook.'
                                 },
                                 {
                                     icon: AlertCircle,
                                     color: 'text-yellow-500',
                                     bg: 'bg-yellow-50',
-                                    title: 'Errori Invisibili',
-                                    desc: 'Un copia-incolla sbagliato, un numero errato, una scadenza dimenticata. Gli errori costano.'
+                                    title: 'Errori che Sfuggono',
+                                    desc: 'Un copia-incolla sbagliato, un numero errato, una scadenza dimenticata. Gli errori costano cari.'
                                 },
                                 {
                                     icon: Layers,
                                     color: 'text-blue-500',
                                     bg: 'bg-blue-50',
                                     title: 'Nessuna Visibilità',
-                                    desc: 'Non sai davvero quanto guadagni, quali clienti sono profittevoli, cosa venderebbe di più.'
+                                    desc: 'Non sai davvero quanto guadagni, quali clienti ti portano valore, cosa venderebbe di più.'
                                 },
                                 {
                                     icon: RefreshCw,
                                     color: 'text-purple-500',
                                     bg: 'bg-purple-50',
-                                    title: 'Task Ripetitivi',
-                                    desc: 'Inviare la stessa email di conferma, creare lo stesso tipo di ordine, ripetere le stesse operazioni.'
+                                    title: 'Operazioni Ripetitive',
+                                    desc: 'Inviare la stessa email di conferma, creare lo stesso preventivo, compilare gli stessi moduli.'
                                 },
                                 {
                                     icon: Users,
                                     color: 'text-cyan-500',
                                     bg: 'bg-cyan-50',
                                     title: 'Team Disallineato',
-                                    desc: 'Ogni persona ha il proprio metodo. Non c\'è condivisione, non c\'è coordinamento.'
+                                    desc: 'Ogni persona ha il proprio metodo. Non c\'è condivisione, non c\'è coordinamento, si duplica il lavoro.'
                                 }
                             ].map((item, i) => (
                                 <div key={i} className="p-8 rounded-3xl border border-gray-100 bg-white shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
@@ -395,18 +411,18 @@ export default function SoftwareGestionaliPage() {
                                 <div className="space-y-6 text-gray-400 text-lg leading-relaxed font-medium">
                                     <p>
                                         Non ti imposto un gestionale complicato pieno di funzioni che non userai mai.
-                                        Analizzo i TUOI processi e costruisco uno strumento che fa esattamente quello che ti serve.
+                                        Analizzo i tuoi processi e costruisco uno strumento su misura che fa esattamente quello che ti serve.
                                     </p>
                                     <p>
-                                        Più efficienza, meno errori, tempo recuperato per le cose che contano.
+                                        Più efficienza, meno errori, tempo recuperato per le cose che contano davvero.
                                     </p>
                                     <ul className="space-y-4 mt-8">
                                         {[
                                             "Interfaccia intuitiva, come un'app che già conosci",
                                             "Dati sempre accessibili da qualsiasi dispositivo",
-                                            "Automazioni che eliminano task ripetitivi",
+                                            "Automazioni che eliminano le operazioni ripetitive",
                                             "Report e metriche per decidere meglio",
-                                            "Nessun canone: il software è TUO"
+                                            "Nessun canone: il software è tuo, per sempre"
                                         ].map((item, i) => (
                                             <li key={i} className="flex items-center gap-3 text-white">
                                                 <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
@@ -542,12 +558,12 @@ export default function SoftwareGestionaliPage() {
                                 </thead>
                                 <tbody className="text-sm md:text-base">
                                     {[
-                                        { label: "Facilità d'uso", excel: "Bassa (formule complesse)", standard: "Media (corsi necessari)", me: "Alta (intuitiva)" },
-                                        { label: "Personalizzazione", excel: "Si, ma fragile", standard: "Limitata o costosa", me: "Totale" },
-                                        { label: "Condivisione Team", excel: "Caos di versioni", standard: "Licenze multiple", me: "Accessi illimitati" },
-                                        { label: "Automazione", excel: "Macro instabili", standard: "Plugin a pagamento", me: "Integrata" },
-                                        { label: "Costo nel tempo", excel: "Gratuito (ma inefficiente)", standard: "Canoni perpetui", me: "Nessun canone" },
-                                        { label: "Supporto", excel: "Nessuno", standard: "Ticket generico", me: "Diretto con sviluppatore" },
+                                        { label: "Facilità d'uso", excel: "Bassa (serve conoscere le formule)", standard: "Media (servono corsi)", me: "Alta (tutti la usano subito)" },
+                                        { label: "Personalizzazione", excel: "Sì, ma fragile", standard: "Limitata o costosa", me: "Totale, senza limiti" },
+                                        { label: "Condivisione in Team", excel: "Caos di versioni", standard: "Licenze multiple costose", me: "Accessi illimitati inclusi" },
+                                        { label: "Automazione", excel: "Macro instabili", standard: "Plugin a pagamento", me: "Integrata nel sistema" },
+                                        { label: "Costo nel tempo", excel: "Gratuito (ma inefficiente)", standard: "Canoni per sempre", me: "Nessun canone, una tantum" },
+                                        { label: "Supporto", excel: "Nessuno", standard: "Ticket generico", me: "Parli direttamente con me" },
                                     ].map((row, i) => (
                                         <tr key={i} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
                                             <td className="py-6 px-4 font-bold text-gray-900">{row.label}</td>
@@ -582,10 +598,10 @@ export default function SoftwareGestionaliPage() {
                         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                             {/* Card 1: CRM Base */}
                             <div className="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-xl shadow-gray-200/40 flex flex-col hover:-translate-y-2 transition-transform duration-300">
-                                <div className="mb-6">
-                                    <h3 className="text-2xl font-black text-gray-900">CRM Base</h3>
-                                    <p className="text-gray-500 font-medium mt-2">Per artigiani e professionisti che vogliono organizzare clienti e preventivi.</p>
-                                </div>
+                            <div className="mb-6">
+                                <h3 className="text-2xl font-black text-gray-900">CRM Base</h3>
+                                <p className="text-gray-500 font-medium mt-2">Per artigiani, professionisti e piccole attività che vogliono organizzare clienti e preventivi.</p>
+                            </div>
                                 <div className="mb-8">
                                     <span className="text-sm text-gray-400 font-bold uppercase">A partire da</span>
                                     <div className="text-4xl font-black text-gray-900">€ 1.500</div>
@@ -609,10 +625,10 @@ export default function SoftwareGestionaliPage() {
                                 <div className="absolute top-0 right-0 bg-[#FFBC11] text-black text-xs font-bold px-4 py-2 rounded-bl-2xl rounded-tr-2xl">
                                     PIÙ RICHIESTO
                                 </div>
-                                <div className="mb-6">
-                                    <h3 className="text-2xl font-black text-white">Gestionale Completo</h3>
-                                    <p className="text-gray-400 font-medium mt-2">Per PMI, artigiani e negozi che gestiscono tutto in un unico sistema.</p>
-                                </div>
+                            <div className="mb-6">
+                                <h3 className="text-2xl font-black text-white">Gestionale Completo</h3>
+                                <p className="text-gray-400 font-medium mt-2">Per piccole e medie imprese, artigiani e negozi che gestiscono tutto in un unico sistema.</p>
+                            </div>
                                 <div className="mb-8">
                                     <span className="text-sm text-gray-500 font-bold uppercase">A partire da</span>
                                     <div className="text-4xl font-black text-[#FFBC11]">€ 3.000</div>
@@ -633,10 +649,10 @@ export default function SoftwareGestionaliPage() {
 
                             {/* Card 3: Web App Complessa */}
                             <div className="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-xl shadow-gray-200/40 flex flex-col hover:-translate-y-2 transition-transform duration-300">
-                                <div className="mb-6">
-                                    <h3 className="text-2xl font-black text-gray-900">Progetto Completo</h3>
-                                    <p className="text-gray-500 font-medium mt-2">Per aziende con processi complessi che necessitano automazioni avanzate.</p>
-                                </div>
+                            <div className="mb-6">
+                                <h3 className="text-2xl font-black text-gray-900">Progetto Completo</h3>
+                                <p className="text-gray-500 font-medium mt-2">Per aziende con processi complessi che necessitano di automazioni avanzate e integrazioni.</p>
+                            </div>
                                 <div className="mb-8">
                                     <span className="text-sm text-gray-400 font-bold uppercase">Investimento</span>
                                     <div className="text-4xl font-black text-gray-900">Su Misura</div>

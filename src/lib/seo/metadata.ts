@@ -36,6 +36,7 @@ const SERVICE_NAMES: Record<string, string> = {
   'social-media': 'Social Media',
   'ecommerce': 'E-commerce',
   'branding': 'Branding',
+  'software-gestionali': 'Software Gestionali',
 };
 
 const SERVICE_SLUGS: Record<string, string> = {
@@ -44,6 +45,38 @@ const SERVICE_SLUGS: Record<string, string> = {
   'social-media': 'social-media',
   'ecommerce': 'ecommerce',
   'branding': 'branding',
+  'software-gestionali': 'software-gestionali',
+};
+
+// Zone/area keywords per città italiane - zona industriale, quartieri, distretti
+const CITY_ZONES: Record<string, string[]> = {
+  // Emilia-Romagna - Modena
+  'modena': [' Sassuolo', ' Carpi', ' Formigine', ' Mirandola', ' Pavullo', ' Vignola', ' Castelnuovo Rangone', ' Nonantola', ' Castelfranco Emilia', ' Soliera', ' distretto ceramico', ' zona industriale modenese'],
+  'bologna': [' San Lazzaro di Savena', ' Imola', ' Castel San Pietro Terme', ' Zola Predosa', ' Pianoro', ' Sasso Marconi', ' Casalecchio di Reno', ' Bentivoglio', ' Minerbio', ' area metropolitana bolognese'],
+  'parma': [' Fidenza', ' Salsomaggiore Terme', ' Langhirano', ' Busseto', ' Colorno', ' Sorbolo', ' Medesano', ' Felino', ' zona industriale parmense'],
+  'reggio-emilia': [' Correggio', ' Scandiano', ' Guastalla', ' Novellara', ' Luzzara', ' Castellarano', ' Rio Saliceto', ' Cavriago', ' Bagnolo in Piano', ' distretto ceramico reggiano'],
+  'piacenza': [' Fiorenzuola d\'Arda', ' Castel San Giovanni', ' Borgonovo Val Tidone', ' Rottofreno', ' Podenzano', ' Vigolzone', ' area industriale piacentina'],
+  'ferrara': [' Cento', ' Comacchio', ' Argenta', ' Copparo', ' Bondeno', ' Poggio Renatico', ' delta del Po'],
+  'ravenna': [' Faenza', ' Lugo', ' Cervia', ' Bagnacavallo', ' Cotignola', ' Fusignano', ' Alfonsine', ' lidi ravennati'],
+  'forli-cesena': [' Forlimpopoli', ' Bertinoro', ' Galeata', ' Civitella di Romagna', ' Predappio', ' Dovadola', ' Cesenatico', ' Gatteo'],
+  'rimini': [' Riccione', ' Cattolica', ' San Marino', ' Santarcangelo di Romagna', ' Bellaria-Igea Marina', ' Misano Adriatico'],
+  // Veneto
+  'verona': [' Villafranca di Verona', ' Legnago', ' Bussolengo', ' Sona', ' Pescantina', ' San Bonifacio', ' zona industriale veronese'],
+  'padova': [' Albignasego', ' Selvazzano Dentro', ' Cadoneghe', ' Vigonza', ' Rubano', ' Campo San Marto', ' zona industriale padovana'],
+  'vicenza': [' Thiene', ' Schio', ' Bassano del Grappa', ' Arzignano', ' Lonigo', ' Dueville', ' zona industriale vicentina'],
+  'venezia': [' Mestre', ' Marghera', ' San Donà di Piave', ' Jesolo', ' Chioggia', ' Cavarzere'],
+  'treviso': [' Conegliano', ' Castelfranco Veneto', ' Montebelluna', ' Vittorio Veneto', ' Oderzo', ' Susegana'],
+  'rovigo': [' Adria', ' Lendinara', ' Badia Polesine', ' Occhiobello', ' Polesella'],
+  // Toscana
+  'firenze': [' Sesto Fiorentino', ' Scandicci', ' Bagno a Ripoli', ' Signa', ' Lastra a Signa', ' zona industriale fiorentina'],
+  'prato': [' Montemurlo', ' Agliana', ' Carmignano', ' Poggio a Caiano', ' Vaiano'],
+  'livorno': [' Piombino', ' Grosseto', ' Rosignano Marittimo', ' Cecina', ' Portoferraio', ' Caltagirone'],
+  'pisa': [' Lucca', ' Viareggio', ' Cascina', ' Pontedera', ' San Giuliano Terme', ' Livorno'],
+  'arezzo': [' Montevarchi', ' San Giovanni Valdarno', ' Cortona', ' Castiglion Fiorentino', ' Foiano della Chiana'],
+  'siena': [' Poggibonsi', ' Colle Val d\'Elsa', ' Montepulciano', ' Chiusi', ' Sinalunga'],
+  // Reggio Emilia province specific zones
+  'castelnovo-ne-monti': [' Ventasso', ' Busana', ' Collagna', ' Ligonchio', ' Villa Minozzo', ' canossa', ' alta val d\'Enza', ' Appennino reggiano'],
+  'san-poledEnza': [' Quattro Castella', ' Montecchio Emilia', ' Bibbiano', ' Traversetolo', ' canossa'],
 };
 
 export function generateCanonicalUrl(citySlug: string, serviceSlug: string = 'siti-web'): string {
@@ -53,8 +86,20 @@ export function generateCanonicalUrl(citySlug: string, serviceSlug: string = 'si
 export function generateTitle(
   cityName: string,
   serviceName: string,
+  serviceSlug: string = 'siti-web',
   suffix: string = 'Manuel De Ceglie'
 ): string {
+  if (serviceSlug === 'software-gestionali') {
+    const templates = [
+      `Software Gestionali su Misura a ${cityName} | ${suffix}`,
+      `Gestionale Personalizzato per la Tua Attività a ${cityName} | ${suffix}`,
+      `CRM e Software Aziendale a ${cityName} | ${suffix}`,
+      `Digitalizza la Tua Impresa con un Software a ${cityName} | ${suffix}`,
+    ];
+    const index = cityName.length % templates.length;
+    return templates[index];
+  }
+  
   const templates = [
     `Realizzazione ${serviceName} a ${cityName} | ${suffix}`,
     `${serviceName} a ${cityName}: fatti per farti trovare | ${suffix}`,
@@ -69,8 +114,65 @@ export function generateTitle(
 export function generateDescription(
   cityName: string,
   serviceName: string,
+  serviceSlug: string = 'siti-web',
   archetype?: MarketArchetype
 ): string {
+  if (serviceSlug === 'software-gestionali') {
+    const archetypeHints: Record<MarketArchetype, string[]> = {
+      MountainSmall: [
+        `Software gestionali per artigiani e attività di montagna a ${cityName}.`,
+        `Gestionali su misura che funzionano anche offline nelle zone appenniniche.`,
+        `Digitalizza la tua attività a ${cityName} con un software pensato per te.`,
+      ],
+      HillMedium: [
+        `Software gestionali per agriturismi e artigiani del territorio collinare a ${cityName}.`,
+        `CRM su misura che valorizza la tradizione della tua attività a ${cityName}.`,
+        `Gestionali personalizzati per attività della zona collinare.`,
+      ],
+      IndustrialHub: [
+        `Software gestionali B2B per aziende del settore a ${cityName}.`,
+        `Gestionali enterprise per il settore industriale della zona.`,
+        `CRM aziendale per PMI e grandi imprese a ${cityName}.`,
+      ],
+      FoodValley: [
+        `Software gestionali per aziende food e artigiani del gusto a ${cityName}.`,
+        `Gestionali con tracciabilità HACCP per il settore alimentare.`,
+        `Digitalizzazione per aziende enogastronomiche a ${cityName}.`,
+      ],
+      ProvinceCapital: [
+        `Software gestionali per professionisti e attività di ${cityName}.`,
+        `CRM su misura per PMI e studi professionali nel territorio.`,
+        `Gestionali che ti fanno risparmiare tempo e aumentare il fatturato.`,
+      ],
+      SuburbanGrowth: [
+        `Software gestionali per attività in crescita nell'hinterland di ${cityName}.`,
+        `CRM scalabile per aziende che vogliono espandersi.`,
+        `Gestionali personalizzati per attività dinamiche della zona.`,
+      ],
+      PlainsSmall: [
+        `Software gestionali per artigiani e commercianti della pianura.`,
+        `Gestionali locali ottimizzati per il territorio di ${cityName}.`,
+        `Digitalizza la tua attività con un software su misura.`,
+      ],
+      MetroBologna: [
+        `Software gestionali nell'area metropolitana bolognese.`,
+        `CRM enterprise per aziende dell'hinterland bolognese.`,
+        `Gestionali professionali per competitività nel territorio.`,
+      ],
+    };
+    
+    const hints = archetype ? archetypeHints[archetype] : [
+      `Software gestionali personalizzati a ${cityName}.`,
+      `CRM e gestionali su misura per la tua attività.`,
+      `Digitalizza la tua impresa con un software professionale.`,
+    ];
+    
+    const index = cityName.length % hints.length;
+    const base = hints[index];
+    
+    return `${base} Soluzioni su misura per PMI, artigiani e professionisti.`;
+  }
+  
   const archetypeHints: Record<MarketArchetype, string[]> = {
     MountainSmall: [
       `Siti web veloci anche con connessione instabile a ${cityName}.`,
@@ -129,28 +231,70 @@ export function generateDescription(
 export function generateKeywords(
   cityName: string,
   province: string,
-  serviceName: string
+  serviceName: string,
+  serviceSlug: string = 'siti-web'
 ): string[] {
   const normalizedCity = cityName.toLowerCase();
   const normalizedProvince = province.toLowerCase();
   const normalizedService = serviceName.toLowerCase();
   
-  return [
+  // Base keywords
+  const keywords = [
     `${normalizedService} ${normalizedCity}`,
     `${normalizedService} ${normalizedProvince}`,
     `realizzazione ${normalizedService} ${normalizedCity}`,
     `web designer ${normalizedCity}`,
     `creazione ${normalizedService} ${normalizedCity}`,
-    `${normalizedService} ${normalizedProvince} appennino`,
-    `${normalizedService} emilia romagna`,
   ];
+  
+  // Add zone/district keywords if available
+  if (CITY_ZONES[normalizedCity]) {
+    const zones = CITY_ZONES[normalizedCity];
+    zones.forEach(zone => {
+      keywords.push(`${normalizedService}${zone}`);
+    });
+  }
+  
+  // Add region and broader area keywords
+  keywords.push(`${normalizedService} emilia romagna`);
+  keywords.push(`${normalizedService} provincia ${normalizedProvince}`);
+  
+  // Add specific service keywords for software
+  if (serviceSlug === 'software-gestionali') {
+    keywords.push('software gestionale emilia romagna');
+    keywords.push('crm su misura');
+    keywords.push('gestionale aziendale personalizzato');
+    keywords.push('digitalizzazione impresa');
+    keywords.push('automatizzazione processi');
+    keywords.push('software per artigiani');
+    keywords.push('gestionale per negozi');
+    keywords.push('software per ristoranti');
+    
+    if (CITY_ZONES[normalizedCity]) {
+      keywords.push(`software gestionale${CITY_ZONES[normalizedCity].join(` ${normalizedProvince}`)}`);
+    }
+  }
+  
+  return keywords;
 }
 
 export function generateH1(
   cityName: string,
   serviceName: string,
+  serviceSlug: string = 'siti-web',
   archetype?: MarketArchetype
 ): string {
+  if (serviceSlug === 'software-gestionali') {
+    const templates = [
+      `Software Gestionali a ${cityName} per Attività che Vogliono Crescere`,
+      `Il Tuo Gestionale Personalizzato a ${cityName}`,
+      `CRM e Software Su Misura per la Tua Impresa`,
+      `Digitalizza la Tua Attività con un Software a ${cityName}`,
+    ];
+    const index = (cityName.length + (archetype ? archetype.length : 0)) % templates.length;
+    return templates[index];
+  }
+  
   const templates = [
     `${serviceName} a ${cityName} per attività che vogliono crescere`,
     `Il tuo sito web a ${cityName} deve portarti clienti`,
@@ -170,11 +314,12 @@ export function buildSeoMetadata(
   const serviceName = SERVICE_NAMES[serviceSlug] || 'Siti Web';
   const citySlug = location.slug;
   const canonical = generateCanonicalUrl(citySlug, serviceSlug);
+  const baseUrl = 'https://manueldeceglie.it';
   
-  const title = generateTitle(location.name, serviceName);
-  const description = generateDescription(location.name, serviceName, archetype);
-  const keywords = generateKeywords(location.name, location.province, serviceName);
-  const h1 = generateH1(location.name, serviceName, archetype);
+  const title = generateTitle(location.name, serviceName, serviceSlug);
+  const description = generateDescription(location.name, serviceName, serviceSlug, archetype);
+  const keywords = generateKeywords(location.name, location.province, serviceName, serviceSlug);
+  const h1 = generateH1(location.name, serviceName, serviceSlug, archetype);
   
   return {
     title,
@@ -188,7 +333,9 @@ export function buildSeoMetadata(
       type: 'website',
       images: [
         {
-          url: `${canonical}/og-image.png`,
+          url: serviceSlug === 'software-gestionali' 
+            ? `${baseUrl}/api/og/software-gestionali/${citySlug}`
+            : `${baseUrl}/og-image.png`,
           width: 1200,
           height: 630,
           alt: `${serviceName} a ${location.name}`,
@@ -199,7 +346,10 @@ export function buildSeoMetadata(
       card: 'summary_large_image',
       title,
       description,
-      images: [`${canonical}/og-image.png`],
+      images: [serviceSlug === 'software-gestionali' 
+        ? `${baseUrl}/api/og/software-gestionali/${citySlug}`
+        : `${baseUrl}/og-image.png`
+      ],
     },
   };
 }

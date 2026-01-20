@@ -3,6 +3,7 @@ import { MarketArchetype, assignArchetype, getArchetype } from '@/data/archetype
 import { createReplacements, TokenReplacements, replaceTokens } from '@/lib/content/tokens';
 import { pickVariant, getPopulationTier, getZoneContext, spintaxParse } from '@/lib/content/spintax';
 import { generateHero, generateDiagnostica, generateGoodInvestment, generateSEO } from '@/lib/content/templates';
+import { generateSoftwareHero, generateSoftwareDiagnostica, generateSoftwareGoodInvestment, generateSoftwareSEO, generateSoftwareFAQ } from '@/lib/content/software-templates';
 import { LocalPageData } from '@/data/local-pages/types';
 
 const OFFERS_BASE = {
@@ -387,6 +388,98 @@ export function rebuildPageData(location: Location, existingData?: Partial<Local
     ...newData,
     ...existingData,
     offers: existingData?.offers || newData.offers,
+    faq: existingData?.faq || newData.faq,
+  };
+}
+
+export function buildSoftwarePageContent(location: Location, active: boolean = true): LocalPageData {
+  const archetype = assignArchetype(location);
+  const archetypeData = getArchetype(archetype);
+  
+  const altitude = estimateAltitudeFromLocation(location);
+  const sector = getSectorFromArchetype(archetype);
+  
+  const replacements = createReplacements(
+    location.name,
+    location.province,
+    location.region,
+    location.population,
+    'Software Gestionali',
+    'software-gestionali',
+    altitude,
+    sector,
+    archetypeData.name,
+    archetypeData.description
+  );
+
+  const hero = generateSoftwareHero(archetype, location.name, replacements);
+  const diagnostica = generateSoftwareDiagnostica(archetype, location.name, replacements);
+  const goodInvestmentBase = generateSoftwareGoodInvestment(archetype, replacements);
+  
+  const investmentCards = [
+    {
+      icon: 'zap' as const,
+      title: 'Tempo Recuperato',
+      description: 'Automazione dei processi ripetitivi',
+      description2: 'Ore risparmiate ogni settimana',
+      footerType: 'roi' as const,
+    },
+    {
+      icon: 'shield' as const,
+      title: 'Zero Errori',
+      description: 'Dati sempre consistenti e aggiornati',
+      description2: 'Niente più fogli che non tornano',
+      footerType: 'ownership' as const,
+    },
+    {
+      icon: 'star' as const,
+      title: 'Controllo Totale',
+      description: 'Metriche e report sempre disponibili',
+      description2: 'Decidi con i dati, non con le sensazioni',
+      footerType: 'premium' as const,
+    },
+  ];
+  
+  const goodInvestment = {
+    ...goodInvestmentBase,
+    cards: investmentCards,
+  };
+  
+  const seo = generateSoftwareSEO(
+    archetype,
+    location.name,
+    location.province,
+    location.slug,
+    replacements
+  );
+  
+  const faq = generateSoftwareFAQ(archetype, location.slug, replacements);
+
+  return {
+    slug: location.slug,
+    cityName: location.name,
+    province: location.province,
+    region: location.region,
+    population: location.population,
+    active,
+    serviceSlug: 'software-gestionali',
+    serviceName: 'Software Gestionali',
+    offers: [],
+    seo,
+    hero,
+    diagnostica,
+    goodInvestment,
+    faq,
+    geo: location.geo,
+  };
+}
+
+export function rebuildSoftwarePageData(location: Location, existingData?: Partial<LocalPageData>): LocalPageData {
+  const newData = buildSoftwarePageContent(location, existingData?.active ?? true);
+  
+  return {
+    ...newData,
+    ...existingData,
     faq: existingData?.faq || newData.faq,
   };
 }

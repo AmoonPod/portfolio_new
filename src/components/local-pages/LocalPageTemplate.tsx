@@ -52,7 +52,7 @@ export default function LocalPageTemplate({ data, nearbyCities = [] }: LocalPage
           badge={data.diagnostica.badge}
           title={data.diagnostica.title}
           problems={data.diagnostica.problems}
-          solutions={data.diagnostica.solutions}
+          solutions={data.diagnostica.solutions as unknown as string[]}
         />
       )}
 
