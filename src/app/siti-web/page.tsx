@@ -32,6 +32,7 @@ import { ServiceContactForm } from '@/components/service-contact-form'
 import { DATA } from '@/data/resume'
 import { sitiWebDataset } from '@/data/local-pages/siti-web-dataset'
 import { generateServiceJsonLd, generateFAQJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo'
+import { locations } from '@/data/locations'
 
 const BASE_URL = 'https://manueldeceglie.it'
 
@@ -129,8 +130,17 @@ function getCitiesByProvince() {
     return grouped
 }
 
+// Ottiene le città più popolose dell'Emilia-Romagna
+function getTopCitiesEmiliaRomagna(limit: number = 10) {
+    return locations
+        .filter(loc => loc.region === 'Emilia-Romagna')
+        .sort((a, b) => b.population - a.population)
+        .slice(0, limit)
+}
+
 export default function SitiWebPage() {
     const citiesByProvince = getCitiesByProvince()
+    const topCities = getTopCitiesEmiliaRomagna(10)
 
     // JSON-LD
     const serviceJsonLd = generateServiceJsonLd({
@@ -465,7 +475,7 @@ export default function SitiWebPage() {
                                 </div>
                                 <div className="mb-8">
                                     <span className="text-sm text-gray-400 font-bold uppercase">A partire da</span>
-                                    <div className="text-4xl font-black text-gray-900">€ 600</div>
+                                    <div className="text-4xl font-black text-gray-900">€ 649</div>
                                 </div>
                                 <ul className="space-y-4 mb-8 flex-1">
                                     {["Pagina Unica a Scorrimento", "Ottimizzata per Conversione", "Mobile Perfect", "Form Contatti + WhatsApp", "Consegna in 7 giorni"].map((f, i) => (
@@ -492,7 +502,7 @@ export default function SitiWebPage() {
                                 </div>
                                 <div className="mb-8">
                                     <span className="text-sm text-gray-500 font-bold uppercase">A partire da</span>
-                                    <div className="text-4xl font-black text-[#FFBC11]">€ 900</div>
+                                    <div className="text-4xl font-black text-[#FFBC11]">€ 949</div>
                                 </div>
                                 <ul className="space-y-4 mb-8 flex-1">
                                     {["Da 2+ Pagine", "Struttura SEO Avanzata", "Google Maps + Business Profile", "CMS per modifiche autonome (su richiesta)", "Analytics + Search Console"].map((f, i) => (
@@ -553,6 +563,30 @@ export default function SitiWebPage() {
                             <Button variant="ghost" className="text-[#FFBC11] hover:text-orange-500 hover:bg-transparent p-0 font-bold" asChild>
                                 <Link href="#contatti">Non trovi la tua città? &rarr;</Link>
                             </Button>
+                        </div>
+
+                        {/* Top Cities - Città più popolose */}
+                        <div className="mb-16 pb-16 border-b border-gray-200">
+                            <h3 className="text-xl font-black text-gray-900 mb-6 flex items-center gap-2">
+                                <MapPin className="w-5 h-5 text-[#FFBC11]" />
+                                Principali Città dell'Emilia-Romagna
+                            </h3>
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                                {topCities.map((city) => (
+                                    <Link
+                                        key={city.slug}
+                                        href={`/siti-web/${city.slug}`}
+                                        className="group p-4 rounded-xl border border-gray-200 hover:border-[#FFBC11] hover:bg-[#FFBC11]/5 transition-all duration-300"
+                                    >
+                                        <div className="font-bold text-gray-900 group-hover:text-[#FFBC11] transition-colors mb-1">
+                                            {city.name}
+                                        </div>
+                                        <div className="text-xs text-gray-500 font-medium">
+                                            {city.province}
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
                         </div>
 
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

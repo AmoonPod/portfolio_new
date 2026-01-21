@@ -46,6 +46,8 @@ import BlurFade from '@/components/magicui/blur-fade'
 import { ServiceContactForm } from '@/components/service-contact-form'
 import { DATA } from '@/data/resume'
 import { generateServiceJsonLd, generateFAQJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo'
+import { locations } from '@/data/locations'
+import { MapPin } from 'lucide-react'
 
 const BASE_URL = 'https://manueldeceglie.it'
 
@@ -122,7 +124,16 @@ const features = [
     { icon: Bell, color: 'text-rose-500', bg: 'bg-rose-500/10', title: 'Automazioni', desc: 'Notifiche e workflow automatici per risparmiare tempo.' },
 ]
 
+// Ottiene le città più popolose dell'Emilia-Romagna
+function getTopCitiesEmiliaRomagna(limit: number = 10) {
+    return locations
+        .filter(loc => loc.region === 'Emilia-Romagna')
+        .sort((a, b) => b.population - a.population)
+        .slice(0, limit)
+}
+
 export default function SoftwareGestionaliPage() {
+    const topCities = getTopCitiesEmiliaRomagna(10)
     // --- SEO GENERATORS ---
     const serviceJsonLd = generateServiceJsonLd({
         serviceName: 'Software Gestionali e CRM su Misura',
@@ -645,6 +656,38 @@ export default function SoftwareGestionaliPage() {
                         <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all">
                             {[Code2, Server, Database, ShieldCheck, Terminal, Smartphone].map((Icon, i) => (
                                 <Icon key={i} className="w-8 h-8 md:w-10 md:h-10 text-gray-800" />
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* --- TOP CITIES --- */}
+                <section className="py-20 bg-white border-t border-gray-200">
+                    <div className="container max-w-[1200px] mx-auto px-4 sm:px-6">
+                        <div className="text-center mb-12">
+                            <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-gray-900 mb-4">
+                                Software Gestionali nelle Principali Città
+                            </h2>
+                            <p className="text-gray-500 font-medium max-w-2xl mx-auto">
+                                Sviluppo software gestionali su misura per aziende in tutta l'Emilia-Romagna.
+                                Scopri le pagine dedicate alle principali città:
+                            </p>
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-5xl mx-auto">
+                            {topCities.map((city) => (
+                                <Link
+                                    key={city.slug}
+                                    href={`/sviluppo-software/${city.slug}`}
+                                    className="group p-4 rounded-xl border border-gray-200 hover:border-[#FFBC11] hover:bg-[#FFBC11]/5 transition-all duration-300 text-center"
+                                >
+                                    <MapPin className="w-5 h-5 text-gray-400 group-hover:text-[#FFBC11] mx-auto mb-2 transition-colors" />
+                                    <div className="font-bold text-gray-900 group-hover:text-[#FFBC11] transition-colors mb-1">
+                                        {city.name}
+                                    </div>
+                                    <div className="text-xs text-gray-500 font-medium">
+                                        {city.province}
+                                    </div>
+                                </Link>
                             ))}
                         </div>
                     </div>
