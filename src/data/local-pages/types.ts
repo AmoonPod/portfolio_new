@@ -62,6 +62,41 @@ export interface LocalPageData {
   }>;
 }
 
+export interface NichePageData extends LocalPageData {
+  nicheSlug: string;
+  nicheName: string;
+  nicheContent?: {
+    painPoints: Array<{
+      icon: string;
+      title: string;
+      description: string;
+      keyword: string;
+    }>;
+    features: Array<{
+      icon: string;
+      title: string;
+      description: string;
+      benefit: string;
+    }>;
+    stats: Array<{
+      value: string;
+      label: string;
+      source: string;
+    }>;
+    testimonials: Array<{
+      quote: string;
+      author: string;
+      business: string;
+      location: string;
+      rating?: number;
+    }>;
+  };
+  relatedCities?: Array<{
+    slug: string;
+    cityName: string;
+  }>;
+}
+
 export interface LocalCityLink {
   slug: string;
   cityName: string;

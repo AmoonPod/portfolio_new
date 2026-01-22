@@ -1,5 +1,7 @@
 import { Location } from '@/data/locations';
 import { MarketArchetype } from '@/data/archetypes';
+import { NicheConfig } from '@/data/niches-config';
+import { buildNicheCanonicalUrl } from '@/lib/link-graph/tokens';
 
 export interface SeoMetadata {
   title: string;
@@ -331,6 +333,70 @@ export function buildNoIndexMetadata(): SeoMetadata {
     robots: {
       index: false,
       follow: false,
+    },
+  };
+}
+
+export function buildNicheSeoMetadata(
+  location: Location,
+  niche: NicheConfig
+): SeoMetadata {
+  const citySlug = location.slug;
+  const canonical = buildNicheCanonicalUrl(citySlug, niche.slug, 'siti-web');
+  const baseUrl = 'https://manueldeceglie.it';
+
+  const titleVariants = [
+    `${niche.name} a ${location.name} | Web Design`,
+    `Siti web per ${niche.pluralName.toLowerCase()} a ${location.name}`,
+    `${niche.singularName} a ${location.name}? Il sito che porta clienti`,
+    `Web design per ${niche.pluralName.toLowerCase()} a ${location.name}`,
+  ];
+
+  const title = titleVariants[location.name.charCodeAt(0) % titleVariants.length];
+
+  const descriptionVariants = [
+    `Sito web professionale per ${niche.pluralName.toLowerCase()} a ${location.name}: design, SEO e marketing specifico per il tuo settore.`,
+    `Realizzo siti web per ${niche.pluralName.toLowerCase()} a ${location.name}. Presenza online che porta risultati concreti.`,
+    `${niche.name} a ${location.name}: sito web ottimizzato per farti trovare dai clienti del tuo settore.`,
+  ];
+
+  const description = descriptionVariants[location.name.charCodeAt(0) % descriptionVariants.length];
+
+  const keywords = [
+    `${niche.name.toLowerCase()} ${location.name}`,
+    `web design ${niche.pluralName.toLowerCase()} ${location.name}`,
+    `marketing per ${niche.pluralName.toLowerCase()} ${location.name}`,
+    `realizzazione siti ${niche.pluralName.toLowerCase()} ${location.name}`,
+  ];
+
+  return {
+    title,
+    description,
+    canonical,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: 'website',
+      images: [
+        {
+          url: `${baseUrl}/og-image.png`,
+          width: 1200,
+          height: 630,
+          alt: `${niche.name} a ${location.name}`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`${baseUrl}/og-image.png`],
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

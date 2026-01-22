@@ -14,6 +14,8 @@ import { ActiveOffersSection } from "./OffersSection";
 import { NearbyCitiesFooter } from "./NearbyCitiesFooter";
 import { CaseStudyProof } from "./CaseStudyProof";
 import { Breadcrumb } from "./Breadcrumb";
+import { StickyBottomBar } from "./StickyBottomBar";
+import NicheHubOtherNiches from "@/components/local-pages/niche/NicheHubOtherNiches";
 
 interface LocalPageTemplateProps {
   data: LocalPageData;
@@ -24,7 +26,6 @@ interface LocalPageTemplateProps {
 export default function LocalPageTemplate({ data, nearbyCities = [] }: LocalPageTemplateProps) {
   const [isOfferOpen, setIsOfferOpen] = useState(false);
 
-  // Filtra solo le offerte attive
   const activeOffers = data.offers?.filter(o => o.active) || []
 
   return (
@@ -33,22 +34,19 @@ export default function LocalPageTemplate({ data, nearbyCities = [] }: LocalPage
         <OfferAlertBar
           offers={data.offers}
           cityName={data.cityName}
-          onClick={() => setIsOfferOpen(true)} // Apre il popup al click
+          onClick={() => setIsOfferOpen(true)}
         />
       )}
-      {/* Offer Popup */}
       {activeOffers.length > 0 && (
         <OfferPopup
           offers={data.offers}
           cityName={data.cityName}
-          // Passiamo lo stato e la funzione per chiuderlo
           isOpen={isOfferOpen}
           onOpenChange={setIsOfferOpen}
         />
       )}
 
       <div className="relative">
-        {/* Breadcrumb Navigation - Posizionato in modo assoluto */}
         <div className="absolute top-0 left-0 right-0 z-20 bg-background/80 backdrop-blur-sm border-b border-border/50">
           <Breadcrumb
             serviceName={data.serviceName}
@@ -56,11 +54,11 @@ export default function LocalPageTemplate({ data, nearbyCities = [] }: LocalPage
             cityName={data.cityName}
           />
         </div>
-        {/* Aggiungo padding top per compensare il breadcrumb */}
         <div className="pt-12">
           <Hero cityName={data.cityName} hero={data.hero} />
         </div>
       </div>
+
       {data.diagnostica && (
         <DiagnosticaAttuale
           badge={data.diagnostica.badge}
@@ -85,22 +83,26 @@ export default function LocalPageTemplate({ data, nearbyCities = [] }: LocalPage
           cards={data.goodInvestment.cards}
         />
       )}
-      {/* --- DID YOU KNOW SECTION --- */}
       <DidYouKnowSection cityName={data.cityName} />
 
-      {/* --- CASE STUDY PROOF --- */}
       <CaseStudyProof cityName={data.cityName} />
 
-      <FAQ faq={data.faq} />
+      {/* Niches Section */}
+      <NicheHubOtherNiches showAll={true} />
 
-      <ContactSection cityName={data.cityName} serviceSlug={data.serviceSlug} />
-
+      {/* Nearby Cities Section */}
       {nearbyCities.length > 0 && (
         <NearbyCitiesFooter
           nearbyCities={nearbyCities}
           serviceName={data.serviceName}
         />
       )}
+
+      <FAQ faq={data.faq} />
+
+      <ContactSection cityName={data.cityName} serviceSlug={data.serviceSlug} />
+
+      <StickyBottomBar cityName={data.cityName} serviceName={data.serviceName} />
     </main>
   );
 }

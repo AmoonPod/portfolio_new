@@ -46,7 +46,7 @@ import BlurFade from '@/components/magicui/blur-fade'
 import { ServiceContactForm } from '@/components/service-contact-form'
 import { DATA } from '@/data/resume'
 import { generateServiceJsonLd, generateFAQJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo'
-import { locations } from '@/data/locations'
+import { targetLocations } from '@/data/locations'
 import { MapPin } from 'lucide-react'
 
 const BASE_URL = 'https://manueldeceglie.it'
@@ -126,7 +126,7 @@ const features = [
 
 // Ottiene le città più popolose dell'Emilia-Romagna
 function getTopCitiesEmiliaRomagna(limit: number = 10) {
-    return locations
+    return targetLocations
         .filter(loc => loc.region === 'Emilia-Romagna')
         .sort((a, b) => b.population - a.population)
         .slice(0, limit)

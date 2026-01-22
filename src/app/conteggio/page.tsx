@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getAllLocationSlugs, locations } from '@/data/locations'
+import { getAllLocationSlugs, targetLocations } from '@/data/locations'
 import { getAllCaseStudySlugs } from '@/data/case-studies/case-studies-data'
 
 const staticPages = [
@@ -24,7 +24,7 @@ export default function ConteggioPage() {
   const sitiWebCityCount = locationSlugs.length
   const softwareCityCount = locationSlugs.length
   const caseStudyCount = caseStudySlugs.length
-  const locationsCount = locations.length
+  const locationsCount = targetLocations.length
 
   const totalIndexable = staticCount + sitiWebCityCount + softwareCityCount + caseStudyCount
 
@@ -55,9 +55,9 @@ export default function ConteggioPage() {
       hint: 'Somma di tutte le pagine sopra',
     },
     {
-      label: 'Totale città in locations.ts',
+      label: 'Totale città attive',
       value: locationsCount,
-      hint: 'Record presenti in src/data/locations.ts',
+      hint: 'Città attualmente abilitate',
     },
   ]
 

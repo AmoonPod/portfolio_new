@@ -34,6 +34,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getLocationBySlug } from "@/data/locations";
 import { Breadcrumb } from "./Breadcrumb";
+import { StickyBottomBar } from "./StickyBottomBar";
 
 interface SoftwareLocalPageTemplateProps {
   data: LocalPageData;
@@ -617,6 +618,9 @@ export default function SoftwareLocalPageTemplate({ data, nearbyCities = [] }: S
           </div>
         </div>
       </div>
+
+      {/* Sticky Bottom Bar */}
+      <StickyBottomBar cityName={data.cityName} serviceName={data.serviceName} />
 
     </main>
     </>

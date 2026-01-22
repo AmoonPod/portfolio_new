@@ -104,6 +104,10 @@ export function buildCanonicalUrl(citySlug: string, serviceSlug: string = 'siti-
   return `https://manueldeceglie.it/${serviceSlug}/${citySlug}`;
 }
 
+export function buildNicheCanonicalUrl(citySlug: string, nicheSlug: string, serviceSlug: string = 'siti-web'): string {
+  return `https://manueldeceglie.it/${serviceSlug}/${citySlug}/${nicheSlug}`;
+}
+
 export function buildKeywords(cityName: string, province: string, serviceName: string = 'siti web'): string[] {
   const normalizedCity = cityName.toLowerCase();
   const normalizedProvince = province.toLowerCase();

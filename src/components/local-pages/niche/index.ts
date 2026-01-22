@@ -1,0 +1,9 @@
+export { default as NicheHubHero } from './NicheHubHero';
+export { default as NicheHubPainPoints } from './NicheHubPainPoints';
+export { default as NicheHubFeatures } from './NicheHubFeatures';
+export { default as NicheHubStats } from './NicheHubStats';
+export { default as NicheHubContact } from './NicheHubContact';
+export { default as NicheHubCaseStudies } from './NicheHubCaseStudies';
+export { default as NicheHubOtherNiches } from './NicheHubOtherNiches';
+export { default as NicheHubFooter } from './NicheHubFooter';
+export { default as NicheHubStickyBottomBar } from './NicheHubStickyBottomBar';

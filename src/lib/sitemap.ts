@@ -1,4 +1,4 @@
-import { locations, getAllLocationSlugs } from '@/data/locations';
+import { targetLocations, getAllLocationSlugs, getLocationBySlug } from '@/data/locations';
 import { getAllProvinces } from '@/lib/link-graph/graph';
 
 export interface SitemapEntry {
@@ -47,7 +47,7 @@ export function buildRootSitemap(): SitemapEntry[] {
 
 export function buildCitySitemap(): SitemapEntry[] {
   return getAllLocationSlugs().map(slug => {
-    const location = locations.find(l => l.slug === slug);
+    const location = getLocationBySlug(slug);
     return {
       url: `${BASE_URL}/siti-web/${slug}`,
       lastmod: new Date().toISOString().split('T')[0],
@@ -148,10 +148,10 @@ export function buildCompleteSitemapIndex(): string {
     });
   });
 
-  if (locations.length > 1000) {
+  if (targetLocations.length > 1000) {
     const chunkSize = 1000;
-    for (let i = 0; i < locations.length; i += chunkSize) {
-      const chunk = locations.slice(i, i + chunkSize);
+    for (let i = 0; i < targetLocations.length; i += chunkSize) {
+      const chunk = targetLocations.slice(i, i + chunkSize);
       sitemaps.push({
         loc: `${BASE_URL}/sitemap-cities-${Math.floor(i / chunkSize) + 1}.xml`,
         lastmod: new Date().toISOString().split('T')[0],

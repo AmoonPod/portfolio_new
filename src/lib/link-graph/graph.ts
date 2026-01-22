@@ -1,4 +1,4 @@
-import { Location, locations, getLocationBySlug } from '@/data/locations';
+import { Location, targetLocations, getLocationBySlug } from '@/data/locations';
 
 export interface NeighborCity {
   location: Location;
@@ -60,7 +60,7 @@ export function getNearestNeighbors(
 
   const neighbors: NeighborCity[] = [];
 
-  for (const other of locations) {
+  for (const other of targetLocations) {
     if (other.slug === citySlug) continue;
 
     const distance = haversineDistance(
@@ -86,7 +86,7 @@ export function getNearestNeighbors(
 export function getAllProvinces(): ProvinceInfo[] {
   const provinceMap = new Map<string, ProvinceInfo>();
 
-  for (const location of locations) {
+  for (const location of targetLocations) {
     const existing = provinceMap.get(location.province);
     
     if (existing) {

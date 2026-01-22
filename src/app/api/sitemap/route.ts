@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { locations } from '@/data/locations';
+import { targetLocations } from '@/data/locations';
 import {
   buildRootSitemap,
   buildCitySitemap,
@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
       { loc: `${BASE_URL}/api/sitemap?type=root`, lastmod: new Date().toISOString().split('T')[0] },
     ];
 
-    if (locations.length > 0) {
+    if (targetLocations.length > 0) {
       sitemaps.push({
         loc: `${BASE_URL}/api/sitemap?type=cities`,
         lastmod: new Date().toISOString().split('T')[0],

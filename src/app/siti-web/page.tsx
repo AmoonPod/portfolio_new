@@ -32,7 +32,9 @@ import { ServiceContactForm } from '@/components/service-contact-form'
 import { DATA } from '@/data/resume'
 import { sitiWebDataset } from '@/data/local-pages/siti-web-dataset'
 import { generateServiceJsonLd, generateFAQJsonLd, generateBreadcrumbJsonLd } from '@/lib/seo'
-import { locations } from '@/data/locations'
+import { locations, targetLocations } from '@/data/locations'
+import NicheHubOtherNiches from '@/components/local-pages/niche/NicheHubOtherNiches'
+import { NearbyCitiesFooter } from '@/components/local-pages/NearbyCitiesFooter'
 
 const BASE_URL = 'https://manueldeceglie.it'
 
@@ -42,40 +44,31 @@ export const metadata: Metadata = {
     description: 'Basta siti vetrina inutili. Realizzo siti web ad alte prestazioni (Next.js) progettati per posizionarsi su Google e generare fatturato. Analisi gratuita.',
     keywords: [
         'realizzazione siti web',
-        'realizzazione siti web reggio emilia',
         'realizzazione siti web emilia romagna',
+        'realizzazione siti web bologna',
         'realizzazione siti web modena',
-        'realizzazione siti web ferrara',
-        'realizzazione siti web parma',
-        'realizzazione siti web piacenza',
-        'realizzazione siti web mantova',
-        'realizzazione siti web rezzo grillo',
-        'realizzazione siti web sorbara',
-        'realizzazione siti web castelnovo ne monti',
-        'realizzazione siti web casina',
+        'realizzazione siti web reggio emilia',
+        'realizzazione siti web sassuolo',
+        'realizzazione siti web maranello',
+        'realizzazione siti web fiorano modenese',
         'realizzazione siti web vignola',
         'realizzazione siti web carpineti',
-        'realizzazione siti web fiorano modenese',
+        "realizzazione siti web castelnovo ne' monti",
         'siti web next.js',
         'siti web veloci',
         'posizionamento google',
         'sviluppo web professionale',
         'web designer emilia romagna',
         'costo sito web',
-        'costo sito web emilia romagna',
+        'costo sito web bologna',
         'costo sito web modena',
         'costo sito web reggio emilia',
-        'costo sito web ferrara',
-        'costo sito web parma',
-        'costo sito web piacenza',
-        'costo sito web mantova',
-        'costo sito web rezzo grillo',
-        'costo sito web sorbara',
-        'costo sito web castelnovo ne monti',
-        'costo sito web casina',
+        'costo sito web sassuolo',
+        'costo sito web maranello',
+        'costo sito web fiorano modenese',
         'costo sito web vignola',
         'costo sito web carpineti',
-        'costo sito web fiorano modenese',
+        "costo sito web castelnovo ne' monti",
         'preventivo sito internet'
     ],
     alternates: {
@@ -132,7 +125,7 @@ function getCitiesByProvince() {
 
 // Ottiene le città più popolose dell'Emilia-Romagna
 function getTopCitiesEmiliaRomagna(limit: number = 10) {
-    return locations
+    return targetLocations
         .filter(loc => loc.region === 'Emilia-Romagna')
         .sort((a, b) => b.population - a.population)
         .slice(0, limit)
@@ -548,74 +541,16 @@ export default function SitiWebPage() {
                 {/* ═══════════════════════════════════════════════════════════════════
             CITTÀ & SEO LOCALE (Interlinking mantenuto ma raffinato)
         ═══════════════════════════════════════════════════════════════════ */}
-                <section className="py-20 bg-white border-t border-gray-100">
-                    <div className="container max-w-[1200px] mx-auto px-4 sm:px-6">
-                        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-                            <div className="max-w-2xl">
-                                <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-gray-900 mb-4">
-                                    Dominio Locale
-                                </h2>
-                                <p className="text-gray-500 font-medium">
-                                    Per le attività locali, essere i primi nella propria città è tutto.
-                                    Ho creato pagine specifiche ottimizzate per dominare le ricerche in queste zone:
-                                </p>
-                            </div>
-                            <Button variant="ghost" className="text-[#FFBC11] hover:text-orange-500 hover:bg-transparent p-0 font-bold" asChild>
-                                <Link href="#contatti">Non trovi la tua città? &rarr;</Link>
-                            </Button>
-                        </div>
 
-                        {/* Top Cities - Città più popolose */}
-                        <div className="mb-16 pb-16 border-b border-gray-200">
-                            <h3 className="text-xl font-black text-gray-900 mb-6 flex items-center gap-2">
-                                <MapPin className="w-5 h-5 text-[#FFBC11]" />
-                                Principali Città dell'Emilia-Romagna
-                            </h3>
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                                {topCities.map((city) => (
-                                    <Link
-                                        key={city.slug}
-                                        href={`/siti-web/${city.slug}`}
-                                        className="group p-4 rounded-xl border border-gray-200 hover:border-[#FFBC11] hover:bg-[#FFBC11]/5 transition-all duration-300"
-                                    >
-                                        <div className="font-bold text-gray-900 group-hover:text-[#FFBC11] transition-colors mb-1">
-                                            {city.name}
-                                        </div>
-                                        <div className="text-xs text-gray-500 font-medium">
-                                            {city.province}
-                                        </div>
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
 
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {Object.entries(citiesByProvince).map(([province, cities]) => (
-                                <div key={province} className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-                                    <div className="flex items-center gap-2 mb-4">
-                                        <MapPin className="w-5 h-5 text-gray-400" />
-                                        <h3 className="font-bold text-gray-900">{province} e Provincia</h3>
-                                    </div>
-                                    <ul className="space-y-2">
-                                        {cities.map((city) => (
-                                            <li key={city.slug}>
-                                                <Link
-                                                    href={`/siti-web/${city.slug}`}
-                                                    className="block text-sm text-gray-600 hover:text-[#FFBC11] hover:translate-x-1 transition-all font-medium py-1"
-                                                >
-                                                    Realizzazione siti web a {city.cityName}
-                                                </Link>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
+                {/* Città Scorrevole con NearbyCitiesFooter */}
+                <NearbyCitiesFooter serviceName="Siti Web" />
+
+                {/* Settori */}
+                <NicheHubOtherNiches showAll={true} />
 
                 {/* ═══════════════════════════════════════════════════════════════════
-            WHATSAPP STRATEGICO (Social Proof + Speed)
+            CTA UNICA - Città e Settori
         ═══════════════════════════════════════════════════════════════════ */}
                 <section className="py-12 bg-green-50/50 border-y border-green-100">
                     <div className="container max-w-[1200px] mx-auto px-4 sm:px-6">
@@ -626,18 +561,20 @@ export default function SitiWebPage() {
                                 </div>
                                 <div>
                                     <h3 className="text-xl md:text-2xl font-black text-gray-900 leading-tight">
-                                        Hai una domanda al volo?
+                                        Non trovi la tua città o il tuo settore?
                                     </h3>
                                     <p className="text-gray-600 font-medium">
-                                        Ti rispondo su WhatsApp in pochi minuti. Niente attese, solo soluzioni.
+                                        Non ti preoccupare. Contattami lo stesso che ne parliamo.
                                     </p>
                                 </div>
                             </div>
                             <WhatsAppButton
                                 size="lg"
                                 className="h-16 px-10 rounded-2xl w-full md:w-auto shadow-xl shadow-green-500/20 transition-all hover:scale-105"
-                                message="Ciao Manuel! Ho visto la tua pagina siti web e avrei una domanda veloce..."
-                            />
+                                message="Ciao Manuel! Non ho trovato la mia città o il mio settore nella lista. Possiamo parlarne?"
+                            >
+                                Scrivimi ora
+                            </WhatsAppButton>
                         </div>
                     </div>
                 </section>

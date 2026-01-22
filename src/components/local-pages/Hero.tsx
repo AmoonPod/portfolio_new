@@ -90,16 +90,7 @@ export function Hero({ cityName, hero }: HeroProps) {
                 </Button>
               </div>
 
-              {/* <div className="mt-8 flex items-center gap-3 text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3].map(i => (
-                    <div key={i} className="w-6 h-6 rounded-full bg-muted border-2 border-background flex items-center justify-center text-[8px] overflow-hidden">
-                      <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-400"></div>
-                    </div>
-                  ))}
-                </div>
-                {hero.trustSignal}
-              </div> */}
+
             </BlurFade>
           </div>
 
