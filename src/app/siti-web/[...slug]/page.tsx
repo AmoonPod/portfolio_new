@@ -56,6 +56,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         return { title: 'Pagina Non Trovata', description: 'La nicchia richiesta non esiste.' };
       }
       const metadata = generateHubMetadata(nicheConfig);
+      const ogUrl = new URL(`${baseUrl}/api/og`);
+      ogUrl.searchParams.set('title', metadata.title);
+      ogUrl.searchParams.set('subtitle', metadata.description);
+      ogUrl.searchParams.set('badge', nicheConfig.name);
+
       return {
         title: metadata.title,
         description: metadata.description,
@@ -66,8 +71,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           url: `${baseUrl}/siti-web/${potential}`,
           type: 'website',
           siteName: 'Manuel De Ceglie',
+          images: [{
+            url: ogUrl.toString(),
+            width: 1200,
+            height: 630,
+            alt: metadata.title,
+          }],
         },
-        twitter: { card: 'summary_large_image', title: metadata.title, description: metadata.description },
+        twitter: { 
+          card: 'summary_large_image', 
+          title: metadata.title, 
+          description: metadata.description,
+          images: [ogUrl.toString()],
+        },
       };
     }
 
@@ -78,12 +94,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
     const archetype = assignArchetype(location);
     const metadata = buildSeoMetadata(location, 'siti-web', archetype);
+    
+    const cityOgUrl = new URL(`${baseUrl}/api/og`);
+    cityOgUrl.searchParams.set('title', metadata.title);
+    cityOgUrl.searchParams.set('subtitle', metadata.description);
+    cityOgUrl.searchParams.set('badge', location.province || 'Emilia-Romagna');
+
     return {
       title: metadata.title,
       description: metadata.description,
       alternates: { canonical: metadata.canonical },
-      openGraph: metadata.openGraph,
-      twitter: metadata.twitter,
+      openGraph: {
+        ...metadata.openGraph,
+        images: [{
+          url: cityOgUrl.toString(),
+          width: 1200,
+          height: 630,
+          alt: metadata.title,
+        }],
+      },
+      twitter: {
+        ...metadata.twitter,
+        images: [cityOgUrl.toString()],
+      },
     };
   }
 
@@ -93,6 +126,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     if (isHubNicheSlug(niche)) {
       const playbook = getPlaybookContent(niche, topic);
       if (playbook) {
+        const playbookOgUrl = new URL(`${baseUrl}/api/og`);
+        playbookOgUrl.searchParams.set('title', playbook.hero.title);
+        playbookOgUrl.searchParams.set('subtitle', playbook.hero.subtitle);
+        playbookOgUrl.searchParams.set('badge', playbook.nicheName);
+
         return {
           title: `${playbook.hero.title} | Manuel De Ceglie`,
           description: playbook.hero.subtitle,
@@ -103,8 +141,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             url: `${baseUrl}/siti-web/${niche}/${topic}`,
             type: 'article',
             siteName: 'Manuel De Ceglie',
+            images: [{
+              url: playbookOgUrl.toString(),
+              width: 1200,
+              height: 630,
+              alt: playbook.hero.title,
+            }],
           },
-          twitter: { card: 'summary_large_image', title: playbook.hero.title, description: playbook.hero.subtitle },
+          twitter: { 
+            card: 'summary_large_image', 
+            title: playbook.hero.title, 
+            description: playbook.hero.subtitle,
+            images: [playbookOgUrl.toString()],
+          },
         };
       }
     }
