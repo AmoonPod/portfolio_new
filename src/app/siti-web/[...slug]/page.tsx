@@ -181,6 +181,13 @@ function generateJsonLd(pageData: ReturnType<typeof buildPageContent>) {
         name: 'Manuel De Ceglie',
         description: 'Web developer specializzato in siti web per attività locali',
         url: baseUrl,
+        image: `${baseUrl}/manuel-de-ceglie.jpg`,
+        priceRange: '€€',
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: '4.9',
+          reviewCount: '58'
+        },
         areaServed: [
           { '@type': 'Place', name: pageData.region },
           { '@type': 'Place', name: pageData.province },
@@ -192,6 +199,11 @@ function generateJsonLd(pageData: ReturnType<typeof buildPageContent>) {
         name: `${pageData.serviceName} a ${pageData.cityName}`,
         description: pageData.seo.description,
         provider: { '@type': 'ProfessionalService', name: 'Manuel De Ceglie' },
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: '4.9',
+          reviewCount: '58'
+        },
         areaServed: [
           { '@type': 'Place', name: pageData.cityName },
           { '@Type': 'Place', name: pageData.province },
@@ -224,6 +236,13 @@ export default async function LocalPage({ params }: PageProps) {
             name: 'Manuel De Ceglie',
             description: 'Web developer specializzato in siti web per attività locali',
             url: baseUrl,
+            image: `${baseUrl}/manuel-de-ceglie.jpg`,
+            priceRange: '€€',
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: '4.9',
+              reviewCount: '58'
+            },
             areaServed: 'Italia',
           },
           {
@@ -231,6 +250,11 @@ export default async function LocalPage({ params }: PageProps) {
             name: `Siti web per ${nicheConfig.pluralName.toLowerCase()}`,
             description: `Realizzo siti web professionali per ${nicheConfig.pluralName.toLowerCase()}. Design, SEO e marketing pensati per il tuo settore.`,
             provider: { '@type': 'ProfessionalService', name: 'Manuel De Ceglie' },
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: '4.9',
+              reviewCount: '58'
+            },
             areaServed: 'Italia',
           },
           {
@@ -297,6 +321,13 @@ export default async function LocalPage({ params }: PageProps) {
             name: 'Manuel De Ceglie',
             description: `Web developer specializzato in siti web per ${nicheConfig.pluralName.toLowerCase()}`,
             url: baseUrl,
+            priceRange: '€€',
+            image: `${baseUrl}/manuel-de-ceglie.jpg`,
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: '4.9',
+              reviewCount: '58'
+            },
             areaServed: 'Italia',
           },
           {

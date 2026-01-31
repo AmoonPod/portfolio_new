@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import type { PlaybookContent } from '@/data/playbooks/types';
@@ -62,14 +63,14 @@ export default function PlaybookTemplate({ playbook }: PlaybookTemplateProps) {
     <main className="min-h-screen bg-white text-[#1a1a1a]">
       <header className="bg-[#1a1a1a] text-white py-12 px-6">
         <div className="max-w-4xl mx-auto">
-          <nav className="mb-6 text-sm text-gray-400">
-            <a href="/" className="hover:text-white">Home</a>
-            <span className="mx-2">/</span>
-            <a href="/siti-web" className="hover:text-white">Siti Web</a>
-            <span className="mx-2">/</span>
-            <a href={`/siti-web/${niche}`} className="hover:text-white">{nicheName}</a>
-            <span className="mx-2">/</span>
-            <span className="text-white">Playbook</span>
+          <nav className="mb-6 text-sm text-gray-400 flex flex-wrap items-center gap-2">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <span className="text-gray-600">/</span>
+            <Link href="/siti-web" className="hover:text-white transition-colors">Siti Web</Link>
+            <span className="text-gray-600">/</span>
+            <Link href={`/siti-web/${niche}`} className="hover:text-white transition-colors">{nicheName}</Link>
+            <span className="text-gray-600">/</span>
+            <span className="text-[#FFBC11] font-medium">Playbook</span>
           </nav>
           <h1 className="text-2xl md:text-4xl font-bold leading-tight mb-3">
             {hero.title}
