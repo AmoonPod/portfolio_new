@@ -30,7 +30,7 @@ export const eventiPromozioni: PlaybookContent = {
   ],
   cta: {
     title: 'Vuoi organizzare eventi che funzionano?',
-    description: 'Ti aiuto a creare la pagina eventi sul sito e il sistema per raccogliere le prenotazioni.',
+    description: 'Ti sviluppo la pagina eventi e integro gli strumenti tecnici per raccogliere prenotazioni e contatti a norma GDPR.',
     buttonText: 'Parliamo di eventi',
     buttonUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao Manuel, vorrei spingere di più gli eventi nel mio ristorante.')}`,
   },

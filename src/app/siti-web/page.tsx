@@ -92,7 +92,7 @@ const faqs = [
     },
     {
         q: 'Ho davvero bisogno di un sito se ho i social?',
-        a: 'Assolutamente sì. I social sono "in affitto": l\'algoritmo cambia e sparisci. Il sito è casa tua. Inoltre, quando le persone cercano un servizio "serio" (un avvocato, un idraulico, un fornitore), cercano su Google, non su Instagram.'
+        a: 'Assolutamente sì. I social sono "in affitto": l\'algoritmo cambia e tu sparisci dalla vista dei tuoi clienti. Il sito è casa tua, e nessuno può togliertelo. Inoltre, quando le persone cercano un servizio "serio" (un avvocato, un idraulico, un fornitore), cercano su Google, non su Instagram.'
     },
     {
         q: 'Quanto tempo ci vuole per andare online?',

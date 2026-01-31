@@ -30,9 +30,9 @@ export const fidelizzazione: PlaybookContent = {
   ],
   cta: {
     title: 'Vuoi automatizzare la fidelizzazione?',
-    description: 'Ti sviluppo un sistema CRM personalizzato che invia auguri e promozioni in automatico.',
+    description: 'Configuro gli strumenti per inviare auguri e promozioni ai tuoi clienti in automatico, senza che tu debba pensarci.',
     buttonText: 'Voglio clienti fedeli',
-    buttonUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao Manuel, vorrei capire come fidelizzare meglio le clienti del mio salone con un software su misura.')}`,
+    buttonUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao Manuel, vorrei capire come fidelizzare meglio le clienti del mio salone.')}`,
   },
   content: `
 ## 1. La Matematica della Frequenza

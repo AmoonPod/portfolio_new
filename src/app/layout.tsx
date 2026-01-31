@@ -22,6 +22,11 @@ export default function RootLayout({
   return (
     <html lang="it">
       <head>
+        <Script
+          id="cookieyes"
+          src="https://cdn-cookieyes.com/client_data/e094b572db338c13aa8929a9bc74db66/script.js"
+          strategy="beforeInteractive"
+        />
         <meta
           name="google-site-verification"
           content="BzkUaVu8rd1Ixv5g73FCGyldZPKgc2NklXHMqbOcm9Q"

@@ -1,6 +1,7 @@
 "use client"; // Mark as client component for form handling
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,6 +23,7 @@ export function ServiceContactForm({
     hideServiceTypes = false
 }: ServiceContactFormProps) {
     // Form state
+    const router = useRouter();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState(''); // Optional phone state
@@ -67,7 +69,10 @@ export function ServiceContactForm({
             if (data.code === 200) {
                 // Success
                 setSubmissionStatus('success');
-                // Clear form
+                // Redirect to thank you page
+                router.push(`/grazie?name=${encodeURIComponent(name)}&need=${encodeURIComponent(need)}`);
+                
+                // Clear form (though redirect happens fast)
                 setName('');
                 setEmail('');
                 setPhone('');

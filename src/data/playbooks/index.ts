@@ -2,10 +2,14 @@
 export * from './types';
 export { ristorantiPlaybooks, getRistorantiPlaybook, getAllRistorantiPlaybookSlugs } from './ristoranti';
 export { saloniBellezzaPlaybooks, getSaloniBellezzaPlaybook, getAllSaloniBellezzaPlaybookSlugs } from './saloni-bellezza';
+export { aziendeAgricolePlaybooks, getAziendeAgricolePlaybook, getAllAziendeAgricolePlaybookSlugs } from './aziende-agricole';
+export { fotografiPlaybooks, getFotografiPlaybook, getAllFotografiPlaybookSlugs } from './fotografi';
 
 import type { PlaybookContent } from './types';
 import { getRistorantiPlaybook, getAllRistorantiPlaybookSlugs } from './ristoranti';
 import { getSaloniBellezzaPlaybook, getAllSaloniBellezzaPlaybookSlugs } from './saloni-bellezza';
+import { getAziendeAgricolePlaybook, getAllAziendeAgricolePlaybookSlugs } from './aziende-agricole';
+import { getFotografiPlaybook, getAllFotografiPlaybookSlugs } from './fotografi';
 
 // Funzione generica per ottenere un playbook da qualsiasi nicchia
 export function getPlaybookContent(niche: string, slug: string): PlaybookContent | null {
@@ -14,6 +18,10 @@ export function getPlaybookContent(niche: string, slug: string): PlaybookContent
       return getRistorantiPlaybook(slug);
     case 'saloni-bellezza':
       return getSaloniBellezzaPlaybook(slug);
+    case 'aziende-agricole':
+      return getAziendeAgricolePlaybook(slug);
+    case 'fotografi':
+      return getFotografiPlaybook(slug);
     default:
       return null;
   }
@@ -26,6 +34,10 @@ export function getAllPlaybookSlugs(niche: string): string[] {
       return getAllRistorantiPlaybookSlugs();
     case 'saloni-bellezza':
       return getAllSaloniBellezzaPlaybookSlugs();
+    case 'aziende-agricole':
+      return getAllAziendeAgricolePlaybookSlugs();
+    case 'fotografi':
+      return getAllFotografiPlaybookSlugs();
     default:
       return [];
   }

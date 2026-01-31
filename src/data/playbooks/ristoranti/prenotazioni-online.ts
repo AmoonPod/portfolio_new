@@ -30,7 +30,7 @@ export const prenotazioniOnline: PlaybookContent = {
   ],
   cta: {
     title: 'Vuoi smettere di vivere al telefono?',
-    description: 'Ti installo un sistema di prenotazione semplice che lavora per te 24 ore su 24.',
+    description: 'Ti sviluppo e installo un sistema di prenotazione su misura che lavora per te 24 ore su 24.',
     buttonText: 'Voglio automatizzare le prenotazioni',
     buttonUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao Manuel, vorrei un sistema di prenotazione online per il mio ristorante.')}`,
   },

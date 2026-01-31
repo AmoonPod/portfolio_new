@@ -111,6 +111,107 @@ export default function HomePage() {
 
       {/* FAQ */}
       <HomeFAQSection />
+      
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "ProfessionalService",
+                "@id": `${DATA.url}/#identity`,
+                "name": DATA.name,
+                "url": DATA.url,
+                "logo": `${DATA.url}/manuel-de-ceglie-sviluppatore-web-modena.png`,
+                "image": `${DATA.url}/og-image.png`,
+                "description": DATA.description,
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressLocality": "Castelfranco Emilia",
+                  "addressRegion": "MO",
+                  "addressCountry": "IT"
+                },
+                "geo": {
+                  "@type": "GeoCoordinates",
+                  "latitude": 44.5966,
+                  "longitude": 11.0526
+                },
+                "telephone": DATA.contact.tel,
+                "email": DATA.contact.email,
+                "priceRange": "€€",
+                "areaServed": [
+                  {
+                    "@type": "City",
+                    "name": "Modena"
+                  },
+                  {
+                    "@type": "City",
+                    "name": "Reggio Emilia"
+                  },
+                  {
+                    "@type": "City",
+                    "name": "Bologna"
+                  },
+                  {
+                    "@type": "AdministrativeArea",
+                    "name": "Emilia-Romagna"
+                  }
+                ],
+                "sameAs": [
+                  DATA.contact.social.LinkedIn.url,
+                  DATA.contact.social.GitHub.url
+                ]
+              },
+              {
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "Quanto costa un progetto?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Dipende da cosa ti serve: un sito vetrina, un gestionale, un'app. Non ho listini fissi perché ogni progetto è diverso. Parliamone: ti faccio una stima chiara dopo aver capito le tue esigenze."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Quanto tempo ci vuole?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Per un sito, di solito 4-6 settimane. Per software o app, dipende dalla complessità. Ti terrò aggiornato passo passo, senza sorprese."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Lavori solo su siti web?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "No. Faccio siti web, software su misura, integrazioni tra sistemi, automazioni con AI e app mobile. Partiamo dal bisogno e scegliamo insieme la soluzione."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Dove lavori?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Lavoro principalmente nelle province di Modena e Reggio Emilia, ma collaboro anche da remoto con clienti in tutta Italia. Per molti progetti non serve vedersi di persona."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Cosa succede dopo la consegna?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Rimango disponibile per supporto e manutenzione. Per i siti c'è un canone annuale che include hosting, aggiornamenti e piccole modifiche. Per software e app, definiamo insieme un piano di assistenza."
+                    }
+                  }
+                ]
+              }
+            ]
+          }),
+        }}
+      />
 
       {/* CTA FINALE */}
       <section

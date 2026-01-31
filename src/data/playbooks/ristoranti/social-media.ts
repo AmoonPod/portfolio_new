@@ -29,10 +29,10 @@ export const socialMedia: PlaybookContent = {
     'I clienti fanno foto ai tuoi piatti?',
   ],
   cta: {
-    title: 'Non sai cosa pubblicare?',
-    description: 'Ti aiuto a creare un piano semplice per avere sempre contenuti pronti senza stress.',
-    buttonText: 'Aiutami coi social',
-    buttonUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao Manuel, vorrei una mano per gestire meglio Instagram e Facebook del mio ristorante.')}`,
+    title: 'Ti serve una strategia o qualcuno che pubblichi per te?',
+    description: 'Posso impostare la tua presenza digitale o metterti in contatto con Social Media Manager professionisti con cui collaboro.',
+    buttonText: 'Parliamo della tua strategia',
+    buttonUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao Manuel, vorrei capire come muovermi sui social.')}`,
   },
   content: `
 ## 1. A cosa servono davvero i Social?

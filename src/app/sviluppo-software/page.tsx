@@ -89,7 +89,7 @@ const faqs = [
     },
     {
         q: 'Il mio team saprà usarlo senza problemi?',
-        a: 'Assolutamente sì. Disegno interfacce "User-First", simili alle app che usano ogni giorno (come Facebook o WhatsApp). Elimino il superfluo. Inoltre, fornisco video-tutorial dedicati per il tuo staff.'
+        a: 'Assolutamente sì. Progetto interfacce pensate per l\'utente finale, semplici come le app che usano ogni giorno (WhatsApp, Instagram). Elimino il superfluo e ti fornisco video-tutorial dedicati per il tuo staff.'
     },
     {
         q: 'Posso integrare il gestionale con i software che uso già?',
@@ -120,7 +120,7 @@ const features = [
     { icon: Package, color: 'text-orange-500', bg: 'bg-orange-500/10', title: 'Magazzino', desc: 'Inventario real-time, sottoscorta e tracciabilità lotti.' },
     { icon: Calendar, color: 'text-cyan-500', bg: 'bg-cyan-500/10', title: 'Agenda Smart', desc: 'Appuntamenti, scadenze e assegnazione task al team.' },
     { icon: BarChart3, color: 'text-pink-500', bg: 'bg-pink-500/10', title: 'Dashboard', desc: 'KPI, grafici di andamento e report decisionali.' },
-    { icon: Puzzle, color: 'text-indigo-500', bg: 'bg-indigo-500/10', title: 'Integrazioni', desc: 'WhatsApp, Email, E-commerce, Banche tutto connesso.' },
+    { icon: Puzzle, color: 'text-indigo-500', bg: 'bg-indigo-500/10', title: 'Integrazioni', desc: 'WhatsApp, Email, E-commerce, Banche: tutto connesso in automatico.' },
     { icon: Bell, color: 'text-rose-500', bg: 'bg-rose-500/10', title: 'Automazioni', desc: 'Notifiche e workflow automatici per risparmiare tempo.' },
 ]
 
@@ -242,7 +242,7 @@ export default function SoftwareGestionaliPage() {
                             {[
                                 { icon: Clock, color: 'text-red-600', bg: 'bg-red-50', border: 'border-red-100', title: 'Ore Perse', desc: 'Compili le stesse informazioni su preventivi, fatture e email. Ogni documento è una perdita di tempo.' },
                                 { icon: Search, color: 'text-orange-600', bg: 'bg-orange-50', border: 'border-orange-100', title: 'Dati Sparsi', desc: 'Clienti su un foglio, ordini su un altro, scadenze sul calendario. Nessuna visione d’insieme.' },
-                                { icon: AlertCircle, color: 'text-yellow-600', bg: 'bg-yellow-50', border: 'border-yellow-100', title: 'Errori Umani', desc: 'Un copia-incolla sbagliato, un prezzo vecchio, una scadenza dimenticata. Errori che costano clienti.' },
+                                { icon: AlertCircle, color: 'text-yellow-600', bg: 'bg-yellow-50', border: 'border-yellow-100', title: 'Errori Umani', desc: 'Un copia-incolla sbagliato, un prezzo vecchio, una scadenza dimenticata. Ogni errore ti costa clienti e soldi.' },
                                 { icon: Layers, color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-100', title: 'Ciechi sui Numeri', desc: 'Non sai davvero quanto guadagni oggi o quale servizio ti rende di più. Navighi a vista.' },
                                 { icon: RefreshCw, color: 'text-purple-600', bg: 'bg-purple-50', border: 'border-purple-100', title: 'Lavoro Doppio', desc: 'Creare un preventivo, poi la conferma, poi la fattura. Tre passaggi manuali invece di uno click.' },
                                 { icon: Users, color: 'text-cyan-600', bg: 'bg-cyan-50', border: 'border-cyan-100', title: 'Team Scollegato', desc: 'Ognuno ha il suo metodo. Le informazioni non circolano e si perde tempo a chiedere "a che punto sei?".' }

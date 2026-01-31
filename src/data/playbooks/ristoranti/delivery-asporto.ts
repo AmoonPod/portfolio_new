@@ -30,7 +30,7 @@ export const deliveryAsporto: PlaybookContent = {
   ],
   cta: {
     title: 'Vuoi smettere di pagare commissioni folli?',
-    description: 'Ti creo un sistema di ordini proprietario: zero commissioni, controllo totale.',
+    description: 'Ti sviluppo un sistema di ordini su misura: zero commissioni, controllo totale e privacy a norma.',
     buttonText: 'Voglio il mio sistema di ordini',
     buttonUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao Manuel, vorrei capire come ricevere ordini dal mio sito senza pagare commissioni.')}`,
   },

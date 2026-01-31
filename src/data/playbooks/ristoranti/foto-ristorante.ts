@@ -29,10 +29,10 @@ export const fotoRistorante: PlaybookContent = {
     'I colori sono reali?',
   ],
   cta: {
-    title: 'Non hai tempo di fare le foto?',
-    description: 'Posso organizzare un servizio fotografico veloce e professionale per il tuo locale.',
-    buttonText: 'Chiedimi un preventivo foto',
-    buttonUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao Manuel, vorrei rifare le foto dei piatti per il mio sito.')}`,
+    title: 'Vuoi foto professionali senza stress?',
+    description: 'Collaboro con fotografi specializzati nel food. Tu cucini, loro scattano, io metto tutto online.',
+    buttonText: 'Chiedi preventivo servizio foto',
+    buttonUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao Manuel, vorrei info sul servizio fotografico per i miei piatti.')}`,
   },
   content: `
 ## 1. La luce è tutto (ed è gratis)

@@ -29,10 +29,10 @@ export const socialMedia: PlaybookContent = {
     'Rispondi ai messaggi privati?',
   ],
   cta: {
-    title: 'Vuoi una strategia social che funziona?',
-    description: 'Ti aiuto a collegare Instagram al sito per trasformare i like in prenotazioni reali.',
-    buttonText: 'Parliamo di Social',
-    buttonUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao Manuel, vorrei migliorare i social del mio salone.')}`,
+    title: 'Trasforma i follower in clienti',
+    description: 'Imposto il collegamento tecnico tra Instagram e il tuo sito per far sì che chi guarda le tue foto possa prenotare subito.',
+    buttonText: 'Collega Social e Agenda',
+    buttonUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ciao Manuel, vorrei collegare Instagram al sistema di prenotazione.')}`,
   },
   content: `
 ## 1. Non vendi shampoo, vendi bellezza

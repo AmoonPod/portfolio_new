@@ -3,6 +3,8 @@ import { DATA } from '@/data/resume';
 import { getAllSlugs } from '@/data/local-pages/siti-web-dataset';
 import { getAllCaseStudySlugs } from '@/data/case-studies/case-studies-data';
 import { getAllLocationSlugs } from '@/data/locations';
+import { NICHE_SLUGS } from '@/data/niches-config';
+import { getAllPlaybookSlugs } from '@/data/playbooks';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = DATA.url;
@@ -106,10 +108,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
       slug.includes('reggio-emilia') || slug.includes('modena') || slug.includes('bologna') ? 0.9 : 0.8,
   }));
 
+  // Niche hub pages + Playbook pages
+  const nichePages: MetadataRoute.Sitemap = [];
+  
+  NICHE_SLUGS.forEach((niche) => {
+    // Hub page for the niche (e.g., /siti-web/ristoranti)
+    nichePages.push({
+      url: `${baseUrl}/siti-web/${niche}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.9,
+    });
+
+    // All playbook pages for this niche
+    const playbookSlugs = getAllPlaybookSlugs(niche);
+    playbookSlugs.forEach((topic) => {
+      nichePages.push({
+        url: `${baseUrl}/siti-web/${niche}/${topic}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly' as const,
+        priority: 0.8,
+      });
+    });
+  });
+
   return [
     ...staticPages,
     ...caseStudyPages,
     ...sitiWebLocalPages,
     ...softwareGestionaliLocalPages,
+    ...nichePages,
   ];
 }
