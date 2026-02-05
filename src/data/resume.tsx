@@ -5,12 +5,12 @@ export const DATA = {
   name: "Manuel De Ceglie",
   initials: "MDC",
   url: "https://manueldeceglie.it",
-  location: "Castelfranco Emilia, MO",
-  locationLink: "https://www.google.com/maps/place/castelfranco-emilia",
+  location: "Castelnovo ne’ Monti, RE",
+  locationLink: "https://www.google.com/maps/place/castelnovo-ne-monti",
   description:
     "Aiuto aziende e attività in Emilia-Romagna a ottenere risultati online con siti web efficaci, software gestionali personalizzati e app mobile.",
   summary:
-    "Appassionato di informatica da sempre, ho trasformato questo interesse in un lavoro che mi permette di aiutare le persone a realizzare le proprie idee. Dopo aver lavorato su diversi tipi di progetti, ho scelto di dedicare parte del mio tempo e delle mie competenze alle attività locali, principalmente nel territorio di Modena, Reggio Emilia e provincia. Offro soluzioni digitali personalizzate: siti web moderni ed efficaci, gestionali su misura, applicazioni mobili intuitive e software specifici per rispondere alle tue esigenze. Il mio obiettivo è fornire strumenti efficaci e un supporto professionale per aiutarti a raggiungere i tuoi obiettivi di business, operando con base a Castelfranco Emilia. Se hai un progetto in mente, contattami per discuterne insieme.",
+    "Appassionato di informatica da sempre, ho trasformato questo interesse in un lavoro che mi permette di aiutare le persone a realizzare le proprie idee. Dopo aver lavorato su diversi tipi di progetti, ho scelto di dedicare parte del mio tempo e delle mie competenze alle attività locali, principalmente nel territorio di Modena, Reggio Emilia e provincia. Offro soluzioni digitali personalizzate: siti web moderni ed efficaci, gestionali su misura, applicazioni mobili intuitive e software specifici per rispondere alle tue esigenze. Il mio obiettivo è fornire strumenti efficaci e un supporto professionale per aiutarti a raggiungere i tuoi obiettivi di business, operando con base a Castelnovo ne’ Monti. Se hai un progetto in mente, contattami per discuterne insieme.",
   avatarUrl: "/manuel-de-ceglie-sviluppatore-web-modena.png",
   skills: [
     "Sviluppo Software",
@@ -165,7 +165,7 @@ export const DATA = {
       {
         title: "Creazione Siti Web Professionali a Modena e Provincia:",
         description:
-          "Sviluppo <a href='/siti-web' style='text-decoration:underline; font-weight:bold;'>siti internet</a> moderni, veloci e ottimizzati (SEO) per aziende, professionisti e negozi a <strong>Modena</strong>, <strong>Vignola</strong>, <strong>Castelfranco Emilia</strong>, <strong>Sassuolo</strong> e dintorni. Un <a href='/siti-web' style='text-decoration:underline;'>sito web</a> efficace è cruciale per <strong>attirare più clienti locali</strong>.Realizzo diverse tipologie di siti, tra cui:<ul><li>Siti vetrina per presentare al meglio la tua attività</li><li>Blog aziendali per condividere contenuti e interagire con il tuo pubblico</li><li>Soluzioni <strong>e-commerce</strong> per avviare o potenziare la vendita online</li></ul>Creo soluzioni su misura, responsive e facili da usare, che riflettono la tua identità e ti aiutano a crescere.",
+          "Sviluppo <a href='/siti-web' style='text-decoration:underline; font-weight:bold;'>siti internet</a> moderni, veloci e ottimizzati (SEO) per aziende, professionisti e negozi a <strong>Modena</strong>, <strong>Reggio Emilia</strong>, <strong>Castelnovo ne’ Monti</strong>, <strong>Sassuolo</strong> e dintorni. Un <a href='/siti-web' style='text-decoration:underline;'>sito web</a> efficace è cruciale per <strong>attirare più clienti locali</strong>.Realizzo diverse tipologie di siti, tra cui:<ul><li>Siti vetrina per presentare al meglio la tua attività</li><li>Blog aziendali per condividere contenuti e interagire con il tuo pubblico</li><li>Soluzioni <strong>e-commerce</strong> per avviare o potenziare la vendita online</li></ul>Creo soluzioni su misura, responsive e facili da usare, che riflettono la tua identità e ti aiutano a crescere.",
         slug: "/siti-web",
       },
       {
@@ -185,7 +185,7 @@ export const DATA = {
   targetAudience: {
     title: "A Chi Mi Rivolgo",
     intro:
-      "Collaboro principalmente con <strong>piccole e medie imprese (PMI)</strong>, <strong>liberi professionisti</strong>, <strong>negozi</strong>, <strong>artigiani</strong> e <strong>startup</strong> con sede nella provincia di <strong>Modena</strong>, incluse aree chiave come <strong>Vignola</strong>, <strong>Castelfranco Emilia</strong>, <strong>Sassuolo</strong> e <strong>Maranello</strong>. Il mio obiettivo è aiutarvi a sfruttare il digitale per:",
+      "Collaboro principalmente con <strong>piccole e medie imprese (PMI)</strong>, <strong>liberi professionisti</strong>, <strong>negozi</strong>, <strong>artigiani</strong> e <strong>startup</strong> con sede nelle province di <strong>Modena</strong> e <strong>Reggio Emilia</strong>, incluse aree chiave come <strong>Castelnovo ne’ Monti</strong>, <strong>Sassuolo</strong> e <strong>Maranello</strong>. Il mio obiettivo è aiutarvi a sfruttare il digitale per:",
     points: [
       "Aumentare la vostra <strong>visibilità online</strong> e raggiungere nuovi clienti con siti web efficaci e ottimizzati (SEO).",
       "Migliorare l'<strong>efficienza operativa</strong> interna attraverso software gestionali personalizzati che digitalizzano e semplificano i processi.",
