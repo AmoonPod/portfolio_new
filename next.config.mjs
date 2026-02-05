@@ -33,17 +33,6 @@ const nextConfig = {
         destination: '/siti-web',
         permanent: true,
       },
-      // Redirect blog to home
-      {
-        source: '/blog',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/blog/:slug',
-        destination: '/',
-        permanent: true,
-      },
       // Redirect old AI consultation page to home
       {
         source: '/consulenza-integrazione-ai-modena',

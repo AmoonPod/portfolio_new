@@ -4,6 +4,7 @@ import { getAllCaseStudySlugs } from '@/data/case-studies/case-studies-data';
 import { getAllLocationSlugs } from '@/data/locations';
 import { NICHE_SLUGS } from '@/data/niches-config';
 import { getAllPlaybookSlugs } from '@/data/playbooks';
+import { getAllPosts } from '@/lib/blog';
 
 // Constants for Sitemap Configuration
 const BASE_URL = DATA.url;
@@ -69,6 +70,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${BASE_URL}/casi-studio`,
+      lastModified: new Date(),
+      changeFrequency: CHANGE_FREQ.WEEKLY,
+      priority: 0.9,
+    },
+    // Blog
+    {
+      url: `${BASE_URL}/blog`,
       lastModified: new Date(),
       changeFrequency: CHANGE_FREQ.WEEKLY,
       priority: 0.9,
@@ -156,11 +164,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
+  // 5. Blog Posts
+  const blogPosts = getAllPosts();
+  const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: CHANGE_FREQ.MONTHLY,
+    priority: PRIORITY.BLOG_POST,
+  }));
+
   return [
     ...staticPages,
     ...caseStudyPages,
     ...sitiWebLocalPages,
     ...softwareGestionaliLocalPages,
     ...nichePages,
+    ...blogPages,
   ];
 }

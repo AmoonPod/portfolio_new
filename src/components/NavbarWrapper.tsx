@@ -77,6 +77,7 @@ export function NavbarWrapper({ children }: { children: React.ReactNode }) {
               <h3 className="font-semibold mb-4 text-sm">Link Utili</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
+                <li><Link href="/blog" className="hover:text-primary transition-colors">Blog</Link></li>
                 <li><Link href="/#contact" className="hover:text-primary transition-colors">Contatti</Link></li>
                 <li><Link href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
               </ul>
