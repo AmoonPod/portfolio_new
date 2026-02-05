@@ -30,17 +30,6 @@ import ServicesSection from "@/components/home/servizi";
 import AboutSection from "@/components/home/about";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(DATA.url),
-  title: {
-    default: "Siti Web, Software e App su Misura | Manuel De Ceglie",
-    template: "%s | Manuel De Ceglie",
-  },
-  alternates: {
-    canonical: DATA.url,
-    languages: {
-      "it-IT": DATA.url,
-    },
-  },
   description:
     "Ti aiuto a farti trovare online, gestire meglio la tua attività e automatizzare il lavoro. Siti web, software e app su misura. Richiedi un'analisi gratuita.",
   keywords: [
@@ -53,41 +42,8 @@ export const metadata: Metadata = {
     "manuel de ceglie",
     "web developer emilia romagna",
   ],
-  openGraph: {
-    title: "Siti Web, Software e App su Misura | Manuel De Ceglie",
-    description:
-      "Ti aiuto a farti trovare online e a gestire meglio la tua attività. Richiedi un'analisi gratuita.",
-    url: DATA.url,
-    siteName: "Manuel De Ceglie",
-    images: [
-      {
-        url: `${DATA.url}/og-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "Siti Web, Software e App - Manuel De Ceglie",
-      },
-    ],
-    countryName: "Italy",
-    locale: "it_IT",
-    type: "website",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  twitter: {
-    title: "Siti Web, Software e App su Misura | Manuel De Ceglie",
-    description:
-      "Ti aiuto a farti trovare online e a gestire meglio la tua attività.",
-    card: "summary_large_image",
-    images: [`${DATA.url}/og-image.png`],
+  alternates: {
+    canonical: DATA.url,
   },
 };
 
@@ -128,8 +84,8 @@ export default function HomePage() {
                 "description": DATA.description,
                 "address": {
                   "@type": "PostalAddress",
-                  "addressLocality": "Castelfranco Emilia",
-                  "addressRegion": "MO",
+                  "addressLocality": "Castelnovo ne’ Monti",
+                  "addressRegion": "RE",
                   "addressCountry": "IT"
                 },
                 "geo": {

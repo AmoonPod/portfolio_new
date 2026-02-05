@@ -8,11 +8,33 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "@/components/ui/sonner";
 import { NavbarWrapper } from "@/components/NavbarWrapper";
+import { DATA } from "@/data/resume";
 
 const fontSans = BricolageGrotesque({
   subsets: ["latin"],
   variable: "--font-sans",
 });
+
+export const metadata: Metadata = {
+  metadataBase: new URL(DATA.url),
+  title: {
+    default: "Siti Web, Software e App su Misura | Manuel De Ceglie",
+    template: "%s | Manuel De Ceglie",
+  },
+  openGraph: {
+    title: "Siti Web, Software e App su Misura | Manuel De Ceglie",
+    description: DATA.description,
+    url: DATA.url,
+    siteName: "Manuel De Ceglie",
+    locale: "it_IT",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Manuel De Ceglie | Sviluppo Web & Software",
+    description: DATA.description,
+  },
+};
 
 export default function RootLayout({
   children,
