@@ -55,6 +55,12 @@ export default function RootLayout({
         />
 
         <meta property="og:logo" content="logo_black.png" />
+        <script
+  defer
+  data-website-id="dfid_TeFZRg9mdhfz1aaqCIl7T"
+  data-domain="manueldeceglie.it"
+  src="https://datafa.st/js/script.js">
+</script>
       </head>
       <body
         className={cn(
