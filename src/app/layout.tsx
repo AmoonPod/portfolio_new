@@ -49,12 +49,19 @@ export default function RootLayout({
           src="https://cdn-cookieyes.com/client_data/e094b572db338c13aa8929a9bc74db66/script.js"
           strategy="beforeInteractive"
         />
+        <Script
+  defer
+  data-website-id="dfid_TeFZRg9mdhfz1aaqCIl7T"
+  data-domain="manueldeceglie.it"
+  src="https://datafa.st/js/script.js"
+/>
         <meta
           name="google-site-verification"
           content="BzkUaVu8rd1Ixv5g73FCGyldZPKgc2NklXHMqbOcm9Q"
         />
 
         <meta property="og:logo" content="logo_black.png" />
+        
       </head>
       <body
         className={cn(
