@@ -16,6 +16,13 @@ const categoryIcons: Record<NicheCategory, string> = {
     'Beauty & Wellness': '💅',
     'Creative': '📸',
     'Agriculture': '🌾',
+    'Professional Services': '💼',
+    'Health & Fitness': '💪',
+    'E-commerce Fashion': '👗',
+    'E-commerce Food': '🥦',
+    'E-commerce Home': '🛋️',
+    'E-commerce Tech': '📱',
+    'Retail': '🛍️',
 }
 
 

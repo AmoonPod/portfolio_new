@@ -1,6 +1,7 @@
 import { NicheConfig, getNicheConfig, NICHE_SLUGS } from '@/data/niches-config';
 import { getNicheContent } from '@/data/niches-content';
 import { pickVariant } from '@/lib/content/spintax';
+import { getNicheLabelForPhrase } from '@/lib/niche-labels';
 
 interface HubPageContent {
   h1: string;
@@ -52,15 +53,16 @@ export function generateHubHero(nicheSlug: string): HubPageContent {
 }
 
 export function generateHubMetadata(niche: NicheConfig) {
+  const label = getNicheLabelForPhrase(niche);
   const titleVariants = [
     `${niche.name} | Web Design e Siti Web Professionali`,
-    `Siti web per ${niche.pluralName.toLowerCase()} | Manuel De Ceglie`,
+    `Siti web per ${label} | Manuel De Ceglie`,
     `${niche.name}: sito web professionale per il tuo business`,
   ];
 
   const descriptionVariants = [
-    `Realizzo siti web professionali per ${niche.pluralName.toLowerCase()}. Design, SEO e marketing pensati per il tuo settore.`,
-    `Sito web per ${niche.pluralName.toLowerCase()}? Mi occupo di web design specializzato per ${niche.pluralName.toLowerCase()} in tutta Italia.`,
+    `Realizzo siti web professionali per ${label}. Design, SEO e marketing pensati per il tuo settore.`,
+    `Sito web per ${label}? Mi occupo di web design specializzato per ${label} in tutta Italia.`,
     `${niche.name}: creazione siti web professionali con focus su risultati concreti per il tuo business.`,
   ];
 
@@ -68,10 +70,10 @@ export function generateHubMetadata(niche: NicheConfig) {
   const description = pickVariant('hub-' + niche.slug, descriptionVariants);
 
   const keywords = [
-    `web design ${niche.pluralName.toLowerCase()}`,
-    `sitoweb ${niche.pluralName.toLowerCase()}`,
-    `realizzazione siti ${niche.pluralName.toLowerCase()}`,
-    `sviluppo siti ${niche.pluralName.toLowerCase()}`,
+    `web design ${label}`,
+    `sitoweb ${label}`,
+    `realizzazione siti ${label}`,
+    `sviluppo siti ${label}`,
   ];
 
   return {

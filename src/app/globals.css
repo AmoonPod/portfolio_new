@@ -295,7 +295,7 @@ code[data-line-numbers-max-digits='3'] > [data-line]::before {
 }
 
 .animate-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 70s linear infinite;
   display: flex;
   width: fit-content;
 }

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getLocationBySlug, getAllLocationSlugs } from '@/data/locations';
+import { getLocationBySlug, PRIORITY_CITY_SLUGS } from '@/data/locations';
 import { assignArchetype } from '@/data/archetypes';
 import { buildSoftwarePageContent } from '@/lib/content/factory';
 import { buildSeoMetadata } from '@/lib/seo/metadata';
@@ -17,8 +17,8 @@ export const dynamicParams = true;
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-  const slugs = getAllLocationSlugs();
-  return slugs.map(slug => ({ city: slug }));
+  // OPTIMIZATION: Only pre-render Priority 1 cities
+  return PRIORITY_CITY_SLUGS.map(slug => ({ city: slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

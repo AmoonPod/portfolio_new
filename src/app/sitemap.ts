@@ -1,23 +1,47 @@
+/**
+ * DYNAMIC SITEMAP GENERATOR
+ * 
+ * Automatically generates sitemap entries for all:
+ * - Static pages
+ * - Service pages (all cities that qualify based on population)
+ * - Niche hub and playbook pages
+ * - Blog posts
+ * - Case studies
+ * 
+ * Total pages: ~350-500 (with 60 cities x 6 services)
+ * 
+ * To add new services:
+ * 1. Add to services-config.ts
+ * 2. This sitemap will automatically include qualifying cities
+ */
+
 import { MetadataRoute } from 'next';
 import { DATA } from '@/data/resume';
 import { getAllCaseStudySlugs } from '@/data/case-studies/case-studies-data';
-import { getAllLocationSlugs } from '@/data/locations';
-import { NICHE_SLUGS } from '@/data/niches-config';
+import { LOCATIONS } from '@/data/locations';
+import { getServicesWithCityPages } from '@/data/services-config';
+import { NICHE_SLUGS, getNichesByServiceType } from '@/data/niches-config';
 import { getAllPlaybookSlugs } from '@/data/playbooks';
 import { getAllPosts } from '@/lib/blog';
 
-// Constants for Sitemap Configuration
+// =============================================================================
+// CONFIGURATION
+// =============================================================================
+
 const BASE_URL = DATA.url;
+
 const PRIORITY = {
   HOME: 1.0,
-  LANDING_CORE: 1.0,
-  LANDING_OFFER: 0.9,
-  LOCAL_CORE: 0.9, // Key cities
-  LOCAL_STD: 0.8,  // Other cities
-  CASE_STUDY: 0.8,
+  SERVICE_HUB: 1.0,        // /siti-web, /ecommerce
+  SERVICE_CITY_P1: 0.9,    // Priority 1 cities
+  SERVICE_CITY_P2: 0.8,    // Priority 2 cities
+  SERVICE_CITY_P3: 0.7,    // Priority 3 cities
   NICHE_HUB: 0.9,
   PLAYBOOK: 0.8,
+  CASE_STUDY: 0.8,
   BLOG_POST: 0.8,
+  LANDING_OFFER: 0.9,
+  BLOG_LIST: 0.9,
   LEGAL: 0.3,
 };
 
@@ -28,8 +52,16 @@ const CHANGE_FREQ = {
   YEARLY: 'yearly' as const,
 };
 
+// =============================================================================
+// SITEMAP GENERATOR
+// =============================================================================
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  // 1. Static Core Pages
+  const entries: MetadataRoute.Sitemap = [];
+
+  // -------------------------------------------------------------------------
+  // 1. STATIC CORE PAGES
+  // -------------------------------------------------------------------------
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: BASE_URL,
@@ -44,49 +76,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: PRIORITY.LEGAL,
     },
     {
-      url: `${BASE_URL}/il-tuo-business-sanguina`,
-      lastModified: new Date(),
-      changeFrequency: CHANGE_FREQ.MONTHLY,
-      priority: PRIORITY.LANDING_OFFER,
-    },
-    // Core Services
-    {
-      url: `${BASE_URL}/siti-web`,
+      url: `${BASE_URL}/blog`,
       lastModified: new Date(),
       changeFrequency: CHANGE_FREQ.WEEKLY,
-      priority: PRIORITY.LANDING_CORE,
-    },
-    {
-      url: `${BASE_URL}/sviluppo-software`,
-      lastModified: new Date(),
-      changeFrequency: CHANGE_FREQ.WEEKLY,
-      priority: PRIORITY.LANDING_CORE,
-    },
-    {
-      url: `${BASE_URL}/sviluppo-app-mobile`,
-      lastModified: new Date(),
-      changeFrequency: CHANGE_FREQ.WEEKLY,
-      priority: 0.9, // Slightly less than core services? Or same? Let's keep 0.9 as per previous
+      priority: PRIORITY.BLOG_LIST,
     },
     {
       url: `${BASE_URL}/casi-studio`,
       lastModified: new Date(),
       changeFrequency: CHANGE_FREQ.WEEKLY,
-      priority: 0.9,
+      priority: PRIORITY.LANDING_OFFER,
     },
-    // Blog
+    // Offer/Landing pages
     {
-      url: `${BASE_URL}/blog`,
+      url: `${BASE_URL}/il-tuo-business-sanguina`,
       lastModified: new Date(),
-      changeFrequency: CHANGE_FREQ.WEEKLY,
-      priority: 0.9,
+      changeFrequency: CHANGE_FREQ.MONTHLY,
+      priority: PRIORITY.LANDING_OFFER,
     },
-    // Offer Landing Pages
     {
       url: `${BASE_URL}/offerta-landing`,
       lastModified: new Date(),
       changeFrequency: CHANGE_FREQ.DAILY,
-      priority: PRIORITY.LANDING_CORE,
+      priority: PRIORITY.SERVICE_HUB,
     },
     {
       url: `${BASE_URL}/offerta-preventivo`,
@@ -108,77 +120,162 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // 2. Case Studies
-  const caseStudySlugs = getAllCaseStudySlugs();
-  const caseStudyPages: MetadataRoute.Sitemap = caseStudySlugs.map((slug) => ({
-    url: `${BASE_URL}/casi-studio/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: CHANGE_FREQ.MONTHLY,
-    priority: PRIORITY.CASE_STUDY,
-  }));
+  entries.push(...staticPages);
 
-  // 3. Local Pages (Siti Web & Software)
-  const allLocationSlugs = getAllLocationSlugs();
+  // -------------------------------------------------------------------------
+  // 2. SERVICE HUB PAGES + CITY PAGES (Dynamic based on services-config.ts)
+  // -------------------------------------------------------------------------
+  const services = getServicesWithCityPages();
+
+  for (const service of services) {
+    // Service hub page (e.g., /ecommerce, /siti-web)
+    entries.push({
+      url: `${BASE_URL}/${service.slug}`,
+      lastModified: new Date(),
+      changeFrequency: CHANGE_FREQ.WEEKLY,
+      priority: PRIORITY.SERVICE_HUB,
+    });
+
+    // City pages for this service
+    for (const location of LOCATIONS) {
+      // Skip cities that don't meet minimum population for this service
+      if (location.population < service.minPopulation) {
+        continue;
+      }
+
+      // Determine priority based on location priority tier
+      let priority: number;
+      switch (location.priority) {
+        case 1:
+          priority = PRIORITY.SERVICE_CITY_P1;
+          break;
+        case 2:
+          priority = PRIORITY.SERVICE_CITY_P2;
+          break;
+        default:
+          priority = PRIORITY.SERVICE_CITY_P3;
+      }
+
+      entries.push({
+        url: `${BASE_URL}/${service.slug}/${location.slug}`,
+        lastModified: new Date(),
+        changeFrequency: CHANGE_FREQ.WEEKLY,
+        priority,
+      });
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // 3. NICHE HUB & PLAYBOOK PAGES & NICHE CITY PAGES
+  // -------------------------------------------------------------------------
   
-  const isPriorityCity = (slug: string) => 
-    slug.includes('reggio-emilia') || 
-    slug.includes('sassuolo') || 
-    slug.includes('modena') || 
-    slug.includes('bologna');
-
-  const sitiWebLocalPages: MetadataRoute.Sitemap = allLocationSlugs.map((slug) => ({
-    url: `${BASE_URL}/siti-web/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: CHANGE_FREQ.WEEKLY,
-    priority: isPriorityCity(slug) ? PRIORITY.LOCAL_CORE : PRIORITY.LOCAL_STD,
-  }));
-
-  const softwareGestionaliLocalPages: MetadataRoute.Sitemap = allLocationSlugs.map((slug) => ({
-    url: `${BASE_URL}/sviluppo-software/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: CHANGE_FREQ.WEEKLY,
-    priority: isPriorityCity(slug) ? PRIORITY.LOCAL_CORE : PRIORITY.LOCAL_STD,
-  }));
-
-  // 4. Niche Hub & Playbooks
-  const nichePages: MetadataRoute.Sitemap = [];
-  
-  NICHE_SLUGS.forEach((niche) => {
-    // Hub Page (e.g. /siti-web/ristoranti)
-    nichePages.push({
-      url: `${BASE_URL}/siti-web/${niche}`,
+  // A. Niche Hubs & Playbooks (Siti Web)
+  for (const nicheSlug of NICHE_SLUGS) {
+    // Niche hub page (e.g., /siti-web/ristoranti)
+    entries.push({
+      url: `${BASE_URL}/siti-web/${nicheSlug}`,
       lastModified: new Date(),
       changeFrequency: CHANGE_FREQ.WEEKLY,
       priority: PRIORITY.NICHE_HUB,
     });
 
-    // Playbook Pages (e.g. /siti-web/ristoranti/menu-online)
-    const playbookSlugs = getAllPlaybookSlugs(niche);
-    playbookSlugs.forEach((topic) => {
-      nichePages.push({
-        url: `${BASE_URL}/siti-web/${niche}/${topic}`,
+    // Playbook pages (e.g., /siti-web/ristoranti/menu-online)
+    const playbookSlugs = getAllPlaybookSlugs(nicheSlug);
+    for (const topic of playbookSlugs) {
+      entries.push({
+        url: `${BASE_URL}/siti-web/${nicheSlug}/${topic}`,
         lastModified: new Date(),
         changeFrequency: CHANGE_FREQ.MONTHLY,
         priority: PRIORITY.PLAYBOOK,
       });
+    }
+  }
+
+  // B. Niche City Pages (Siti Web Only for now)
+  // Cross-reference all siti-web niches with all qualifying cities
+  const sitiWebNiches = getNichesByServiceType('siti-web');
+  
+  for (const niche of sitiWebNiches) {
+    for (const location of LOCATIONS) {
+      // Skip if city is too small for this niche
+      if (location.population < niche.minPopulation) {
+        continue;
+      }
+
+      // Determine priority - usually lower than main service pages
+      let priority = PRIORITY.SERVICE_CITY_P3; // Default
+      if (location.priority === 1) priority = PRIORITY.SERVICE_CITY_P2;
+
+      entries.push({
+        url: `${BASE_URL}/siti-web/${niche.slug}/${location.slug}`,
+        lastModified: new Date(),
+        changeFrequency: CHANGE_FREQ.WEEKLY,
+        priority,
+      });
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // 4. CASE STUDIES
+  // -------------------------------------------------------------------------
+  const caseStudySlugs = getAllCaseStudySlugs();
+  for (const slug of caseStudySlugs) {
+    entries.push({
+      url: `${BASE_URL}/casi-studio/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: CHANGE_FREQ.MONTHLY,
+      priority: PRIORITY.CASE_STUDY,
     });
-  });
+  }
 
-  // 5. Blog Posts
+  // -------------------------------------------------------------------------
+  // 5. BLOG POSTS
+  // -------------------------------------------------------------------------
   const blogPosts = getAllPosts();
-  const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-    url: `${BASE_URL}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: CHANGE_FREQ.MONTHLY,
-    priority: PRIORITY.BLOG_POST,
-  }));
+  for (const post of blogPosts) {
+    entries.push({
+      url: `${BASE_URL}/blog/${post.slug}`,
+      lastModified: new Date(post.date),
+      changeFrequency: CHANGE_FREQ.MONTHLY,
+      priority: PRIORITY.BLOG_POST,
+    });
+  }
 
-  return [
-    ...staticPages,
-    ...caseStudyPages,
-    ...sitiWebLocalPages,
-    ...softwareGestionaliLocalPages,
-    ...nichePages,
-    ...blogPages,
-  ];
+  return entries;
+}
+
+// =============================================================================
+// STATS HELPER (for debugging/monitoring)
+// =============================================================================
+
+export function getSitemapStats(): {
+  totalPages: number;
+  breakdown: Record<string, number>;
+} {
+  const services = getServicesWithCityPages();
+  const breakdown: Record<string, number> = {
+    static: 9, // Approximate static pages
+    caseStudies: getAllCaseStudySlugs().length,
+    blogPosts: getAllPosts().length,
+  };
+
+  // Calculate service pages
+  for (const service of services) {
+    const qualifyingCities = LOCATIONS.filter(
+      loc => loc.population >= service.minPopulation
+    ).length;
+    breakdown[`${service.slug} (hub + cities)`] = 1 + qualifyingCities;
+  }
+
+  // Niche pages
+  let nichePages = 0;
+  for (const nicheSlug of NICHE_SLUGS) {
+    nichePages += 1; // Hub
+    nichePages += getAllPlaybookSlugs(nicheSlug).length; // Playbooks
+  }
+  breakdown['niches (hubs + playbooks)'] = nichePages;
+
+  const totalPages = Object.values(breakdown).reduce((sum, count) => sum + count, 0);
+
+  return { totalPages, breakdown };
 }

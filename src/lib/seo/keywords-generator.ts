@@ -1,4 +1,5 @@
 import { NicheConfig } from '@/data/niches-config';
+import { getNicheLabelForPhrase, getNicheMetaQuestionStart } from '@/lib/niche-labels';
 
 export interface GeneratedKeywords {
   base: string[];
@@ -90,18 +91,19 @@ export const generateKeywords = (
     pattern.replace('{city}', cityName)
   );
 
+  const label = getNicheLabelForPhrase(niche);
   const serviceKeywords = SERVICE_KEYWORDS[niche.category] || [];
   const base = serviceKeywords.map(kw => `${kw} ${niche.singularName.toLowerCase()}`);
 
   const longTail = [
     `${niche.singularName.toLowerCase()} professionale ${cityName}`,
-    `web marketing per ${niche.pluralName.toLowerCase()}`,
-    `aumento clienti ${niche.pluralName.toLowerCase()}`,
-    `digitalizzazione ${niche.pluralName.toLowerCase()}`,
+    `web marketing per ${label}`,
+    `aumento clienti ${label}`,
+    `digitalizzazione ${label}`,
     `${niche.slug} seo locale ${cityName}`,
-    `sviluppo web per ${niche.pluralName.toLowerCase()}`,
+    `sviluppo web per ${label}`,
     `presenza online ${niche.singularName.toLowerCase()} ${cityName}`,
-    `lead generation per ${niche.pluralName.toLowerCase()}`
+    `lead generation per ${label}`
   ];
 
   return {
@@ -115,7 +117,9 @@ export const generateMetaDescription = (
   niche: NicheConfig,
   cityName: string
 ): string => {
-  return `Sei un ${niche.singularName.toLowerCase()} a ${cityName}? Realizziamo siti web professionali per ${niche.pluralName.toLowerCase()}. Web design, SEO locale e marketing digitale per professionisti come te.`;
+  const label = getNicheLabelForPhrase(niche);
+  const questionStart = getNicheMetaQuestionStart(niche, cityName);
+  return `${questionStart} Realizziamo siti web professionali per ${label}. Web design, SEO locale e marketing digitale per professionisti come te.`;
 };
 
 export const generateTitle = (
@@ -123,8 +127,9 @@ export const generateTitle = (
   cityName: string,
   isServicePage: boolean = false
 ): string => {
+  const label = getNicheLabelForPhrase(niche);
   if (isServicePage) {
-    return `${niche.name} a ${cityName} | Web Design e Marketing per ${niche.pluralName}`;
+    return `${niche.name} a ${cityName} | Web Design e Marketing per ${label}`;
   }
   return `Siti Web per ${niche.name} a ${cityName}`;
 };
@@ -184,7 +189,7 @@ export const generateBulkKeywords = (
   });
   
   KEYWORD_BUNDLES.question.forEach(bundle => {
-    keywords.push(bundle.replace('{niche}', niche.pluralName.toLowerCase()));
+    keywords.push(bundle.replace('{niche}', getNicheLabelForPhrase(niche)));
   });
   
   return [...new Set(keywords)];

@@ -6,9 +6,15 @@ import { MessageCircle } from 'lucide-react';
 
 interface NicheHubStickyBottomBarProps {
     nicheName: string;
+    /** Testo corretto in italiano per la CTA, es. "il tuo e-commerce" o "i tuoi ristoranti" */
+    ctaPhrase?: string;
+    /** Testo per il messaggio WhatsApp, es. "e-commerce di libri" */
+    labelForMessage?: string;
 }
 
-export function NicheHubStickyBottomBar({ nicheName }: NicheHubStickyBottomBarProps) {
+export function NicheHubStickyBottomBar({ nicheName, ctaPhrase, labelForMessage }: NicheHubStickyBottomBarProps) {
+    const displayPhrase = ctaPhrase ?? nicheName.toLowerCase();
+    const messageLabel = labelForMessage ?? nicheName.toLowerCase();
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -51,7 +57,7 @@ export function NicheHubStickyBottomBar({ nicheName }: NicheHubStickyBottomBarPr
                             </div>
                             <div className="min-w-0">
                                 <p className="text-sm font-bold text-gray-900 truncate">
-                                    Vuoi un sito per i tuoi {nicheName.toLowerCase()}?
+                                    Vuoi un sito per {displayPhrase}?
                                 </p>
                                 <p className="text-xs text-gray-600">Rispondo entro 24 ore</p>
                             </div>
@@ -59,7 +65,7 @@ export function NicheHubStickyBottomBar({ nicheName }: NicheHubStickyBottomBarPr
                         <WhatsAppButton
                             size="lg"
                             className="h-12 px-6 rounded-full bg-[#25D366] hover:bg-[#128C7E] text-white border-0 font-bold shadow-lg hover:shadow-green-500/30 transition-all hover:scale-105 shrink-0"
-                            message={`Ciao Manuel! Vorrei informazioni per un sito web per ${nicheName.toLowerCase()}.`}
+                            message={`Ciao Manuel! Vorrei informazioni per un sito web per ${messageLabel}.`}
                         >
                             Scrivimi
                         </WhatsAppButton>

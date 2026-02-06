@@ -2,6 +2,7 @@ import { Location } from '@/data/locations';
 import { MarketArchetype } from '@/data/archetypes';
 import { NicheConfig } from '@/data/niches-config';
 import { buildNicheCanonicalUrl } from '@/lib/link-graph/tokens';
+import { getNicheLabelForPhrase } from '@/lib/niche-labels';
 
 export interface SeoMetadata {
   title: string;
@@ -67,6 +68,11 @@ export function generateTitle(
     const isSmallTown = archetype === 'MountainSmall' || archetype === 'PlainsSmall';
     const isIndustrial = archetype === 'IndustrialHub' || archetype === 'FoodValley';
 
+    // Hash unico per la città (usato in tutti i casi)
+    const cityHash = cityName.split('').reduce((acc, char) => {
+      return ((acc << 5) - acc) + char.charCodeAt(0) | 0;
+    }, 0);
+
     // CASO 1: Piccoli Comuni (Target: Artigiani, Negozi, Piccole Imprese)
     if (isSmallTown) {
       const smallTownTemplates = [
@@ -74,9 +80,12 @@ export function generateTitle(
         `Programmi per Artigiani e PMI a ${cityName} | No Excel`,
         `Digitalizzazione ${cityName}: Software su Misura Semplici`,
         `Software Gestionale Magazzino e Fatture a ${cityName}`,
+        `App su Misura per Negozi a ${cityName} | Facile e Veloce`,
+        `Digitalizza la Tua Attività a ${cityName}: Software Intuitivi`,
+        `Software per Ristoranti e Negozi a ${cityName} | Pronto in 14 Giorni`,
+        `Gestionale Semplice ${cityName}: Dici Addio alla Carta`,
       ];
-      // Usa un hash della città per mantenere il titolo consistente (non random a ogni build)
-      const index = cityName.charCodeAt(0) % smallTownTemplates.length;
+      const index = Math.abs(cityHash) % smallTownTemplates.length;
       return smallTownTemplates[index];
     }
 
@@ -87,8 +96,12 @@ export function generateTitle(
         `Automazione Processi e Software Custom a ${cityName}`,
         `Software su Misura ${cityName}: Integrazioni e Gestionali Web`,
         `Sviluppo Gestionale Produzione a ${cityName} | ${suffix}`,
+        `Software Industriale ${cityName}: Automazione e Controllo Qualità`,
+        `ERP e Gestionali per Aziende ${cityName} | Industria 4.0`,
+        `Digitalizzazione Produzione ${cityName}: Software su Misura`,
+        `Software Gestione Commesse e Magazzino ${cityName}`,
       ];
-      const index = cityName.charCodeAt(0) % industrialTemplates.length;
+      const index = Math.abs(cityHash) % industrialTemplates.length;
       return industrialTemplates[index];
     }
 
@@ -98,20 +111,38 @@ export function generateTitle(
       `Programmatore a ${cityName}: Web App e Automazioni | ${suffix}`,
       `Realizzazione Software e CRM a ${cityName} | ${suffix}`,
       `Sviluppo Tool e Integrazioni API a ${cityName}`,
+      `Software House ${cityName}: App, Gestionali e Web App`,
+      `CRM e Software Gestionali ${cityName} | Sviluppo Custom`,
+      `Applicazioni Web e Mobile ${cityName} | Sviluppo su Misura`,
+      `Digital Transformation ${cityName}: Software per Aziende`,
     ];
-    const index = cityName.charCodeAt(0) % corporateTemplates.length;
+    const index = Math.abs(cityHash) % corporateTemplates.length;
     return corporateTemplates[index];
   }
 
-  // LOGICA STANDARD PER ALTRI SERVIZI (Siti Web, SEO, ecc)
+  // LOGICA STANDARD PER ALTRI SERVIZI (Siti Web, SEO, ecc) - Emotional Trigger per CTR
+  // Hash unico per combinazione city + service per evitare duplicati
+  const hashInput = `${cityName}-${serviceSlug}`;
+  const hash = hashInput.split('').reduce((acc, char) => {
+    return ((acc << 5) - acc) + char.charCodeAt(0) | 0;
+  }, 0);
+  
   const templates = [
-    `Realizzazione ${serviceName} a ${cityName} | ${suffix}`,
-    `${serviceName} a ${cityName}: Strategie per crescere | ${suffix}`,
-    `Creazione ${serviceName} professionali a ${cityName}`,
-    `${serviceName} a ${cityName} | Consulente Digitale`,
+    `${serviceName} ${cityName}: Primi su Google in 30 giorni ⭐ 58+ Recensioni`,
+    `Sito Web ${cityName} che vende in 14 giorni o rimborsati | 58+ Clienti`,
+    `${serviceName} ${cityName}: Da 890€ - Pagamento a Rate 0% ✅`,
+    `${serviceName} ${cityName} | Garanzia Soddisfatti o Rimborsati`,
+    `${serviceName} ${cityName}: Solo 3 slot disponibili questo mese 🔥`,
+    `Web Designer ${cityName}: Risultati garantiti in 30 giorni | Manuel De Ceglie`,
+    `${serviceName} ${cityName} - Preventivo Gratuito in 2 minuti`,
+    `${serviceName} ${cityName}: 100% Italiano, Assistenza 24/7`,
+    `${serviceName} ${cityName}: Pronto in 7-14 Giorni 🚀`,
+    `Realizzazione ${serviceName} ${cityName} - 58+ Imprese Soddisfatte`,
+    `${serviceName} ${cityName}: SEO Inclusa e Mobile-First 📱`,
+    `${serviceName} ${cityName} | Consulente Web Locale`,
   ];
 
-  const index = cityName.charCodeAt(0) % templates.length;
+  const index = Math.abs(hash) % templates.length;
   return templates[index];
 }
 
@@ -166,19 +197,32 @@ export function generateDescription(
     ];
 
     const specificDescs = archetype ? descriptionMap[archetype] : fallbackDescs;
-    const index = cityName.charCodeAt(0) % specificDescs.length;
-    return specificDescs[index];
+    // Hash unico per città + servizio per evitare duplicati
+    const descHashInput = `${cityName}-${serviceSlug}-desc`;
+    const descHash = descHashInput.split('').reduce((acc, char) => {
+      return ((acc << 5) - acc) + char.charCodeAt(0) | 0;
+    }, 0);
+    const descIndex = Math.abs(descHash) % specificDescs.length;
+    return specificDescs[descIndex];
   }
 
-  // DESCRIZIONI STANDARD (Siti Web, ecc.) - Mantenute generiche ma efficaci
+  // DESCRIZIONI STANDARD (Siti Web, ecc.) - Emotional trigger e social proof
   const standardDescs = [
-    `Cerchi ${serviceName} a ${cityName}? Aiuto professionisti e aziende locali a crescere online con strategie concrete e misurabili.`,
-    `Realizzazione ${serviceName} a ${cityName}. Progetti curati nel design e ottimizzati per Google. Richiedi un'analisi gratuita.`,
-    `Servizi di ${serviceName} professionali a ${cityName}. Affidati a un esperto che conosce il mercato locale. Risultati garantiti.`,
+    `58+ progetti completati a ${cityName}. Sito web professionale da 890€ con garanzia soddisfatti o rimborsati. Pagamento a rate 0%. Solo 3 slot disponibili questo mese!`,
+    `Realizzazione ${serviceName} a ${cityName}: pronto in 14 giorni o ti rimborsiamo. Assistenza 24/7 inclusa. Valutazione 4.9/5 su 58 recensioni verificate.`,
+    `${serviceName} ${cityName} che portano clienti reali. Preventivo gratuito in 2 minuti. Garanzia "prima pagina Google" in 30 giorni o continuo gratis.`,
+    `Non rischiare con agenzie anonime. 58+ imprese a ${cityName} si sono già affidate a me. ${serviceName} professionali da 890€. Pagamento rateale 0%.`,
+    `Hai bisogno di ${serviceName.toLowerCase()} a ${cityName}? Consegna in 7-14 giorni, non mesi. Risultati garantiti o rimborso integrale. Richiedi preventivo ora.`,
+    `${serviceName} ${cityName}: il tuo sito online in 2 settimane. SEO inclusa, mobile-first, assistenza diretta con Manuel. Solo 3 progetti al mese.`,
   ];
 
-  const index = cityName.charCodeAt(0) % standardDescs.length;
-  return standardDescs[index];
+  // Hash unico per città + servizio
+  const descHashInput = `${cityName}-${serviceSlug}-desc`;
+  const descHash = descHashInput.split('').reduce((acc, char) => {
+    return ((acc << 5) - acc) + char.charCodeAt(0) | 0;
+  }, 0);
+  const descIndex = Math.abs(descHash) % standardDescs.length;
+  return standardDescs[descIndex];
 }
 
 export function generateKeywords(
@@ -251,6 +295,12 @@ export function generateH1(
   serviceSlug: string = 'siti-web',
   archetype?: MarketArchetype
 ): string {
+  // Hash unico per città + servizio
+  const h1HashInput = `${cityName}-${serviceSlug}-h1`;
+  const h1Hash = h1HashInput.split('').reduce((acc, char) => {
+    return ((acc << 5) - acc) + char.charCodeAt(0) | 0;
+  }, 0);
+
   if (serviceSlug === 'sviluppo-software') {
     const isSmallTown = archetype === 'MountainSmall' || archetype === 'PlainsSmall';
 
@@ -259,8 +309,11 @@ export function generateH1(
         `Software Gestionali Semplici a ${cityName}`,
         `Il Tuo Gestionale su Misura a ${cityName}`,
         `Digitalizza la Tua Attività a ${cityName}`,
+        `App per Negozi e Ristoranti a ${cityName}`,
+        `Software Intuitivo per PMI a ${cityName}`,
+        `Gestionale Facile per ${cityName}`,
       ];
-      return templates[cityName.charCodeAt(0) % templates.length];
+      return templates[Math.abs(h1Hash) % templates.length];
     }
 
     const templates = [
@@ -268,12 +321,28 @@ export function generateH1(
       `Realizzazione Gestionali Custom a ${cityName}`,
       `Software su Misura e Web App a ${cityName}`,
       `Soluzioni Software per Aziende a ${cityName}`,
+      `CRM e Gestionali ${cityName}: Sviluppo su Misura`,
+      `Software Industria 4.0 a ${cityName}`,
+      `Digital Transformation ${cityName}: Software Custom`,
+      `Programmatore Software ${cityName}: App e Gestionali`,
     ];
-    return templates[cityName.charCodeAt(0) % templates.length];
+    return templates[Math.abs(h1Hash) % templates.length];
   }
 
-  // Standard H1
-  return `${serviceName} a ${cityName}: Soluzioni per Crescere`;
+  // Standard H1 - Emotional trigger
+  const h1Templates = [
+    `${serviceName} ${cityName}: Il tuo sito che vende in 14 giorni`,
+    `${serviceName} ${cityName} - Da 890€ con Garanzia Risultati`,
+    `${serviceName} ${cityName}: Primi su Google in 30 giorni`,
+    `${serviceName} ${cityName} - 58+ Clienti Soddisfatti`,
+    `Web Designer ${cityName}: Sito Professionale in 2 Settimane`,
+    `${serviceName} ${cityName} - Preventivo Gratuito in 2 minuti`,
+    `${serviceName} ${cityName}: SEO Inclusa e Mobile-First`,
+    `Realizzazione ${serviceName} ${cityName} - Pagamento a Rate 0%`,
+    `${serviceName} ${cityName}: Sito Web che Porta Clienti`,
+    `Creazione ${serviceName} ${cityName} - Assistenza 24/7`,
+  ];
+  return h1Templates[Math.abs(h1Hash) % h1Templates.length];
 }
 
 export function buildSeoMetadata(
@@ -345,28 +414,45 @@ export function buildNicheSeoMetadata(
   const canonical = buildNicheCanonicalUrl(citySlug, niche.slug, 'siti-web');
   const baseUrl = 'https://manueldeceglie.it';
 
+  const label = getNicheLabelForPhrase(niche);
+  const labelTitle = label.charAt(0).toUpperCase() + label.slice(1);
+  
+  // Hash unico per città + nicchia per evitare duplicati
+  const nicheHashInput = `${location.name}-${niche.slug}`;
+  const nicheHash = nicheHashInput.split('').reduce((acc, char) => {
+    return ((acc << 5) - acc) + char.charCodeAt(0) | 0;
+  }, 0);
+  
   const titleVariants = [
-    `${niche.name} a ${location.name} | Web Design`,
-    `Siti web per ${niche.pluralName.toLowerCase()} a ${location.name}`,
-    `${niche.singularName} a ${location.name}? Il sito che porta clienti`,
-    `Web design per ${niche.pluralName.toLowerCase()} a ${location.name}`,
+    `${niche.name} ${location.name}: Sito che porta clienti ⭐ 58+ Recensioni`,
+    `Web Design ${labelTitle} ${location.name} - Pronti in 14 giorni`,
+    `${niche.name} ${location.name}: Da 890€ - Solo 3 slot disponibili`,
+    `${niche.name} ${location.name} | Garanzia Prima Pagina Google`,
+    `Siti Web per ${labelTitle} ${location.name} - Pagamento Rate 0%`,
+    `${niche.name} ${location.name}: Risultati garantiti o rimborso`,
+    `${niche.name} ${location.name} - Preventivo Gratuito 2 minuti`,
+    `Web Designer ${labelTitle} ${location.name} | 58+ Progetti`,
+    `${niche.name} ${location.name}: SEO per il tuo settore`,
+    `Realizzazione Siti ${labelTitle} ${location.name} - 7-14 Giorni`,
   ];
 
-  const title = titleVariants[location.name.charCodeAt(0) % titleVariants.length];
-
+  const title = titleVariants[Math.abs(nicheHash) % titleVariants.length];
   const descriptionVariants = [
-    `Sito web professionale per ${niche.pluralName.toLowerCase()} a ${location.name}: design, SEO e marketing specifico per il tuo settore.`,
-    `Realizzo siti web per ${niche.pluralName.toLowerCase()} a ${location.name}. Presenza online che porta risultati concreti.`,
-    `${niche.name} a ${location.name}: sito web ottimizzato per farti trovare dai clienti del tuo settore.`,
+    `58+ attività nel settore ${label} hanno già scelto il mio servizio a ${location.name}. Sito professionale da 890€ con garanzia soddisfatti o rimborsati. Solo 3 slot disponibili!`,
+    `${niche.name} ${location.name}: sito web pronto in 14 giorni o ti rimborsiamo. SEO specifica per il tuo settore, assistenza 24/7. Pagamento a rate 0%.`,
+    `Realizzo siti web per ${label} a ${location.name}. 58+ progetti completati, valutazione 4.9/5. Preventivo gratuito in 2 minuti!`,
+    `${niche.name} ${location.name}: il tuo sito che porta clienti reali. Garanzia "prima pagina Google" in 30 giorni o continuo gratis. Da 890€.`,
+    `Non rischiare con agenzie anonime. Specialista in ${niche.name.toLowerCase()} a ${location.name} con 58+ casi di successo. Risultati garantiti, pagamento rateale.`,
+    `${niche.name} ${location.name}: sito ottimizzato per farti trovare dai clienti giusti. Design professionale, mobile-first. Richiedi preventivo!`,
   ];
 
-  const description = descriptionVariants[location.name.charCodeAt(0) % descriptionVariants.length];
+  const description = descriptionVariants[Math.abs(nicheHash) % descriptionVariants.length];
 
   const keywords = [
     `${niche.name.toLowerCase()} ${location.name}`,
-    `web design ${niche.pluralName.toLowerCase()} ${location.name}`,
-    `marketing per ${niche.pluralName.toLowerCase()} ${location.name}`,
-    `realizzazione siti ${niche.pluralName.toLowerCase()} ${location.name}`,
+    `web design ${label} ${location.name}`,
+    `marketing per ${label} ${location.name}`,
+    `realizzazione siti ${label} ${location.name}`,
   ];
 
   return {

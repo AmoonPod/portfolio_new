@@ -2,6 +2,7 @@
 
 import { getNicheConfig } from '@/data/niches-config';
 import { getNicheContent } from '@/data/niches-content';
+import { getNicheStatsSectionTitle, getNicheSingularContext, getNicheLabelForPhrase } from '@/lib/niche-labels';
 import { Breadcrumb } from '@/components/local-pages/Breadcrumb';
 import { NicheHubStickyBottomBar } from '@/components/local-pages/niche/NicheHubStickyBottomBar';
 import NicheHubHero from '@/components/local-pages/niche/NicheHubHero';
@@ -26,7 +27,7 @@ interface NicheHubTemplateProps {
   content: HubPageContent;
 }
 
-function NichePlaybookSection({ nicheSlug, nicheName, singularName }: { nicheSlug: string; nicheName: string; singularName: string }) {
+function NichePlaybookSection({ nicheSlug, nicheName, singularContext }: { nicheSlug: string; nicheName: string; singularContext: string }) {
   const links = getAllPlaybookSlugs(nicheSlug);
 
   if (links.length === 0) {
@@ -45,7 +46,7 @@ function NichePlaybookSection({ nicheSlug, nicheName, singularName }: { nicheSlu
             Risorse per {nicheName}
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Non solo teoria. Ecco le strategie pratiche che usiamo per portare clienti reali nel tuo {singularName.toLowerCase()} usando il digitale.
+            Non solo teoria. Ecco le strategie pratiche che usiamo per portare clienti reali nel tuo {singularContext} usando il digitale.
           </p>
         </div>
 
@@ -138,12 +139,12 @@ export default function NicheHubTemplate({ nicheSlug, content }: NicheHubTemplat
       <NichePlaybookSection 
         nicheSlug={nicheSlug} 
         nicheName={nicheConfig.name} 
-        singularName={nicheConfig.singularName}
+        singularContext={getNicheSingularContext(nicheConfig)}
       />
 
       {nicheContent?.stats && (
         <NicheHubStats
-          title={`Perché i ${nicheConfig.pluralName.toLowerCase()} hanno bisogno di un sito web professionale`}
+          title={nicheContent.introSection?.title ?? getNicheStatsSectionTitle(nicheConfig)}
           stats={nicheContent.stats}
         />
       )}
@@ -158,7 +159,11 @@ export default function NicheHubTemplate({ nicheSlug, content }: NicheHubTemplat
         showBreadcrumb={false}
       />
 
-      <NicheHubStickyBottomBar nicheName={nicheConfig.name} />
+      <NicheHubStickyBottomBar
+        nicheName={nicheConfig.name}
+        ctaPhrase={`il tuo ${getNicheSingularContext(nicheConfig)}`}
+        labelForMessage={getNicheLabelForPhrase(nicheConfig)}
+      />
     </main>
   );
 }

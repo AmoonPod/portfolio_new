@@ -2,6 +2,7 @@ import { MarketArchetype } from '@/data/archetypes';
 import { NicheConfig } from '@/data/niches-config';
 import { TokenReplacements, replaceTokens, buildNicheCanonicalUrl, buildKeywords } from '@/lib/link-graph/tokens';
 import { pickVariant, spintaxParse } from '@/lib/content/spintax';
+import { getNicheLabelForPhrase } from '@/lib/niche-labels';
 
 interface NicheHeroTemplate {
   h1: string;
@@ -421,21 +422,22 @@ export function generateNicheSEO(
   citySlug: string,
   replacements: TokenReplacements
 ) {
+  const label = getNicheLabelForPhrase(niche);
   const titleVariants = [
     `${niche.name} a ${cityName} | Web Design e Marketing`,
-    `Siti web per ${niche.pluralName.toLowerCase()} a ${cityName}`,
-    `${niche.singularName} a ${cityName}? Il sito che porta clienti`,
+    `Siti web per ${label} a ${cityName}`,
+    `${niche.name} a ${cityName}? Il sito che porta clienti`,
   ];
 
   const descriptionVariants = [
-    `Sito web professionale per ${niche.pluralName.toLowerCase()} a ${cityName}: design, SEO e marketing per il tuo settore.`,
-    `Realizzo siti web per ${niche.pluralName.toLowerCase()} a ${cityName}. Presenza online che porta risultati.`,
+    `Sito web professionale per ${label} a ${cityName}: design, SEO e marketing per il tuo settore.`,
+    `Realizzo siti web per ${label} a ${cityName}. Presenza online che porta risultati.`,
     `${niche.name} a ${cityName}: sito web ottimizzato per farti trovare dai clienti del tuo settore.`,
   ];
 
   const h1Variants = [
     `${niche.name} a ${cityName}`,
-    `Web design per ${niche.pluralName.toLowerCase()} a ${cityName}`,
+    `Web design per ${label} a ${cityName}`,
     `Il tuo sito per ${cityName}`,
   ];
 
@@ -445,8 +447,8 @@ export function generateNicheSEO(
 
   const keywords = [
     `${niche.name.toLowerCase()} ${cityName}`,
-    `web design ${niche.pluralName.toLowerCase()} ${cityName}`,
-    `marketing per ${niche.pluralName.toLowerCase()} ${cityName}`,
+    `web design ${label} ${cityName}`,
+    `marketing per ${label} ${cityName}`,
   ];
 
   return {

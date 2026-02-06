@@ -1,24 +1,30 @@
 import Link from 'next/link'
 import { LocalPageData } from '@/data/local-pages/types'
 import { MapPin, ArrowRight } from 'lucide-react'
-import { targetLocations } from '@/data/locations'
+import { PRIORITY_CITY_SLUGS, getLocationBySlug } from '@/data/locations'
 
 interface NearbyCitiesFooterProps {
   nearbyCities?: LocalPageData[]
   serviceName: string
 }
 
+// Limite massimo città per performance
+const MAX_CITIES_DISPLAY = 30
+
 export function NearbyCitiesFooter({ nearbyCities, serviceName }: NearbyCitiesFooterProps) {
-  // Se nearbyCities non è fornito o è vuoto, usa tutte le città da locations.ts
+  // Se nearbyCities non è fornito o è vuoto, usa solo le città prioritarie
   const citiesToShow = nearbyCities && nearbyCities.length > 0
-    ? nearbyCities
-    : targetLocations.map(location => ({
-      slug: location.slug,
-      cityName: location.name,
-      province: location.province,
-      region: location.region,
-      active: true,
-    } as LocalPageData))
+    ? nearbyCities.slice(0, MAX_CITIES_DISPLAY)
+    : PRIORITY_CITY_SLUGS.slice(0, MAX_CITIES_DISPLAY).map(slug => {
+        const location = getLocationBySlug(slug)
+        return {
+          slug: location!.slug,
+          cityName: location!.name,
+          province: location!.province,
+          region: location!.region,
+          active: true,
+        } as LocalPageData
+      })
 
   return (
     <section className="py-16 bg-gradient-to-b from-gray-50 to-white border-t border-gray-200">

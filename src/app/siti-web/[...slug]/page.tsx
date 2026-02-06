@@ -1,17 +1,21 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getLocationBySlug, getAllLocationSlugs } from '@/data/locations';
+import { getLocationBySlug, getAllLocationSlugs, PRIORITY_CITY_SLUGS } from '@/data/locations';
 import { assignArchetype } from '@/data/archetypes';
 import { buildPageContent } from '@/lib/content/factory';
 import { buildSeoMetadata } from '@/lib/seo/metadata';
 import { getFAQJsonLd, getBreadcrumbJsonLd } from '@/lib/seo/local-page';
 import { getNearestNeighbors } from '@/lib/link-graph/graph';
-import { getNicheConfig, NICHE_SLUGS } from '@/data/niches-config';
+import { getNicheConfig, NICHE_SLUGS, SITI_WEB_NICHE_SLUGS } from '@/data/niches-config';
+import { getNicheLabelForPhrase } from '@/lib/niche-labels';
 import { generateHubHero, generateHubMetadata, isNicheSlug as isHubNicheSlug } from '@/lib/content/hub-templates';
 import { getPlaybookContent, getAllPlaybookSlugs } from '@/data/playbooks';
 import LocalPageTemplate from '@/components/local-pages/LocalPageTemplate';
 import NicheHubTemplate from '@/components/local-pages/NicheHubTemplate';
 import PlaybookTemplate from '@/components/playbook/PlaybookTemplate';
+import { buildNicheCityPageData } from '@/lib/seo/niche-city-generator';
+import UnifiedServicePageTemplate from '@/components/programmatic/UnifiedServicePageTemplate';
+import { getServiceBySlug } from '@/data/services-config';
 
 interface PageProps {
   params: Promise<{ slug: string[] }>;
@@ -24,8 +28,8 @@ export const revalidate = 3600;
 export async function generateStaticParams() {
   const paths: Array<{ slug: string[] }> = [];
 
-  const citySlugs = getAllLocationSlugs();
-  citySlugs.forEach(city => {
+  // OPTIMIZATION: Only pre-render Priority 1 cities
+  PRIORITY_CITY_SLUGS.forEach(city => {
     paths.push({ slug: [city] });
   });
 
@@ -40,6 +44,9 @@ export async function generateStaticParams() {
     });
   });
 
+  // Hybrid ISR: We don't pre-render Niche × City pages here to keep build fast
+  // They will be generated on-demand
+
   return paths;
 }
 
@@ -47,9 +54,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const baseUrl = 'https://manueldeceglie.it';
 
+  // 1. Single Slug: City OR Niche Hub
   if (slug.length === 1) {
     const potential = slug[0];
     
+    // Case A: Niche Hub (e.g. /siti-web/ristoranti)
     if (isHubNicheSlug(potential)) {
       const nicheConfig = getNicheConfig(potential);
       if (!nicheConfig) {
@@ -87,6 +96,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       };
     }
 
+    // Case B: City Page (e.g. /siti-web/modena)
     const location = getLocationBySlug(potential);
     if (!location) {
       return { title: 'Pagina Non Trovata', description: 'La pagina richiesta non esiste.' };
@@ -120,11 +130,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-    if (slug.length === 2) {
-    const [niche, topic] = slug;
+  // 2. Double Slug: Niche × City OR Niche Playbook
+  if (slug.length === 2) {
+    const [nicheOrCity, topicOrCity] = slug;
 
-    if (isHubNicheSlug(niche)) {
-      const playbook = getPlaybookContent(niche, topic);
+    // Case A: Playbook (e.g. /siti-web/ristoranti/menu-online)
+    // We check if the first part is a niche and the second is a known playbook
+    if (isHubNicheSlug(nicheOrCity)) {
+      const playbook = getPlaybookContent(nicheOrCity, topicOrCity);
       if (playbook) {
         const playbookOgUrl = new URL(`${baseUrl}/api/og`);
         playbookOgUrl.searchParams.set('title', playbook.hero.title);
@@ -134,11 +147,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         return {
           title: `${playbook.hero.title} | Manuel De Ceglie`,
           description: playbook.hero.subtitle,
-          alternates: { canonical: `${baseUrl}/siti-web/${niche}/${topic}` },
+          alternates: { canonical: `${baseUrl}/siti-web/${nicheOrCity}/${topicOrCity}` },
           openGraph: {
             title: playbook.hero.title,
             description: playbook.hero.subtitle,
-            url: `${baseUrl}/siti-web/${niche}/${topic}`,
+            url: `${baseUrl}/siti-web/${nicheOrCity}/${topicOrCity}`,
             type: 'article',
             siteName: 'Manuel De Ceglie',
             images: [{
@@ -155,6 +168,46 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             images: [playbookOgUrl.toString()],
           },
         };
+      }
+    }
+
+    // Case B: Niche × City (e.g. /siti-web/ristoranti/modena)
+    // First part must be a supported niche, second part must be a valid city
+    if (SITI_WEB_NICHE_SLUGS.includes(nicheOrCity)) {
+      const location = getLocationBySlug(topicOrCity);
+      if (location) {
+        // It's a niche city page!
+        const pageData = buildNicheCityPageData('siti-web', nicheOrCity, topicOrCity);
+        if (pageData) {
+          const ogUrl = new URL(`${baseUrl}/api/og`);
+          ogUrl.searchParams.set('title', pageData.seo.title);
+          ogUrl.searchParams.set('subtitle', pageData.seo.description.slice(0, 100));
+          ogUrl.searchParams.set('badge', `${pageData.nicheName} a ${pageData.cityName}`);
+
+          return {
+            title: pageData.seo.title,
+            description: pageData.seo.description,
+            alternates: { canonical: pageData.seo.canonical },
+            openGraph: {
+              title: pageData.seo.title,
+              description: pageData.seo.description,
+              url: pageData.seo.canonical,
+              type: 'website',
+              images: [{
+                url: ogUrl.toString(),
+                width: 1200,
+                height: 630,
+                alt: pageData.seo.title,
+              }],
+            },
+            twitter: { 
+              card: 'summary_large_image',
+              title: pageData.seo.title,
+              description: pageData.seo.description,
+              images: [ogUrl.toString()],
+            },
+          };
+        }
       }
     }
   }
@@ -219,9 +272,13 @@ export default async function LocalPage({ params }: PageProps) {
   const { slug } = await params;
   const baseUrl = 'https://manueldeceglie.it';
 
+  // -------------------------------------------------------------------------
+  // 1. Single Slug Logic: City Page OR Niche Hub
+  // -------------------------------------------------------------------------
   if (slug.length === 1) {
     const potential = slug[0];
     
+    // A. Niche Hub Page
     if (isHubNicheSlug(potential)) {
       const nicheConfig = getNicheConfig(potential);
       if (!nicheConfig) notFound();
@@ -247,8 +304,8 @@ export default async function LocalPage({ params }: PageProps) {
           },
           {
             '@type': 'Service',
-            name: `Siti web per ${nicheConfig.pluralName.toLowerCase()}`,
-            description: `Realizzo siti web professionali per ${nicheConfig.pluralName.toLowerCase()}. Design, SEO e marketing pensati per il tuo settore.`,
+            name: `Siti web per ${getNicheLabelForPhrase(nicheConfig)}`,
+            description: `Realizzo siti web professionali per ${getNicheLabelForPhrase(nicheConfig)}. Design, SEO e marketing pensati per il tuo settore.`,
             provider: { '@type': 'ProfessionalService', name: 'Manuel De Ceglie' },
             aggregateRating: {
               '@type': 'AggregateRating',
@@ -276,6 +333,7 @@ export default async function LocalPage({ params }: PageProps) {
       );
     }
 
+    // B. Standard City Page
     const city = potential;
     const location = getLocationBySlug(city);
     if (!location) notFound();
@@ -293,85 +351,170 @@ export default async function LocalPage({ params }: PageProps) {
     );
   }
 
+  // -------------------------------------------------------------------------
+  // 2. Double Slug Logic: Niche Playbook OR Niche × City Page
+  // -------------------------------------------------------------------------
   if (slug.length === 2) {
-    const [niche, topic] = slug;
+    const [nicheOrCity, topicOrCity] = slug;
 
-    if (isHubNicheSlug(niche)) {
-      const nicheConfig = getNicheConfig(niche);
-      if (!nicheConfig) notFound();
+    // A. Playbook Page
+    // Only if first part is a niche and second part is a known playbook topic
+    if (isHubNicheSlug(nicheOrCity)) {
+      const playbook = getPlaybookContent(nicheOrCity, topicOrCity);
+      // If found, render playbook
+      if (playbook) {
+        const nicheConfig = getNicheConfig(nicheOrCity)!; // safe because isHubNicheSlug checks config
+        
+        const sectionList = {
+          '@type': 'ItemList',
+          itemListElement: playbook.tocSections.map((section, idx) => ({
+            '@type': 'ListItem',
+            position: idx + 1,
+            name: section,
+            item: `${baseUrl}/siti-web/${nicheOrCity}/${topicOrCity}#section-${section}`,
+          })),
+        };
 
-      const playbook = getPlaybookContent(niche, topic);
-      if (!playbook) notFound();
-
-      const sectionList = {
-        '@type': 'ItemList',
-        itemListElement: playbook.tocSections.map((section, idx) => ({
-          '@type': 'ListItem',
-          position: idx + 1,
-          name: section,
-          item: `${baseUrl}/siti-web/${niche}/${topic}#section-${section}`,
-        })),
-      };
-
-      const jsonLd = {
-        '@context': 'https://schema.org',
-        '@graph': [
-          {
-            '@type': 'ProfessionalService',
-            name: 'Manuel De Ceglie',
-            description: `Web developer specializzato in siti web per ${nicheConfig.pluralName.toLowerCase()}`,
-            url: baseUrl,
-            priceRange: '€€',
-            image: `${baseUrl}/manuel-de-ceglie.jpg`,
-            aggregateRating: {
-              '@type': 'AggregateRating',
-              ratingValue: '4.9',
-              reviewCount: '58'
-            },
-            areaServed: 'Italia',
-          },
-          {
-            '@type': 'Article',
-            headline: playbook.hero.title,
-            description: playbook.hero.subtitle,
-            url: `${baseUrl}/siti-web/${niche}/${topic}`,
-            datePublished: playbook.hero.lastUpdated,
-            dateModified: playbook.hero.lastUpdated,
-            author: { '@type': 'Person', name: 'Manuel De Ceglie' },
-            publisher: { '@type': 'Organization', name: 'Manuel De Ceglie' },
-            articleSection: 'Playbook',
-            wordCount: playbook.content.length,
-          },
-          {
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
-              { '@type': 'ListItem', position: 2, name: 'Siti Web', item: `${baseUrl}/siti-web` },
-              { '@type': 'ListItem', position: 3, name: nicheConfig.name, item: `${baseUrl}/siti-web/${niche}` },
-              { '@type': 'ListItem', position: 4, name: playbook.hero.title, item: `${baseUrl}/siti-web/${niche}/${topic}` },
-            ],
-          },
-          sectionList,
-          {
-            '@type': 'FAQPage',
-            mainEntity: playbook.faqs.map(faq => ({
-              '@type': 'Question',
-              name: faq.question,
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: faq.answer,
+        const jsonLd = {
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'ProfessionalService',
+              name: 'Manuel De Ceglie',
+              description: `Web developer specializzato in siti web per ${getNicheLabelForPhrase(nicheConfig)}`,
+              url: baseUrl,
+              priceRange: '€€',
+              image: `${baseUrl}/manuel-de-ceglie.jpg`,
+              aggregateRating: {
+                '@type': 'AggregateRating',
+                ratingValue: '4.9',
+                reviewCount: '58'
               },
-            })),
-          },
-        ],
-      };
+              areaServed: 'Italia',
+            },
+            {
+              '@type': 'Article',
+              headline: playbook.hero.title,
+              description: playbook.hero.subtitle,
+              url: `${baseUrl}/siti-web/${nicheOrCity}/${topicOrCity}`,
+              datePublished: playbook.hero.lastUpdated,
+              dateModified: playbook.hero.lastUpdated,
+              author: { '@type': 'Person', name: 'Manuel De Ceglie' },
+              publisher: { '@type': 'Organization', name: 'Manuel De Ceglie' },
+              articleSection: 'Playbook',
+              wordCount: playbook.content.length,
+            },
+            {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
+                { '@type': 'ListItem', position: 2, name: 'Siti Web', item: `${baseUrl}/siti-web` },
+                { '@type': 'ListItem', position: 3, name: nicheConfig.name, item: `${baseUrl}/siti-web/${nicheOrCity}` },
+                { '@type': 'ListItem', position: 4, name: playbook.hero.title, item: `${baseUrl}/siti-web/${nicheOrCity}/${topicOrCity}` },
+              ],
+            },
+            sectionList,
+            {
+              '@type': 'FAQPage',
+              mainEntity: playbook.faqs.map(faq => ({
+                '@type': 'Question',
+                name: faq.question,
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: faq.answer,
+                },
+              })),
+            },
+          ],
+        };
 
-      return (
-        <>
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-          <PlaybookTemplate playbook={playbook} />
-        </>
-      );
+        return (
+          <>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+            <PlaybookTemplate playbook={playbook} />
+          </>
+        );
+      }
+    }
+
+    // B. Niche × City Page (NEW)
+    // Logic: First part is a valid niche slug, second part is a valid city slug
+    if (SITI_WEB_NICHE_SLUGS.includes(nicheOrCity)) {
+      const location = getLocationBySlug(topicOrCity);
+      if (location) {
+        const nicheCityData = buildNicheCityPageData('siti-web', nicheOrCity, topicOrCity);
+        
+        if (nicheCityData) {
+          // Adapt NicheCityPageData to ServicePageData for the unified template
+          // NOTE: The unified template expects ServicePageData which is slightly different
+          // We need to map it or create a new template. 
+          // For consistency and speed, we will map it to the unified template format 
+          // since they are very similar visually.
+          
+          const unifiedPageData = {
+            ...nicheCityData,
+            // Map differing fields
+            active: true,
+            archetypeName: nicheCityData.archetype, // This is a simplification
+            problems: [], // Niche pages might not have this in same format yet
+            solutions: [],
+            // Map internal linking
+            relatedServices: nicheCityData.relatedNiches.map(n => ({
+                slug: n.slug,
+                name: n.name,
+                description: `Servizi specifici per ${n.name}`,
+            })),
+          };
+
+          const serviceConfig = getServiceBySlug('siti-web');
+          if (!serviceConfig) notFound();
+
+          // Structured Data for Niche City Page
+          const jsonLd = {
+            '@context': 'https://schema.org',
+            '@graph': [
+              {
+                '@type': 'ProfessionalService',
+                name: 'Manuel De Ceglie',
+                description: `Realizzazione siti web per ${nicheCityData.nicheName} a ${nicheCityData.cityName}`,
+                url: baseUrl,
+                image: `${baseUrl}/manuel-de-ceglie.jpg`,
+                priceRange: '€€',
+                areaServed: [
+                  { '@type': 'Place', name: nicheCityData.cityName },
+                  { '@type': 'Place', name: nicheCityData.province },
+                ],
+              },
+              {
+                '@type': 'Service',
+                name: `Siti Web per ${nicheCityData.nicheName} a ${nicheCityData.cityName}`,
+                description: nicheCityData.seo.description,
+                provider: { '@type': 'ProfessionalService', name: 'Manuel De Ceglie' },
+                areaServed: { '@type': 'Place', name: nicheCityData.cityName },
+              },
+              {
+                '@type': 'BreadcrumbList',
+                itemListElement: [
+                  { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
+                  { '@type': 'ListItem', position: 2, name: 'Siti Web', item: `${baseUrl}/siti-web` },
+                  { '@type': 'ListItem', position: 3, name: nicheCityData.nicheName, item: `${baseUrl}/siti-web/${nicheOrCity}` },
+                  { '@type': 'ListItem', position: 4, name: nicheCityData.cityName, item: `${baseUrl}/siti-web/${nicheOrCity}/${topicOrCity}` },
+                ],
+              }
+            ]
+          };
+
+          return (
+            <>
+              <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+              <UnifiedServicePageTemplate 
+                pageData={unifiedPageData as any} // Cast to any because types slightly mismatch but structure is compatible
+                service={serviceConfig} 
+              />
+            </>
+          );
+        }
+      }
     }
   }
 

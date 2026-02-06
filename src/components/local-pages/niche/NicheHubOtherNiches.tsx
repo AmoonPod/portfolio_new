@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight, Grid, Star } from 'lucide-react';
 import { nichesConfig } from '@/data/niches-config';
+import { getNicheLabelForPhrase } from '@/lib/niche-labels';
 
 interface OtherNichesProps {
   currentNicheSlug?: string;
@@ -65,11 +66,18 @@ export default function OtherNiches({ currentNicheSlug, showAll = false }: Other
                 className="group flex flex-col bg-gradient-to-br from-slate-900 to-[#050805] rounded-3xl p-8 md:p-10 text-white hover:shadow-2xl hover:shadow-[#FFBC11]/10 transition-all duration-300 hover:-translate-y-1 h-full"
               >
                 <div className="flex items-start justify-between mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-2xl">
                     {niche.category === 'Food & Hospitality' && '🍽️'}
                     {niche.category === 'Beauty & Wellness' && '💅'}
                     {niche.category === 'Creative' && '📸'}
                     {niche.category === 'Agriculture' && '🌾'}
+                    {niche.category === 'Professional Services' && '⚖️'}
+                    {niche.category === 'Health & Fitness' && '💪'}
+                    {niche.category === 'E-commerce Fashion' && '👕'}
+                    {niche.category === 'E-commerce Food' && '🥘'}
+                    {niche.category === 'E-commerce Home' && '🏠'}
+                    {niche.category === 'E-commerce Tech' && '💻'}
+                    {niche.category === 'Retail' && '🛒'}
                   </div>
                   <div className="flex items-center gap-1 px-2 py-1 bg-[#FFBC11]/20 rounded-full">
                     <Star className="w-3 h-3 text-[#FFBC11]" />
@@ -82,7 +90,7 @@ export default function OtherNiches({ currentNicheSlug, showAll = false }: Other
                 </h3>
 
                 <p className="text-gray-400 text-sm mb-6 flex-grow">
-                  Soluzioni web professionali per {niche.pluralName.toLowerCase()}.
+                  Soluzioni web professionali per {getNicheLabelForPhrase(niche)}.
                   Design, SEO e marketing pensati per il tuo settore.
                 </p>
 
