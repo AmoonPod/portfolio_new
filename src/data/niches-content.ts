@@ -16,6 +16,7 @@ export interface Stat {
   value: string;
   label: string;
   source: string;
+  icon?: string;
 }
 
 export interface TestimonialSchema {
@@ -148,10 +149,10 @@ export const nichesContent: Record<string, NicheContent> = {
       }
     ],
     stats: [
-      { value: '73%', label: 'clienti cerca il menu sullo smartphone', source: 'Think with Google' },
-      { value: '94%', label: 'legge le recensioni prima di scegliere', source: 'BrightLocal' },
-      { value: '15-25%', label: 'commissioni medie sui portali', source: 'Elaborazione interna' },
-      { value: '68%', label: 'ricerche locali terminano con visita', source: 'HubSpot' }
+      { value: '73%', label: 'clienti cerca il menu sullo smartphone', source: 'Think with Google', icon: 'smartphone' },
+      { value: '94%', label: 'legge le recensioni prima di scegliere', source: 'BrightLocal', icon: 'star' },
+      { value: '15-25%', label: 'commissioni medie sui portali', source: 'Elaborazione interna', icon: 'percent' },
+      { value: '68%', label: 'ricerche locali terminano con visita', source: 'HubSpot', icon: 'map-pin' }
     ],
     testimonials: [
       {
@@ -272,10 +273,10 @@ export const nichesContent: Record<string, NicheContent> = {
       }
     ],
     stats: [
-      { value: '93%', label: 'fotografi considerano il portfolio essenziale', source: 'ASMP' },
-      { value: '63%', label: 'dei clienti cerca su Google', source: 'Google Data' },
-      { value: '4s', label: 'tempo medio di attesa accettabile', source: 'Google PageSpeed' },
-      { value: '72%', label: 'di clienti B2B legge le recensioni', source: 'BrightLocal' }
+      { value: '93%', label: 'fotografi considerano il portfolio essenziale', source: 'ASMP', icon: 'image' },
+      { value: '63%', label: 'dei clienti cerca su Google', source: 'Google Data', icon: 'search' },
+      { value: '4s', label: 'tempo medio di attesa accettabile', source: 'Google PageSpeed', icon: 'clock' },
+      { value: '72%', label: 'di clienti B2B legge le recensioni', source: 'BrightLocal', icon: 'star' }
     ],
     testimonials: [
       {
@@ -396,10 +397,10 @@ export const nichesContent: Record<string, NicheContent> = {
       }
     ],
     stats: [
-      { value: '65%', label: 'prenoterebbe online se possibile', source: 'Square' },
-      { value: '70%', label: 'legge le recensioni prima di prenotare', source: 'BrightLocal' },
-      { value: '47%', label: 'dei no-show dovuti a dimenticanza', source: 'Internal data' },
-      { value: '40%', label: 'prenotazioni fuori orario con booking online', source: 'Salon Tech' }
+      { value: '65%', label: 'prenoterebbe online se possibile', source: 'Square', icon: 'calendar' },
+      { value: '70%', label: 'legge le recensioni prima di prenotare', source: 'BrightLocal', icon: 'star' },
+      { value: '47%', label: 'dei no-show dovuti a dimenticanza', source: 'Internal data', icon: 'clock' },
+      { value: '40%', label: 'prenotazioni fuori orario con booking online', source: 'Salon Tech', icon: 'trending-up' }
     ],
     testimonials: [
       {
@@ -520,10 +521,10 @@ export const nichesContent: Record<string, NicheContent> = {
       }
     ],
     stats: [
-      { value: '72%', label: 'dei consumatori preferisce prodotti locali quando disponibili', source: 'Nielsen' },
-      { value: '58%', label: 'compra online prodotti alimentari almeno una volta al mese', source: 'Statista' },
-      { value: '41%', label: 'aumenta la spesa quando conosce l\'origine', source: 'Internal data' },
-      { value: '35%', label: 'prenotazioni visite generate da ricerche locali', source: 'Google Data' }
+      { value: '72%', label: 'dei consumatori preferisce prodotti locali quando disponibili', source: 'Nielsen', icon: 'map-pin' },
+      { value: '58%', label: 'compra online prodotti alimentari almeno una volta al mese', source: 'Statista', icon: 'shopping-cart' },
+      { value: '41%', label: 'aumenta la spesa quando conosce l\'origine', source: 'Internal data', icon: 'trending-up' },
+      { value: '35%', label: 'prenotazioni visite generate da ricerche locali', source: 'Google Data', icon: 'search' }
     ],
     testimonials: [
       {
@@ -602,8 +603,10 @@ export const nichesContent: Record<string, NicheContent> = {
       }
     ],
     stats: [
-      { value: '74%', label: 'cerca un avvocato online', source: 'Clio Trends' },
-      { value: '58%', label: 'visita il sito web dello studio', source: 'Clio Trends' }
+      { value: '74%', label: 'cerca un avvocato online', source: 'Clio Trends', icon: 'search' },
+      { value: '58%', label: 'visita il sito web dello studio', source: 'Clio Trends', icon: 'users' },
+      { value: '82%', label: 'considera recensioni nella scelta', source: 'Lawyer Marketing', icon: 'star' },
+      { value: '60%', label: 'preferisce contatto via web form', source: 'Legal Trends', icon: 'mail' }
     ],
     testimonials: [
       {
@@ -663,8 +666,10 @@ export const nichesContent: Record<string, NicheContent> = {
       }
     ],
     stats: [
-      { value: '88%', label: 'cerca info salute online', source: 'Pew Research' },
-      { value: '45%', label: 'prenoterebbe online se potesse', source: 'Accenture' }
+      { value: '88%', label: 'cerca info salute online', source: 'Pew Research', icon: 'search' },
+      { value: '45%', label: 'prenoterebbe online se potesse', source: 'Accenture', icon: 'calendar' },
+      { value: '76%', label: 'valuta il dentista online prima di prenotare', source: 'Google Health', icon: 'star' },
+      { value: '3x', label: 'ROI di un sito professionale vs pubblicità tradizionale', source: 'Healthcare Marketing', icon: 'trending-up' }
     ],
     testimonials: [
       {
@@ -748,9 +753,10 @@ export const nichesContent: Record<string, NicheContent> = {
       }
     ],
     stats: [
-      { value: '67%', label: 'cerca palestre online prima di iscriversi', source: 'IHRSA' },
-      { value: '30%', label: 'di abbandono entro i primi 3 mesi', source: 'Statista' },
-      { value: '25%', label: 'aumento retention con app/community digitale', source: 'Club Industry' }
+      { value: '67%', label: 'cerca palestre online prima di iscriversi', source: 'IHRSA', icon: 'search' },
+      { value: '30%', label: 'di abbandono entro i primi 3 mesi', source: 'Statista', icon: 'trending-down' },
+      { value: '25%', label: 'aumento retention con app/community digitale', source: 'Club Industry', icon: 'heart' },
+      { value: '82%', label: 'utilizza smartphone per tracciare allenamenti', source: 'Fitness Tech', icon: 'smartphone' }
     ],
     testimonials: [
       {

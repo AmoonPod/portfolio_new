@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { MapPin, ChevronRight, Globe } from 'lucide-react';
 import { getNicheConfig } from '@/data/niches-config';
 import { targetLocations } from '@/data/locations';
+import ExpandableCityGrid from '@/components/local-pages/ExpandableCityGrid';
 
 interface NicheHubFooterProps {
   nicheSlug: string;
@@ -37,22 +38,14 @@ export default function NicheHubFooter({ nicheSlug, nicheName, showBreadcrumb = 
           </p>
         </div>
 
-        {/* Cities Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-4xl mx-auto mb-12">
-          {citiesWithNiche.map((city) => (
-            <Link
-              key={city.slug}
-              href={`/siti-web/${city.slug}`}
-              className="group flex items-center gap-3 p-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#FFBC11]/30 rounded-xl transition-all duration-300"
-            >
-              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-gray-400 group-hover:text-[#FFBC11] transition-colors">
-                <MapPin className="w-4 h-4" />
-              </div>
-              <span className="font-medium text-white group-hover:text-[#FFBC11] transition-colors">
-                {city.name}
-              </span>
-            </Link>
-          ))}
+        {/* Cities Grid with Expandable Functionality */}
+        <div className="max-w-5xl mx-auto mb-12">
+          <ExpandableCityGrid
+            cities={citiesWithNiche}
+            serviceSlug="siti-web"
+            nicheSlug={nicheSlug}
+            initialVisible={10}
+          />
         </div>
 
         {/* More cities link */}

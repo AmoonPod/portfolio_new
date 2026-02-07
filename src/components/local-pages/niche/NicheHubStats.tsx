@@ -1,12 +1,59 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { TrendingUp, Target, Users, Award } from 'lucide-react';
+import { 
+  TrendingUp, 
+  Target, 
+  Users, 
+  Award,
+  TrendingDown,
+  CalendarCheck,
+  Star,
+  Clock,
+  Heart,
+  Search,
+  Eye,
+  BarChart3,
+  Percent,
+  MapPin,
+  Phone,
+  CreditCard,
+  Shield,
+  Zap,
+  CheckCircle,
+  LucideIcon
+} from 'lucide-react';
+
+// Mappatura nome icona -> componente Lucide
+const ICON_MAP: Record<string, LucideIcon> = {
+  'trending-up': TrendingUp,
+  'trending-down': TrendingDown,
+  'target': Target,
+  'users': Users,
+  'award': Award,
+  'calendar-check': CalendarCheck,
+  'star': Star,
+  'clock': Clock,
+  'heart': Heart,
+  'search': Search,
+  'eye': Eye,
+  'bar-chart': BarChart3,
+  'percent': Percent,
+  'map-pin': MapPin,
+  'phone': Phone,
+  'credit-card': CreditCard,
+  'shield': Shield,
+  'zap': Zap,
+  'check-circle': CheckCircle,
+  'trendingup': TrendingUp,
+  'trendingdown': TrendingDown,
+};
 
 interface Stat {
   value: string;
   label: string;
   source: string;
+  icon?: string;
 }
 
 interface NicheHubStatsProps {
@@ -43,33 +90,37 @@ export default function NicheHubStats({ title, stats }: NicheHubStatsProps) {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {stats.map((stat, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="text-center"
-            >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/5 border border-white/10 mb-4">
-                {idx === 0 && <Target className="w-8 h-8 text-[#FFBC11]" />}
-                {idx === 1 && <Users className="w-8 h-8 text-[#FFBC11]" />}
-                {idx === 2 && <TrendingUp className="w-8 h-8 text-[#FFBC11]" />}
-                {idx === 3 && <Award className="w-8 h-8 text-[#FFBC11]" />}
-                {idx > 3 && <TrendingUp className="w-8 h-8 text-[#FFBC11]" />}
-              </div>
-              <div className="text-4xl md:text-5xl font-black text-white mb-2">
-                {stat.value}
-              </div>
-              <div className="text-gray-400 font-medium mb-2">
-                {stat.label}
-              </div>
-              <div className="text-xs text-gray-600 uppercase tracking-wider">
-                {stat.source}
-              </div>
-            </motion.div>
-          ))}
+          {stats.map((stat, idx) => {
+            // Ottieni l'icona specifica dello stat, o usa default basato sull'indice
+            const iconName = stat.icon;
+            const IconComponent = iconName && ICON_MAP[iconName] 
+              ? ICON_MAP[iconName] 
+              : ICON_MAP[Object.keys(ICON_MAP)[idx % Object.keys(ICON_MAP).length]] || TrendingUp;
+            
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="text-center"
+              >
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/5 border border-white/10 mb-4">
+                  <IconComponent className="w-8 h-8 text-[#FFBC11]" />
+                </div>
+                <div className="text-4xl md:text-5xl font-black text-white mb-2">
+                  {stat.value}
+                </div>
+                <div className="text-gray-400 font-medium mb-2">
+                  {stat.label}
+                </div>
+                <div className="text-xs text-gray-600 uppercase tracking-wider">
+                  {stat.source}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Bottom badge */}
