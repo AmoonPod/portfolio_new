@@ -16,6 +16,7 @@ import { NicheConfig, getNicheConfig } from '@/data/niches-config';
 import { Location, getLocationBySlug } from '@/data/locations';
 import { MarketArchetype, assignArchetype, getArchetype } from '@/data/archetypes';
 import { getNicheLabelForPhrase, getNicheSingularContext } from '@/lib/niche-labels';
+import { getCopyVariants } from '@/lib/content/copy-variations';
 
 // =============================================================================
 // TYPE DEFINITIONS
@@ -175,31 +176,13 @@ export function buildNicheCityPageData(
   const archetypeData = getArchetype(archetype);
   const baseUrl = 'https://manueldeceglie.it';
 
-  // Generate content
+  // Generate content using Anti-Doorway System (24 variations)
+  const copyVariants = getCopyVariants(location, niche);
   const label = getNicheLabelForPhrase(niche);
-  const templateKey = `${serviceSlug}:${nicheSlug}`;
-  const heroTemplate = NICHE_CITY_HERO_TEMPLATES[templateKey] ||
-    `${service.name} per ${label} a {{CITY}}`;
-
-  const title = `${service.name} ${niche.name} a ${location.name} | Manuel De Ceglie`;
-  const h1 = heroTemplate.replace('{{CITY}}', location.name);
-
-  // Enhanced Description Generation with Local Context
-  let description = `${service.name} professionale per ${label} a ${location.name}.`;
   
-  if (location.famousFor) {
-    description += ` Valorizza la tua attività nella città famosa per ${location.famousFor}.`;
-  } else if (location.demonym) {
-    description += ` Il partner digitale per le aziende ${location.demonym}.`;
-  } else {
-    description += ` Soluzioni su misura per il tuo settore.`;
-  }
-
-  if (location.landmarks && location.landmarks.length > 0) {
-    description += ` Servizio attivo dal centro storico a zona ${location.landmarks[0]}.`;
-  }
-  
-  description += ` Preventivo gratuito e prezzi chiari.`;
+  const title = `${copyVariants.hero.title} | Manuel De Ceglie`;
+  const h1 = copyVariants.hero.title;
+  const description = copyVariants.intro; // Use the AI generated intro which is specific and varied
   
   const keywords = [
     `${service.slug} ${nicheSlug} ${location.name.toLowerCase()}`,
@@ -289,8 +272,8 @@ export function buildNicheCityPageData(
     hero: {
       badge: `${service.name} • ${niche.name}`,
       title: h1,
-      subtitle: description,
-      ctaText: 'Richiedi Preventivo Gratuito',
+      subtitle: copyVariants.hero.subtitle,
+      ctaText: copyVariants.hero.cta,
       ctaHref: '#contatti',
     },
     features,
