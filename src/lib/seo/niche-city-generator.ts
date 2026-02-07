@@ -13,7 +13,7 @@
 
 import { ServiceConfig, getServiceBySlug } from '@/data/services-config';
 import { NicheConfig, getNicheConfig } from '@/data/niches-config';
-import { Location, getLocationBySlug } from '@/data/locations';
+import { Location, getLocationBySlug, getNearbyCities } from '@/data/locations';
 import { MarketArchetype, assignArchetype, getArchetype } from '@/data/archetypes';
 import { getNicheLabelForPhrase, getNicheSingularContext } from '@/lib/niche-labels';
 import { getCopyVariants } from '@/lib/content/copy-variations';
@@ -246,8 +246,16 @@ export function buildNicheCityPageData(
       name: n.name,
     }));
 
-  // Get nearby cities with same niche
-  const nearbyCities: Array<{ slug: string; name: string }> = []; // Simplified for now, can expand later
+  // Get real nearby cities with same niche (for internal linking semantic clusters)
+  const neighbors = getNearbyCities(citySlug, 12); // Get more so we can filter
+  const nearbyCities = neighbors
+    .filter(loc => loc.population >= niche.minPopulation) // Only cities where this niche is active
+    .slice(0, 6) // Keep top 6 closest
+    .map(loc => ({
+      slug: loc.slug,
+      name: loc.name,
+      province: loc.province,
+    }));
 
   return {
     slug: `${serviceSlug}-${nicheSlug}-${citySlug}`,

@@ -446,17 +446,13 @@ export default async function LocalPage({ params }: PageProps) {
         
         if (nicheCityData) {
           // Adapt NicheCityPageData to ServicePageData for the unified template
-          // NOTE: The unified template expects ServicePageData which is slightly different
-          // We need to map it or create a new template. 
-          // For consistency and speed, we will map it to the unified template format 
-          // since they are very similar visually.
-          
           const unifiedPageData = {
             ...nicheCityData,
             // Map differing fields
             active: true,
-            archetypeName: nicheCityData.archetype, // This is a simplification
-            problems: [], // Niche pages might not have this in same format yet
+            nicheSlug: nicheOrCity, // Pass niche slug for proper internal linking
+            archetypeName: nicheCityData.archetype, 
+            problems: [], 
             solutions: [],
             // Map internal linking
             relatedServices: nicheCityData.relatedNiches.map(n => ({

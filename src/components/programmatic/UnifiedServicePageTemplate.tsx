@@ -497,7 +497,10 @@ export default function UnifiedServicePageTemplate({
               {pageData.nearbyCities.map((city) => (
                 <Link
                   key={city.slug}
-                  href={`/${service.slug}/${city.slug}`}
+                  href={pageData.nicheSlug 
+                    ? `/${service.slug}/${pageData.nicheSlug}/${city.slug}`
+                    : `/${service.slug}/${city.slug}`
+                  }
                   className="bg-card border border-border rounded-lg p-4 text-center hover:border-[#FFBC11] hover:shadow-md transition-all"
                 >
                   <MapPin className="h-5 w-5 mx-auto mb-2 text-muted-foreground" />

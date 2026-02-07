@@ -86,6 +86,7 @@ export interface ServicePageData {
   slug: string;
   citySlug: string;
   serviceSlug: string;
+  nicheSlug?: string;
   
   // Location Data
   cityName: string;
