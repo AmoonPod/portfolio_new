@@ -48,48 +48,14 @@ export interface Location {
   demonym?: string;
   /** Famous local landmarks (e.g., "Ghirlandina", "Piazza Maggiore") */
   landmarks?: string[];
-  /** What the city is famous for (e.g., "motori", "ceramica", "moda") */
+  /** Famous for (e.g., "la ceramica", "i motori") */
   famousFor?: string;
+  /** SEO Wave for drip-feed strategy (1=Core, 2=Expansion, 3=LongTail, 4=National) */
+  wave?: 1 | 2 | 3 | 4;
 }
 
-export type Province = 
-  | 'Modena'
-  | 'Reggio Emilia'
-  | 'Bologna'
-  | 'Parma'
-  | 'Ferrara'
-  | 'Ravenna'
-  | 'Forli-Cesena'
-  | 'Piacenza'
-  | 'Rimini'
-  // Veneto
-  | 'Venezia'
-  | 'Verona'
-  | 'Padova'
-  | 'Vicenza'
-  | 'Treviso'
-  // Lombardia
-  | 'Milano'
-  | 'Brescia'
-  | 'Bergamo'
-  | 'Monza e Brianza'
-  | 'Cremona'
-  | 'Pavia'
-  | 'Mantova'
-  | 'Como'
-  | 'Lecco'
-  | 'Varese'
-  // Toscana
-  | 'Firenze'
-  | 'Prato'
-  | 'Livorno'
-  | 'Pisa'
-  | 'Arezzo'
-  | 'Lucca'
-  | 'Pistoia'
-  | 'Grosseto'
-  | 'Siena';
-
+// =============================================================================
+// PROVINCES AND REGIONS
 // =============================================================================
 // LOCATIONS DATABASE
 // =============================================================================
@@ -817,21 +783,36 @@ export const LOCATIONS: Location[] = [
 import { ALL_ADDITIONAL_LOCATIONS } from './locations-expansion';
 
 // Extend the Province type to include new provinces
-export type AdditionalProvince = 
+export type Province = 
+  // Core Provinces
+  | 'Modena' | 'Bologna' | 'Reggio Emilia' | 'Parma' | 'Ferrara' | 'Ravenna' | 'Forlì-Cesena' | 'Rimini' | 'Piacenza'
+  | 'Milano' | 'Monza e Brianza' | 'Varese' | 'Como' | 'Lecco' | 'Bergamo' | 'Brescia' | 'Mantova' | 'Cremona' | 'Lodi' | 'Pavia' | 'Sondrio'
+  | 'Venezia' | 'Padova' | 'Verona' | 'Vicenza' | 'Treviso' | 'Rovigo' | 'Belluno'
+  | 'Firenze' | 'Prato' | 'Pistoia' | 'Lucca' | 'Pisa' | 'Livorno' | 'Arezzo' | 'Siena' | 'Grosseto' | 'Massa-Carrara'
+  
+  // Wave 2 Expansion
   | 'Torino' | 'Novara' | 'Alessandria' | 'Asti' | 'Cuneo' | 'Biella' | 'Vercelli'
   | 'Genova' | 'Savona' | 'La Spezia' | 'Imperia'
   | 'Trieste' | 'Udine' | 'Pordenone' | 'Gorizia'
   | 'Trento' | 'Bolzano'
   | 'Aosta'
+  
+  // Wave 3 Expansion
   | 'Ancona' | 'Pesaro e Urbino' | 'Macerata' | 'Ascoli Piceno' | 'Fermo'
   | 'Perugia' | 'Terni'
   | "L'Aquila" | 'Pescara' | 'Chieti' | 'Teramo'
   | 'Campobasso' | 'Isernia'
+  | 'Roma' | 'Latina' | 'Frosinone' | 'Viterbo' | 'Rieti'
   | 'Napoli' | 'Salerno' | 'Caserta' | 'Avellino' | 'Benevento'
-  | 'Bari' | 'Taranto' | 'Foggia' | 'Lecce' | 'Brindisi'
-  | 'Palermo' | 'Catania' | 'Messina' | 'Siracusa' | 'Trapani' | 'Ragusa'
-  | 'Cagliari' | 'Sassari' | 'Nuoro' | 'Oristano'
-  | 'Massa-Carrara';
+  | 'Bari' | 'Taranto' | 'Foggia' | 'Lecce' | 'Brindisi' | 'Barletta-Andria-Trani'
+  
+  // Wave 4 Expansion
+  | 'Palermo' | 'Catania' | 'Messina' | 'Siracusa' | 'Trapani' | 'Ragusa' | 'Caltanissetta' | 'Agrigento' | 'Enna'
+  | 'Cagliari' | 'Sassari' | 'Nuoro' | 'Oristano' | 'Sud Sardegna'
+  | 'Potenza' | 'Matera'
+  | 'Reggio Calabria' | 'Catanzaro' | 'Cosenza' | 'Crotone' | 'Vibo Valentia';
+
+export type AdditionalProvince = Province; // Alias for backward compatibility
 
 // Combine all locations
 const ALL_LOCATIONS: Location[] = [...LOCATIONS, ...ALL_ADDITIONAL_LOCATIONS];
