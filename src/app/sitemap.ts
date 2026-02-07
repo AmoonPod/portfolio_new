@@ -19,6 +19,7 @@ import { getServicesWithCityPages } from '@/data/services-config';
 import { NICHE_SLUGS, getNichesByServiceType } from '@/data/niches-config';
 import { getAllPlaybookSlugs } from '@/data/playbooks';
 import { getAllPosts } from '@/lib/blog';
+import { getRegions, getProvinces } from '@/lib/seo/hub-generator';
 
 const BASE_URL = DATA.url;
 
@@ -113,6 +114,31 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
           priority: 0.8,
         });
       }
+    }
+
+    // 6. Regional & Provincial Hubs (Mainly for siti-web and ecommerce)
+    const hubServices = ['siti-web', 'ecommerce'];
+    const regions = getRegions();
+    const provinces = getProvinces();
+
+    for (const serviceSlug of hubServices) {
+      regions.forEach(region => {
+        entries.push({
+          url: `${BASE_URL}/${serviceSlug}/regione/${region.slug}`,
+          lastModified: new Date(),
+          changeFrequency: 'monthly',
+          priority: 0.6,
+        });
+      });
+
+      provinces.forEach(province => {
+        entries.push({
+          url: `${BASE_URL}/${serviceSlug}/provincia/${province.slug}`,
+          lastModified: new Date(),
+          changeFrequency: 'monthly',
+          priority: 0.5,
+        });
+      });
     }
   }
 

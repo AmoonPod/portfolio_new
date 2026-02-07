@@ -21,6 +21,15 @@ import {
   Shield,
   Zap,
   CheckCircle,
+  Smartphone,
+  Image as ImageIcon,
+  Calendar,
+  ShoppingCart,
+  Gift,
+  Video,
+  RefreshCcw,
+  Ruler,
+  BookOpen,
   LucideIcon
 } from 'lucide-react';
 
@@ -47,6 +56,15 @@ const ICON_MAP: Record<string, LucideIcon> = {
   'check-circle': CheckCircle,
   'trendingup': TrendingUp,
   'trendingdown': TrendingDown,
+  'smartphone': Smartphone,
+  'image': ImageIcon,
+  'calendar': Calendar,
+  'shopping-cart': ShoppingCart,
+  'gift': Gift,
+  'video': Video,
+  'refresh-ccw': RefreshCcw,
+  'ruler': Ruler,
+  'book-open': BookOpen,
 };
 
 interface Stat {

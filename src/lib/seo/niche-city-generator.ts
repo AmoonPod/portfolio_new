@@ -17,6 +17,7 @@ import { Location, getLocationBySlug, getNearbyCities } from '@/data/locations';
 import { MarketArchetype, assignArchetype, getArchetype } from '@/data/archetypes';
 import { getNicheLabelForPhrase, getNicheSingularContext } from '@/lib/niche-labels';
 import { getCopyVariants } from '@/lib/content/copy-variations';
+import { getNicheContent } from '@/data/niches-content';
 
 // =============================================================================
 // TYPE DEFINITIONS
@@ -93,7 +94,7 @@ export interface NicheCityPageData {
 }
 
 // =============================================================================
-// CONTENT TEMPLATES
+// MAIN PAGE DATA BUILDER
 // =============================================================================
 
 const NICHE_CITY_HERO_TEMPLATES: Record<string, string> = {
@@ -192,14 +193,23 @@ export function buildNicheCityPageData(
 
   const canonical = `${baseUrl}/${serviceSlug}/${nicheSlug}/${citySlug}`;
 
+  // Get niche-specific content from the deep content database
+  const nicheContent = getNicheContent(nicheSlug);
+
   // Get niche-specific features
-  const features = NICHE_FEATURES[nicheSlug] || service.pricing[0]?.features.slice(0, 3).map(f => ({
+  const features = nicheContent?.features.map(f => ({
+    title: f.title,
+    description: f.description,
+  })) || service.pricing[0]?.features.slice(0, 3).map(f => ({
     title: f.split(':')[0] || f,
     description: f.split(':')[1] || 'Feature inclusa nel pacchetto base',
   })) || [];
 
-  // Generate benefits
-  const benefits = [
+  // Generate benefits (mix of general and niche-specific)
+  const benefits = nicheContent?.features.slice(0, 3).map(f => ({
+    title: f.title,
+    description: f.benefit,
+  })) || [
     {
       title: `Specializzato in ${niche.name}`,
       description: `Non sono un'agenzia generalista. Conosco le sfide specifiche di chi gestisce un ${getNicheSingularContext(niche)} e come risolverle.`,
@@ -216,7 +226,7 @@ export function buildNicheCityPageData(
     },
   ];
 
-  // Generate FAQ
+  // Generate FAQ (niche specific if available)
   const faq = [
     {
       question: `Quanto costa un ${service.singularName.toLowerCase()} per ${label} a ${location.name}?`,

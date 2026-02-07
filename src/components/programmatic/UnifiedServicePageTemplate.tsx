@@ -21,6 +21,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { Breadcrumb, BreadcrumbItem } from "@/components/local-pages/Breadcrumb";
+import { slugify } from "@/lib/seo/hub-generator";
 
 // =============================================================================
 // ICON MAPPING
@@ -54,6 +56,7 @@ const COMPARISON_DATA = [
 interface UnifiedServicePageTemplateProps {
   pageData: ServicePageData;
   service: ServiceConfig;
+  breadcrumbItems?: BreadcrumbItem[];
 }
 
 // =============================================================================
@@ -63,6 +66,7 @@ interface UnifiedServicePageTemplateProps {
 export default function UnifiedServicePageTemplate({
   pageData,
   service,
+  breadcrumbItems,
 }: UnifiedServicePageTemplateProps) {
   const [activeTab, setActiveTab] = useState<'problems' | 'solutions'>('problems');
   const ServiceIcon = SERVICE_ICONS[service.slug] || Globe;
@@ -81,30 +85,14 @@ export default function UnifiedServicePageTemplate({
       </div>
 
       {/* BREADCRUMB */}
-      <nav className="bg-background/80 backdrop-blur-sm border-b border-border/50 sticky top-0 z-40">
-        <div className="container max-w-6xl mx-auto px-4 py-3">
-          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-            <li>
-              <Link href="/" className="hover:text-foreground transition-colors">
-                Home
-              </Link>
-            </li>
-            <ChevronRight className="h-4 w-4" />
-            <li>
-              <Link 
-                href={`/${service.slug}`} 
-                className="hover:text-foreground transition-colors"
-              >
-                {service.name}
-              </Link>
-            </li>
-            <ChevronRight className="h-4 w-4" />
-            <li className="text-foreground font-medium">
-              {pageData.cityName}
-            </li>
-          </ol>
-        </div>
-      </nav>
+      <div className="bg-background/80 backdrop-blur-sm border-b border-border/50 sticky top-0 z-40">
+        <Breadcrumb
+          items={breadcrumbItems}
+          serviceName={service.name}
+          serviceSlug={service.slug}
+          cityName={pageData.cityName}
+        />
+      </div>
 
       {/* HERO SECTION */}
       <section className="relative py-16 md:py-24 bg-gradient-to-b from-background to-muted/30">
@@ -508,6 +496,22 @@ export default function UnifiedServicePageTemplate({
                   <div className="text-xs text-muted-foreground">{city.province}</div>
                 </Link>
               ))}
+            </div>
+
+            {/* HUB LINKS */}
+            <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 border-t border-border pt-8">
+              <Link 
+                href={`/${service.slug}/provincia/${slugify(pageData.province)}`}
+                className="text-sm font-medium text-[#FFBC11] hover:underline flex items-center gap-1"
+              >
+                Tutti i comuni di {pageData.province} <ChevronRight className="h-4 w-4" />
+              </Link>
+              <Link 
+                href={`/${service.slug}/regione/${slugify(pageData.region)}`}
+                className="text-sm font-medium text-[#FFBC11] hover:underline flex items-center gap-1"
+              >
+                Tutte le province in {pageData.region} <ChevronRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
         </section>

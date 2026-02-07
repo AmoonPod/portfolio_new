@@ -16,14 +16,23 @@ import { CaseStudyProof } from "./CaseStudyProof";
 import { Breadcrumb } from "./Breadcrumb";
 import { StickyBottomBar } from "./StickyBottomBar";
 import NicheHubOtherNiches from "@/components/local-pages/niche/NicheHubOtherNiches";
+import { BreadcrumbItem } from "./Breadcrumb";
+import { slugify } from "@/lib/seo/hub-generator";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
 interface LocalPageTemplateProps {
   data: LocalPageData;
   nearbyCities?: LocalPageData[];
+  breadcrumbItems?: BreadcrumbItem[];
 }
 
 
-export default function LocalPageTemplate({ data, nearbyCities = [] }: LocalPageTemplateProps) {
+export default function LocalPageTemplate({ 
+  data, 
+  nearbyCities = [],
+  breadcrumbItems
+}: LocalPageTemplateProps) {
   const [isOfferOpen, setIsOfferOpen] = useState(false);
 
   const activeOffers = data.offers?.filter(o => o.active) || []
@@ -49,6 +58,7 @@ export default function LocalPageTemplate({ data, nearbyCities = [] }: LocalPage
       <div className="relative">
         <div className="absolute top-0 left-0 right-0 z-20 bg-background/80 backdrop-blur-sm border-b border-border/50">
           <Breadcrumb
+            items={breadcrumbItems}
             serviceName={data.serviceName}
             serviceSlug={data.serviceSlug}
             cityName={data.cityName}
@@ -92,10 +102,27 @@ export default function LocalPageTemplate({ data, nearbyCities = [] }: LocalPage
 
       {/* Nearby Cities Section */}
       {nearbyCities.length > 0 && (
-        <NearbyCitiesFooter
-          nearbyCities={nearbyCities}
-          serviceName={data.serviceName}
-        />
+        <section className="bg-[#050805] py-16">
+          <NearbyCitiesFooter
+            nearbyCities={nearbyCities}
+            serviceName={data.serviceName}
+          />
+          
+          <div className="container max-w-6xl mx-auto px-6 mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 border-t border-white/5 pt-8">
+            <Link 
+              href={`/${data.serviceSlug}/provincia/${slugify(data.province)}`}
+              className="text-sm font-medium text-[#FFBC11] hover:underline flex items-center gap-1"
+            >
+              Tutti i comuni di {data.province} <ChevronRight className="h-4 w-4" />
+            </Link>
+            <Link 
+              href={`/${data.serviceSlug}/regione/${slugify(data.region)}`}
+              className="text-sm font-medium text-[#FFBC11] hover:underline flex items-center gap-1"
+            >
+              Tutte le province in {data.region} <ChevronRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </section>
       )}
 
       <FAQ faq={data.faq} />

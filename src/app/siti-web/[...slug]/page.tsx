@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getLocationBySlug, getAllLocationSlugs, PRIORITY_CITY_SLUGS } from '@/data/locations';
+import { getLocationBySlug, PRIORITY_CITY_SLUGS } from '@/data/locations';
 import { assignArchetype } from '@/data/archetypes';
 import { buildPageContent } from '@/lib/content/factory';
 import { buildSeoMetadata } from '@/lib/seo/metadata';
@@ -16,6 +16,8 @@ import PlaybookTemplate from '@/components/playbook/PlaybookTemplate';
 import { buildNicheCityPageData } from '@/lib/seo/niche-city-generator';
 import UnifiedServicePageTemplate from '@/components/programmatic/UnifiedServicePageTemplate';
 import { getServiceBySlug } from '@/data/services-config';
+import { getRegions, getProvinces, generateRegionHubData, generateProvinceHubData, slugify } from '@/lib/seo/hub-generator';
+import HubGridTemplate from '@/components/local-pages/HubGridTemplate';
 
 interface PageProps {
   params: Promise<{ slug: string[] }>;
@@ -34,18 +36,20 @@ export async function generateStaticParams() {
   });
 
   NICHE_SLUGS.forEach(niche => {
-    // Hub page
     paths.push({ slug: [niche] });
-
-    // Playbook pages
     const playbooks = getAllPlaybookSlugs(niche);
     playbooks.forEach(topic => {
       paths.push({ slug: [niche, topic] });
     });
   });
 
-  // Hybrid ISR: We don't pre-render Niche × City pages here to keep build fast
-  // They will be generated on-demand
+  getRegions().forEach(region => {
+    paths.push({ slug: ['regione', region.slug] });
+  });
+
+  getProvinces().forEach(province => {
+    paths.push({ slug: ['provincia', province.slug] });
+  });
 
   return paths;
 }
@@ -54,461 +58,142 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const baseUrl = 'https://manueldeceglie.it';
 
-  // 1. Single Slug: City OR Niche Hub
   if (slug.length === 1) {
     const potential = slug[0];
-    
-    // Case A: Niche Hub (e.g. /siti-web/ristoranti)
     if (isHubNicheSlug(potential)) {
       const nicheConfig = getNicheConfig(potential);
-      if (!nicheConfig) {
-        return { title: 'Pagina Non Trovata', description: 'La nicchia richiesta non esiste.' };
-      }
+      if (!nicheConfig) return { title: 'Pagina Non Trovata' };
       const metadata = generateHubMetadata(nicheConfig);
-      const ogUrl = new URL(`${baseUrl}/api/og`);
-      ogUrl.searchParams.set('title', metadata.title);
-      ogUrl.searchParams.set('subtitle', metadata.description);
-      ogUrl.searchParams.set('badge', nicheConfig.name);
-
       return {
         title: metadata.title,
         description: metadata.description,
         alternates: { canonical: `${baseUrl}/siti-web/${potential}` },
-        openGraph: {
-          title: metadata.title,
-          description: metadata.description,
-          url: `${baseUrl}/siti-web/${potential}`,
-          type: 'website',
-          siteName: 'Manuel De Ceglie',
-          images: [{
-            url: ogUrl.toString(),
-            width: 1200,
-            height: 630,
-            alt: metadata.title,
-          }],
-        },
-        twitter: { 
-          card: 'summary_large_image', 
-          title: metadata.title, 
-          description: metadata.description,
-          images: [ogUrl.toString()],
-        },
       };
     }
 
-    // Case B: City Page (e.g. /siti-web/modena)
     const location = getLocationBySlug(potential);
-    if (!location) {
-      return { title: 'Pagina Non Trovata', description: 'La pagina richiesta non esiste.' };
-    }
-
+    if (!location) return { title: 'Pagina Non Trovata' };
     const archetype = assignArchetype(location);
     const metadata = buildSeoMetadata(location, 'siti-web', archetype);
-    
-    const cityOgUrl = new URL(`${baseUrl}/api/og`);
-    cityOgUrl.searchParams.set('title', metadata.title);
-    cityOgUrl.searchParams.set('subtitle', metadata.description);
-    cityOgUrl.searchParams.set('badge', location.province || 'Emilia-Romagna');
-
     return {
       title: metadata.title,
       description: metadata.description,
       alternates: { canonical: metadata.canonical },
-      openGraph: {
-        ...metadata.openGraph,
-        images: [{
-          url: cityOgUrl.toString(),
-          width: 1200,
-          height: 630,
-          alt: metadata.title,
-        }],
-      },
-      twitter: {
-        ...metadata.twitter,
-        images: [cityOgUrl.toString()],
-      },
     };
   }
 
-  // 2. Double Slug: Niche × City OR Niche Playbook
   if (slug.length === 2) {
-    const [nicheOrCity, topicOrCity] = slug;
+    const [typeOrNiche, slugPart] = slug;
 
-    // Case A: Playbook (e.g. /siti-web/ristoranti/menu-online)
-    // We check if the first part is a niche and the second is a known playbook
-    if (isHubNicheSlug(nicheOrCity)) {
-      const playbook = getPlaybookContent(nicheOrCity, topicOrCity);
-      if (playbook) {
-        const playbookOgUrl = new URL(`${baseUrl}/api/og`);
-        playbookOgUrl.searchParams.set('title', playbook.hero.title);
-        playbookOgUrl.searchParams.set('subtitle', playbook.hero.subtitle);
-        playbookOgUrl.searchParams.set('badge', playbook.nicheName);
-
-        return {
-          title: `${playbook.hero.title} | Manuel De Ceglie`,
-          description: playbook.hero.subtitle,
-          alternates: { canonical: `${baseUrl}/siti-web/${nicheOrCity}/${topicOrCity}` },
-          openGraph: {
-            title: playbook.hero.title,
-            description: playbook.hero.subtitle,
-            url: `${baseUrl}/siti-web/${nicheOrCity}/${topicOrCity}`,
-            type: 'article',
-            siteName: 'Manuel De Ceglie',
-            images: [{
-              url: playbookOgUrl.toString(),
-              width: 1200,
-              height: 630,
-              alt: playbook.hero.title,
-            }],
-          },
-          twitter: { 
-            card: 'summary_large_image', 
-            title: playbook.hero.title, 
-            description: playbook.hero.subtitle,
-            images: [playbookOgUrl.toString()],
-          },
-        };
-      }
+    if (typeOrNiche === 'regione') {
+      const data = generateRegionHubData(slugPart);
+      if (!data) return { title: 'Regione Non Trovata' };
+      return { title: data.title, description: data.description };
     }
 
-    // Case B: Niche × City (e.g. /siti-web/ristoranti/modena)
-    // First part must be a supported niche, second part must be a valid city
-    if (SITI_WEB_NICHE_SLUGS.includes(nicheOrCity)) {
-      const location = getLocationBySlug(topicOrCity);
-      if (location) {
-        // It's a niche city page!
-        const pageData = buildNicheCityPageData('siti-web', nicheOrCity, topicOrCity);
-        if (pageData) {
-          const ogUrl = new URL(`${baseUrl}/api/og`);
-          ogUrl.searchParams.set('title', pageData.seo.title);
-          ogUrl.searchParams.set('subtitle', pageData.seo.description.slice(0, 100));
-          ogUrl.searchParams.set('badge', `${pageData.nicheName} a ${pageData.cityName}`);
+    if (typeOrNiche === 'provincia') {
+      const data = generateProvinceHubData(slugPart);
+      if (!data) return { title: 'Provincia Non Trovata' };
+      return { title: data.title, description: data.description };
+    }
 
-          return {
-            title: pageData.seo.title,
-            description: pageData.seo.description,
-            alternates: { canonical: pageData.seo.canonical },
-            openGraph: {
-              title: pageData.seo.title,
-              description: pageData.seo.description,
-              url: pageData.seo.canonical,
-              type: 'website',
-              images: [{
-                url: ogUrl.toString(),
-                width: 1200,
-                height: 630,
-                alt: pageData.seo.title,
-              }],
-            },
-            twitter: { 
-              card: 'summary_large_image',
-              title: pageData.seo.title,
-              description: pageData.seo.description,
-              images: [ogUrl.toString()],
-            },
-          };
-        }
+    if (isHubNicheSlug(typeOrNiche)) {
+      const playbook = getPlaybookContent(typeOrNiche, slugPart);
+      if (playbook) return { title: `${playbook.hero.title} | Manuel De Ceglie`, description: playbook.hero.subtitle };
+    }
+
+    if (SITI_WEB_NICHE_SLUGS.includes(typeOrNiche)) {
+      const location = getLocationBySlug(slugPart);
+      if (location) {
+        const pageData = buildNicheCityPageData('siti-web', typeOrNiche, slugPart);
+        if (pageData) return { title: pageData.seo.title, description: pageData.seo.description };
       }
     }
   }
 
-  return { title: 'Pagina Non Trovata', description: 'La pagina richiesta non esiste.' };
-}
-
-function generateJsonLd(pageData: ReturnType<typeof buildPageContent>) {
-  const baseUrl = 'https://manueldeceglie.it';
-  const faqJsonLd = getFAQJsonLd(pageData.faq);
-  const breadcrumbJsonLd = getBreadcrumbJsonLd([
-    { name: 'Home', url: baseUrl },
-    { name: 'Servizi', url: `${baseUrl}#services` },
-    { name: pageData.serviceName, url: `${baseUrl}/siti-web` },
-    { name: pageData.province, url: `${baseUrl}/siti-web/${pageData.province.toLowerCase().replace(/ /g, '-')}` },
-    { name: pageData.cityName, url: pageData.seo.canonical },
-  ]);
-
-  return {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'ProfessionalService',
-        name: 'Manuel De Ceglie',
-        description: 'Web developer specializzato in siti web per attività locali',
-        url: baseUrl,
-        image: `${baseUrl}/manuel-de-ceglie.jpg`,
-        priceRange: '€€',
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          reviewCount: '58'
-        },
-        areaServed: [
-          { '@type': 'Place', name: pageData.region },
-          { '@type': 'Place', name: pageData.province },
-          { '@type': 'Place', name: pageData.cityName },
-        ],
-      },
-      {
-        '@type': 'Service',
-        name: `${pageData.serviceName} a ${pageData.cityName}`,
-        description: pageData.seo.description,
-        provider: { '@type': 'ProfessionalService', name: 'Manuel De Ceglie' },
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          reviewCount: '58'
-        },
-        areaServed: [
-          { '@type': 'Place', name: pageData.cityName },
-          { '@Type': 'Place', name: pageData.province },
-        ],
-      },
-      breadcrumbJsonLd,
-      faqJsonLd,
-    ],
-  };
+  return { title: 'Pagina Non Trovata' };
 }
 
 export default async function LocalPage({ params }: PageProps) {
   const { slug } = await params;
   const baseUrl = 'https://manueldeceglie.it';
 
-  // -------------------------------------------------------------------------
-  // 1. Single Slug Logic: City Page OR Niche Hub
-  // -------------------------------------------------------------------------
   if (slug.length === 1) {
     const potential = slug[0];
-    
-    // A. Niche Hub Page
     if (isHubNicheSlug(potential)) {
       const nicheConfig = getNicheConfig(potential);
       if (!nicheConfig) notFound();
-
       const content = generateHubHero(potential);
-
-      const jsonLd = {
-        '@context': 'https://schema.org',
-        '@graph': [
-          {
-            '@type': 'ProfessionalService',
-            name: 'Manuel De Ceglie',
-            description: 'Web developer specializzato in siti web per attività locali',
-            url: baseUrl,
-            image: `${baseUrl}/manuel-de-ceglie.jpg`,
-            priceRange: '€€',
-            aggregateRating: {
-              '@type': 'AggregateRating',
-              ratingValue: '4.9',
-              reviewCount: '58'
-            },
-            areaServed: 'Italia',
-          },
-          {
-            '@type': 'Service',
-            name: `Siti web per ${getNicheLabelForPhrase(nicheConfig)}`,
-            description: `Realizzo siti web professionali per ${getNicheLabelForPhrase(nicheConfig)}. Design, SEO e marketing pensati per il tuo settore.`,
-            provider: { '@type': 'ProfessionalService', name: 'Manuel De Ceglie' },
-            aggregateRating: {
-              '@type': 'AggregateRating',
-              ratingValue: '4.9',
-              reviewCount: '58'
-            },
-            areaServed: 'Italia',
-          },
-          {
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
-              { '@type': 'ListItem', position: 2, name: 'Siti Web', item: `${baseUrl}/siti-web` },
-              { '@type': 'ListItem', position: 3, name: nicheConfig.name, item: `${baseUrl}/siti-web/${potential}` },
-            ],
-          },
-        ],
-      };
-
-      return (
-        <>
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-          <NicheHubTemplate nicheSlug={potential} content={content} />
-        </>
-      );
+      return <NicheHubTemplate nicheSlug={potential} content={content} />;
     }
 
-    // B. Standard City Page
-    const city = potential;
-    const location = getLocationBySlug(city);
+    const location = getLocationBySlug(potential);
     if (!location) notFound();
-
     const pageData = buildPageContent(location);
-    const neighbors = getNearestNeighbors(city, 6);
+    const neighbors = getNearestNeighbors(potential, 6);
     const nearbyCities = neighbors.map(n => buildPageContent(n.location));
-    const jsonLd = generateJsonLd(pageData);
+    
+    const breadcrumbItems = [
+      { name: 'Home', href: '/' },
+      { name: 'Siti Web', href: '/siti-web' },
+      { name: location.region, href: `/siti-web/regione/${slugify(location.region)}` },
+      { name: location.province, href: `/siti-web/provincia/${slugify(location.province)}` },
+      { name: location.name }
+    ];
 
-    return (
-      <>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <LocalPageTemplate data={pageData} nearbyCities={nearbyCities} />
-      </>
-    );
+    return <LocalPageTemplate data={pageData} nearbyCities={nearbyCities} breadcrumbItems={breadcrumbItems} />;
   }
 
-  // -------------------------------------------------------------------------
-  // 2. Double Slug Logic: Niche Playbook OR Niche × City Page
-  // -------------------------------------------------------------------------
   if (slug.length === 2) {
-    const [nicheOrCity, topicOrCity] = slug;
+    const [typeOrNiche, slugPart] = slug;
 
-    // A. Playbook Page
-    // Only if first part is a niche and second part is a known playbook topic
-    if (isHubNicheSlug(nicheOrCity)) {
-      const playbook = getPlaybookContent(nicheOrCity, topicOrCity);
-      // If found, render playbook
-      if (playbook) {
-        const nicheConfig = getNicheConfig(nicheOrCity)!; // safe because isHubNicheSlug checks config
-        
-        const sectionList = {
-          '@type': 'ItemList',
-          itemListElement: playbook.tocSections.map((section, idx) => ({
-            '@type': 'ListItem',
-            position: idx + 1,
-            name: section,
-            item: `${baseUrl}/siti-web/${nicheOrCity}/${topicOrCity}#section-${section}`,
-          })),
-        };
-
-        const jsonLd = {
-          '@context': 'https://schema.org',
-          '@graph': [
-            {
-              '@type': 'ProfessionalService',
-              name: 'Manuel De Ceglie',
-              description: `Web developer specializzato in siti web per ${getNicheLabelForPhrase(nicheConfig)}`,
-              url: baseUrl,
-              priceRange: '€€',
-              image: `${baseUrl}/manuel-de-ceglie.jpg`,
-              aggregateRating: {
-                '@type': 'AggregateRating',
-                ratingValue: '4.9',
-                reviewCount: '58'
-              },
-              areaServed: 'Italia',
-            },
-            {
-              '@type': 'Article',
-              headline: playbook.hero.title,
-              description: playbook.hero.subtitle,
-              url: `${baseUrl}/siti-web/${nicheOrCity}/${topicOrCity}`,
-              datePublished: playbook.hero.lastUpdated,
-              dateModified: playbook.hero.lastUpdated,
-              author: { '@type': 'Person', name: 'Manuel De Ceglie' },
-              publisher: { '@type': 'Organization', name: 'Manuel De Ceglie' },
-              articleSection: 'Playbook',
-              wordCount: playbook.content.length,
-            },
-            {
-              '@type': 'BreadcrumbList',
-              itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
-                { '@type': 'ListItem', position: 2, name: 'Siti Web', item: `${baseUrl}/siti-web` },
-                { '@type': 'ListItem', position: 3, name: nicheConfig.name, item: `${baseUrl}/siti-web/${nicheOrCity}` },
-                { '@type': 'ListItem', position: 4, name: playbook.hero.title, item: `${baseUrl}/siti-web/${nicheOrCity}/${topicOrCity}` },
-              ],
-            },
-            sectionList,
-            {
-              '@type': 'FAQPage',
-              mainEntity: playbook.faqs.map(faq => ({
-                '@type': 'Question',
-                name: faq.question,
-                acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: faq.answer,
-                },
-              })),
-            },
-          ],
-        };
-
-        return (
-          <>
-            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-            <PlaybookTemplate playbook={playbook} />
-          </>
-        );
-      }
+    if (typeOrNiche === 'regione') {
+      const data = generateRegionHubData(slugPart);
+      if (!data) notFound();
+      return <HubGridTemplate data={data} type="region" />;
     }
 
-    // B. Niche × City Page (NEW)
-    // Logic: First part is a valid niche slug, second part is a valid city slug
-    if (SITI_WEB_NICHE_SLUGS.includes(nicheOrCity)) {
-      const location = getLocationBySlug(topicOrCity);
+    if (typeOrNiche === 'provincia') {
+      const data = generateProvinceHubData(slugPart);
+      if (!data) notFound();
+      return <HubGridTemplate data={data} type="province" />;
+    }
+
+    if (isHubNicheSlug(typeOrNiche)) {
+      const playbook = getPlaybookContent(typeOrNiche, slugPart);
+      if (playbook) return <PlaybookTemplate playbook={playbook} />;
+    }
+
+    if (SITI_WEB_NICHE_SLUGS.includes(typeOrNiche)) {
+      const location = getLocationBySlug(slugPart);
       if (location) {
-        const nicheCityData = buildNicheCityPageData('siti-web', nicheOrCity, topicOrCity);
-        
+        const nicheCityData = buildNicheCityPageData('siti-web', typeOrNiche, slugPart);
         if (nicheCityData) {
-          // Adapt NicheCityPageData to ServicePageData for the unified template
+          const serviceConfig = getServiceBySlug('siti-web');
           const unifiedPageData = {
             ...nicheCityData,
-            // Map differing fields
             active: true,
-            nicheSlug: nicheOrCity, // Pass niche slug for proper internal linking
-            archetypeName: nicheCityData.archetype, 
-            problems: [], 
+            nicheSlug: typeOrNiche,
+            archetypeName: nicheCityData.archetype,
+            problems: [],
             solutions: [],
-            // Map internal linking
             relatedServices: nicheCityData.relatedNiches.map(n => ({
-                slug: n.slug,
-                name: n.name,
-                description: `Servizi specifici per ${n.name}`,
+              slug: n.slug,
+              name: n.name,
+              description: `Servizi per ${n.name}`,
             })),
           };
 
-          const serviceConfig = getServiceBySlug('siti-web');
-          if (!serviceConfig) notFound();
+          const breadcrumbItems = [
+            { name: 'Home', href: '/' },
+            { name: 'Siti Web', href: '/siti-web' },
+            { name: nicheCityData.nicheName, href: `/siti-web/${typeOrNiche}` },
+            { name: location.region, href: `/siti-web/regione/${slugify(location.region)}` },
+            { name: location.province, href: `/siti-web/provincia/${slugify(location.province)}` },
+            { name: location.name }
+          ];
 
-          // Structured Data for Niche City Page
-          const jsonLd = {
-            '@context': 'https://schema.org',
-            '@graph': [
-              {
-                '@type': 'ProfessionalService',
-                name: 'Manuel De Ceglie',
-                description: `Realizzazione siti web per ${nicheCityData.nicheName} a ${nicheCityData.cityName}`,
-                url: baseUrl,
-                image: `${baseUrl}/manuel-de-ceglie.jpg`,
-                priceRange: '€€',
-                areaServed: [
-                  { '@type': 'Place', name: nicheCityData.cityName },
-                  { '@type': 'Place', name: nicheCityData.province },
-                ],
-              },
-              {
-                '@type': 'Service',
-                name: `Siti Web per ${nicheCityData.nicheName} a ${nicheCityData.cityName}`,
-                description: nicheCityData.seo.description,
-                provider: { '@type': 'ProfessionalService', name: 'Manuel De Ceglie' },
-                areaServed: { '@type': 'Place', name: nicheCityData.cityName },
-              },
-              {
-                '@type': 'BreadcrumbList',
-                itemListElement: [
-                  { '@type': 'ListItem', position: 1, name: 'Home', item: baseUrl },
-                  { '@type': 'ListItem', position: 2, name: 'Siti Web', item: `${baseUrl}/siti-web` },
-                  { '@type': 'ListItem', position: 3, name: nicheCityData.nicheName, item: `${baseUrl}/siti-web/${nicheOrCity}` },
-                  { '@type': 'ListItem', position: 4, name: nicheCityData.cityName, item: `${baseUrl}/siti-web/${nicheOrCity}/${topicOrCity}` },
-                ],
-              }
-            ]
-          };
-
-          return (
-            <>
-              <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-              <UnifiedServicePageTemplate 
-                pageData={unifiedPageData as any} // Cast to any because types slightly mismatch but structure is compatible
-                service={serviceConfig} 
-              />
-            </>
-          );
+          return <UnifiedServicePageTemplate pageData={unifiedPageData as any} service={serviceConfig!} breadcrumbItems={breadcrumbItems} />;
         }
       }
     }
