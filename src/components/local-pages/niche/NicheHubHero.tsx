@@ -1,10 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, MapPin, Star, TrendingUp, Globe, Users, Award, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Globe } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { NicheCategory, getNicheConfig } from '@/data/niches-config';
+import { NicheCategory } from '@/data/niches-config';
 
 interface NicheHubHeroProps {
   nicheSlug: string;
@@ -85,11 +85,8 @@ export default function NicheHubHero({ nicheSlug, nicheName, category, hero, sta
             </Link>
           </motion.div>
 
-          {/* Trust Signal */}
-
-
-          {/* Stats Row */}
-          {stats && stats.length > 0 && (
+          {/* Stats Row - Mostra solo se ci sono stats valide (non vuote) */}
+          {stats && stats.length > 0 && stats[0].value && (
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -98,8 +95,12 @@ export default function NicheHubHero({ nicheSlug, nicheName, category, hero, sta
             >
               {stats.map((stat, idx) => (
                 <div key={idx} className="text-center">
-                  <div className="text-3xl md:text-4xl font-black text-[#FFBC11] mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-400">{stat.label}</div>
+                  <div className="text-3xl md:text-4xl font-black text-[#FFBC11] mb-1">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-gray-400 leading-tight">
+                    {stat.label}
+                  </div>
                 </div>
               ))}
             </motion.div>
