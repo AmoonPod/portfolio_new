@@ -63,8 +63,8 @@ const FAQ_ITEMS = [
         answer: "La consegna è garantita in 48 ore lavorative dal pagamento dell'acconto. Riceverai una landing page completa, testata e pronta per andare online."
     },
     {
-        question: "Lavori solo a Modena o anche in altre città?",
-        answer: "Lavoro con clienti in tutta Italia! Creo landing page per aziende di Modena, Bologna, Reggio Emilia, Parma, Milano e qualsiasi altra città. La comunicazione avviene via WhatsApp e videochiamate."
+        question: "Lavori solo in una zona specifica o anche in altre città?",
+        answer: "Lavoro con clienti in tutta Italia! Creo landing page per aziende in qualsiasi città. La comunicazione avviene via WhatsApp e videochiamate."
     },
     {
         question: "Cosa include esattamente il servizio?",
@@ -108,7 +108,7 @@ export default function OfferLandingPageC() {
             <FloatingOrb className="w-64 h-64 bg-yellow-400 bottom-1/4 left-1/4 animation-delay-4000" />
 
             {/* H1 nascosto per SEO */}
-            <h1 className="sr-only">Landing Page Professionale Modena Bologna Reggio Emilia - Consegna 48 Ore - Paga in 2 Rate</h1>
+            <h1 className="sr-only">Landing Page Professionale - Consegna 48 Ore - Paga in 2 Rate</h1>
 
             {/* Urgency Bar - "Ultimi 5 clienti in 48h" */}
             <div className={cn(
@@ -164,7 +164,7 @@ export default function OfferLandingPageC() {
                     {/* Subtitle URGENTE */}
                     <p className="text-lg sm:text-xl text-zinc-400 max-w-2xl mx-auto mb-10">
                         Non aspettare. La tua concorrenza sta già convertendo online.
-                        <span className="text-white font-medium"> Unisciti ai 15+ clienti </span>
+                        <span className="text-white font-medium"> Unisciti ai numerosi clienti </span>
                         che hanno già scelto.
                     </p>
 
@@ -571,7 +571,7 @@ export default function OfferLandingPageC() {
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-8">
                         <p className="text-zinc-500 text-sm max-w-3xl mx-auto leading-relaxed">
-                            <strong className="text-zinc-400">Manuel De Ceglie</strong> - Sviluppatore web freelance specializzato in landing page professionali per aziende e professionisti.
+                            <strong className="text-zinc-400">Manuel De Ceglie</strong> - Sviluppatore web freelance specializzato in landing page professionali per aziende e professionisti in tutta Italia.
                         </p>
                     </div>
 
@@ -586,7 +586,7 @@ export default function OfferLandingPageC() {
                     </nav>
 
                     <div className="text-center text-zinc-700 text-xs space-y-1">
-                        <p>© {new Date().getFullYear()} Manuel De Ceglie • P.IVA 04032610364 • Castelnovo ne' Monti (RE)</p>
+                        <p>© {new Date().getFullYear()} Manuel De Ceglie • P.IVA 04032610364</p>
                         <p>Offerta Rate - Paga in 2 Rate</p>
                     </div>
                 </div>

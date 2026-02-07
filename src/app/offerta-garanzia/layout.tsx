@@ -11,10 +11,7 @@ export const metadata: Metadata = {
         'landing page comunicazione trasparente',
         'landing page professionale',
         'landing page zero pressioni',
-        'landing page Modena',
-        'landing page Bologna',
-        'landing page Reggio Emilia',
-        'landing page Emilia-Romagna',
+        'landing page Italia',
     ],
     openGraph: {
         title: 'Landing Page - Zero Stress, Zero Pressioni | Solo 347€',

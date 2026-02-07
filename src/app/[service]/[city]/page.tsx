@@ -125,11 +125,6 @@ export default async function ServiceCityPage({ params }: PageProps) {
         url: baseUrl,
         image: `${baseUrl}/manuel-de-ceglie.jpg`,
         priceRange: service.schema.additionalProperties?.priceRange || '€€',
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          reviewCount: '58',
-        },
         areaServed: [
           { '@type': 'Place', name: location.region },
           { '@type': 'Place', name: location.province },
@@ -153,6 +148,11 @@ export default async function ServiceCityPage({ params }: PageProps) {
           { '@type': 'Place', name: location.name },
           { '@type': 'Place', name: location.province },
         ],
+        geo: {
+          '@type': 'GeoCoordinates',
+          latitude: location.geo.lat,
+          longitude: location.geo.lng,
+        },
         ...(service.pricing.length > 0 && {
           offers: service.pricing.map(tier => ({
             '@type': 'Offer',

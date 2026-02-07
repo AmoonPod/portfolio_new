@@ -12,10 +12,7 @@ export const metadata: Metadata = {
         'landing page professionale',
         'landing page 48 ore',
         'landing page veloce',
-        'landing page Modena',
-        'landing page Bologna',
-        'landing page Reggio Emilia',
-        'landing page Emilia-Romagna',
+        'landing page Italia',
     ],
     openGraph: {
         title: 'Landing Page - Inizia con Solo 173€ | Paga in 2 Rate',

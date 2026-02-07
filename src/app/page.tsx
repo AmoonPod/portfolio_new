@@ -33,14 +33,12 @@ export const metadata: Metadata = {
   description:
     "Ti aiuto a farti trovare online, gestire meglio la tua attività e automatizzare il lavoro. Siti web, software e app su misura. Richiedi un'analisi gratuita.",
   keywords: [
-    "realizzazione siti web emilia romagna",
-    "sviluppatore web modena",
-    "sviluppatore web reggio emilia",
+    "realizzazione siti web",
     "software su misura",
     "app mobile",
     "siti web veloci",
     "manuel de ceglie",
-    "web developer emilia romagna",
+    "web developer italia",
   ],
   alternates: {
     canonical: DATA.url,
@@ -96,24 +94,10 @@ export default function HomePage() {
                 "telephone": DATA.contact.tel,
                 "email": DATA.contact.email,
                 "priceRange": "€€",
-                "areaServed": [
-                  {
-                    "@type": "City",
-                    "name": "Modena"
-                  },
-                  {
-                    "@type": "City",
-                    "name": "Reggio Emilia"
-                  },
-                  {
-                    "@type": "City",
-                    "name": "Bologna"
-                  },
-                  {
-                    "@type": "AdministrativeArea",
-                    "name": "Emilia-Romagna"
-                  }
-                ],
+                "areaServed": {
+                  "@type": "Country",
+                  "name": "Italia"
+                },
                 "sameAs": [
                   DATA.contact.social.LinkedIn.url,
                   DATA.contact.social.GitHub.url
@@ -146,14 +130,14 @@ export default function HomePage() {
                       "text": "No. Faccio siti web, software su misura, integrazioni tra sistemi, automazioni con AI e app mobile. Partiamo dal bisogno e scegliamo insieme la soluzione."
                     }
                   },
-                  {
-                    "@type": "Question",
-                    "name": "Dove lavori?",
-                    "acceptedAnswer": {
-                      "@type": "Answer",
-                      "text": "Lavoro principalmente nelle province di Modena e Reggio Emilia, ma collaboro anche da remoto con clienti in tutta Italia. Per molti progetti non serve vedersi di persona."
-                    }
-                  },
+                    {
+                      "@type": "Question",
+                      "name": "Dove lavori?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Collaboro da remoto con clienti in tutta Italia. Per molti progetti non serve vedersi di persona, la comunicazione digitale è rapida ed efficace."
+                      }
+                    },
                   {
                     "@type": "Question",
                     "name": "Cosa succede dopo la consegna?",

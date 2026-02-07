@@ -5,8 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
-// Scadenza: 31 gennaio 2026 alle 23:00
-const TARGET_DATE = new Date('2026-01-31T23:00:00')
+// Scadenza: fine febbraio 2026
+const TARGET_DATE = new Date('2026-02-28T23:00:00')
 
 function useCountdown(targetDate: Date) {
     const calculateTimeLeft = useCallback(() => {
@@ -124,8 +124,8 @@ const FAQ_ITEMS = [
         answer: "La consegna è garantita in 48 ore lavorative dal pagamento dell'acconto. Riceverai una landing page completa, testata e pronta per andare online."
     },
     {
-        question: "Lavori solo a Modena o anche in altre città?",
-        answer: "Lavoro con clienti in tutta Italia! Creo landing page per aziende di Modena, Bologna, Reggio Emilia, Parma, Milano e qualsiasi altra città. La comunicazione avviene via WhatsApp e videochiamate."
+        question: "Lavori solo in una zona specifica o anche in altre città?",
+        answer: "Lavoro con clienti in tutta Italia! Creo landing page per aziende in qualsiasi città. La comunicazione avviene via WhatsApp e videochiamate."
     },
     {
         question: "Cosa include esattamente il servizio?",
@@ -157,8 +157,8 @@ export default function OfferLandingPage() {
             <FloatingOrb className="w-80 h-80 bg-orange-500 top-1/3 -right-40 animation-delay-2000" />
             <FloatingOrb className="w-64 h-64 bg-yellow-400 bottom-1/4 left-1/4 animation-delay-4000" />
 
-            {/* H1 nascosto per SEO long-tail */}
-            <h1 className="sr-only">Landing Page Professionale Modena Bologna Reggio Emilia - Consegna 48 Ore - 347€</h1>
+            {/* H1 nascosto per SEO */}
+            <h1 className="sr-only">Landing Page Professionale - Consegna 48 Ore - 347€</h1>
 
             {/* Breadcrumb nascosto per SEO */}
             <nav aria-label="Breadcrumb" className="sr-only">
@@ -196,7 +196,7 @@ export default function OfferLandingPage() {
                     {/* Badge */}
                     <div className="inline-flex items-center gap-2 bg-zinc-900/80 backdrop-blur-sm border border-amber-500/20 rounded-full px-4 py-2 mb-8">
                         <span className="w-2 h-2 bg-[#FFBC11] rounded-full animate-pulse" aria-hidden="true" />
-                        <span className="text-sm text-zinc-400">Offerta valida fino al 31 gennaio 2026</span>
+                        <span className="text-sm text-zinc-400">Offerta valida fino al 28 febbraio 2026</span>
                     </div>
 
                     {/* Main Title visibile */}
@@ -220,7 +220,7 @@ export default function OfferLandingPage() {
                     {/* Subtitle con social proof */}
                     <p className="text-lg sm:text-xl text-zinc-400 max-w-2xl mx-auto mb-10">
                         Design moderno, mobile-first, pronta per convertire visitatori in clienti.
-                        <span className="text-[#FFBC11] font-medium"> Già scelta da 15+ aziende in Emilia-Romagna.</span>
+                        <span className="text-[#FFBC11] font-medium"> Già scelta da numerose aziende in tutta Italia.</span>
                     </p>
 
                     {/* Countdown */}
@@ -442,7 +442,7 @@ export default function OfferLandingPage() {
                     {/* Social Proof + Internal Links */}
                     <div className="mt-12 text-center space-y-4">
                         <p className="text-zinc-500 text-sm">
-                            <span className="text-white font-semibold">+15 progetti</span> completati per aziende in <strong>Modena</strong>, <strong>Bologna</strong>, <strong>Reggio Emilia</strong> e tutta Italia
+                            <span className="text-white font-semibold">+15 progetti</span> completati per aziende in tutta Italia
                         </p>
                         <p className="text-zinc-600 text-xs">
                             Scopri altri <Link href="/casi-studio" className="text-[#FFBC11] hover:underline">casi studio</Link> o i miei <Link href="/siti-web" className="text-[#FFBC11] hover:underline">servizi di creazione siti web</Link>
@@ -648,8 +648,7 @@ export default function OfferLandingPage() {
                     {/* SEO Content */}
                     <div className="text-center mb-8">
                         <p className="text-zinc-500 text-sm max-w-3xl mx-auto leading-relaxed">
-                            <strong className="text-zinc-400">Manuel De Ceglie</strong> - Sviluppatore web freelance specializzato nella creazione di <strong className="text-zinc-400">landing page professionali</strong> e <strong className="text-zinc-400">siti web</strong> per aziende, startup e liberi professionisti.
-                            Opero principalmente a <strong className="text-zinc-400">Modena</strong>, <strong className="text-zinc-400">Bologna</strong>, <strong className="text-zinc-400">Reggio Emilia</strong>, <strong className="text-zinc-400">Parma</strong> e in tutta l'<strong className="text-zinc-400">Emilia-Romagna</strong>, ma lavoro con clienti in tutta <strong className="text-zinc-400">Italia</strong>.
+                            <strong className="text-zinc-400">Manuel De Ceglie</strong> - Sviluppatore web freelance specializzato nella creazione di <strong className="text-zinc-400">landing page professionali</strong> e <strong className="text-zinc-400">siti web</strong> per aziende, startup e liberi professionisti. Lavoro con clienti in tutta <strong className="text-zinc-400">Italia</strong>.
                         </p>
                     </div>
 
@@ -666,9 +665,9 @@ export default function OfferLandingPage() {
 
                     {/* Copyright */}
                     <div className="text-center text-zinc-700 text-xs space-y-1">
-                        <p>© {new Date().getFullYear()} Manuel De Ceglie • P.IVA 04032610364 • Castelnovo ne' Monti (RE)</p>
+                        <p>© {new Date().getFullYear()} Manuel De Ceglie • P.IVA 04032610364</p>
                         <p>
-                            Web Designer & Developer • Landing Page e Siti Web per aziende a Modena, Bologna, Reggio Emilia e tutta Italia
+                            Web Designer & Developer • Landing Page e Siti Web per aziende in tutta Italia
                         </p>
                     </div>
                 </div>

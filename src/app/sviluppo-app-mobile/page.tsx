@@ -177,10 +177,6 @@ export const metadata: Metadata = {
         'sviluppo app android',
         'app su misura',
         'flutter sviluppatore',
-        'sviluppo app roma',
-        'sviluppo app milano',
-        'sviluppo app bologna',
-        'sviluppo app firenze',
         'app per aziende',
         'sviluppo app startup',
         'mobile app development italia',
@@ -190,19 +186,6 @@ export const metadata: Metadata = {
         'sviluppo app cross-platform',
         'flutter developer',
         'dart sviluppatore',
-        // Locali - Emilia-Romagna
-        'sviluppo app reggio emilia',
-        'sviluppo app modena',
-        'sviluppo app parma',
-        'sviluppo app bologna',
-        'sviluppo app piacenza',
-        'sviluppo app ferrara',
-        'sviluppo app rimini',
-        // Locali - Castelnovo ne' Monti e zone
-        'sviluppo app castelnovo ne monti',
-        'app per ristoranti emilia romagna',
-        'app per artigiani emilia',
-        'app per negozi emilia romagna',
         // Settori
         'app per ristoranti',
         'app per palestre',
@@ -342,21 +325,6 @@ const features = [
     }
 ]
 
-const cities = [
-    { name: 'Milano', region: 'Lombardia' },
-    { name: 'Roma', region: 'Lazio' },
-    { name: 'Bologna', region: 'Emilia-Romagna' },
-    { name: 'Firenze', region: 'Toscana' },
-    { name: 'Torino', region: 'Piemonte' },
-    { name: 'Napoli', region: 'Campania' },
-    { name: 'Genova', region: 'Liguria' },
-    { name: 'Venezia', region: 'Veneto' },
-    { name: 'Verona', region: 'Veneto' },
-    { name: 'Modena', region: 'Emilia-Romagna' },
-    { name: 'Parma', region: 'Emilia-Romagna' },
-    { name: 'Reggio Emilia', region: 'Emilia-Romagna' }
-]
-
 const processSteps = [
     {
         number: '01',
@@ -443,78 +411,63 @@ export default function AppMobilePage() {
                     </div>
 
                     <div className="container max-w-[1200px] mx-auto px-4 sm:px-6 relative z-10">
-                        <BlurFade delay={0.1}>
-                            <div className="max-w-3xl">
-                                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full mb-8 backdrop-blur-sm">
-                                    <span className="relative flex h-2 w-2">
-                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFBC11] opacity-75"></span>
-                                        <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FFBC11]"></span>
-                                    </span>
-                                    <span className="text-xs font-bold uppercase tracking-widest text-white">
-                                        Sviluppo App Mobile Professionali
-                                    </span>
-                                </div>
+                <BlurFade delay={0.1}>
+                    <div className="max-w-3xl">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full mb-8 backdrop-blur-sm">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFBC11] opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FFBC11]"></span>
+                            </span>
+                            <span className="text-xs font-bold uppercase tracking-widest text-white">
+                                Sviluppo App Mobile Professionali
+                            </span>
+                        </div>
 
-                                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-[0.9] mb-8">
-                                    La tua idea merita <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFBC11] via-orange-400 to-purple-500">
-                                        un'app eccezionale.
-                                    </span>
-                                </h1>
+                        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white leading-[0.9] mb-8">
+                            La tua idea merita <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFBC11] via-orange-400 to-purple-500">
+                                un'app eccezionale.
+                            </span>
+                        </h1>
 
-                                <p className="text-xl md:text-2xl text-gray-300 font-medium leading-relaxed mb-12 max-w-2xl">
-                                    Non creo template. Creo esperienze digitali che conquistano milioni di utenti.
-                                    Il tuo prodotto digitale, sviluppato con passione e tecnologia di ultima generazione.
-                                </p>
+                        <p className="text-xl md:text-2xl text-gray-300 font-medium leading-relaxed mb-12 max-w-2xl">
+                            Non creo template. Creo esperienze digitali che conquistano milioni di utenti.
+                            Il tuo prodotto digitale, sviluppato con passione e tecnologia di ultima generazione.
+                        </p>
 
-                                <div className="flex flex-col sm:flex-row gap-5 mb-16">
-                                    <Button
-                                        size="lg"
-                                        className="h-16 px-10 rounded-full bg-[#FFBC11] text-black font-black text-lg hover:bg-[#FFBC11]/90 shadow-[0_0_30px_-5px_rgba(255,188,17,0.4)] transition-all hover:scale-105"
-                                        asChild
-                                    >
-                                        <Link href="#contatti">
-                                            Raccontami la Tua Idea
-                                            <ArrowRight className="w-5 h-5 ml-2" />
-                                        </Link>
-                                    </Button>
-                                    <WhatsAppButton
-                                        size="lg"
-                                        className="h-16 px-10 rounded-full"
-                                        message="Ciao Manuel! Vorrei parlare dello sviluppo di un'app mobile per la mia attività."
-                                    >
-                                        Scrivimi su WhatsApp
-                                    </WhatsAppButton>
-                                </div>
+                        <div className="flex flex-col sm:flex-row gap-5 mb-16">
+                            <Button
+                                size="lg"
+                                className="h-16 px-10 rounded-full bg-[#FFBC11] text-black font-black text-lg hover:bg-[#FFBC11]/90 shadow-[0_0_30px_-5px_rgba(255,188,17,0.4)] transition-all hover:scale-105"
+                                asChild
+                            >
+                                <Link href="#contatti">
+                                    Raccontami la Tua Idea
+                                    <ArrowRight className="w-5 h-5 ml-2" />
+                                </Link>
+                            </Button>
+                            <WhatsAppButton
+                                size="lg"
+                                className="h-16 px-10 rounded-full"
+                                message="Ciao Manuel! Vorrei parlare dello sviluppo di un'app mobile per la mia attività."
+                            >
+                                Scrivimi su WhatsApp
+                            </WhatsAppButton>
+                        </div>
 
-                                <div className="flex flex-wrap gap-4">
-                                    <span className="px-4 py-2 bg-white/5 rounded-full text-sm font-medium text-gray-400 border border-white/10">Flutter</span>
-                                    <span className="px-4 py-2 bg-white/5 rounded-full text-sm font-medium text-gray-400 border border-white/10">Swift</span>
-                                    <span className="px-4 py-2 bg-white/5 rounded-full text-sm font-medium text-gray-400 border border-white/10">Kotlin</span>
-                                    <span className="px-4 py-2 bg-white/5 rounded-full text-sm font-medium text-gray-400 border border-white/10">Dart</span>
-                                </div>
-                            </div>
-                        </BlurFade>
-                    </div>
-                </section>
-
-                {/* CITIES - Simple Grid */}
-                <section className="py-12 bg-gradient-to-r from-[#0a0a0a] to-[#1a1a2e] border-y border-white/10">
-                    <div className="container max-w-[1200px] mx-auto px-4 sm:px-6">
-                        <p className="text-center text-gray-500 text-sm font-bold uppercase tracking-widest mb-6">Lavoro con clienti in tutta Italia</p>
-                        <div className="flex flex-wrap justify-center gap-4">
-                            {cities.map((city, i) => (
-                                <div key={i} className="flex items-center gap-2 px-5 py-2 bg-white/5 rounded-full border border-white/10 hover:bg-white/10 transition-colors cursor-pointer">
-                                    <MapPin className="w-4 h-4 text-[#FFBC11]" />
-                                    <span className="text-white font-medium text-sm">{city.name}</span>
-                                </div>
-                            ))}
+                        <div className="flex flex-wrap gap-4">
+                            <span className="px-4 py-2 bg-white/5 rounded-full text-sm font-medium text-gray-400 border border-white/10">Flutter</span>
+                            <span className="px-4 py-2 bg-white/5 rounded-full text-sm font-medium text-gray-400 border border-white/10">Swift</span>
+                            <span className="px-4 py-2 bg-white/5 rounded-full text-sm font-medium text-gray-400 border border-white/10">Kotlin</span>
+                            <span className="px-4 py-2 bg-white/5 rounded-full text-sm font-medium text-gray-400 border border-white/10">Dart</span>
                         </div>
                     </div>
-                </section>
+                </BlurFade>
+            </div>
+        </section>
 
-                {/* WHY APP - Impactful Numbers */}
-                <section className="py-24 bg-white relative">
+        {/* WHY APP - Impactful Numbers */}
+        <section className="py-24 bg-white relative">
                     <div className="container max-w-[1200px] mx-auto px-4 sm:px-6">
                         <div className="text-center max-w-4xl mx-auto mb-16">
                             <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-gray-900 mb-6 leading-[1.1]">

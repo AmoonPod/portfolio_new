@@ -211,10 +211,10 @@ export default function EcommerceHubPage() {
       <section className="py-16 md:py-24">
         <div className="container max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-4">
-            E-commerce in Emilia-Romagna
+            E-commerce in tutta Italia
           </h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Realizzo e-commerce professionali in tutta la regione. 
+            Realizzo e-commerce professionali per attività in ogni regione. 
             Trova la pagina dedicata alla tua città.
           </p>
 

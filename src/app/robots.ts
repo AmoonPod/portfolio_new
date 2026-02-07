@@ -8,7 +8,10 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/_next/', '/edit-cms'],
     },
-    sitemap: `${DATA.url}/sitemap.xml`,
+    sitemap: [
+      `${DATA.url}/sitemap.xml`,
+      `${DATA.url}/sitemap/0.xml`,
+    ],
   }
 }
 

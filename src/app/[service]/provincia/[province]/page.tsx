@@ -37,6 +37,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: data.title,
     description: data.description,
+    alternates: {
+      canonical: `https://manueldeceglie.it/${service}/provincia/${province}`,
+    },
   };
 }
 

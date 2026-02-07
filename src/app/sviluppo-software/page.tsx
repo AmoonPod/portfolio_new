@@ -61,7 +61,7 @@ export const metadata: Metadata = {
         'software su misura', 'automatizzazione processi aziendali', 'digitalizzazione impresa',
         'gestionale clienti', 'software gestione magazzino', 'integrazioni api', 'api rest',
         'fatturazione elettronica', 'industria 4.0', 'transizione 5.0', 'crm per artigiani',
-        'gestionale emilia romagna', 'sviluppo software modena', 'crm bologna'
+        'gestionale emilia romagna'
     ],
     alternates: {
         canonical: `${BASE_URL}/sviluppo-software`,

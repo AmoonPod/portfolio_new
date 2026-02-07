@@ -33,7 +33,7 @@ const faqs = [
   {
     question: "Dove lavori?",
     answer:
-      "Lavoro principalmente nelle province di Modena e Reggio Emilia, ma collaboro anche da remoto con clienti in tutta Italia. Per molti progetti non serve vedersi di persona."
+      "Collaboro da remoto con clienti in tutta Italia. Per molti progetti non serve vedersi di persona, la comunicazione digitale è rapida ed efficace."
   },
   {
     question: "Cosa succede dopo la consegna?",

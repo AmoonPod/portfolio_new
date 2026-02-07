@@ -22,6 +22,7 @@ import { getAllPosts } from '@/lib/blog';
 import { getRegions, getProvinces } from '@/lib/seo/hub-generator';
 
 const BASE_URL = DATA.url;
+const STABLE_DATE = new Date('2024-02-01');
 
 // =============================================================================
 // SITEMAP INDEX GENERATION
@@ -51,16 +52,16 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
   if (waveId === 0) {
     // 1. Static Core Pages
     entries.push(
-      { url: BASE_URL, lastModified: new Date(), changeFrequency: 'weekly', priority: 1.0 },
-      { url: `${BASE_URL}/privacy-policy`, lastModified: new Date(), changeFrequency: 'yearly', priority: 0.3 },
-      { url: `${BASE_URL}/blog`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
-      { url: `${BASE_URL}/casi-studio`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
+      { url: BASE_URL, lastModified: STABLE_DATE, changeFrequency: 'weekly', priority: 1.0 },
+      { url: `${BASE_URL}/privacy-policy`, lastModified: STABLE_DATE, changeFrequency: 'yearly', priority: 0.3 },
+      { url: `${BASE_URL}/blog`, lastModified: STABLE_DATE, changeFrequency: 'weekly', priority: 0.9 },
+      { url: `${BASE_URL}/casi-studio`, lastModified: STABLE_DATE, changeFrequency: 'weekly', priority: 0.9 },
       // Landing Pages
-      { url: `${BASE_URL}/il-tuo-business-sanguina`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
-      { url: `${BASE_URL}/offerta-landing`, lastModified: new Date(), changeFrequency: 'daily', priority: 1.0 },
-      { url: `${BASE_URL}/offerta-preventivo`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.9 },
-      { url: `${BASE_URL}/offerta-rate`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.9 },
-      { url: `${BASE_URL}/offerta-garanzia`, lastModified: new Date(), changeFrequency: 'daily', priority: 0.9 },
+      { url: `${BASE_URL}/il-tuo-business-sanguina`, lastModified: STABLE_DATE, changeFrequency: 'monthly', priority: 0.9 },
+      { url: `${BASE_URL}/offerta-landing`, lastModified: STABLE_DATE, changeFrequency: 'daily', priority: 1.0 },
+      { url: `${BASE_URL}/offerta-preventivo`, lastModified: STABLE_DATE, changeFrequency: 'daily', priority: 0.9 },
+      { url: `${BASE_URL}/offerta-rate`, lastModified: STABLE_DATE, changeFrequency: 'daily', priority: 0.9 },
+      { url: `${BASE_URL}/offerta-garanzia`, lastModified: STABLE_DATE, changeFrequency: 'daily', priority: 0.9 },
     );
 
     // 2. Blog Posts
@@ -79,7 +80,7 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
     for (const slug of caseStudies) {
       entries.push({
         url: `${BASE_URL}/casi-studio/${slug}`,
-        lastModified: new Date(),
+        lastModified: STABLE_DATE,
         changeFrequency: 'monthly',
         priority: 0.8,
       });
@@ -90,7 +91,7 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
     for (const service of services) {
       entries.push({
         url: `${BASE_URL}/${service.slug}`,
-        lastModified: new Date(),
+        lastModified: STABLE_DATE,
         changeFrequency: 'weekly',
         priority: 1.0,
       });
@@ -100,7 +101,7 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
     for (const nicheSlug of NICHE_SLUGS) {
       entries.push({
         url: `${BASE_URL}/siti-web/${nicheSlug}`,
-        lastModified: new Date(),
+        lastModified: STABLE_DATE,
         changeFrequency: 'weekly',
         priority: 0.9,
       });
@@ -109,7 +110,7 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
       for (const topic of playbooks) {
         entries.push({
           url: `${BASE_URL}/siti-web/${nicheSlug}/${topic}`,
-          lastModified: new Date(),
+          lastModified: STABLE_DATE,
           changeFrequency: 'monthly',
           priority: 0.8,
         });
@@ -125,7 +126,7 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
       regions.forEach(region => {
         entries.push({
           url: `${BASE_URL}/${serviceSlug}/regione/${region.slug}`,
-          lastModified: new Date(),
+          lastModified: STABLE_DATE,
           changeFrequency: 'monthly',
           priority: 0.6,
         });
@@ -134,7 +135,7 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
       provinces.forEach(province => {
         entries.push({
           url: `${BASE_URL}/${serviceSlug}/provincia/${province.slug}`,
-          lastModified: new Date(),
+          lastModified: STABLE_DATE,
           changeFrequency: 'monthly',
           priority: 0.5,
         });
@@ -169,7 +170,7 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
         if (location.population >= service.minPopulation) {
           entries.push({
             url: `${BASE_URL}/${service.slug}/${location.slug}`,
-            lastModified: new Date(),
+            lastModified: STABLE_DATE,
             changeFrequency: 'weekly',
             priority: location.priority === 1 ? 0.9 : 0.8,
           });
@@ -181,7 +182,7 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
         if (location.population >= niche.minPopulation) {
           entries.push({
             url: `${BASE_URL}/siti-web/${niche.slug}/${location.slug}`,
-            lastModified: new Date(),
+            lastModified: STABLE_DATE,
             changeFrequency: 'weekly',
             priority: location.priority === 1 ? 0.8 : 0.7,
           });

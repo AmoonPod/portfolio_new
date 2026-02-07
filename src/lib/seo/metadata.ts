@@ -42,15 +42,9 @@ const SERVICE_NAMES: Record<string, string> = {
   'sviluppo-software': 'Sviluppo Software', // Cambiato da "Software Gestionali" a "Sviluppo Software" per coprire tutto
 };
 
-// Zone/area keywords per città italiane (Utili per siti-web, DA EVITARE per software)
-const CITY_ZONES: Record<string, string[]> = {
-  // Emilia-Romagna
-  'modena': [' Sassuolo', ' Carpi', ' Formigine', ' Mirandola', ' Pavullo', ' Vignola', ' Castelnuovo Rangone', ' Nonantola', ' Castelfranco Emilia', ' Soliera', ' distretto ceramico', ' zona industriale modenese'],
-  'bologna': [' San Lazzaro', ' Imola', ' Casalecchio', ' Zola Predosa', ' Valsamoggia', ' Interporto', ' Centergross', ' zona industriale Roveri'],
-  'parma': [' Fidenza', ' Langhirano', ' Collecchio', ' Interporto di Parma', ' zona SPIP'],
-  'reggio-emilia': [' Correggio', ' Scandiano', ' Guastalla', ' Rubiera', ' zona industriale Mancasale'],
-  // ... (altre città rimangono invariate se le hai nel db)
-};
+// Zone/area keywords per città italiane (Uteli per siti-web, DA EVITARE per software)
+// Rimossi per evitare cannibalizzazione doorway pages
+const CITY_ZONES: Record<string, string[]> = {};
 
 export function generateCanonicalUrl(citySlug: string, serviceSlug: string = 'siti-web'): string {
   return `https://manueldeceglie.it/${serviceSlug}/${citySlug}`;
@@ -273,18 +267,8 @@ export function generateKeywords(
   const keywords = [
     `${serviceName.toLowerCase()} ${normalizedCity}`,
     `realizzazione ${serviceName.toLowerCase()} ${normalizedCity}`,
-    `agenzia web ${normalizedCity}`,
     `web designer ${normalizedCity}`,
   ];
-
-  // Aggiungi zone/quartieri SOLO per servizi "local" come siti web
-  if (CITY_ZONES[normalizedCity]) {
-    const zones = CITY_ZONES[normalizedCity];
-    // Prendiamo solo i primi 3 per non esagerare
-    zones.slice(0, 3).forEach(zone => {
-      keywords.push(`${serviceName.toLowerCase()}${zone}`);
-    });
-  }
 
   return keywords;
 }

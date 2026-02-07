@@ -125,6 +125,13 @@ export interface ServicePageData {
     description: string;
   }>;
   
+  // City-specific content blocks
+  localContext: string;
+  whyHere: string;
+  marketInsight: string;
+  deliverables: string[];
+  archetypeFaq: Array<{ question: string; answer: string }>;
+  
   // Status
   active: boolean;
 }
@@ -425,6 +432,174 @@ const PROBLEM_TEMPLATES: Record<string, Record<MarketArchetype, ServicePageProbl
       { title: 'Autorevolezza da costruire', description: 'I clienti cercano i migliori. Devi costruire reputazione online.' },
     ],
   },
+  'siti-web': {
+    MountainSmall: [
+      { title: 'Sito lento con connessioni deboli', description: 'In montagna la connessione è spesso instabile. Il tuo sito deve caricarsi veloce anche con poca banda.' },
+      { title: 'Turisti che non ti trovano', description: 'Chi cerca un albergo, un rifugio o un\'esperienza in montagna finisce sui portali. Il tuo sito non esiste.' },
+      { title: 'Mobile ignorato', description: 'I turisti cercano tutto dal telefono. Se il tuo sito non funziona bene su mobile, perdi prenotazioni.' },
+    ],
+    HillMedium: [
+      { title: 'Sito fermo al 2010', description: 'Il tuo sito sembra vecchio e non rappresenta la qualità di quello che offri.' },
+      { title: 'Nessuna prenotazione online', description: 'Agriturismi, cantine, esperienze: i clienti vogliono prenotare dal sito. Tu li costringi a telefonare.' },
+      { title: 'Immagini che non rendono giustizia', description: 'Il paesaggio e i tuoi prodotti meritano foto professionali e un sito che li valorizzi.' },
+    ],
+    IndustrialHub: [
+      { title: 'Sito aziendale datato', description: 'Il tuo sito corporate è un biglietto da visita dimenticato. I buyer B2B lo giudicano in 3 secondi.' },
+      { title: 'Catalogo prodotti assente', description: 'I tuoi clienti internazionali vogliono sfogliare i prodotti online con schede tecniche. Tu mandi PDF via email.' },
+      { title: 'Zero credibilità internazionale', description: 'Esporti ma il sito è solo in italiano e non comunica professionalità ai mercati esteri.' },
+    ],
+    FoodValley: [
+      { title: 'Il prodotto parla, il sito no', description: 'Fai prodotti eccezionali ma il tuo sito non racconta la filiera, la tradizione, la qualità.' },
+      { title: 'Nessuna vetrina per i riconoscimenti', description: 'DOP, IGP, premi: li hai conquistati ma il sito non li mette in evidenza.' },
+      { title: 'Visite in azienda perse', description: 'Chi cerca esperienze enogastronomiche non trova il tuo sito. Trovi solo i soliti portali.' },
+    ],
+    ProvinceCapital: [
+      { title: 'Concorrenza con siti professionali', description: 'I tuoi competitor hanno siti moderni e curati. Il tuo sembra amatoriale al confronto.' },
+      { title: 'Nessun contatto dal sito', description: 'Hai un sito ma non genera richieste. Le persone guardano e se ne vanno.' },
+      { title: 'Informazioni sparse ovunque', description: 'Orari su Google, prezzi su Facebook, servizi su WhatsApp. Ti serve un punto unico e aggiornato.' },
+    ],
+    SuburbanGrowth: [
+      { title: 'Crescita senza presenza online', description: 'La tua attività cresce ma il sito non la rappresenta. I nuovi residenti cercano online prima di tutto.' },
+      { title: 'Sito generico senza identità', description: 'Il tuo sito è un template uguale a mille altri. Non trasmette cosa ti rende diverso.' },
+      { title: 'Difficile da aggiornare', description: 'Ogni modifica al sito richiede il webmaster. Vorresti poter aggiornare offerte e news in autonomia.' },
+    ],
+    PlainsSmall: [
+      { title: 'Nessun sito web', description: 'La tua attività vive di passaparola ma chi ti cerca su Google trova solo una pagina vuota.' },
+      { title: 'Sito fatto in casa', description: 'L\'hai costruito con un builder gratuito anni fa. Si vede, e non ispira fiducia.' },
+      { title: 'Non mobile-friendly', description: 'Il sito si vede bene solo da desktop. Ma i tuoi clienti navigano tutti da smartphone.' },
+    ],
+    MetroBologna: [
+      { title: 'Sito che non converte', description: 'Hai traffico ma poche conversioni. Il sito non guida l\'utente verso il contatto o l\'acquisto.' },
+      { title: 'Performance scadenti', description: 'Il sito è lento e pesante. Gli utenti escono e Google ti penalizza nei risultati.' },
+      { title: 'Design non all\'altezza', description: 'Nell\'area metropolitana le aspettative sono alte. Un sito mediocre ti fa sembrare poco professionale.' },
+    ],
+  },
+  'landing-pages': {
+    MountainSmall: [
+      { title: 'Campagne senza destinazione', description: 'Fai pubblicità su Facebook ma mandi le persone alla home del sito. Il messaggio si perde.' },
+      { title: 'Offerte stagionali sprecate', description: 'Settimana bianca, estate in quota: le tue promozioni non hanno una pagina dedicata che converta.' },
+      { title: 'Lead turistici persi', description: 'I turisti interessati non trovano un percorso chiaro per prenotare. Vanno su Booking.' },
+    ],
+    HillMedium: [
+      { title: 'Eventi senza prenotazioni', description: 'Organizzi degustazioni e eventi ma non hai una pagina dedicata per raccogliere iscrizioni.' },
+      { title: 'Promozioni invisibili', description: 'Lanci un\'offerta speciale ma la comunichi solo sui social. Chi arriva dal web non la trova.' },
+      { title: 'Contatti generici', description: 'Il form di contatto è generico. Non catturi le informazioni giuste per qualificare i lead.' },
+    ],
+    IndustrialHub: [
+      { title: 'Fiere senza follow-up', description: 'Partecipi a fiere e investi migliaia di euro ma non hai una landing per raccogliere contatti mirati.' },
+      { title: 'Campagne Ads che bruciano budget', description: 'Investi in Google Ads ma mandi tutto alla homepage. Il costo per lead è alle stelle.' },
+      { title: 'Lancio prodotti senza impatto', description: 'Lanci un nuovo prodotto industriale ma non hai una pagina che ne spieghi i vantaggi e raccolga richieste.' },
+    ],
+    FoodValley: [
+      { title: 'Promozioni stagionali disperse', description: 'Cesti di Natale, offerte estive, nuovi raccolti: ogni promozione merita una pagina dedicata.' },
+      { title: 'Lanci DOP/IGP senza vetrina', description: 'Ottieni una certificazione importante ma non hai una pagina per comunicarla e generare ordini.' },
+      { title: 'Degustazioni vuote', description: 'Organizzi visite e degustazioni ma le prenotazioni arrivano solo dal passaparola. Online zero.' },
+    ],
+    ProvinceCapital: [
+      { title: 'Troppi messaggi, zero focus', description: 'La tua homepage parla di tutto. Ti serve una pagina per ogni servizio, chiara e focalizzata.' },
+      { title: 'Campagne social senza conversione', description: 'Investi in social ads ma senza una landing ottimizzata il ritorno è deludente.' },
+      { title: 'Preventivi non richiesti', description: 'Vorresti più richieste di preventivo ma il tuo sito non ha un percorso chiaro per ottenerle.' },
+    ],
+    SuburbanGrowth: [
+      { title: 'Apertura nuova sede senza buzz', description: 'Stai aprendo o espandendo ma non hai una pagina per generare interesse e raccogliere contatti.' },
+      { title: 'Servizi specifici nascosti', description: 'Offri servizi diversi per target diversi ma li presenti tutti insieme. Ogni target merita la sua pagina.' },
+      { title: 'Promozioni locali inefficaci', description: 'Fai volantinaggio o ads locali ma senza una destinazione digitale i contatti si perdono.' },
+    ],
+    PlainsSmall: [
+      { title: 'Nessuna pagina promozionale', description: 'Le tue offerte vivono solo su un post Facebook che dopo un giorno nessuno vede più.' },
+      { title: 'Contatti solo telefonici', description: 'Chi vede una tua pubblicità deve chiamarti. Ma la sera, il weekend, in pausa pranzo, non può.' },
+      { title: 'Primo approccio al digitale', description: 'Non hai un sito completo? Una landing page è il modo più veloce ed economico per partire.' },
+    ],
+    MetroBologna: [
+      { title: 'A/B testing inesistente', description: 'Investi migliaia in campagne ma non testi mai varianti. Stai buttando soldi senza saperlo.' },
+      { title: 'Funnel di vendita spezzato', description: 'Il percorso dall\'annuncio alla conversione ha troppi passaggi. I potenziali clienti abbandonano.' },
+      { title: 'Landing generiche', description: 'Usi la stessa pagina per campagne diverse. Ogni campagna ha bisogno di un messaggio su misura.' },
+    ],
+  },
+  'sviluppo-software': {
+    MountainSmall: [
+      { title: 'Gestione manuale delle prenotazioni', description: 'Quaderni, Excel, WhatsApp. D\'inverno ti perdi nelle prenotazioni per la stagione sciistica.' },
+      { title: 'Nessun sistema per la stagionalità', description: 'Prezzi, disponibilità, turni del personale cambiano ogni stagione. Gestisci tutto a mano.' },
+      { title: 'Dati sparsi ovunque', description: 'Fatture nel cassetto, clienti su un foglio, fornitori a memoria. Un gestionale ti semplifica la vita.' },
+    ],
+    HillMedium: [
+      { title: 'Tracciabilità artigianale', description: 'Produci vino, olio, miele? La tracciabilità di filiera è obbligatoria ma la fai ancora su carta.' },
+      { title: 'Gestione agriturismi complessa', description: 'Camere, ristorante, eventi, fattoria didattica: ogni attività ha il suo foglio Excel.' },
+      { title: 'Nessun controllo sui costi', description: 'Non sai quali prodotti o servizi sono realmente profittevoli. Ti manca un sistema di analisi.' },
+    ],
+    IndustrialHub: [
+      { title: 'Produzione senza controllo', description: 'Monitori la produzione con fogli cartacei. Scarti, fermi macchina e ritardi non vengono tracciati.' },
+      { title: 'Supply chain manuale', description: 'Ordini ai fornitori, magazzino, spedizioni: ogni passaggio è un collo di bottiglia gestito a mano.' },
+      { title: 'Documentazione export complicata', description: 'Certificati, bolle doganali, compliance: ogni mercato estero ha le sue regole e tu le gestisci in Word.' },
+    ],
+    FoodValley: [
+      { title: 'Conformità HACCP su carta', description: 'Registri temperature, pulizie, lotti ancora su moduli cartacei. Un errore e rischi sanzioni.' },
+      { title: 'Gestione lotti impossibile', description: 'Tracciare un lotto dalla materia prima al prodotto finito richiede ore di lavoro manuale.' },
+      { title: 'Ordini e produzione scollegati', description: 'Gli ordini arrivano da un canale, la produzione va per conto suo. Nessuna pianificazione integrata.' },
+    ],
+    ProvinceCapital: [
+      { title: 'Processi interni inefficienti', description: 'Approvazioni, richieste interne, report: tutto via email. Si perde tempo e si dimenticano cose.' },
+      { title: 'Software che non si parlano', description: 'Usi 5 strumenti diversi che non si integrano. Copi e incolli dati da uno all\'altro.' },
+      { title: 'Crescita bloccata dai processi', description: 'La tua azienda è cresciuta ma i processi sono rimasti quelli di quando eravate in tre.' },
+    ],
+    SuburbanGrowth: [
+      { title: 'Gestione multi-sede caotica', description: 'Hai più sedi o punti vendita ma ogni sede lavora con i propri strumenti. Nessuna visione d\'insieme.' },
+      { title: 'Reportistica manuale', description: 'Per avere i numeri del mese devi chiedere a tre persone e mettere insieme fogli diversi.' },
+      { title: 'Automazione zero', description: 'Attività ripetitive che i tuoi dipendenti fanno ogni giorno potrebbero essere automatizzate.' },
+    ],
+    PlainsSmall: [
+      { title: 'Tutto in testa al titolare', description: 'Se ti ammali si ferma tutto. Le procedure non sono scritte, figuriamoci digitalizzate.' },
+      { title: 'Fatturazione e contabilità base', description: 'Usi ancora il foglio Excel del commercialista. Ogni scadenza è uno stress.' },
+      { title: 'Nessun CRM', description: 'I contatti dei clienti sono sparsi tra telefono, email e biglietti da visita.' },
+    ],
+    MetroBologna: [
+      { title: 'Piattaforme legacy da sostituire', description: 'Il gestionale ha 15 anni e il fornitore non lo supporta più. Ogni aggiornamento è un rischio.' },
+      { title: 'Integrazioni complesse', description: 'Devi collegare ERP, CRM, e-commerce, BI. Servono API custom e architetture scalabili.' },
+      { title: 'Time to market troppo lungo', description: 'Sviluppare nuove funzionalità richiede mesi. I competitor si muovono più velocemente.' },
+    ],
+  },
+  'sviluppo-app-mobile': {
+    MountainSmall: [
+      { title: 'Informazioni turistiche frammentate', description: 'Sentieri, impianti, meteo, eventi: i turisti devono cercare su 10 siti diversi. Un\'app risolve tutto.' },
+      { title: 'Nessun canale diretto con i visitatori', description: 'I turisti arrivano, spendono e ripartono. Non hai modo di ricontattarli o fidelizzarli.' },
+      { title: 'Emergenze senza comunicazione', description: 'Chiusura impianti, allerta meteo, variazioni percorsi: non hai un canale push per avvisare in tempo reale.' },
+    ],
+    HillMedium: [
+      { title: 'Esperienze non prenotabili', description: 'Degustazioni, visite guidate, percorsi: i clienti vogliono prenotare e pagare dal telefono.' },
+      { title: 'Mappa e percorsi assenti', description: 'I visitatori vogliono esplorare il territorio. Un\'app con mappe e itinerari li guida da te.' },
+      { title: 'Fidelizzazione inesistente', description: 'I clienti vengono una volta e non tornano. Un\'app con notifiche e offerte li riporta da te.' },
+    ],
+    IndustrialHub: [
+      { title: 'Operai senza strumenti mobili', description: 'I tuoi tecnici compilano rapportini cartacei. Un\'app di field service digitalizza tutto.' },
+      { title: 'Magazzino non tracciato', description: 'Inventario, movimentazioni, picking: tutto a mano. Un\'app con scanner velocizza le operazioni.' },
+      { title: 'Manutenzione reattiva', description: 'Intervieni solo quando qualcosa si rompe. Un\'app di manutenzione programmata riduce i fermi macchina.' },
+    ],
+    FoodValley: [
+      { title: 'Tracciabilità non comunicata', description: 'Il consumatore vuole sapere da dove viene il cibo. Un\'app che mostra la filiera crea fiducia.' },
+      { title: 'Ordini B2B ancora al telefono', description: 'Ristoranti e negozi ti ordinano chiamando. Un\'app dedicata semplifica e velocizza tutto.' },
+      { title: 'Nessun programma fedeltà', description: 'I clienti comprano i tuoi prodotti ma non hai modo di premiarli e farli tornare.' },
+    ],
+    ProvinceCapital: [
+      { title: 'Clienti persi dalle catene', description: 'Le grandi catene hanno app con punti, offerte, prenotazioni. Tu no, e i clienti se ne vanno.' },
+      { title: 'Prenotazioni appuntamenti caotiche', description: 'Telefonate, messaggi, no-show. Un\'app con booking e reminder risolve il problema.' },
+      { title: 'Comunicazione one-way', description: 'Comunichi solo via social ma non tutti li seguono. Le notifiche push arrivano sempre.' },
+    ],
+    SuburbanGrowth: [
+      { title: 'Servizi a domicilio senza gestione', description: 'Consegne, interventi, appuntamenti a casa: coordini tutto a mano tra telefonate e messaggi.' },
+      { title: 'Community locale disconnessa', description: 'I nuovi residenti non conoscono le attività locali. Un\'app di quartiere crea connessione.' },
+      { title: 'Feedback dei clienti non raccolto', description: 'Non sai cosa pensano i tuoi clienti. Un\'app con recensioni e sondaggi ti dà risposte concrete.' },
+    ],
+    PlainsSmall: [
+      { title: 'Servizio clienti solo in orario', description: 'I clienti vorrebbero controllare ordini, prenotazioni, stato lavori anche la sera o il weekend.' },
+      { title: 'Nessuna presenza mobile', description: 'I tuoi clienti passano ore sullo smartphone ma tu non sei tra le app che usano.' },
+      { title: 'Comunicazioni perse', description: 'Avvisi, promozioni, novità: li pubblichi su Facebook ma raggiungono il 5% dei tuoi clienti.' },
+    ],
+    MetroBologna: [
+      { title: 'App competitor già sul mercato', description: 'I tuoi concorrenti hanno già un\'app. Ogni giorno che aspetti perdi terreno.' },
+      { title: 'Esperienza utente frammentata', description: 'I clienti usano il sito, chiamano, mandano email. Un\'app unifica tutto in un unico punto.' },
+      { title: 'Dati mobile non sfruttati', description: 'Geolocalizzazione, abitudini d\'uso, preferenze: un\'app ti dà insight che il sito non può darti.' },
+    ],
+  },
   // Add more service problem templates as needed...
 };
 
@@ -548,6 +723,11 @@ export function buildServicePageData(
     faq,
     nearbyCities,
     relatedServices,
+    localContext: archetypeData.description,
+    whyHere: `Supporto dedicato alle realtà di ${location.name}.`,
+    marketInsight: `Analisi di mercato per ${service.name} in zona ${location.province}.`,
+    deliverables: service.pricing[0]?.features || [],
+    archetypeFaq: [],
     active: true,
   };
 }

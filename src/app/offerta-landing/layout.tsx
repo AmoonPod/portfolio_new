@@ -4,7 +4,7 @@ const BASE_URL = 'https://manueldeceglie.it'
 
 export const metadata: Metadata = {
     title: 'Landing Page Professionale 347€ | Consegna in 48 Ore | Manuel De Ceglie',
-    description: 'Cerchi una landing page professionale a Modena, Bologna o in Emilia-Romagna? Design moderno, responsive, ottimizzata SEO. Consegna in 48 ore a soli 347€. Offerta limitata fino al 31 gennaio.',
+    description: 'Cerchi una landing page professionale? Design moderno, responsive, ottimizzata SEO. Consegna in 48 ore a soli 347€. Offerta limitata fino al 28 febbraio.',
     keywords: [
         // Keywords principali ad alto volume
         'landing page professionale',
@@ -16,49 +16,6 @@ export const metadata: Metadata = {
         'quanto costa una landing page',
         'landing page preventivo',
 
-        // Keywords locali - Modena e provincia
-        'landing page Modena',
-        'siti web Modena',
-        'web designer Modena',
-        'sviluppatore web Modena',
-        'realizzazione siti web Modena',
-        "creazione siti web Castelnovo ne' Monti",
-        'siti web Vignola',
-        'siti web Sassuolo',
-        'siti web Carpi',
-        'siti web Formigine',
-        'siti web Maranello',
-        'siti web Pavullo',
-
-        // Keywords locali - Reggio Emilia
-        'landing page Reggio Emilia',
-        'siti web Reggio Emilia',
-        'web designer Reggio Emilia',
-        'siti web Correggio',
-        'siti web Scandiano',
-        'siti web Castelnovo ne Monti',
-        'siti web Guastalla',
-
-        // Keywords locali - Bologna
-        'landing page Bologna',
-        'siti web Bologna',
-        'web designer Bologna',
-        'sviluppatore web Bologna',
-        'siti web Imola',
-        'siti web Casalecchio',
-
-        // Keywords locali - Parma
-        'landing page Parma',
-        'siti web Parma',
-        'web designer Parma',
-
-        // Keywords Emilia-Romagna
-        'landing page Emilia-Romagna',
-        'siti web Emilia-Romagna',
-        'web designer Emilia-Romagna',
-        'realizzazione siti web Emilia-Romagna',
-        'agenzia web Emilia-Romagna',
-
         // Keywords Italia
         'landing page Italia',
         'creazione landing page online',
@@ -67,8 +24,6 @@ export const metadata: Metadata = {
         'landing page per aziende',
         'landing page per startup',
         'landing page per liberi professionisti',
-
-        // Keywords conversione e servizio
         'landing page che converte',
         'landing page per lead generation',
         'landing page efficace',
@@ -81,7 +36,7 @@ export const metadata: Metadata = {
     ],
     openGraph: {
         title: 'Landing Page Professionale in 48 Ore | Solo 347€ | Offerta Limitata',
-        description: 'Design moderno, 100% responsive, form contatto, SEO base inclusa. Consegna garantita in 48 ore. Offerta valida fino al 31 gennaio 2026.',
+        description: 'Design moderno, 100% responsive, form contatto, SEO base inclusa. Consegna garantita in 48 ore. Offerta valida fino al 28 febbraio 2026.',
         type: 'website',
         locale: 'it_IT',
         url: `${BASE_URL}/offerta-landing`,
@@ -91,14 +46,14 @@ export const metadata: Metadata = {
                 url: `${BASE_URL}/og-image.png`,
                 width: 1200,
                 height: 630,
-                alt: 'Landing Page Professionale in 48 Ore - Offerta 347€ - Manuel De Ceglie Web Developer Modena',
+                alt: 'Landing Page Professionale in 48 Ore - Offerta 347€ - Manuel De Ceglie Web Developer',
             },
         ],
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Landing Page Professionale 347€ | Consegna in 48 Ore',
-        description: 'Design moderno, responsive, ottimizzata SEO. Consegna garantita in 48 ore. Offerta limitata fino al 31 gennaio.',
+        description: 'Design moderno, responsive, ottimizzata SEO. Consegna garantita in 48 ore. Offerta limitata fino al 28 febbraio.',
         images: [`${BASE_URL}/og-image.png`],
         creator: '@manueldeceglie',
     },
@@ -126,20 +81,6 @@ export const metadata: Metadata = {
     creator: 'Manuel De Ceglie',
     publisher: 'Manuel De Ceglie',
     category: 'Web Development',
-    classification: 'Business',
-    other: {
-        'geo.region': 'IT-RE',
-        'geo.placename': "Castelnovo ne' Monti, Reggio Emilia, Emilia-Romagna, Italia",
-        'geo.position': '44.4347;10.4053',
-        'ICBM': '44.4347, 10.4053',
-        'rating': 'General',
-        'distribution': 'Global',
-        'revisit-after': '3 days',
-        'language': 'Italian',
-        'target': 'all',
-        'audience': 'all',
-        'coverage': 'Worldwide',
-    },
     verification: {
         google: 'BzkUaVu8rd1Ixv5g73FCGyldZPKgc2NklXHMqbOcm9Q',
     },

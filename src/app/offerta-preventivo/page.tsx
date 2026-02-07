@@ -63,8 +63,8 @@ const FAQ_ITEMS = [
         answer: "La consegna è garantita in 48 ore lavorative dal pagamento dell'acconto. Riceverai una landing page completa, testata e pronta per andare online."
     },
     {
-        question: "Lavori solo a Modena o anche in altre città?",
-        answer: "Lavoro con clienti in tutta Italia! Creo landing page per aziende di Modena, Bologna, Reggio Emilia, Parma, Milano e qualsiasi altra città. La comunicazione avviene via WhatsApp e videochiamate."
+        question: "Lavori solo in una zona specifica o anche in altre città?",
+        answer: "Lavoro con clienti in tutta Italia! Creo landing page per aziende in qualsiasi città. La comunicazione avviene via WhatsApp e videochiamate."
     },
     {
         question: "Cosa include esattamente il servizio?",
@@ -108,7 +108,7 @@ export default function OfferLandingPageB() {
             <FloatingOrb className="w-64 h-64 bg-yellow-400 bottom-1/4 left-1/4 animation-delay-4000" />
 
             {/* H1 nascosto per SEO */}
-            <h1 className="sr-only">Landing Page Professionale Modena Bologna Reggio Emilia - Consegna 48 Ore - 347€</h1>
+            <h1 className="sr-only">Landing Page Professionale - Consegna 48 Ore - 347€</h1>
 
             {/* Urgency Bar - "Solo 3 slot questa settimana" */}
             <div className={cn(
@@ -164,7 +164,7 @@ export default function OfferLandingPageB() {
                     {/* Subtitle con social proof */}
                     <p className="text-lg sm:text-xl text-zinc-400 max-w-2xl mx-auto mb-10">
                         Richiedi un preventivo gratuito senza impegno.
-                        <span className="text-[#FFBC11] font-medium"> Già scelto da 15+ aziende in Emilia-Romagna.</span>
+                        <span className="text-[#FFBC11] font-medium"> Già scelto da numerose aziende in tutta Italia.</span>
                     </p>
 
                     {/* CTA Buttons */}
@@ -531,7 +531,7 @@ export default function OfferLandingPageB() {
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-8">
                         <p className="text-zinc-500 text-sm max-w-3xl mx-auto leading-relaxed">
-                            <strong className="text-zinc-400">Manuel De Ceglie</strong> - Sviluppatore web freelance specializzato nella creazione di <strong className="text-zinc-400">landing page professionali</strong> e <strong className="text-zinc-400">siti web</strong> per aziende, startup e liberi professionisti.
+                            <strong className="text-zinc-400">Manuel De Ceglie</strong> - Sviluppatore web freelance specializzato nella creazione di <strong className="text-zinc-400">landing page professionali</strong> e <strong className="text-zinc-400">siti web</strong> per aziende, startup e liberi professionisti. Lavoro con clienti in tutta <strong className="text-zinc-400">Italia</strong>.
                         </p>
                     </div>
 
@@ -546,8 +546,8 @@ export default function OfferLandingPageB() {
                     </nav>
 
                     <div className="text-center text-zinc-700 text-xs space-y-1">
-                        <p>© {new Date().getFullYear()} Manuel De Ceglie • P.IVA 04032610364 • Castelnovo ne' Monti (RE)</p>
-                        <p>Offerta Preventivo - Trust First</p>
+                        <p>© {new Date().getFullYear()} Manuel De Ceglie • P.IVA 04032610364</p>
+                        <p>Offerta Preventivo - Landing Page Professionali</p>
                     </div>
                 </div>
             </footer>
